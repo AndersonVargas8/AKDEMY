@@ -5,6 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -28,6 +30,30 @@ public class Acudiente {
 
     @Column(name = "Correo_Acudiente", nullable = false, length = 200)
     private String Correo_Acudiente;
+
+
+    //Relaciones con otras tablas
+
+    @OneToOne
+    @JoinColumn(name = "Usuario", updatable = false, nullable = false)
+    private User usuario;
+
+    //Constructores de la calse Calificacion
+
+    public Acudiente() {
+    }
+
+    public Acudiente(Integer Id_Acudiente, String Nombres_Acudiente, String Apellidos_Acudiente, Long Telefono_Acudiente, String Correo_Acudiente) {
+        this.Id_Acudiente = Id_Acudiente;
+        this.Nombres_Acudiente = Nombres_Acudiente;
+        this.Apellidos_Acudiente = Apellidos_Acudiente;
+        this.Telefono_Acudiente = Telefono_Acudiente;
+        this.Correo_Acudiente = Correo_Acudiente;
+    }
+
+    public Acudiente(Integer Id_Acudiente) {
+        this.Id_Acudiente = Id_Acudiente;
+    }
 
     //Getter y setter
 

@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 
 import org.hibernate.annotations.GenericGenerator;
 
@@ -28,6 +30,12 @@ public class Curso {
         this.id = id;
         this.descripcion = descripcion;
     }
+
+    //Relaciones con otras tablas
+
+    @OneToOne
+    @JoinColumn(name = "Director_Curso", updatable = false, nullable = false)
+    private Profesor profesor;
 
     public long getId() {
         return this.id;

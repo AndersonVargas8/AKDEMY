@@ -1,6 +1,7 @@
 package com.app.akdemy.entity;
 
 import java.util.Objects;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -9,7 +10,11 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 import org.hibernate.annotations.GenericGenerator;
 
@@ -29,8 +34,23 @@ public class Estudiante {
     @Column 
 	private String documento;
 
+    //Relaciones con otras tablas
+
     @ManyToOne(optional = false, cascade = CascadeType.ALL,  fetch= FetchType.EAGER)
     private Curso curso;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    private Observador observador;
+
+    @OneToOne
+    @JoinColumn(name = "Usuario", updatable = false, nullable = false)
+    private User usuario;
+
+    @ManyToMany
+    @JoinTable(name = "Acudiente_Estudiante"
+            , joinColumns = @JoinColumn(name = "Id_Estudiante")
+            , inverseJoinColumns = @JoinColumn(name = "Id_Acudiente"))
+    private Set<Acudiente> acudiente;
 
 
     public Estudiante() {

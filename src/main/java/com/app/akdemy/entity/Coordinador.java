@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -27,6 +29,28 @@ public class Coordinador {
 
     @Column(name = "Fecha_Nacimiento_C", nullable = false)
     private Date Fecha_Nacimiento_C;
+
+    //Constructores de la clase Coordinador
+
+    public Coordinador() {
+    }
+
+    public Coordinador(Integer Id_Coordinador, String Nombres_Coordinador, String Apellidos_Coordinador, Date Fecha_Nacimiento_C) {
+        this.Id_Coordinador = Id_Coordinador;
+        this.Nombres_Coordinador = Nombres_Coordinador;
+        this.Apellidos_Coordinador = Apellidos_Coordinador;
+        this.Fecha_Nacimiento_C = Fecha_Nacimiento_C;
+    }
+
+    public Coordinador(Integer Id_Coordinador) {
+        this.Id_Coordinador = Id_Coordinador;
+    }
+
+    //Relaciones con otras tablas
+
+    @OneToOne
+    @JoinColumn(name = "Usuario", updatable = false, nullable = false)
+    private User usuario;
 
     //Getter y Setter
 

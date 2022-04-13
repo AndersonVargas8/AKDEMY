@@ -7,6 +7,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -24,7 +27,32 @@ public class Observador {
  
      @Column(name = "Fecha_Observacion", nullable = false)
      private Date Fecha_Observacion;
- 
+
+     //Constructores de la calse Observador
+
+    public Observador() {
+    }
+
+    public Observador(Integer Id_Observador, String Descargos, Date Fecha_Observacion) {
+        this.Id_Observador = Id_Observador;
+        this.Descargos = Descargos;
+        this.Fecha_Observacion = Fecha_Observacion;
+    }
+
+    public Observador(Integer Id_Observador) {
+        this.Id_Observador = Id_Observador;
+    }
+
+    //Relaciones con otras tablas
+
+    @ManyToOne
+    @JoinColumn(name= "Profesor")
+    private Profesor  profesor;
+
+    @OneToOne
+    @JoinColumn(name = "Estudiante", updatable = false, nullable = false)
+    private Estudiante estudiante;
+
      //Getter y Setter
  
      public Integer getId_Observador() {

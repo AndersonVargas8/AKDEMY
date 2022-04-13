@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Objects;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -13,6 +14,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Transient;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
@@ -54,6 +56,21 @@ public class User implements Serializable{
     @Transient
     @NotBlank
     private String confirmPassword;
+
+    //Relaciones con otras tablas
+
+    @OneToOne(cascade = CascadeType.ALL)
+    private Estudiante estudiante;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    private Profesor profesor;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    private Coordinador coordinador;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    private Acudiente acudiente;
+
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "user_roles"
             , joinColumns = @JoinColumn(name="user_id")
