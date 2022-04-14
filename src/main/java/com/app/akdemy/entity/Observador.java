@@ -47,11 +47,12 @@ public class Observador {
 
     @ManyToOne
     @JoinColumn(name= "Profesor")
-    private Profesor  profesor;
+    private Profesor profesor;
 
-    @OneToOne
-    @JoinColumn(name = "Estudiante", updatable = false, nullable = false)
+    @ManyToOne
+    @JoinColumn(name= "Estudiante")
     private Estudiante estudiante;
+
 
      //Getter y Setter
  

@@ -5,6 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -22,6 +24,12 @@ public class Materia_Grado {
 
     @Column(name = "Descripcion", nullable = false)
     private String Descripcion;
+
+    //Relaciones con otras tablas  
+
+    @ManyToOne
+    @JoinColumn(name= "id_Materia")
+    private Materia materia;
 
     //Getter y Setter
 

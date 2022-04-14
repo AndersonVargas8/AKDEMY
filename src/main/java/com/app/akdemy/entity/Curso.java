@@ -5,25 +5,20 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 
-import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 public class Curso {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
-    @GenericGenerator(name = "native", strategy = "native")
-    private long id;
+
+    @Id private long id;
 
     @Column
-    private String Nombre_Curso;
+    private Integer Nombre_Curso;
 
     @Column
     private Integer Anio_Curso;
@@ -35,7 +30,7 @@ public class Curso {
     public Curso() {
     }
 
-    public Curso(long id, String Nombre_Curso, Integer Anio_Curso, String descripcion) {
+    public Curso(long id, Integer Nombre_Curso, Integer Anio_Curso, String descripcion) {
         this.id = id;
         this.Anio_Curso = Anio_Curso;
         this.Nombre_Curso = Nombre_Curso;
@@ -64,11 +59,11 @@ public class Curso {
         this.id = id;
     }
 
-    public String getNombre_Curso() {
+    public Integer getNombre_Curso() {
         return this.Nombre_Curso;
     }
 
-    public void setNombre_Curso(String Nombre_Curso) {
+    public void setNombre_Curso(Integer Nombre_Curso) {
         this.Nombre_Curso = Nombre_Curso;
     }
 
@@ -110,7 +105,7 @@ public class Curso {
     public String toString() {
         return "{" +
             " id='" + getId() + "'" +
-            ", nombre='" + getDescripcion() + "'" +
+            ", nombre='" + getNombre_Curso() + "'" +
             ", descripcion='" + getDescripcion() + "'" +
             "}";
     }

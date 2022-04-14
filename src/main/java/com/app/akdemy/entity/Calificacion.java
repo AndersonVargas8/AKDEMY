@@ -46,6 +46,14 @@ public class Calificacion {
     @JoinColumn(name = "Estudiante")
     private Estudiante Estudiante;
 
+    @ManyToOne
+    @JoinColumn(name = "Profesor")
+    private Profesor Profesor;
+
+    @ManyToOne
+    @JoinColumn(name = "Materia")
+    private Materia_Grado Materia;
+
     //Getter y Setter
 
    public Integer getId_Calificacion() {

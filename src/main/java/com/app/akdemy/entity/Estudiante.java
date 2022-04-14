@@ -36,11 +36,12 @@ public class Estudiante {
 
     //Relaciones con otras tablas
 
-    @ManyToOne(optional = false, cascade = CascadeType.ALL,  fetch= FetchType.EAGER)
-    private Curso curso;
+    @ManyToMany
+    @JoinTable(name = "Curso_Estudiante"
+            , joinColumns = @JoinColumn(name = "Id_Estudiante")
+            , inverseJoinColumns = @JoinColumn(name = "Id_Curso"))
+    private Set<Curso> curso;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    private Observador observador;
 
     @OneToOne
     @JoinColumn(name = "Usuario", updatable = false, nullable = false)
@@ -56,12 +57,11 @@ public class Estudiante {
     public Estudiante() {
     }
 
-    public Estudiante(long id, String nombre, int tipoDocumento, String documento, Curso curso) {
+    public Estudiante(long id, String nombre, int tipoDocumento, String documento) {
         this.id = id;
         this.nombre = nombre;
         this.tipoDocumento = tipoDocumento;
         this.documento = documento;
-        this.curso = curso;
     }
 
     public long getId() {
@@ -96,14 +96,6 @@ public class Estudiante {
         this.documento = documento;
     }
 
-    public Curso getCurso() {
-        return this.curso;
-    }
-
-    public void setCurso(Curso curso) {
-        this.curso = curso;
-    }
-
 
     @Override
     public boolean equals(Object o) {
@@ -128,7 +120,6 @@ public class Estudiante {
             ", nombre='" + getNombre() + "'" +
             ", tipoDocumento='" + getTipoDocumento() + "'" +
             ", documento='" + getDocumento() + "'" +
-            ", curso='" + getCurso() + "'" +
             "}";
     }
 
