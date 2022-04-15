@@ -1,6 +1,7 @@
 package com.app.akdemy.entity;
 
 import java.util.Objects;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -9,7 +10,11 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 import org.hibernate.annotations.GenericGenerator;
 
@@ -29,19 +34,34 @@ public class Estudiante {
     @Column 
 	private String documento;
 
-    @ManyToOne(optional = false, cascade = CascadeType.ALL,  fetch= FetchType.EAGER)
-    private Curso curso;
+    //Relaciones con otras tablas
+
+    @ManyToMany
+    @JoinTable(name = "Curso_Estudiante"
+            , joinColumns = @JoinColumn(name = "Id_Estudiante")
+            , inverseJoinColumns = @JoinColumn(name = "Id_Curso"))
+    private Set<Curso> curso;
+
+
+    @OneToOne
+    @JoinColumn(name = "Usuario", updatable = false, nullable = false)
+    private User usuario;
+
+    @ManyToMany
+    @JoinTable(name = "Acudiente_Estudiante"
+            , joinColumns = @JoinColumn(name = "Id_Estudiante")
+            , inverseJoinColumns = @JoinColumn(name = "Id_Acudiente"))
+    private Set<Acudiente> acudiente;
 
 
     public Estudiante() {
     }
 
-    public Estudiante(long id, String nombre, int tipoDocumento, String documento, Curso curso) {
+    public Estudiante(long id, String nombre, int tipoDocumento, String documento) {
         this.id = id;
         this.nombre = nombre;
         this.tipoDocumento = tipoDocumento;
         this.documento = documento;
-        this.curso = curso;
     }
 
     public long getId() {
@@ -76,14 +96,6 @@ public class Estudiante {
         this.documento = documento;
     }
 
-    public Curso getCurso() {
-        return this.curso;
-    }
-
-    public void setCurso(Curso curso) {
-        this.curso = curso;
-    }
-
 
     @Override
     public boolean equals(Object o) {
@@ -108,7 +120,6 @@ public class Estudiante {
             ", nombre='" + getNombre() + "'" +
             ", tipoDocumento='" + getTipoDocumento() + "'" +
             ", documento='" + getDocumento() + "'" +
-            ", curso='" + getCurso() + "'" +
             "}";
     }
 
