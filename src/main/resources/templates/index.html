@@ -1,10 +1,13 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inicio de sesión</title>
+    <title>AKDEMY | Iniciar Sesión</title>
+    
+    <link rel="shortcut icon" type="image/x-icon" href="../static/img/avatar.png" th:href="@{/img/avatar.png}">
 
     <!--JQUERY-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -22,43 +25,51 @@
 </head>
 
 <body>
-    
-    <div class="container col-10 d-flex justify-content-center">
+
+    <div class="container col-10 d-flex cont-index">
         <div class="main-section row d-flex justify-content-center">
-            <div class="modal-info col-lg-4 d-inline">
-                <div class="col-12 user-img text-center">
-                    <br>
-                    <h3>AKDEMY</h3>
-                    
-                    <br><br>
-                </div>
-                <div>
-                    <label>AKDEMY es una herramienta que permite la administración y gestión de colegios</label>
-                </div>
-            </div>
             <div class="modal-content col-lg-6 d-inline">
-                <div class="col-12 user-img">
-                    <br>
-                    <h3>Iniciar Sesión</h3>
-                    
-                    <br><br>
-                </div>
-                <form class="col-12" th:action="@{/login}" method="post">
-                    <div class="form-group" id="user-group">
-                        <input id="username" class="form-control" type="text" placeholder="Nombre de usuario" name="username"/>
-                    </div> 
-                    <div class="form-group" id="password-group">
-                        <input class="form-control" type="password" placeholder="Contraseña" name="password"/>
+                <div class="form-content">
+                    <div class="col-12">
+                        <br>
+                        <h3>BIENVENIDO</h3>
+
+                        <br><br>
                     </div>
-                    <button type="submit" class="btn"><i class="fas fa-sign-in-alt"></i> Ingresar</button>
-                </form>
-                <div th:if="${param.error}" class="alert alert-danger" role="alert">
-		            Usuario o contraseña inválidos.
-		        </div>
-		        <div th:if="${param.logout}" class="alert alert-success" role="alert">
-		            Se ha cerrado la sesión.
-		        </div>  
+                    <form class="col-12" th:action="@{/login}" method="post">
+                        <div class="form-group" id="user-group">
+                            <input id="username" class="form-control" type="text" placeholder="Usuario"
+                                name="username" />
+                        </div>
+                        <div class="form-group" id="password-group">
+                            <input class="form-control" type="password" placeholder="Contraseña" name="password" />
+                        </div>
+                        <button type="submit" class="btn"><i class="fas fa-sign-in-alt"></i> Iniciar Sesión</button>
+                    </form>
+                    <div th:if="${param.error}" class="alert alert-danger" role="alert">
+                        Usuario o contraseña inválidos.
+                    </div>
+                    <div th:if="${param.logout}" class="alert alert-success" role="alert">
+                        Se ha cerrado la sesión.
+                    </div>  
+                </div>
+
             </div>
+            <div class="modal-info col-lg-6 d-inline">
+                <div class="col-12 user-img text-center">
+                    <div class="form-content">
+                        <br>
+                        <h3>AKDEMY</h3><br>
+                        <img th:src="@{/img/avatar.png}" src="../static/img/avatar.png">
+
+                    </div>
+                    <div>
+                        <label>Administra tu instituión</label>
+                    </div>
+
+                </div>
+            </div>
+
         </div>
     </div>
 </body>
