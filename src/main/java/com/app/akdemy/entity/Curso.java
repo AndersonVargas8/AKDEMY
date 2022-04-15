@@ -18,10 +18,10 @@ public class Curso {
     @Id private long id;
 
     @Column
-    private Integer Nombre_Curso;
+    private Integer nombre_Curso;
 
     @Column
-    private Integer Anio_Curso;
+    private Integer anio_Curso;
 
     @Column 
 	private String descripcion;
@@ -30,10 +30,10 @@ public class Curso {
     public Curso() {
     }
 
-    public Curso(long id, Integer Nombre_Curso, Integer Anio_Curso, String descripcion) {
+    public Curso(long id, Integer nombre_Curso, Integer anio_Curso, String descripcion) {
         this.id = id;
-        this.Anio_Curso = Anio_Curso;
-        this.Nombre_Curso = Nombre_Curso;
+        this.anio_Curso = anio_Curso;
+        this.nombre_Curso = nombre_Curso;
         this.descripcion = descripcion;
     }
 
@@ -51,8 +51,9 @@ public class Curso {
 
     //Getter y Setter
 
+
     public long getId() {
-        return this.id;
+        return id;
     }
 
     public void setId(long id) {
@@ -60,30 +61,44 @@ public class Curso {
     }
 
     public Integer getNombre_Curso() {
-        return this.Nombre_Curso;
+        return nombre_Curso;
     }
 
-    public void setNombre_Curso(Integer Nombre_Curso) {
-        this.Nombre_Curso = Nombre_Curso;
+    public void setNombre_Curso(Integer nombre_Curso) {
+        this.nombre_Curso = nombre_Curso;
     }
 
     public Integer getAnio_Curso() {
-        return this.Anio_Curso;
+        return anio_Curso;
     }
 
-    public void setAnio_Curso(Integer Anio_Curso) {
-        this.Anio_Curso= Anio_Curso;
+    public void setAnio_Curso(Integer anio_Curso) {
+        this.anio_Curso = anio_Curso;
     }
 
     public String getDescripcion() {
-        return this.descripcion;
+        return descripcion;
     }
 
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
-    
 
+    public Profesor getProfesor() {
+        return profesor;
+    }
+
+    public void setProfesor(Profesor profesor) {
+        this.profesor = profesor;
+    }
+
+    public Set<Curso> getCurso() {
+        return curso;
+    }
+
+    public void setCurso(Set<Curso> curso) {
+        this.curso = curso;
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -93,12 +108,12 @@ public class Curso {
             return false;
         }
         Curso curso = (Curso) o;
-        return id == curso.id && Objects.equals(descripcion, curso.descripcion) && Objects.equals(Anio_Curso, curso.Anio_Curso) && Objects.equals(Nombre_Curso, curso.Nombre_Curso);
+        return id == curso.id && Objects.equals(descripcion, curso.descripcion) && Objects.equals(anio_Curso, curso.anio_Curso) && Objects.equals(nombre_Curso, curso.nombre_Curso);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, Nombre_Curso, Anio_Curso, descripcion);
+        return Objects.hash(id, nombre_Curso, anio_Curso, descripcion);
     }
 
     @Override
