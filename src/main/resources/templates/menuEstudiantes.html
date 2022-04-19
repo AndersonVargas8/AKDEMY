@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>AKDEMY | Iniciar Sesión</title>
+        
+        <link rel="shortcut icon" type="image/x-icon" href="../static/img/avatar.png" th:href="@{/img/avatar.png}">
+    
+        <!--JQUERY-->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    
+        <!-- FRAMEWORK BOOTSTRAP para el estilo de la pagina-->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    
+        <!-- Los iconos tipo Solid de Fontawesome-->
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/solid.css">
+        <script src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
+    
+        <!-- Nuestro css-->
+        <link rel="stylesheet" type="text/css" href="../static/css/menu.css" th:href="@{/css/menu.css}">
+        <link rel="stylesheet" href="css/normalize.css">
+    </head>
+<body>
+
+    <nav class="navbar navbar-dark navbar-expand-sm">
+        <div class="container">
+            <a href="menuEstudiantes.html" class="navbar-brand mr-auto"><img src="../static/img/avatar1.png" height="40" width="35" alt="AKDEMY"></a>
+            <div class="collapse navbar-collapse" id="Navbar">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active"><a class="nav-link" href="./index.html"><span class="fa fa-home fa-lg"></span>Inicio</a></li>
+                    <li class="nav-item"><a class="nav-link" href="./aboutus.html"><span class="fa fa-info fa-lg"></span>Curso</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#"><span class="fa fa-list fa-lg"></span>Horario</a></li>
+                </ul> 
+                <span class="navbar-text">
+                    <a><span class=""></span>Cerrar Sesión</a>
+                </span>   
+            </div>  
+        </div>
+    </nav>
+
+    <header class="jumbotron">
+        <div class="container">
+            <div class="row row-header">
+                <div class="col-12 align-items-center">
+                    <h2>AKDEMY <span class="badge badge-dark">Estudiantes</span> </h2>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus cum eveniet et autem neque aliquam placeat dolorem minima aperiam illo ut quo molestias, odit similique earum laboriosam rem, dolorum facilis!</p>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row row-content">
+                <div class="col">
+                    <div id="mycarousel" class="carousel slide" data-ride="carousel">
+                        <div class="carousel-inner" role="listbox">
+                            <div class="carousel-item active">
+                                <div class="carousel-caption d-none d-md-block">
+                                    <h2>Cursos</h2>
+                                    <p class="d-none d-sm-block">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aspernatur mollitia officia adipisci quas unde quam, similique ducimus voluptatem doloribus rerum, modi aut at, nihil quo reprehenderit dolorem ullam delectus. Necessitatibus!</p>
+                                </div>
+                            </div>
+                            <div class="carousel-item">
+                                <div class="carousel-caption d-none d-md-block">
+                                    <h2>Horario</h2>
+                                    <p class="d-none d-sm-block">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab adipisci ratione, expedita numquam inventore consequuntur pariatur dicta harum odio voluptate eum laudantium nobis minus magnam nam esse explicabo cupiditate exercitationem! </p>
+                                </div>
+                            </div>
+                        </div>
+                        <ol class="carousel-indicators">
+                            <li data-target="#mycarousel" data-slide-to="0" class="active"></li>
+                            <li data-target="#mycarousel" data-slide-to="1"></li>
+                        </ol>
+                        <a class="carousel-control-prev" href="#mycarousel" role="button" data-slide="prev">
+                            <span class="carousel-control-prev-icon"></span>
+                        </a>
+                        <a class="carousel-control-next" href="#mycarousel" role="button" data-slide="next">
+                            <span class="carousel-control-next-icon"></span>
+                        </a>
+                    </div>
+                 </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row row-content align-items-center curso">
+                <!-- para todo el contenido (col-12) habrá 4 columns de tamaño sm y 3 md-->
+                <div class="col-12 col-sm-5 align-self-center order-sm-last col-md-5 text-center bg-dark rounded">
+                    <h2>Horario</h2>
+                    <p class="d-none d-sm-block">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab adipisci ratione, expedita numquam inventore consequuntur pariatur dicta harum odio voluptate eum laudantium nobis minus magnam nam esse explicabo cupiditate exercitationem! </p>
+                </div>
+                <div class="col-12 col-sm-2">
+    
+                </div>
+                <div class="col col-sm-5 order-sm-first col-md-5 text-center bg-dark border border-secondary rounded">
+                    <h2>Cursos</h2>
+                    <p class="d-none d-sm-block">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aspernatur mollitia officia adipisci quas unde quam, similique ducimus voluptatem doloribus rerum, modi aut at, nihil quo reprehenderit dolorem ullam delectus. Necessitatibus!</p>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+</body>
+</html>

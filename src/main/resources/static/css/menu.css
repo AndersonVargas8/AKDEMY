@@ -1,0 +1,36 @@
+html{
+    box-sizing: border-box;
+}
+
+body{
+    background: url("../img/fondo-login.png");
+    background-size: cover;
+    margin: 0 auto;
+}
+.navbar-dark {
+    background-color: rgb(55,80,130);
+}
+.container {
+    padding: 0 50px;
+}
+.jumbotron {
+    margin: 0px auto;
+    padding: 70px 30px;
+    color: floralwhite;
+}
+.row-header {
+    color: rgb(55,80,130);
+}
+.row-content {
+    margin: 0px auto;
+    padding: 50px 0px;
+    border-bottom: 1px ridge;
+    min-height: 400px;
+    color: floralwhite;
+}
+.carousel {
+   background: rgb(55,80,130);
+}
+.carousel .carousel-item {
+   height: 300px;
+}
