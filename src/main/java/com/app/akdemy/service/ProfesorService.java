@@ -19,4 +19,10 @@ public class ProfesorService implements IProfesorService{
     public List<Profesor> getAllProfesors() {
         return (List<Profesor>) repProfesor.findAll();
     }
+
+    @Override
+    public void saveProfesor(Profesor profesor) {
+        repProfesor.save(profesor);
+        
+    }
 }
