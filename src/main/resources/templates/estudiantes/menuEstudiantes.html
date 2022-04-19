@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>AKDEMY | Iniciar Sesión</title>
         
-        <link rel="shortcut icon" type="image/x-icon" href="../static/img/avatar.png" th:href="@{/img/avatar.png}">
+        <link rel="shortcut icon" type="image/x-icon" href="../../static/img/avatar.png" th:href="@{/img/avatar.png}">
     
         <!--JQUERY-->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -20,18 +20,18 @@
         <script src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
     
         <!-- Nuestro css-->
-        <link rel="stylesheet" type="text/css" href="../static/css/menu.css" th:href="@{/css/menu.css}">
-        <link rel="stylesheet" href="css/normalize.css">
+        <link rel="stylesheet" type="text/css" href="../../static/css/menu.css" th:href="@{/css/menu.css}">
+        <link rel="stylesheet" href="../../static/css/normalize.css">
     </head>
 <body>
 
     <nav class="navbar navbar-dark navbar-expand-sm">
         <div class="container">
-            <a href="menuEstudiantes.html" class="navbar-brand mr-auto"><img src="../static/img/avatar1.png" height="40" width="35" alt="AKDEMY"></a>
+            <a href="menuEstudiantes.html" class="navbar-brand mr-auto"><img src="../../static/img/avatar1.png" height="40" width="35" alt="AKDEMY"></a>
             <div class="collapse navbar-collapse" id="Navbar">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active"><a class="nav-link" href="./index.html"><span class="fa fa-home fa-lg"></span>Inicio</a></li>
-                    <li class="nav-item"><a class="nav-link" href="./aboutus.html"><span class="fa fa-info fa-lg"></span>Curso</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../cursos.html"><span class="fa fa-info fa-lg"></span>Curso</a></li>
                     <li class="nav-item"><a class="nav-link" href="#"><span class="fa fa-list fa-lg"></span>Horario</a></li>
                 </ul> 
                 <span class="navbar-text">
@@ -99,6 +99,36 @@
             </div>
         </div>
     </header>
+    <footer class="footer">
+        <div class="container">
+            <div class="row">     
+                <div class="col-12 col-sm-3">
+
+                </div>        
+                <div class="col-12 col-sm-4 align-items-center">
+                    <h5>Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#">Inicio</a></li>
+                        <li><a href="../../templates/cursos.html">Curso</a></li>
+                        <li><a href="#">Horario</a></li>
+                    </ul>
+                </div>
+                <div class="col col-sm">
+                    <h5>Our Address</h5>
+                    <address>
+                        <i class="fa fa-phone fa-lg"></i>: +852 1234 5678<br>
+                        <i class="fa fa-fax fa-lg"></i>: +852 8765 4321<br>
+		           </address>
+                </div>
+           </div>
+           <div class="row justify-content-center">             
+                <div class="col-auto">
+                    <p>© Copyright 2022 AKDEMY</p>
+                </div>
+           </div>
+        </div>
+    </footer>
+    
     
 </body>
 </html>

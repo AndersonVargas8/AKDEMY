@@ -34,3 +34,13 @@ body{
 .carousel .carousel-item {
    height: 300px;
 }
+.footer {
+    background-color: rgb(55,80,130);
+    color: floralwhite;
+    margin: 0px auto;
+    padding: 20px 0px;
+  }
+
+.table {
+    background-color: rgb(155,180,230);
+}
