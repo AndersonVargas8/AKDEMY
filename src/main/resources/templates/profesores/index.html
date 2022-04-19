@@ -49,15 +49,15 @@
                     
                     </div>
                     <div class="card-body">
-                        <table id="example" class="display" style="width:100%">
+                        <table id="teachers" class="display" style="width:100%">
                             <thead>
                                 <tr>
-                                    <th>Name</th>
-                                    <th>Position</th>
-                                    <th>Office</th>
+                                    <th>Nombres</th>
+                                    <th>Apellidos</th>
+                                    <th>Fecha de Nacimiento</th>
                                     <th>Age</th>
-                                    <th>Start date</th>
-                                    <th>Salary</th>
+                                    <th>Editar</th>
+                                    <th>Eliminar</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -520,12 +520,12 @@
                             </tbody>
                             <tfoot>
                                 <tr>
-                                    <th>Name</th>
-                                    <th>Position</th>
-                                    <th>Office</th>
+                                    <th>Nombres</th>
+                                    <th>Apellidos</th>
+                                    <th>Fecha de Nacimiento</th>
                                     <th>Age</th>
-                                    <th>Start date</th>
-                                    <th>Salary</th>
+                                    <th>Editar</th>
+                                    <th>Eliminar</th>
                                 </tr>
                             </tfoot>
                         </table>
@@ -539,37 +539,27 @@
         <div class="modal-dialog modal-lg d-flex justify-content-center" role="document">
             <div class="modal-content" style="max-width:80%">
                 <div class="modal-header">
-                    <h5 class="modal-title">Nuevo Estudiante</h5>
+                    <h5 class="modal-title">Nuevo Profesor</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body p-4 d-flex justify-content-center">
-                    <form id="estudiantesForm" >
-                        <!--Es necesario para poder pasar la validacion del Model-->
-                        <input class="form-control" hidden>
-
-                        <div class="form-group row">
-                            <label class="col-lg-3 col-lg form-label form-control-label"><b>Estudiante</b></label>
-                            <input class="form-control col-lg-8">
+                <div class="modal-body p-5 justify-content-center">
+                    <form>
+                        <div class="form-group">
+                          <label for="names"><b>Nombres</b></label>
+                          <input type="name" class="form-control" id="names" placeholder="Nombre(s)">
                         </div>
-
-                        <div class="form-group row">
-                            <label class="col-lg-3 col-lg form-label form-control-label"><b>Documento</b></label>
-                            <input class="form-control col-lg-9">
+                        <div class="form-group">
+                            <label for="lastnames"><b>Apellidos</b></label>
+                            <input type="lastname" class="form-control" id="lastnames" placeholder="Apellido(s)">
+                          </div>
+                        <div class="form-group">
+                          <label for="birthdate"><b>Fecha de Nacimiento</b></label>
+                          <input type="date" class="form-control" id="birthdate" placeholder="Password">
                         </div>
-                        <div class="form-group row">
-                            <label class="col-lg-3 col-lg form-label form-control-label"><b>Curso</b></label>
-                            <!--                                <select th:field="${nuevoEstudiante.curso}" required class="btn dropdown-toggle border col-lg-6">-->
-                            <!--                                   -->
-                            <!--                                    <option th:each="curso:${cursos}" th:value="${curso.id}" th:text="${curso.descripcion}"></option>-->
-                            <!--                                </select>-->
-                        </div>
-
-                        <div class="form-group row d-flex justify-content-center">
-                            <input type="submit" value="Guardar" class="btn btn-success" />
-                        </div>
-                    </form>
+                        <button type="submit" class="w-100 btn btn-primary" width="100%">Guardar</button>
+                      </form>
                 </div>
             </div>
         </div>
