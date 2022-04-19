@@ -1,102 +1,137 @@
 package com.app.akdemy.entity;
 
 import java.sql.Date;
-import java.util.Set;
+import java.util.Objects;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "Profesor")
+@Table(name = "profesor")
 public class Profesor {
     
     //Definición de columnas para la tabla Profesor
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer Id_Profesor;
+    private Integer id;
 
-    @Column(name = "Nombres_Profesor", nullable = false, length = 70)
-    private String Nombres_Profesor;
+    @Column(name = "pro_nombres", nullable = false, length = 70)
+    private String nombres;
 
-    @Column(name = "Apellidos_Profesor", nullable = false, length = 70)
-    private String Apellidos_Profesor;
+    @Column(name = "pro_apellidos", nullable = false, length = 70)
+    private String apellidos;
 
-    @Column(name = "Fecha_Nacimiento_P", nullable = false)
-    private Date Fecha_Nacimiento_P;
+    @Column(name = "pro_documento")
+    private String documento;
+
+    @Column(name = "pro_fecha_nacimiento", nullable = false)
+    private Date fechaNacimiento;
+
+    @OneToOne
+    @JoinColumn(name = "pro_usuario", updatable = false, nullable = false)
+    private User usuario;
+
 
     //Constructores de la clase Coordinador
 
     public Profesor() {
     }
 
-    public Profesor(Integer Id_Profesor, String Nombres_Profesor, String Apellidos_Profesor, Date Fecha_Nacimiento_P) {
-        this.Id_Profesor = Id_Profesor;
-        this.Nombres_Profesor = Nombres_Profesor;
-        this.Apellidos_Profesor = Apellidos_Profesor;
-        this.Fecha_Nacimiento_P = Fecha_Nacimiento_P;
+
+
+    public Profesor(Integer id, String nombres, String apellidos, String documento, Date fechaNacimiento, User usuario) {
+        this.id = id;
+        this.nombres = nombres;
+        this.apellidos = apellidos;
+        this.documento = documento;
+        this.fechaNacimiento = fechaNacimiento;
+        this.usuario = usuario;
     }
 
-    public Profesor(Integer Id_Profesor) {
-        this.Id_Profesor = Id_Profesor;
+   
+    public Integer getId() {
+        return this.id;
     }
 
-    //Relaciones con otras tablas
-
-    @OneToOne(cascade = CascadeType.ALL)
-    private Curso curso;
-
-    @OneToOne
-    @JoinColumn(name = "Usuario", updatable = false, nullable = false)
-    private User usuario;
-
-    @ManyToMany
-    @JoinTable(name = "Materia_Profesor"
-            , joinColumns = @JoinColumn(name = "Id_Profesor")
-            , inverseJoinColumns = @JoinColumn(name = "Id_Materia"))
-    private Set<Materia_Grado> materia;
-
-    //Getter y Setter
-
-    public Integer getId_Profesor() {
-        return Id_Profesor;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
-    public void setId_Profesor(Integer Id_Profesor) {
-        this.Id_Profesor = Id_Profesor;
+    public String getNombres() {
+        return this.nombres;
     }
 
-    public String getNombres_Profesor() {
-        return Nombres_Profesor;
+    public void setNombres(String nombres) {
+        this.nombres = nombres;
     }
 
-    public void setNombres_Profesor(String Nombres_Profesor) {
-        this.Nombres_Profesor = Nombres_Profesor;
+    public String getApellidos() {
+        return this.apellidos;
     }
 
-    public String getApellidos_Profesor() {
-        return Apellidos_Profesor;
+    public void setApellidos(String apellidos) {
+        this.apellidos = apellidos;
     }
 
-    public void setApellidos_Profesor(String Apellidos_Profesor) {
-        this.Apellidos_Profesor = Apellidos_Profesor;
+    public String getDocumento() {
+        return this.documento;
     }
 
-    public Date getFecha_Nacimiento_P() {
-        return Fecha_Nacimiento_P;
+    public void setDocumento(String documento) {
+        this.documento = documento;
     }
 
-    public void setFecha_Nacimiento_P(Date Fecha_Nacimiento_P) {
-        this.Fecha_Nacimiento_P = Fecha_Nacimiento_P;
+    public Date getFechaNacimiento() {
+        return this.fechaNacimiento;
     }
+
+    public void setFechaNacimiento(Date fechaNacimiento) {
+        this.fechaNacimiento = fechaNacimiento;
+    }
+
+    public User getUsuario() {
+        return this.usuario;
+    }
+
+    public void setUsuario(User usuario) {
+        this.usuario = usuario;
+    }
+   
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == this)
+            return true;
+        if (!(o instanceof Profesor)) {
+            return false;
+        }
+        Profesor profesor = (Profesor) o;
+        return Objects.equals(id, profesor.id) && Objects.equals(nombres, profesor.nombres) && Objects.equals(apellidos, profesor.apellidos) && Objects.equals(documento, profesor.documento) && Objects.equals(fechaNacimiento, profesor.fechaNacimiento);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, nombres, apellidos, documento, fechaNacimiento);
+    }
+
+    @Override
+    public String toString() {
+        return "{" +
+            " id='" + getId() + "'" +
+            ", nombres='" + getNombres() + "'" +
+            ", apellidos='" + getApellidos() + "'" +
+            ", documento='" + getDocumento() + "'" +
+            ", fechaNacimiento='" + getFechaNacimiento() + "'" +
+            "}";
+    }
+    
 
 }

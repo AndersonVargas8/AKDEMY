@@ -1,5 +1,7 @@
 package com.app.akdemy.entity;
 
+import java.util.Objects;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -17,25 +19,27 @@ public class Acudiente {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer Id_Acudiente;
+    private Integer id;
+    @Column(name = "acu_nombres", nullable = false, length = 70)
+    private String nombres;
 
-    @Column(name = "Nombres_Acudiente", nullable = false, length = 70)
-    private String Nombres_Acudiente;
+    @Column(name = "acu_apellidos", nullable = false, length = 70)
+    private String apellidos;
 
-    @Column(name = "Apellidos_Acudiente", nullable = false, length = 70)
-    private String Apellidos_Acudiente;
+    @Column(name = "acu_documento", nullable = false)
+    private String documento;
 
-    @Column(name = "Telefono_Acudiente", nullable = false)
-    private Long Telefono_Acudiente;
+    @Column(name = "acu_telefono")
+    private String telefono;
 
-    @Column(name = "Correo_Acudiente", nullable = false, length = 200)
-    private String Correo_Acudiente;
+    @Column(name = "acu_correo", length = 200)
+    private String correo;
 
 
     //Relaciones con otras tablas
 
     @OneToOne
-    @JoinColumn(name = "Usuario", updatable = false, nullable = false)
+    @JoinColumn(name = "acu_usuario", updatable = false, nullable = false)
     private User usuario;
 
     //Constructores de la calse Calificacion
@@ -43,58 +47,103 @@ public class Acudiente {
     public Acudiente() {
     }
 
-    public Acudiente(Integer Id_Acudiente, String Nombres_Acudiente, String Apellidos_Acudiente, Long Telefono_Acudiente, String Correo_Acudiente) {
-        this.Id_Acudiente = Id_Acudiente;
-        this.Nombres_Acudiente = Nombres_Acudiente;
-        this.Apellidos_Acudiente = Apellidos_Acudiente;
-        this.Telefono_Acudiente = Telefono_Acudiente;
-        this.Correo_Acudiente = Correo_Acudiente;
+
+
+    public Acudiente(Integer id, String nombres, String apellidos, String documento, String telefono, String correo, User usuario) {
+        this.id = id;
+        this.nombres = nombres;
+        this.apellidos = apellidos;
+        this.documento = documento;
+        this.telefono = telefono;
+        this.correo = correo;
+        this.usuario = usuario;
     }
 
-    public Acudiente(Integer Id_Acudiente) {
-        this.Id_Acudiente = Id_Acudiente;
+
+    //Getter y Setter
+
+    public Integer getId() {
+        return this.id;
     }
 
-    //Getter y setter
-
-    public Integer getId_Acudiente() {
-        return Id_Acudiente;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
-    public void setId_Acudiente(Integer Id_Acudiente) {
-        this.Id_Acudiente = Id_Acudiente;
+    public String getNombres() {
+        return this.nombres;
     }
 
-    public String getNombres_Acudiente() {
-        return Nombres_Acudiente;
+    public void setNombres(String nombres) {
+        this.nombres = nombres;
     }
 
-    public void setNombres_Acudiente(String Nombres_Acudiente) {
-        this.Nombres_Acudiente = Nombres_Acudiente;
+    public String getApellidos() {
+        return this.apellidos;
     }
 
-    public String getApellidos_Acudiente() {
-        return Apellidos_Acudiente;
+    public void setApellidos(String apellidos) {
+        this.apellidos = apellidos;
     }
 
-    public void setApellidos_Acudiente(String Apellidos_Acudiente) {
-        this.Apellidos_Acudiente = Apellidos_Acudiente;
+    public String getTelefono() {
+        return this.telefono;
     }
 
-    public Long getTelefono_Acudiente() {
-        return Telefono_Acudiente;
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
     }
 
-    public void setTelefono_Acudiente(Long Telefono_Acudiente) {
-        this.Telefono_Acudiente = Telefono_Acudiente;
+    public String getCorreo() {
+        return this.correo;
     }
 
-    public String getCorreo_Acudiente() {
-        return Correo_Acudiente;
+    public void setCorreo(String correo) {
+        this.correo = correo;
     }
 
-    public void setCorreo_Acudiente(String Correo_Acudiente) {
-        this.Correo_Acudiente= Correo_Acudiente;
+    public User getUsuario() {
+        return this.usuario;
     }
 
+    public void setUsuario(User usuario) {
+        this.usuario = usuario;
+    }
+    
+    public String getDocumento() {
+        return this.documento;
+    }
+
+    public void setDocumento(String documento) {
+        this.documento = documento;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == this)
+            return true;
+        if (!(o instanceof Acudiente)) {
+            return false;
+        }
+        Acudiente acudiente = (Acudiente) o;
+        return Objects.equals(id, acudiente.id) && Objects.equals(nombres, acudiente.nombres) && Objects.equals(apellidos, acudiente.apellidos) && Objects.equals(telefono, acudiente.telefono) && Objects.equals(correo, acudiente.correo) && Objects.equals(usuario, acudiente.usuario);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, nombres, apellidos, telefono, correo, usuario);
+    }
+
+    @Override
+    public String toString() {
+        return "{" +
+            " id='" + getId() + "'" +
+            ", nombres='" + getNombres() + "'" +
+            ", apellidos='" + getApellidos() + "'" +
+            ", telefono='" + getTelefono() + "'" +
+            ", correo='" + getCorreo() + "'" +
+            ", usuario='" + getUsuario() + "'" +
+            "}";
+    }
+    
 }
