@@ -1,6 +1,7 @@
 package com.app.akdemy.entity;
 
 import java.sql.Date;
+import java.util.Objects;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,78 +13,125 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "Coordinador")
+@Table(name = "coordinador")
 public class Coordinador {
 
     //Definición de columnas para la tabla Coordinador
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer Id_Coordinador;
+    private Integer id;
 
-    @Column(name = "Nombres_Coordinador", nullable = false, length = 70)
-    private String Nombres_Coordinador;
+    @Column(name = "coo_nombres", nullable = false, length = 70)
+    private String nombres;
 
-    @Column(name = "Apellidos_Coordinador", nullable = false, length = 70)
-    private String Apellidos_Coordinador;
+    @Column(name = "coo_apellidos", nullable = false, length = 70)
+    private String apeliidos;
 
-    @Column(name = "Fecha_Nacimiento_C", nullable = false)
-    private Date Fecha_Nacimiento_C;
+    @Column(name = "coo_fecha_nacimiento", nullable = false)
+    private Date fechaNacimiento;
+
+    @Column(name = "coo_documento", nullable = false)
+    private String documento;
+
+    @OneToOne
+    @JoinColumn(name = "coo_usuario", updatable = false, nullable = false)
+    private User usuario;
 
     //Constructores de la clase Coordinador
 
     public Coordinador() {
     }
 
-    public Coordinador(Integer Id_Coordinador, String Nombres_Coordinador, String Apellidos_Coordinador, Date Fecha_Nacimiento_C) {
-        this.Id_Coordinador = Id_Coordinador;
-        this.Nombres_Coordinador = Nombres_Coordinador;
-        this.Apellidos_Coordinador = Apellidos_Coordinador;
-        this.Fecha_Nacimiento_C = Fecha_Nacimiento_C;
+
+
+    public Coordinador(Integer id, String nombres, String apeliidos, Date fechaNacimiento, String documento, User usuario) {
+        this.id = id;
+        this.nombres = nombres;
+        this.apeliidos = apeliidos;
+        this.fechaNacimiento = fechaNacimiento;
+        this.documento = documento;
+        this.usuario = usuario;
     }
 
-    public Coordinador(Integer Id_Coordinador) {
-        this.Id_Coordinador = Id_Coordinador;
-    }
-
-    //Relaciones con otras tablas
-
-    @OneToOne
-    @JoinColumn(name = "Usuario", updatable = false, nullable = false)
-    private User usuario;
-
+   
     //Getter y Setter
-
-    public Integer getId_Coordinador() {
-        return Id_Coordinador;
+    
+    public Integer getId() {
+        return this.id;
     }
 
-    public void setId_Coordinador(Integer Id_Coordinador) {
-        this.Id_Coordinador = Id_Coordinador;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
-    public String getNombres_Coordinador() {
-        return Nombres_Coordinador;
+    public String getNombres() {
+        return this.nombres;
     }
 
-    public void setNombres_Coordinador(String Nombres_Coordinador) {
-        this.Nombres_Coordinador = Nombres_Coordinador;
+    public void setNombres(String nombres) {
+        this.nombres = nombres;
     }
 
-    public String getApellidos_Coordinador() {
-        return Apellidos_Coordinador;
+    public String getApeliidos() {
+        return this.apeliidos;
     }
 
-    public void setApellidos_Coordinador(String Apellidos_Coordinador) {
-        this.Apellidos_Coordinador = Apellidos_Coordinador;
+    public void setApeliidos(String apeliidos) {
+        this.apeliidos = apeliidos;
     }
 
-    public Date getFecha_Nacimiento_C() {
-        return Fecha_Nacimiento_C;
+    public Date getFechaNacimiento() {
+        return this.fechaNacimiento;
     }
 
-    public void setFecha_Nacimiento_C(Date Fecha_Nacimiento_C) {
-        this.Fecha_Nacimiento_C = Fecha_Nacimiento_C;
+    public void setFechaNacimiento(Date fechaNacimiento) {
+        this.fechaNacimiento = fechaNacimiento;
     }
+
+     public String getDocumento() {
+        return this.documento;
+    }
+
+    public void setDocumento(String documento) {
+        this.documento = documento;
+    }
+
+    public User getUsuario() {
+        return this.usuario;
+    }
+
+    public void setUsuario(User usuario) {
+        this.usuario = usuario;
+    }
+  
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == this)
+            return true;
+        if (!(o instanceof Coordinador)) {
+            return false;
+        }
+        Coordinador coordinador = (Coordinador) o;
+        return Objects.equals(id, coordinador.id) && Objects.equals(nombres, coordinador.nombres) && Objects.equals(apeliidos, coordinador.apeliidos) && Objects.equals(fechaNacimiento, coordinador.fechaNacimiento);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, nombres, apeliidos, fechaNacimiento);
+    }
+
+    @Override
+    public String toString() {
+        return "{" +
+            " id='" + getId() + "'" +
+            ", nombres='" + getNombres() + "'" +
+            ", apeliidos='" + getApeliidos() + "'" +
+            ", fechaNacimiento='" + getFechaNacimiento() + "'" +
+            "}";
+    }
+    
     
 }

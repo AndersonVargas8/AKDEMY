@@ -77,9 +77,6 @@ public class UserServiceImpl implements UserService {
 
     protected void mapUser(User from, User to) {
         to.setUsername(from.getUsername());
-        to.setFirstName(from.getFirstName());
-        to.setLastName(from.getLastName());
-        to.setEmail(from.getEmail());
         to.setRoles(from.getRoles());
         to.setConfirmPassword(to.getPassword());
     }

@@ -30,23 +30,9 @@ public class User implements Serializable{
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
     @GenericGenerator(name = "native", strategy = "native")
     private long id;
-
-    @Column 
-	@NotBlank
-	private String firstName;
-	
-	@Column 
-	@NotBlank
-	private String lastName;
-	
-	@Column(unique = true) 
-	@Email 
-	@NotBlank
-	private String email;
-	
+		
 	@Column(unique = true) 
 	@NotBlank
-    @Size(min=5,max=10,message="No se cumplen las reglas del tamaño")
 	private String username;
 	
 	@Column 
@@ -59,61 +45,33 @@ public class User implements Serializable{
 
     //Relaciones con otras tablas
 
-    @OneToOne(cascade = CascadeType.ALL)
-    private Estudiante estudiante;
-
-    @OneToOne(cascade = CascadeType.ALL)
-    private Profesor profesor;
-
-    @OneToOne(cascade = CascadeType.ALL)
-    private Coordinador coordinador;
-
-    @OneToOne(cascade = CascadeType.ALL)
-    private Acudiente acudiente;
-
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "user_roles"
             , joinColumns = @JoinColumn(name="user_id")
             , inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles;
 
+
+    //Constructores
     public User(){}
 
-    public User(Long id){
+
+    public User(long id, String username, String password, String confirmPassword, Set<Role> roles) {
         this.id = id;
+        this.username = username;
+        this.password = password;
+        this.confirmPassword = confirmPassword;
+        this.roles = roles;
     }
 
-
+    //Getter y Setter
+    
     public long getId() {
         return this.id;
     }
 
     public void setId(long id) {
         this.id = id;
-    }
-
-    public String getFirstName() {
-        return this.firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return this.lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public String getEmail() {
-        return this.email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
     }
 
     public String getUsername() {
@@ -152,9 +110,6 @@ public class User implements Serializable{
     public String toString() {
         return "{" + 
             " id='" + getId() + "'" +
-            ", firstName='" + getFirstName() + "'" +
-            ", lastName='" + getLastName() + "'" +
-            ", email='" + getEmail() + "'" +
             ", username='" + getUsername() + "'" +
             ", password='" + getPassword() + "'" +
             ", confirmPassword='" + getConfirmPassword() + "'" +
@@ -170,12 +125,13 @@ public class User implements Serializable{
             return false;
         }
         User user = (User) o;
-        return id == user.id && Objects.equals(firstName, user.firstName) && Objects.equals(lastName, user.lastName) && Objects.equals(email, user.email) && Objects.equals(username, user.username) && Objects.equals(password, user.password) && Objects.equals(confirmPassword, user.confirmPassword) && Objects.equals(roles, user.roles);
+        return id == user.id && Objects.equals(username, user.username) && Objects.equals(password, user.password) && Objects.equals(confirmPassword, user.confirmPassword) && Objects.equals(roles, user.roles);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, firstName, lastName, email, username, password, confirmPassword, roles);
+        return Objects.hash(id, username, password, confirmPassword, roles);
     }
+    
 
 }

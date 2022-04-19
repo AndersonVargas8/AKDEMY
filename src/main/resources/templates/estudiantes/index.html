@@ -23,11 +23,11 @@
         <th>documento</th>
         <th>curso</th>
     </tr>
-    <!--        <tr th:each="estudiante:${estudiantes601}">-->
-    <!--            <th th:text="${estudiante.nombre}"></th>-->
-    <!--            <th th:text="${estudiante.documento}"></th>-->
-    <!--            <th th:text="${estudiante.curso.descripcion}"></th>-->
-    <!--        </tr>-->
+           <tr th:each="estudiante:${estudiantes601}">
+               <th th:text="${estudiante.nombre}"></th>
+               <th th:text="${estudiante.documento}"></th>
+               <th th:text="${estudiante.curso.descripcion}"></th>
+           </tr>
 </table>
 <div class="container mt-4 p-4">
     <!--Formulario-->

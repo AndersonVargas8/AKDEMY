@@ -10,29 +10,25 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "periodo")
-public class Periodo {
-    
-     //Definición de columnas para la tabla Periodo
+@Table(name = "tipo_documento")
+public class TipoDocumento {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
 
-     @Id
-     @GeneratedValue(strategy = GenerationType.IDENTITY)
-     private Integer id;
-
-     @Column(name = "per_descripcion")
-     private String descripcion;
+    @Column(name = "tipo_doc_descripcion", nullable = false, length = 70)
+    private String descripcion;
 
     //Constructor
-    public Periodo() {
+    public TipoDocumento() {
     }
 
-    public Periodo(Integer id, String descripcion) {
+    public TipoDocumento(Integer id, String descripcion) {
         this.id = id;
         this.descripcion = descripcion;
     }
 
     //Getter y Setter
-
     public Integer getId() {
         return this.id;
     }
@@ -44,21 +40,20 @@ public class Periodo {
     public String getDescripcion() {
         return this.descripcion;
     }
-
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
 
-
+    
     @Override
     public boolean equals(Object o) {
         if (o == this)
-            return true;
-        if (!(o instanceof Periodo)) {
+        return true;
+        if (!(o instanceof TipoDocumento)) {
             return false;
         }
-        Periodo periodo = (Periodo) o;
-        return Objects.equals(id, periodo.id) && Objects.equals(descripcion, periodo.descripcion);
+        TipoDocumento tipoDocumento = (TipoDocumento) o;
+        return Objects.equals(id, tipoDocumento.id) && Objects.equals(descripcion, tipoDocumento.descripcion);
     }
 
     @Override
@@ -69,9 +64,9 @@ public class Periodo {
     @Override
     public String toString() {
         return "{" +
-            " id='" + getId() + "'" +
-            ", descripcion='" + getDescripcion() + "'" +
-            "}";
+                " id='" + getId() + "'" +
+                ", descripcion='" + getDescripcion() + "'" +
+                "}";
     }
 
 }
