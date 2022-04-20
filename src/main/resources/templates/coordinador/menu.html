@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
     <head>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -24,26 +24,11 @@
         <link rel="stylesheet" href="../../static/css/normalize.css">
     </head>
 <body>
+    
 
-    <nav class="navbar navbar-dark navbar-expand-sm">
-        <div class="container">
-            <a href="menuEstudiantes.html" class="navbar-brand mr-auto"><img src="../../static/img/avatar1.png" height="40" width="35" alt="AKDEMY"></a>
-            <div class="collapse navbar-collapse" id="Navbar">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active"><a class="nav-link" href="./index.html"><span class="fa fa-home fa-lg"></span>Inicio</a></li>
-                    <li class="nav-item"><a class="nav-link" href="../cursos.html"><span class="fa fa-info fa-lg"></span>Cursos</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#"><span class="fa fa-list fa-lg"></span>Horarios</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#"><span class="fa fa-list fa-lg"></span>Estudiantes</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#"><span class="fa fa-list fa-lg"></span>Profesores</a></li>
-                </ul> 
-                <span class="navbar-text">
-                    <a><span class=""></span>Cerrar Sesión</a>
-                </span>   
-            </div>  
-        </div>
-    </nav>
-
+    <div th:include="coordinador/navbar.html" th:remove="tag"></div>
     <header class="jumbotron">
+        
         <div class="container">
             <div class="row row-header">
                 <div class="col-12 align-items-center">
