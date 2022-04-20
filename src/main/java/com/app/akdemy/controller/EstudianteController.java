@@ -14,9 +14,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+@Controller
 public class EstudianteController {
-    @Autowired
-    private EstudianteRepository repProfesor;
 
     @Autowired
     private IEstudianteService serEstudiante;
@@ -25,7 +24,6 @@ public class EstudianteController {
     public String index(Model model) {
 
         model.addAttribute("newEstudiante", new Estudiante());
-        model.addAttribute("estudiantes", repProfesor.findAll());
         return "estudiantes/index";
     }
 

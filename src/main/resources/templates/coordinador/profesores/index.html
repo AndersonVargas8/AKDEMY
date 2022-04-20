@@ -31,7 +31,7 @@
                 <script src="https://cdn.datatables.net/plug-ins/1.11.5/i18n/es-ES.json"></script>
         </head>
         <body>
-            <div th:include="navbar.html" th:remove="tag"></div>
+            <div th:include="coordinador/navbar.html" th:remove="tag"></div>
             <section class="layout">
                 <div class="main card w-100">
                     <div class="card-title row titletable">
@@ -107,7 +107,7 @@
                     </button>
                 </div>
                 <div class="modal-body p-5 justify-content-center">
-                    <form th:action="@{/saveprofesor}" th:object=${nuevoProfesor} method="POST">
+                    <form th:action="@{/saveprofesor}" th:object="${nuevoProfesor}" method="POST">
                         <div class="form-group">
                           <label for="names"><b>Nombres</b></label>
                           <input th:field="*{nombres}" type="text" class="form-control" id="names" placeholder="Nombre(s)">

@@ -30,7 +30,7 @@ public class ProfesorController {
 
         model.addAttribute("nuevoProfesor", new Profesor());
         model.addAttribute("profesores", repProfesor.findAll());
-        return "profesores/index";
+        return "coordinador/profesores/index";
     }
 
     @PostMapping("/saveprofesor")
