@@ -25,7 +25,6 @@ public class ProfesorController {
     @Autowired
     private ProfesorRepository repProfesor;
 
-
     @GetMapping("/profesores")
     public String index(Model model) {
 
@@ -35,7 +34,7 @@ public class ProfesorController {
     }
 
     @PostMapping("/saveprofesor")
-    public String createProfesor(@Valid Profesor profesor, Model model){
+    public String createProfesor(@Valid Profesor profesor, Model model) {
         service.saveProfesor(profesor);
         return "redirect:/profesores";
     }

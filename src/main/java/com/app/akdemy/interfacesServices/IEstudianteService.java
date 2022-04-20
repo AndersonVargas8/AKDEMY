@@ -6,5 +6,8 @@ import com.app.akdemy.entity.Estudiante;
 
 public interface IEstudianteService {
     public void guardarEstudiante(Estudiante estudiante);
-    public List<Estudiante> buscarPorCurso(int numCurso);
+
+    public void eliminarEstudiante(Estudiante estudiante);
+
+    public List<Estudiante> listarEstudiantes();
 }
