@@ -1,15 +1,16 @@
 package com.app.akdemy.service;
 
 import java.util.Optional;
+import java.util.Set;
 
 import com.app.akdemy.Exception.CustomeFieldValidationException;
 import com.app.akdemy.Exception.UsernameOrIdNotFound;
-import com.app.akdemy.dto.ChangePasswordForm;
+import com.app.akdemy.entity.Role;
 import com.app.akdemy.entity.User;
+import com.app.akdemy.interfacesServices.IRoleService;
 import com.app.akdemy.repository.UserRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -27,6 +28,9 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     PasswordEncoder passwordEncoder;
+
+    @Autowired
+    IRoleService serRole;
 
     @Override
     public Iterable<User> getAllUsers() {
@@ -50,28 +54,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User createUser(User user) throws Exception {
-        if (checkUserNameAvailable(user) && checkPasswordValid(user)) {
-            String encodePassword = bCryptPasswordEncoder.encode(user.getPassword());
-            user.setPassword(encodePassword);
-            user = repUser.save(user);
-        }
-
-        return user;
-    }
-
-    @Override
     public User getUserById(Long id) throws UsernameOrIdNotFound {
         User user = repUser.findById(id).orElseThrow(() -> new UsernameOrIdNotFound("El Id del usuario no existe"));
-        return user;
-    }
-
-    @Override
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USER')")
-    public User updateUser(User fromUser) throws Exception {
-        User toUser = getUserById(fromUser.getId());
-        mapUser(fromUser, toUser);
-        User user = repUser.save(toUser);
         return user;
     }
 
@@ -81,56 +65,24 @@ public class UserServiceImpl implements UserService {
         to.setConfirmPassword(to.getPassword());
     }
 
-    @Override
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
-    public void deleteUser(Long id) throws UsernameOrIdNotFound {
-        User user = getUserById(id);
 
-        repUser.delete(user);
-    }
+    public boolean loggedUserHasRole(String roleName) throws Exception {
+        //Obtener role con el nombre
+        Role role = serRole.buscarPorNombre(roleName);
+        //Obtener el usuario logueado
+        User usuarioLogueado = this.getLoggedUser();
+        
+        Set<Role> roles = usuarioLogueado.getRoles();
 
-    public boolean isLoggedUserADMIN() {
-        return loggedUserHasRole("ROLE_ADMIN");
-    }
-
-    public boolean loggedUserHasRole(String role) {
-        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        UserDetails loggedUser = null;
-        Object roles = null;
-        if (principal instanceof UserDetails) {
-            loggedUser = (UserDetails) principal;
-
-            roles = loggedUser.getAuthorities().stream()
-                    .filter(x -> role.equals(x.getAuthority()))
-                    .findFirst().orElse(null); // loggedUser = null;
-        }
-        return roles != null ? true : false;
-    }
-
-    @Override
-    public User changePassword(ChangePasswordForm form) throws Exception {
-        User storedUser = getUserById(form.getId());
-        if (!isLoggedUserADMIN() && !passwordEncoder.matches(form.getCurrentPassword(), storedUser.getPassword())) {
-            throw new Exception("Contraseña actual incorrecta.");
-        }
-
-        if (!isLoggedUserADMIN() && form.getCurrentPassword().equals(form.getNewPassword())) {
-            throw new Exception("La nueva contraseña debe ser diferente a la actual contraseña");
-        }
-
-        if (!form.getNewPassword().equals(form.getConfirmPassword())) {
-            throw new Exception("Las contraseñas no coinciden");
-        }
-
-        String encodePassword = bCryptPasswordEncoder.encode(form.getNewPassword());
-        storedUser.setPassword(encodePassword);
-        storedUser.setConfirmPassword(encodePassword);
-        return repUser.save(storedUser);
+        if(roles.contains(role))
+            return true;
+        
+        return false;
     }
     
     @Override
     public User getLoggedUser() throws Exception {
-        //Obtener el usuario logeado
+        //Obtener el usuario logueado
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         
         UserDetails loggedUser = null;

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seleccionar Rol</title>
+
+    <!-- FRAMEWORK BOOTSTRAP para el estilo de la pagina-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+</head>
+
+<body>
+    <div class="container mt-4">
+        <div th:each="rol: ${roles}" th:remove="tag">
+            <a th:if="${rol.name == 'COORDINADOR'}" th:href="@{/coordinador}" class="btn btn-primary">Coordinador</a>
+            <a th:if="${rol.name == 'PROFESOR'}" th:href="@{/profesor}" class="btn btn-info">Profesor</a>
+            <a th:if="${rol.name == 'ACUDIENTE'}" th:href="@{/acudiente}" class="btn btn-warning">Acudiente</a>
+            <a th:if="${rol.name == 'ESTUDIANTE'}" th:href="@{/estudiante}" class="btn btn-success">Estudiante</a>
+        </div>
+    </div>
+</body>
+
+</html>

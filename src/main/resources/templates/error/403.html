@@ -18,8 +18,6 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/solid.css">
     <script src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
 
-    <!-- Nuestro css-->
-    <link rel="stylesheet" type="text/css" href="../static/css/index.css" th:href="@{/css/index.css}">
 
     <style type="text/css">
         body {
@@ -43,7 +41,8 @@
     <div class="container text-center">
         <div class="mx-auto col-10 card errorpane">
             <div class="card-header">
-                <h4 th:text="${error}">403 Forbidden</h4>
+                <h4>No tienes acceso a este elemento</h4>
+                <a href="javascript:history.back()" class="text-info">Regresar</a>
             </div>
             <div class="card-body">
                 <a href="/userForm"><img src="../../static/img/error/403.jpg" th:src="@{/img/error/403.jpg}" /></a>
