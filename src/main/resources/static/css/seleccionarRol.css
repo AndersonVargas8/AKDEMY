@@ -27,7 +27,7 @@ body{
     
 }
 .contenedor_boton {
-    margin: 19px;
+    margin: 12px;
     display: grid;
     grid-template-columns: repeat(auto,1fr);
     gap: 36px;
