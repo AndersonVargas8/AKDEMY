@@ -10,9 +10,8 @@ body{
 .contenedor{
     margin: 0 auto;
     display: flex;
-    justify-content: center;
-    align-items: center;
     flex-direction: column;
+    flex: auto;
     width: 640px;
     padding-top: 60px;
     background-color: rgb(135,206,235);
@@ -28,10 +27,10 @@ body{
     
 }
 .contenedor_boton {
-    margin: 25px;
+    margin: 19px;
     display: grid;
-    grid-template-columns: repeat(2,1fr);
-    gap: 50px;
+    grid-template-columns: repeat(auto,1fr);
+    gap: 36px;
 }
 .boton {
     background-color: rgb(5,30,80);

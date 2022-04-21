@@ -23,20 +23,20 @@
         <div class="contenedor_boton">
             <div th:each="rol: ${roles}" th:remove="tag">
                 <a th:if="${rol.name == 'COORDINADOR'}" th:href="@{/coordinador}" class="boton">Coordinador  
-                    <img src="../static/img/coordinador.png" th:src="@{/img/coordinador.png}" width="130" height="130" alt="Coordinador">
+                    <img src="../static/img/coordinador.png" th:src="@{/img/coordinador.png}" width="50" height="50" alt="Coordinador">
                 </a>
                 <a th:if="${rol.name == 'PROFESOR'}" th:href="@{/profesor}" class="boton">Profesor
-                    <img src="../static/profesor.png" th:src="@{/img/profesor.png}" width="130" height="130" alt="Profesor">
+                    <img src="../static/profesor.png" th:src="@{/img/profesor.png}" width="50" height="50" alt="Profesor">
                 </a>
             </div>
         </div>
         <div class="contenedor_boton">
             <div th:each="rol: ${roles}" th:remove="tag">
                 <a th:if="${rol.name == 'ACUDIENTE'}" th:href="@{/acudiente}" class="boton">Acudiente 
-                    <img src="../static/img/acudiente.png" th:src="@{/img/acudiente.png}" width="130" height="130" alt="Acudiente">
+                    <img src="../static/img/acudiente.png" th:src="@{/img/acudiente.png}" width="50" height="50" alt="Acudiente">
                 </a>
                 <a th:if="${rol.name == 'ESTUDIANTE'}" th:href="@{/estudiante}" class="boton">Estudiante 
-                    <img src="../static/img/estudiante.png" th:src="@{/img/estudiante.png}" width="130" height="130" alt="Estudiante">
+                    <img src="../static/img/estudiante.png" th:src="@{/img/estudiante.png}" width="50" height="50" alt="Estudiante">
                 </a>
             </div>
         </div>
