@@ -31,7 +31,6 @@ public class ProfesorController {
 
     
     @GetMapping("/coordinador/profesores")
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_COORDINADOR')")
     public String index(Model model) {
 
         model.addAttribute("profesor", new Profesor());
