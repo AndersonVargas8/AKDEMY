@@ -29,7 +29,7 @@
     <div th:include="coordinador/navbar.html" th:remove="tag"></div>
 
     <div class="container mt-4 p-4">
-        <!--Formulario-->
+        <!--Formulario nuevo estudiante-->
         <div class="modal fade" tabindex="-1" role="dialog" id="modalFormEstudiantes">
             <div class="modal-dialog modal-lg d-flex justify-content-center" role="document">
                 <div class="modal-content" style="max-width:80%">
@@ -41,6 +41,24 @@
                     </div>
                     <div th:include="coordinador/estudiantes/nuevoEstudiante.html"
                         class="modal-body p-4 d-flex justify-content-center">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--Formulario editar estudiante-->
+        <div class="modal fade" tabindex="-1" role="dialog" id="modalFormEditarEstudiantes">
+            <div class="modal-dialog modal-lg d-flex justify-content-center" role="document">
+                <div class="modal-content" style="max-width:80%">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Editar estudiante</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div th:include="coordinador/estudiantes/editarEstudiante.html"
+                        class="modal-body p-4 d-flex justify-content-center" id="formEditarEstudiantes">
 
                     </div>
                 </div>
@@ -70,7 +88,7 @@
                     <td th:text="${estudiante.documento}"></td>
                     <td th:text="${estudiante.usuario.username}"></td>
                     <td>
-                        <button type='button' class='btn btn-info btn-sm'>
+                        <button type='button' class='btn btn-info btn-sm' th:onclick="editarEstudiante([[${estudiante.id}]])">
                             <span class='material-icons align-middle'></span>
                             <span class="fa fa-edit fa-sm"></span>
                         </button>

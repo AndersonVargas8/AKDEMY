@@ -1,0 +1,44 @@
+<form id="editarEstudiantesForm" th:object="${editarEstudiante}" method="post" class="form col-lg" role="form"
+    autocomplete="off" th:action="@{/coordinador/editarEstudiante}" th:if="${editarEstudiante != null}">
+    <!--Es necesario para poder pasar la validacion del Model-->
+    <input class="form-control" hidden th:field="*{id}">
+
+    <div class="form-group row">
+        <label class="col-lg-3 col-lg form-label form-control-label"><b>Nombres</b></label>
+        <div class="col-lg-7 search_select_box">
+            <input th:field="${editarEstudiante.nombres}" class="form-control">
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-lg-3 col-lg form-label form-control-label"><b>Apellidos</b></label>
+        <div class="col-lg-7 search_select_box">
+            <input th:field="${editarEstudiante.apellidos}" class="form-control">
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label class="col-lg-3 form-label form-control-label"><b>Tipo de documento</b></label>
+        <select th:field="${editarEstudiante.tipoDocumento}" required class="col-lg-6 m-2 ml-3 btn dropdown-toggle border">
+            <option th:each="tipoDoc:${tiposDoc}" th:value="${tipoDoc.id}" th:text="${tipoDoc.descripcion}"></option>
+        </select>
+    </div>
+
+    <div class="form-group row">
+        <label class="col-lg-3 col-lg form-label form-control-label"><b>Documento</b></label>
+        <div class="col-lg-7 search_select_box">
+            <input th:field="${editarEstudiante.documento}" type="number" class="form-control">
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label class="col-lg-3 col-lg form-label form-control-label"><b>Nombre de usuario</b></label>
+        <div class="col-lg-7 search_select_box">
+            <input th:field="${editarEstudiante.usuario.username}" class="form-control">
+        </div>
+    </div>
+
+
+    <div class="form-group row d-flex justify-content-center">
+        <input type="submit" value="Guardar" class="btn btn-success" />
+    </div>
+</form>

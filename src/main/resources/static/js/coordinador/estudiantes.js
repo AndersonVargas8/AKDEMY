@@ -9,3 +9,11 @@ $(document).ready(function() {
     );
     
 } );
+
+function editarEstudiante(id){
+    // let mes = document.getElementById("selMesCalendar").value;
+    var url = "/coordinador/estudiantes/" + id;
+    $("#formEditarEstudiantes").load(url);
+    
+    $("#modalFormEditarEstudiantes").modal();
+}

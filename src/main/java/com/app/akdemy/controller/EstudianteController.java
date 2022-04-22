@@ -8,6 +8,7 @@ import javax.validation.Valid;
 import com.app.akdemy.entity.Acudiente;
 import com.app.akdemy.entity.Estudiante;
 import com.app.akdemy.entity.Role;
+import com.app.akdemy.entity.User;
 import com.app.akdemy.interfacesServices.IEstudianteService;
 import com.app.akdemy.repository.TipoDocumentoRepository;
 import com.app.akdemy.service.AcudienteService;
@@ -41,7 +42,7 @@ public class EstudianteController {
 
     @Autowired
     AcudienteService serAcudiente;
-    
+
     @Autowired
     BCryptPasswordEncoder bCryptPasswordEncoder;
 
@@ -52,43 +53,70 @@ public class EstudianteController {
         model.addAttribute("tiposDoc", repTipoDoc.findAll());
         model.addAttribute("estudiantes", serEstudiante.listarEstudiantes());
 
-        model.addAttribute("itemNavbar","estudiantes");
+        model.addAttribute("itemNavbar", "estudiantes");
         return "coordinador/estudiantes/index";
     }
 
     @PostMapping("/coordinador/estudiantes")
-    public String guardarEstudiante(@Valid @ModelAttribute("estudiante") Estudiante estudiante, BindingResult result, Model model) {
-        
-        //Se pone la contraseña de usuario igual al documento   
+    public String guardarEstudiante(@Valid @ModelAttribute("estudiante") Estudiante estudiante, BindingResult result,
+            Model model) {
+
+        // Se pone la contraseña de usuario igual al documento
         String encodePassword = bCryptPasswordEncoder.encode(estudiante.getDocumento());
         estudiante.getUsuario().setPassword(encodePassword);
         estudiante.getUsuario().setConfirmPassword(encodePassword);
-        //Se le asigna el rol estudiante
+        // Se le asigna el rol estudiante
         Set<Role> roles = new HashSet<>();
         roles.add(serRole.buscarPorNombre("ESTUDIANTE"));
         estudiante.getUsuario().setRoles(roles);
 
-        //Se guarda el user y se le asigna al estudiante
+        // Se guarda el user y se le asigna al estudiante
         estudiante.setUsuario(serUser.guardarUsuario(estudiante.getUsuario()));
 
-        //Se agrega un conjunto vacío de acudientes
+        // Se agrega un conjunto vacío de acudientes
         Set<Acudiente> acudientes = new HashSet<>();
         estudiante.setAcudientes(acudientes);
 
-        //Se guarda el estudiante
+        // Se guarda el estudiante
         serEstudiante.guardarEstudiante(estudiante);
 
         return "redirect:/coordinador/estudiantes";
     }
 
     @GetMapping("/coordinador/estudiantes/{id}")
-    public String editarEstudiante(@PathVariable int id, Model model){
+    public String getEditarEstudiante(@PathVariable int id, Model model) {
         Estudiante estudiante = serEstudiante.buscarPorId(id);
-        model.addAttribute("nuevoEstudiante", estudiante);
+        model.addAttribute("editarEstudiante", estudiante);
         model.addAttribute("tiposDoc", repTipoDoc.findAll());
         model.addAttribute("estudiantes", serEstudiante.listarEstudiantes());
 
-        model.addAttribute("itemNavbar","estudiantes");
-        return "coordinador/estudiantes/index";
+        model.addAttribute("itemNavbar", "estudiantes");
+        return "coordinador/estudiantes/editarEstudiante.html";
+    }
+
+    @PostMapping("/coordinador/editarEstudiante")
+    public String editarEstudiante(@Valid @ModelAttribute("estudiante") Estudiante estudiante, BindingResult result,
+            Model model) {
+        User user = serEstudiante.buscarPorId(estudiante.getId()).getUsuario();
+        // Se pone la contraseña de usuario igual al documento
+        String encodePassword = bCryptPasswordEncoder.encode(estudiante.getDocumento());
+        user.setPassword(encodePassword);
+        user.setConfirmPassword(encodePassword);
+        user.setUsername(estudiante.getUsuario().getUsername());
+
+        // Se guarda el user y se le asigna al estudiante
+        estudiante.setUsuario(serUser.guardarUsuario(user));
+
+        Set<Acudiente> acudientes = estudiante.getAcudientes();
+
+        if (acudientes == null) {
+            // Se agrega un conjunto vacío de acudientes
+            acudientes = new HashSet<>();
+            estudiante.setAcudientes(acudientes);
+        }
+        // Se guarda el estudiante
+        serEstudiante.guardarEstudiante(estudiante);
+
+        return "redirect:/coordinador/estudiantes";
     }
 }
