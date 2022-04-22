@@ -1,0 +1,52 @@
+*,*:after, *:before{
+    box-sizing: inherit;
+}
+
+body{
+    background: url("../img/fondo-login.png");
+    background-size: cover;
+    margin: 0 auto;
+}
+.contenedor{
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    flex: auto;
+    width: 640px;
+    padding-top: 60px;
+    background-color: rgb(135,206,235);
+    border-radius: 1rem;
+}
+
+.titulo{
+    font-weight: bold;
+    text-transform: uppercase;
+    color: rgb(5,30,80);
+    text-align: center;
+    margin-bottom: 4px;
+    
+}
+.contenedor_boton {
+    margin: 12px;
+    display: grid;
+    grid-template-columns: repeat(auto,1fr);
+    gap: 36px;
+}
+.boton {
+    background-color: rgb(5,30,80);
+    color: floralwhite;
+    padding: 20px 50px;
+    font-weight: bold;
+    text-transform: uppercase;
+    border-radius: 1rem;
+    text-align: center;
+    margin: 0 5px;
+}
+.boton:hover {
+    border-color: rgb(5,30,80);
+    background-color: floralwhite;
+    color: rgb(5,30,80);
+    font-weight: bold;
+    cursor: pointer;
+    text-decoration: none;
+}
