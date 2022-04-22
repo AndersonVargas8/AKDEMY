@@ -104,7 +104,7 @@
                     </button>
                 </div>
                 <div class="modal-body p-5 justify-content-center">
-                    <form th:action="@{/saveprofesor}" th:object="${nuevoProfesor}" method="POST">
+                    <form th:action="@{/saveprofesor}" th:object="${profesor}" method="POST">
                         <div class="form-group">
                             <label for="names"><b>Nombres</b></label>
                             <input th:field="*{nombres}" type="text" class="form-control" id="names"
@@ -120,6 +120,18 @@
                             <input th:field="*{fechaNacimiento}" type="date" class="form-control" id="birthdate"
                                 placeholder="Password">
                         </div>
+                        <div class="form-group">
+                            <label for="document"><b>Documento</b></label>
+                            <input th:field="*{documento}" type="number" class="form-control" id="document"
+                                placeholder="Documento">
+                        </div>
+                        <div>
+                            <label for="user"><b>Usuario Asociado</b></label>
+                            <select class="form-control" th:field="${profesor.usuario.id}" id="user">
+                                <option th:each="user:${users}" th:value="${user.id}" th:text="${user.username}"></option>
+                            </select>
+                        </div>
+                        <br>
                         <button type="submit" class="w-100 btn btn-primary" width="100%">Guardar</button>
                     </form>
                 </div>
