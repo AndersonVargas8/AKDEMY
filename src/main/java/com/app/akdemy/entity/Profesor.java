@@ -20,7 +20,7 @@ public class Profesor {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private long id;
 
     @Column(name = "pro_nombres", nullable = false, length = 70)
     private String nombres;
@@ -46,7 +46,7 @@ public class Profesor {
 
 
 
-    public Profesor(Integer id, String nombres, String apellidos, String documento, Date fechaNacimiento, User usuario) {
+    public Profesor(long id, String nombres, String apellidos, String documento, Date fechaNacimiento, User usuario) {
         this.id = id;
         this.nombres = nombres;
         this.apellidos = apellidos;
@@ -56,11 +56,11 @@ public class Profesor {
     }
 
    
-    public Integer getId() {
+    public long getId() {
         return this.id;
     }
 
-    public void setId(Integer id) {
+    public void setId(long id) {
         this.id = id;
     }
 
