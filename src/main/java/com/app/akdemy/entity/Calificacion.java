@@ -19,7 +19,7 @@ public class Calificacion {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private long id;
 
     @Column(name = "cal_nota", nullable = false)
     private Float nota;
@@ -48,7 +48,7 @@ public class Calificacion {
     public Calificacion() {
     }
 
-    public Calificacion(Integer id, Float nota, Periodo periodo, Estudiante estudiante, Profesor profesor, MateriaGrado materia) {
+    public Calificacion(long id, Float nota, Periodo periodo, Estudiante estudiante, Profesor profesor, MateriaGrado materia) {
         this.id = id;
         this.nota = nota;
         this.periodo = periodo;
@@ -59,11 +59,11 @@ public class Calificacion {
 
     //Getter y Setter
     
-    public Integer getId() {
+    public long getId() {
         return this.id;
     }
 
-    public void setId(Integer id) {
+    public void setId(long id) {
         this.id = id;
     }
 

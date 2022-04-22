@@ -20,7 +20,7 @@ public class Coordinador {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private long id;
 
     @Column(name = "coo_nombres", nullable = false, length = 70)
     private String nombres;
@@ -45,7 +45,7 @@ public class Coordinador {
 
 
 
-    public Coordinador(Integer id, String nombres, String apeliidos, Date fechaNacimiento, String documento, User usuario) {
+    public Coordinador(long id, String nombres, String apeliidos, Date fechaNacimiento, String documento, User usuario) {
         this.id = id;
         this.nombres = nombres;
         this.apeliidos = apeliidos;
@@ -57,11 +57,11 @@ public class Coordinador {
    
     //Getter y Setter
     
-    public Integer getId() {
+    public long getId() {
         return this.id;
     }
 
-    public void setId(Integer id) {
+    public void setId(long id) {
         this.id = id;
     }
 

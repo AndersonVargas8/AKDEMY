@@ -19,7 +19,7 @@ public class Acudiente {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private long id;
     @Column(name = "acu_nombres", nullable = false, length = 70)
     private String nombres;
 
@@ -49,7 +49,7 @@ public class Acudiente {
 
 
 
-    public Acudiente(Integer id, String nombres, String apellidos, String documento, String telefono, String correo, User usuario) {
+    public Acudiente(long id, String nombres, String apellidos, String documento, String telefono, String correo, User usuario) {
         this.id = id;
         this.nombres = nombres;
         this.apellidos = apellidos;
@@ -62,11 +62,11 @@ public class Acudiente {
 
     //Getter y Setter
 
-    public Integer getId() {
+    public long getId() {
         return this.id;
     }
 
-    public void setId(Integer id) {
+    public void setId(long id) {
         this.id = id;
     }
 
