@@ -1,0 +1,27 @@
+package com.app.akdemy.service;
+
+import java.util.List;
+
+import com.app.akdemy.entity.Curso;
+import com.app.akdemy.interfacesServices.ICursoService;
+import com.app.akdemy.repository.CursoRepository;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+@Service
+public class CursoService implements ICursoService{
+
+    @Autowired
+    CursoRepository repCurso;
+
+    @Override
+    public List<Curso> getAllCourses() {
+        return (List<Curso>) repCurso.findAll();
+    }
+
+    @Override
+    public void saveCurso(Curso curso) {
+        repCurso.save(curso);
+    }
+}

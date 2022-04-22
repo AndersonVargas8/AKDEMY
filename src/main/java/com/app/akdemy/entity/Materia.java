@@ -17,7 +17,7 @@ public class Materia {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private long id;
 
     @Column(name = "mat_nombre", nullable = false, length = 100)
     private String nombre;
@@ -26,18 +26,18 @@ public class Materia {
     public Materia() {
     }
 
-    public Materia(Integer id, String nombre) {
+    public Materia(long id, String nombre) {
         this.id = id;
         this.nombre = nombre;
     }
 
     //Getter y Setter
 
-    public Integer getId() {
+    public long getId() {
         return this.id;
     }
 
-    public void setId(Integer id) {
+    public void setId(long id) {
         this.id = id;
     }
 

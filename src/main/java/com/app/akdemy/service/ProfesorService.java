@@ -2,6 +2,7 @@ package com.app.akdemy.service;
 
 import java.util.List;
 
+import com.app.akdemy.Exception.ProfesorNotFound;
 import com.app.akdemy.entity.Profesor;
 import com.app.akdemy.interfacesServices.IProfesorService;
 import com.app.akdemy.repository.ProfesorRepository;
@@ -25,4 +26,12 @@ public class ProfesorService implements IProfesorService{
         repProfesor.save(profesor);
         
     }
+
+
+    @Override
+    public Profesor getById(Long id) throws ProfesorNotFound {
+        Profesor profesor = repProfesor.findById(id).orElseThrow(() -> new ProfesorNotFound("El profesor no ha sido encontrado"));
+        return profesor;
+    }
+
 }

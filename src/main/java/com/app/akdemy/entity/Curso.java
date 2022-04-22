@@ -19,10 +19,10 @@ public class Curso {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private long id;
 
     @Column(name = "cur_nombre", nullable = false, length = 70)
-    private Integer nombre_Curso;
+    private String nombre_Curso;
 
     @Column(name = "cur_anio", nullable = false, length = 70)
     private Integer anio_Curso;
@@ -46,7 +46,7 @@ public class Curso {
     public Curso() {
     }
 
-    public Curso(int id, Integer nombre_Curso, Integer anio_Curso, Profesor profesor, Set<Estudiante> estudiantes) {
+    public Curso(long id, String nombre_Curso, Integer anio_Curso, Profesor profesor, Set<Estudiante> estudiantes) {
         this.id = id;
         this.nombre_Curso = nombre_Curso;
         this.anio_Curso = anio_Curso;
@@ -63,11 +63,11 @@ public class Curso {
         this.id = id;
     }
 
-    public Integer getNombre_Curso() {
+    public String getNombre_Curso() {
         return this.nombre_Curso;
     }
 
-    public void setNombre_Curso(Integer nombre_Curso) {
+    public void setNombre_Curso(String nombre_Curso) {
         this.nombre_Curso = nombre_Curso;
     }
 

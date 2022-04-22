@@ -19,7 +19,7 @@ public class MateriaGrado {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private long id;
 
     
     @Column(name = "mat_gra_grado", nullable = false)
@@ -38,18 +38,18 @@ public class MateriaGrado {
     public MateriaGrado() {
     }
 
-    public MateriaGrado(Integer id, Integer grado, String descripcion, Materia materia) {
+    public MateriaGrado(long id, Integer grado, String descripcion, Materia materia) {
         this.id = id;
         this.grado = grado;
         this.descripcion = descripcion;
         this.materia = materia;
     }
 
-    public Integer getId() {
+    public long getId() {
         return this.id;
     }
 
-    public void setId(Integer id) {
+    public void setId(long id) {
         this.id = id;
     }
 

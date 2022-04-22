@@ -17,7 +17,7 @@ public class Periodo {
 
      @Id
      @GeneratedValue(strategy = GenerationType.IDENTITY)
-     private Integer id;
+     private long id;
 
      @Column(name = "per_descripcion")
      private String descripcion;
@@ -26,18 +26,18 @@ public class Periodo {
     public Periodo() {
     }
 
-    public Periodo(Integer id, String descripcion) {
+    public Periodo(long id, String descripcion) {
         this.id = id;
         this.descripcion = descripcion;
     }
 
     //Getter y Setter
 
-    public Integer getId() {
+    public long getId() {
         return this.id;
     }
 
-    public void setId(Integer id) {
+    public void setId(long id) {
         this.id = id;
     }
 

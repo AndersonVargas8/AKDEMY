@@ -8,4 +8,5 @@ public class UsernameOrIdNotFound extends Exception{
     public UsernameOrIdNotFound(String message){
         super(message);
     }
+    
 }

@@ -20,7 +20,7 @@ public class Observador {
 
      @Id
      @GeneratedValue(strategy = GenerationType.IDENTITY)
-     private Integer id;
+     private long id;
  
      @Column(name = "obs_descargos", nullable = false)
      private String descargos;
@@ -42,7 +42,7 @@ public class Observador {
     }
 
 
-    public Observador(Integer id, String descargos, Date fecha, Estudiante estudiante, Profesor profesor) {
+    public Observador(long id, String descargos, Date fecha, Estudiante estudiante, Profesor profesor) {
         this.id = id;
         this.descargos = descargos;
         this.fecha = fecha;
@@ -69,11 +69,11 @@ public class Observador {
     }
   
 
-    public Integer getId() {
+    public long getId() {
         return this.id;
     }
 
-    public void setId(Integer id) {
+    public void setId(long id) {
         this.id = id;
     }
 
