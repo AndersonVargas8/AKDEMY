@@ -8,20 +8,20 @@ body{
     margin: 0 auto;
 }
 .contenedor{
+    max-width: 90%;
     margin: 0 auto;
     display: flex;
     flex-direction: column;
     flex: auto;
     width: 640px;
     padding-top: 60px;
-    background-color: rgb(135,206,235);
+    background-color: #119bf1;
     border-radius: 1rem;
 }
 
 .titulo{
     font-weight: bold;
     text-transform: uppercase;
-    color: rgb(5,30,80);
     text-align: center;
     margin-bottom: 4px;
     
@@ -33,7 +33,7 @@ body{
     gap: 36px;
 }
 .boton {
-    background-color: rgb(5,30,80);
+    background-color: #0f0a8e;
     color: floralwhite;
     padding: 20px 50px;
     font-weight: bold;
@@ -43,9 +43,9 @@ body{
     margin: 0 5px;
 }
 .boton:hover {
-    border-color: rgb(5,30,80);
+    border-color: #0f0a8e;
     background-color: floralwhite;
-    color: rgb(5,30,80);
+    color: #0f0a8e;
     font-weight: bold;
     cursor: pointer;
     text-decoration: none;
