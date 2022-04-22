@@ -2,127 +2,90 @@ body{
     background: url(../img/fondo-login.png) no-repeat center center fixed; 
     /* background-color: lightsteelblue; */
     background-size: cover;
+    background-repeat: no-repeat;
 }
-
-.main-section{
-    margin: 0;
-    padding: 0px;
-    width: 100%;
-    height: 100%;
-    background-color: red;
+*,*:after, *:before{
+    box-sizing: inherit;
 }
-.container{
-    background-color: blue;
-    height: 78vh;
+.contenedor {
+    margin: 0 auto;
     max-width: 80%;
-    max-height: 90vh;
-    margin-top: 5%;
-    margin-bottom: 5%;
-    padding: 0;
 }
-
-.modal-content{
-    /* background-color:snow; */
-    background-image: linear-gradient(rgb(68,98,158),rgb(55,80,130));
-    padding: 5%;
-    border:none;
-    border-radius: 0px;
+.contenedor__principal {
+    margin-top: 100px;
+    display: grid;
+    grid-template-columns: repeat(2,1fr) ;
+}
+.sombra {
+    /*se genera desde https://www.cssmatic.com/box-shadow*/
+    -webkit-box-shadow: -1px 6px 28px 3px rgba(0,0,0,0.39);
+    -moz-box-shadow: -1px 6px 28px 3px rgba(0,0,0,0.39);
+    box-shadow: -1px 6px 28px 3px rgba(0,0,0,0.39);
+    border-radius: 10px;
+}
+.formulario {
+    height: 100%;
+}
+.inicio_sesion{
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    background-color: #119bf1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+}
+.formulario__titulo {
     text-align: center;
-    /* box-shadow: 0px 0px 10px 1px rgb(34, 61, 98); */
-}
-
-.form-content{
-}
-
-
-
-.modal-content h3{
-    color: rgb(242,242,252);
-    font-family: "Bahnschrift";
-}
-
-.btn{
-    background-color: rgb(82, 187, 138);
-    -webkit-border-radius: 50px;
-    border-radius: 50px;
-    height: 50px;
-    border: none;
-    color: white;
+    text-transform: uppercase;
     font-weight: bold;
-    width: 60%;
-    margin: 5px 0 25px;
 }
-
-.btn:hover{
-    background-color: rgb(61, 158, 113);
-    border: none;
-
+.formulario__titulo h3 {
+    font-size: 30px;
 }
-
-.btn:active{
-    background-color: rgb(99, 199, 152);
-    border: none;
-    box-shadow: none;
+.formulario__form {
+    margin-top: 10px;
+    width: 90%;
 }
-
-.btn:focus{
-    box-shadow: none;
-}
-
-
-.form-group input{
-    background-color: rgb(242,242,252);
-    -webkit-border-radius: 50px;
-    border-radius: 50px;
-    height: 50px;
-    border: none;
+.input-text{
     text-align: center;
-    padding-left: 0px;
+    margin: 10px 0;
+    width: 90%;
+    border: none;
+    padding: 15px;
+    border-radius: 0.5rem;
 }
-
-.form-control:focus{
-    box-shadow: 0 0 15px 2px rgba(4, 19, 48, 0.877); 
-    /* border-bottom: 2px solid rgb(9, 65, 92); */
-    /* box-shadow: none;
-    box-shadow:50px red; */
+.campo {
+    grid-column: 1/3;
+    justify-content: center;
+    margin: 0 auto;
 }
-
-.form-group::before{
-    font-family: "Font Awesome\ 5 Free";
-    position: absolute;
-    left: 30px;
-    font-size: 20px;
-    padding-top: 10px;
-    color: rgb(9, 65, 92);
+.campo:nth-child(2){
+    margin-bottom: 40px;
 }
-.form-group#user-group::before{
-    content: "\f007";
+.campo__boton{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 8px;
 }
-
-.form-group#password-group::before{
-    content: "\f023";
-}
-
-.modal-info{
-    background-color:rgb(242,242,252);
-    padding: 5%;
-    border:none;
-}
-
-.modal-info h3{
-    color: rgb(39,56,91);
-    font-family: "Bahnschrift";
+.boton {
+    background-color: #0f0a8e;
+    color: floralwhite;
     font-weight: bold;
-    font-size: 35px;
+    padding: 20px 20px;
+    text-transform: uppercase;
+    border-radius: 10px;
+    text-align: center;
+    margin: 0 5px;
+    border: none;
 }
 
-.modal-info img{
-    width: 200px;
+.logo {
+    background-color: #0f0a8e;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
 }
-
-.modal-info label{
-    margin: 5px;
-    font-family: "Bahnschrift";
-    color: rgb(39,56,91);
-    font-size: 20px;
+.logo__seccion {
+    text-align: center;
+    color: floralwhite;
 }
