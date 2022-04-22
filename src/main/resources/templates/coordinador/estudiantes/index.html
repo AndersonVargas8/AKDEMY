@@ -46,13 +46,43 @@
                 </div>
             </div>
         </div>
-        <!-- LISTA DE ESTUDIANTES -->
-        <div th:each="estudiante: ${estudiantes}">
-            <div th:text="${estudiante.nombres}"></div>
-        </div>
+        
         <button type="button" class="btn btn-success mb-2" data-toggle="modal" data-target="#modalFormEstudiantes">
             <span class="fa fa-plus fa-sm"></span> Nuevo Estudiante
-        </button>
+        </button><br><br>
+        <!-- LISTA DE ESTUDIANTES -->
+        <table id="tablaEstudiantes" class="display" style="width:100%">
+            <thead>
+                <tr>
+                    <th>Nombres</th>
+                    <th>Apellidos</th>
+                    <th>Tipo de documento</th>
+                    <th>Documento</th>
+                    <th>Usuario</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="estudiante:${estudiantes}">
+                    <td th:text="${estudiante.nombres}"></td>
+                    <td th:text="${estudiante.apellidos}"></td>
+                    <td th:text="${estudiante.tipoDocumento.descripcion}"></td>
+                    <td th:text="${estudiante.documento}"></td>
+                    <td th:text="${estudiante.usuario.username}"></td>
+                    <td>
+                        <button type='button' class='btn btn-info btn-sm'>
+                            <span class='material-icons align-middle'></span>
+                            <span class="fa fa-edit fa-sm"></span>
+                        </button>
+                        <button type='button' class='btn btn-danger btn-sm'>
+                            <span class="fa fa-trash fa-sm"></span>
+                        </button>
+                    </td>
+
+                </tr>
+            </tbody>
+            
+        </table>
     </div>
 </body>
 

@@ -10,4 +10,7 @@ public interface IEstudianteService {
     public void eliminarEstudiante(Estudiante estudiante);
 
     public List<Estudiante> listarEstudiantes();
+
+    public Estudiante buscarPorId(int id);
+    
 }

@@ -18,7 +18,7 @@
 
     <div class="form-group row">
         <label class="col-lg-3 form-label form-control-label"><b>Tipo de documento</b></label>
-        <select th:field="${nuevoEstudiante.tipoDocumento}" required class="col-lg-7 m-2 ml-3 btn dropdown-toggle border">
+        <select th:field="${nuevoEstudiante.tipoDocumento}" required class="col-lg-6 m-2 ml-3 btn dropdown-toggle border">
             <option th:each="tipoDoc:${tiposDoc}" th:value="${tipoDoc.id}" th:text="${tipoDoc.descripcion}"></option>
         </select>
     </div>

@@ -45,4 +45,9 @@ public class EstudianteService implements IEstudianteService {
 
     }
 
+    @Override
+    public Estudiante buscarPorId(int id) {
+        return repEstudiante.findById(id).get();
+    }
+
 }

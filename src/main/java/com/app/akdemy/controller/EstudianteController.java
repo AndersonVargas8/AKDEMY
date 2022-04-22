@@ -21,6 +21,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
@@ -78,5 +79,16 @@ public class EstudianteController {
         serEstudiante.guardarEstudiante(estudiante);
 
         return "redirect:/coordinador/estudiantes";
+    }
+
+    @GetMapping("/coordinador/estudiantes/{id}")
+    public String editarEstudiante(@PathVariable int id, Model model){
+        Estudiante estudiante = serEstudiante.buscarPorId(id);
+        model.addAttribute("nuevoEstudiante", estudiante);
+        model.addAttribute("tiposDoc", repTipoDoc.findAll());
+        model.addAttribute("estudiantes", serEstudiante.listarEstudiantes());
+
+        model.addAttribute("itemNavbar","estudiantes");
+        return "coordinador/estudiantes/index";
     }
 }
