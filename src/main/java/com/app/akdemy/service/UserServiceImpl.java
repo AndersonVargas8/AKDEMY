@@ -97,4 +97,9 @@ public class UserServiceImpl implements UserService {
         
         return myUser;
     }
+
+    @Override
+    public User guardarUsuario(User user) {
+        return repUser.save(user);
+    }
 }

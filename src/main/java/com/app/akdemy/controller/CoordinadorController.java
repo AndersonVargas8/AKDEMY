@@ -11,6 +11,7 @@ public class CoordinadorController {
     @GetMapping("/coordinador")
     @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_COORDINADOR')")
     public String inicioCoordinador(Model model){
+        model.addAttribute("itemNavbar","inicio");
         return "coordinador/menu";
     }
 }

@@ -28,6 +28,7 @@ public class ProfesorController {
 
         model.addAttribute("nuevoProfesor", new Profesor());
         model.addAttribute("profesores", repProfesor.findAll());
+        model.addAttribute("itemNavbar","profesores");
         return "coordinador/profesores/index";
     }
 

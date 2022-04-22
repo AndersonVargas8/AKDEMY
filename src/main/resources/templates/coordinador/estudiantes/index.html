@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estudiantes</title>
+    
+    <link rel="shortcut icon" type="image/x-icon" href="../static/img/avatar.png" th:href="@{../img/avatar.png}">
+
+    <!--JQUERY-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!-- FRAMEWORK BOOTSTRAP para el estilo de la pagina-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <!-- Datables-->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
+    <script type="text/javascript" charset="utf8"
+        src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
+        
+    <!-- Local Files-->
+    <script type="text/javascript" th:src="@{/js/coordinador/estudiantes.js}"></script>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/coordinador/estudiantes.css}">
+</head>
+
+<body>
+    <!-- NAVBAR -->
+    <div th:include="coordinador/navbar.html" th:remove="tag"></div>
+
+    <div class="container mt-4 p-4">
+        <!--Formulario-->
+        <div class="modal fade" tabindex="-1" role="dialog" id="modalFormEstudiantes">
+            <div class="modal-dialog modal-lg d-flex justify-content-center" role="document">
+                <div class="modal-content" style="max-width:80%">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Nuevo Estudiante</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div th:include="coordinador/estudiantes/nuevoEstudiante.html"
+                        class="modal-body p-4 d-flex justify-content-center">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- LISTA DE ESTUDIANTES -->
+        <div th:each="estudiante: ${estudiantes}">
+            <div th:text="${estudiante.nombres}"></div>
+        </div>
+        <button type="button" class="btn btn-success mb-2" data-toggle="modal" data-target="#modalFormEstudiantes">
+            <span class="fa fa-plus fa-sm"></span> Nuevo Estudiante
+        </button>
+    </div>
+</body>
+
+</html>

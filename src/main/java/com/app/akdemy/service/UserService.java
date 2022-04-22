@@ -11,4 +11,6 @@ public interface UserService {
     public User getLoggedUser() throws Exception;
 
     public boolean loggedUserHasRole(String roleName) throws Exception;
+
+    public User guardarUsuario(User user);
 }
