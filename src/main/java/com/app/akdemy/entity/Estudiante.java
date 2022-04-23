@@ -1,5 +1,6 @@
 package com.app.akdemy.entity;
 
+import java.sql.Date;
 import java.util.Objects;
 import java.util.Set;
 
@@ -21,13 +22,16 @@ public class Estudiante {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
     @GenericGenerator(name = "native", strategy = "native")
-    private Integer id;
+    private long id;
 
     @Column(name = "est_nombres", nullable = false, length = 70) 
 	private String nombres;
 
     @Column(name = "est_apellidos", nullable = false, length = 70) 
 	private String apellidos;
+
+    @Column(name = "est_fecha_nacimiento")
+    private Date fechaNacimiento;
 
     @ManyToOne
     @JoinColumn(name = "est_tipo_doc")
@@ -37,6 +41,14 @@ public class Estudiante {
 	private String documento;
 
     //Relaciones con otras tablas
+
+    @ManyToOne
+    @JoinColumn(name = "est_eps")
+    private Eps eps;
+
+    @ManyToOne
+    @JoinColumn(name = "est_gsrh")
+    private GrupoSanguineoRH grupoSanguineoRH;
 
     @OneToOne
     @JoinColumn(name = "est_usuario", updatable = false, nullable = false)
@@ -53,23 +65,27 @@ public class Estudiante {
     public Estudiante() {
     }
 
-    public Estudiante(Integer id, String nombres, String apellidos, TipoDocumento tipoDocumento, String documento, User usuario, Set<Acudiente> acudientes) {
+
+    public Estudiante(long id, String nombres, String apellidos, Date fechaNacimiento, TipoDocumento tipoDocumento, String documento, Eps eps, GrupoSanguineoRH grupoSanguineoRH, User usuario, Set<Acudiente> acudientes) {
         this.id = id;
         this.nombres = nombres;
         this.apellidos = apellidos;
+        this.fechaNacimiento = fechaNacimiento;
         this.tipoDocumento = tipoDocumento;
         this.documento = documento;
+        this.eps = eps;
+        this.grupoSanguineoRH = grupoSanguineoRH;
         this.usuario = usuario;
         this.acudientes = acudientes;
     }
 
     //Getter y Setter
-
-    public Integer getId() {
+    
+    public long getId() {
         return this.id;
     }
 
-    public void setId(Integer id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -89,6 +105,14 @@ public class Estudiante {
         this.apellidos = apellidos;
     }
 
+    public Date getFechaNacimiento() {
+        return this.fechaNacimiento;
+    }
+
+    public void setFechaNacimiento(Date fechaNacimiento) {
+        this.fechaNacimiento = fechaNacimiento;
+    }
+
     public TipoDocumento getTipoDocumento() {
         return this.tipoDocumento;
     }
@@ -103,6 +127,22 @@ public class Estudiante {
 
     public void setDocumento(String documento) {
         this.documento = documento;
+    }
+
+    public Eps getEps() {
+        return this.eps;
+    }
+
+    public void setEps(Eps eps) {
+        this.eps = eps;
+    }
+
+    public GrupoSanguineoRH getGrupoSanguineoRH() {
+        return this.grupoSanguineoRH;
+    }
+
+    public void setGrupoSanguineoRH(GrupoSanguineoRH grupoSanguineoRH) {
+        this.grupoSanguineoRH = grupoSanguineoRH;
     }
 
     public User getUsuario() {
@@ -130,12 +170,12 @@ public class Estudiante {
             return false;
         }
         Estudiante estudiante = (Estudiante) o;
-        return Objects.equals(id, estudiante.id) && Objects.equals(nombres, estudiante.nombres) && Objects.equals(apellidos, estudiante.apellidos) && Objects.equals(tipoDocumento, estudiante.tipoDocumento) && Objects.equals(documento, estudiante.documento) && Objects.equals(usuario, estudiante.usuario) && Objects.equals(acudientes, estudiante.acudientes);
+        return id == estudiante.id && Objects.equals(nombres, estudiante.nombres) && Objects.equals(apellidos, estudiante.apellidos) && Objects.equals(fechaNacimiento, estudiante.fechaNacimiento) && Objects.equals(tipoDocumento, estudiante.tipoDocumento) && Objects.equals(documento, estudiante.documento) && Objects.equals(eps, estudiante.eps) && Objects.equals(grupoSanguineoRH, estudiante.grupoSanguineoRH) && Objects.equals(usuario, estudiante.usuario) && Objects.equals(acudientes, estudiante.acudientes);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, nombres, apellidos, tipoDocumento, documento, usuario, acudientes);
+        return Objects.hash(id, nombres, apellidos, fechaNacimiento, tipoDocumento, documento, eps, grupoSanguineoRH, usuario, acudientes);
     }
 
     @Override
@@ -144,12 +184,16 @@ public class Estudiante {
             " id='" + getId() + "'" +
             ", nombres='" + getNombres() + "'" +
             ", apellidos='" + getApellidos() + "'" +
+            ", fechaNacimiento='" + getFechaNacimiento() + "'" +
             ", tipoDocumento='" + getTipoDocumento() + "'" +
             ", documento='" + getDocumento() + "'" +
+            ", eps='" + getEps() + "'" +
+            ", grupoSanguineoRH='" + getGrupoSanguineoRH() + "'" +
             ", usuario='" + getUsuario() + "'" +
             ", acudientes='" + getAcudientes() + "'" +
             "}";
     }
+    
     
 
 }

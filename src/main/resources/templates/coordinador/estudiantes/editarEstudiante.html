@@ -17,8 +17,16 @@
     </div>
 
     <div class="form-group row">
+        <label class="col-lg-3 col-lg form-label form-control-label"><b>Fecha de Nacimiento</b></label>
+        <div class="col-lg-7">
+            <input th:field="${editarEstudiante.fechaNacimiento}" type="date" class="form-control">
+        </div>
+    </div>
+
+    <div class="form-group row">
         <label class="col-lg-3 form-label form-control-label"><b>Tipo de documento</b></label>
-        <select th:field="${editarEstudiante.tipoDocumento}" required class="col-lg-6 m-2 ml-3 btn dropdown-toggle border">
+        <select th:field="${editarEstudiante.tipoDocumento}" required
+            class="col-lg-6 m-2 ml-3 btn dropdown-toggle border">
             <option th:each="tipoDoc:${tiposDoc}" th:value="${tipoDoc.id}" th:text="${tipoDoc.descripcion}"></option>
         </select>
     </div>
@@ -31,14 +39,37 @@
     </div>
 
     <div class="form-group row">
+        <label class="col-lg-3 form-label form-control-label"><b>Grupo sanguíneo - RH</b></label>
+        <select th:field="${editarEstudiante.grupoSanguineoRH}" required
+            class="col-lg-6 m-2 ml-3 btn dropdown-toggle border">
+            <option th:each="grupoS:${gsrh}" th:value="${grupoS.id}" th:text="${grupoS.descripcion}"></option>
+        </select>
+    </div>
+
+    <div class="form-group row">
+        <label class="col-lg-3 form-label form-control-label"><b>EPS</b></label>
+        <div class="col-lg-7 search_select_box2">
+            <select th:field="${editarEstudiante.eps}" class="w-100 border" data-live-search="true"
+                data-none-results-text="No se encontró {0}">
+                <option th:each="EPS:${eps}" th:value="${EPS.id}" th:text="${EPS.nombre}"></option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group row">
         <label class="col-lg-3 col-lg form-label form-control-label"><b>Nombre de usuario</b></label>
-        <div class="col-lg-7 search_select_box">
+        <div class="col-lg-7">
             <input th:field="${editarEstudiante.usuario.username}" class="form-control">
         </div>
     </div>
 
 
     <div class="form-group row d-flex justify-content-center">
-        <input type="submit" value="Guardar" class="btn btn-success" />
+        <button type="submit" class="w-50 btn btn-primary">Guardar</button>
     </div>
 </form>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.search_select_box2 select').selectpicker();
+    })
+</script>

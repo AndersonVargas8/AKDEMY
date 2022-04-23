@@ -9,6 +9,6 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface EstudianteRepository extends CrudRepository<Estudiante,Integer>{
+public interface EstudianteRepository extends CrudRepository<Estudiante,Long>{
     public List<Estudiante> findByNombres(String nombres);
 }

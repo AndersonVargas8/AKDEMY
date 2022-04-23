@@ -11,6 +11,6 @@ public interface IEstudianteService {
 
     public List<Estudiante> listarEstudiantes();
 
-    public Estudiante buscarPorId(int id);
+    public Estudiante buscarPorId(long id);
     
 }

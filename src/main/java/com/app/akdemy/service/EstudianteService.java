@@ -33,7 +33,7 @@ public class EstudianteService implements IEstudianteService {
     }
 
     @Override
-    public Estudiante buscarPorId(int id) {
+    public Estudiante buscarPorId(long id) {
         return repEstudiante.findById(id).get();
     }
 

@@ -1,8 +1,7 @@
 <link rel="stylesheet" type="text/css" href="../../static/css/navbar.css" th:href="@{/css/navbar.css}">
 
 <!-- Los iconos tipo Solid de Fontawesome-->
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/solid.css">
-<script src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
 
 <nav class="navbar navbar-dark navbar-expand-sm">
     <div class="container">
@@ -10,16 +9,19 @@
                 th:src="@{/img/avatar1.png}" height="40" width="35" alt="AKDEMY"></a>
         <div class="collapse navbar-collapse" id="Navbar">
             <ul class="navbar-nav mr-auto">
-                <li  th:class="${itemNavbar == 'inicio'} ? 'nav-item active' : 'nav-item'"><a class="nav-link" href="/coordinador"><span
-                            class="fa fa-home fa-lg"></span> Inicio</a></li>
-                <li class="nav-item"><a class="nav-link" href="/coordinador/cursos"><span class="fa fa-info fa-lg"></span>
+                <li th:class="${itemNavbar == 'inicio'} ? 'nav-item active' : 'nav-item'"><a class="nav-link"
+                        href="/coordinador"><span class="fa fa-home fa-lg"></span> Inicio</a></li>
+                <li class="nav-item"><a class="nav-link" href="/coordinador/cursos"><span
+                            class="fa fa-info fa-lg"></span>
                         Cursos</a></li>
                 <li class="nav-item"><a class="nav-link" href="#"><span class="fa fa-list fa-lg"></span> Horarios</a>
                 </li>
-                <li th:class="${itemNavbar == 'estudiantes'} ? 'nav-item active' : 'nav-item'"><a class="nav-link" href="/coordinador/estudiantes"><span class="fa fa-users fa-lg"></span> Estudiantes</a>
+                <li th:class="${itemNavbar == 'estudiantes'} ? 'nav-item active' : 'nav-item'"><a class="nav-link"
+                        href="/coordinador/estudiantes"><span class="fa fa-users fa-lg"></span> Estudiantes</a>
                 </li>
-                <li  th:class="${itemNavbar == 'profesores'} ? 'nav-item active' : 'nav-item'"><a class="nav-link" th:href="@{/coordinador/profesores}"><span
-                            class="fa fa-suitcase fa-lg"></span> Profesores</a></li>
+                <li th:class="${itemNavbar == 'profesores'} ? 'nav-item active' : 'nav-item'"><a class="nav-link"
+                        th:href="@{/coordinador/profesores}"><span class="fa fa-suitcase fa-lg"></span> Profesores</a>
+                </li>
             </ul>
             <span class="navbar-text">
                 <a th:href="@{/logout}"><span class=""></span>Cerrar Sesión</a>
