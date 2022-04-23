@@ -111,7 +111,7 @@
                         </div>
                         <div class="form-group">
                             <label for="year"><b>Año</b></label>
-                            <input th:field="*{anio_Curso}" type="number" class="form-control" id="year"
+                            <input th:field="*{anio_Curso}" type="number" min="1900" max="3000" class="form-control" id="year"
                                 placeholder="Año" required>
                         </div>
                         <div>
