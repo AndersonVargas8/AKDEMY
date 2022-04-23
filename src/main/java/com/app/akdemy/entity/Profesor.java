@@ -35,7 +35,7 @@ public class Profesor {
     private Date fechaNacimiento;
 
     @OneToOne
-    @JoinColumn(name = "pro_usuario", updatable = false, nullable = false)
+    @JoinColumn(name = "pro_usuario", nullable = false)
     private User usuario;
 
 

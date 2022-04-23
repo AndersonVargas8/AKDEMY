@@ -1,8 +1,5 @@
 package com.app.akdemy.repository;
 
-import java.util.Optional;
-import java.util.List;
-
 import com.app.akdemy.entity.Profesor;
 
 import org.springframework.data.repository.CrudRepository;
