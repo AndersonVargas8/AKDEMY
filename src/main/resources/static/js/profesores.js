@@ -8,3 +8,10 @@ $(document).ready(function() {
     );
     
 } );
+
+function editarProfesor(id){
+    var url = "/coordinador/profesores/" + id;
+    $("#formEditarProfesor").load(url);
+    
+    $("#modalFormEditarProfesor").modal();
+}

@@ -26,6 +26,15 @@ public class Role implements Serializable {
     @Column
     private String description;
 
+    // Constructor
+    public Role(String name, String description) {
+        this.name = name;
+        this.description = description;
+    }
+
+    public Role() {
+    }
+
     public long getId() {
         return this.id;
     }
@@ -49,6 +58,8 @@ public class Role implements Serializable {
     public void setDescription(String description) {
         this.description = description;
     }
+
+
 
     @Override
     public String toString() {

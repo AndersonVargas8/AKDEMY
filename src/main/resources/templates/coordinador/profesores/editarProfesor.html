@@ -1,0 +1,43 @@
+<form id="editarProfesorForm" th:action="@{/saveprofesor}"
+    th:object="${editarProfesor}" method="POST" th:if="${editarProfesor != null}">
+
+    <!--Es necesario para poder pasar la validacion del Model-->
+    <input class="form-control" hidden th:field="*{id}">
+
+    <div class="form-group">
+        <label for="names"><b>Nombres</b></label>
+        <input th:field="*{nombres}" type="text"
+            class="form-control" id="names"
+            placeholder="Nombre(s)">
+    </div>
+    <div class="form-group">
+        <label for="lastnames"><b>Apellidos</b></label>
+        <input th:field="*{apellidos}" type="text"
+            class="form-control" id="lastnames"
+            placeholder="Apellido(s)">
+    </div>
+    <div class="form-group">
+        <label for="birthdate"><b>Fecha de Nacimiento</b></label>
+        <input th:field="*{fechaNacimiento}" type="date"
+            class="form-control" id="birthdate"
+            placeholder="Password">
+    </div>
+    <div class="form-group">
+        <label for="document"><b>Documento</b></label>
+        <input th:field="*{documento}" type="number"
+            class="form-control" id="document"
+            placeholder="Documento">
+    </div>
+    <div>
+        <label for="user"><b>Usuario Asociado</b></label>
+        <select class="form-control"
+            th:field="*{usuario.id}" id="user">
+            <option th:each="user:${users}"
+                th:value="${user.id}"
+                th:text="${user.username}"></option>
+        </select>
+    </div>
+    <br>
+    <button type="submit" class="w-100 btn btn-primary"
+        width="100%">Guardar</button>
+</form>

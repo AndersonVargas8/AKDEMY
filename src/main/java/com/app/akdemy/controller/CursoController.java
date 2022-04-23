@@ -15,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
@@ -46,5 +47,17 @@ public class CursoController {
         //profesor.setUsuario(serUser.getUserById(profesor.getUsuario().getId()));
         service.saveCurso(curso);
         return "redirect:/coordinador/cursos";
+    }
+
+    @GetMapping("/coordinador/cursos/{id}")
+    public String editarCurso(@PathVariable int id, Model model) {
+
+        Curso curso= serCurso.buscarPorId(id);
+        model.addAttribute("editarCurso", curso);
+        model.addAttribute("cursos", serCurso.getAllCourses());
+        model.addAttribute("profesores", serProfesor.getAllProfesors());
+        model.addAttribute("itemNavbar","cursos");
+
+        return "coordinador/cursos/editarCursos.html";
     }
 }

@@ -23,6 +23,10 @@ public class TipoDocumento {
     public TipoDocumento() {
     }
 
+    public TipoDocumento(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
     public TipoDocumento(Integer id, String descripcion) {
         this.id = id;
         this.descripcion = descripcion;

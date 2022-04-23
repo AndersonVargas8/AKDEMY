@@ -8,3 +8,11 @@ $(document).ready(function() {
     );
     
 } );
+
+function editarCurso(id){
+    // let mes = document.getElementById("selMesCalendar").value;
+    var url = "/coordinador/cursos/" + id;
+    $("#formEditarCursos").load(url);
+    
+    $("#modalFormEditarCursos").modal();
+}

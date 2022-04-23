@@ -51,6 +51,10 @@ public class User implements Serializable{
     //Constructores
     public User(){}
 
+    public User(String username, String password){
+        this.username = username;
+        this.password = password;
+    }
 
     public User(long id, String username, String password, String confirmPassword, Set<Role> roles) {
         this.id = id;

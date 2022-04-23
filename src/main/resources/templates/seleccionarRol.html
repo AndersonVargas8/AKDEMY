@@ -25,7 +25,7 @@
         <div class="contenedor_boton">
             <div th:each="rol: ${roles}" th:remove="tag">
                 <a th:if="${rol.name == 'COORDINADOR'}" th:href="@{/coordinador}" class="boton">Coordinador  
-                    <img src="../static/img/coordinador.png" th:src="@{/img/coordinador.png}" width="50" height="50" alt="Coordinador">
+                    <img src="../static/img/coordinador1.png" th:src="@{/img/coordinador1.png}" width="50" height="50" alt="Coordinador">
                 </a>
                 <a th:if="${rol.name == 'PROFESOR'}" th:href="@{/profesor}" class="boton">Profesor
                     <img src="../static/profesor.png" th:src="@{/img/profesor.png}" width="50" height="50" alt="Profesor">

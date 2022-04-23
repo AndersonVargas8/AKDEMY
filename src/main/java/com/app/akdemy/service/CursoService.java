@@ -24,4 +24,9 @@ public class CursoService implements ICursoService{
     public void saveCurso(Curso curso) {
         repCurso.save(curso);
     }
+
+    @Override
+    public Curso buscarPorId(long id) {
+        return repCurso.findById(id).get();
+    }
 }

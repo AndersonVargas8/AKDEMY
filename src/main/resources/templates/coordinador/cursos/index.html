@@ -65,7 +65,7 @@
                             <td th:text="${curso.anio_Curso}"></td>
                             <td th:text="${curso.profesor.nombres} + ' ' + ${curso.profesor.apellidos}"></td>
                             <td>
-                                <button type='button' class='btn btn-info btn-sm'>
+                                <button type='button' class='btn btn-info btn-sm' th:onclick="editarCurso([[${curso.id}]])">
                                     <span class='material-icons align-middle'>edit</span>
                                     <span class='align-middle'>Editar</span>
                                 </button>
@@ -92,7 +92,7 @@
 
     </section>
 
-    <!--Formulario-->
+    <!--Formulario crear curso-->
     <div class="modal fade" tabindex="-1" role="dialog" id="modalFormCurso">
         <div class="modal-dialog modal-lg d-flex justify-content-center" role="document">
             <div class="modal-content" style="max-width:80%">
@@ -127,6 +127,25 @@
             </div>
         </div>
     </div>
+
+    <!--Formulario editar Curso-->
+    <div class="modal fade" tabindex="-1" role="dialog" id="modalFormEditarCursos">
+        <div class="modal-dialog modal-lg d-flex justify-content-center" role="document">
+            <div class="modal-content" style="max-width:80%">
+                <div class="modal-header">
+                    <h5 class="modal-title">Editar curso</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div th:include="coordinador/cursos/editarCursos"
+                    class="modal-body p-4 d-flex justify-content-center" id="formEditarCursos">
+
+                </div>
+            </div>
+        </div>
+    </div>
+
 </body>
 
 </html>
