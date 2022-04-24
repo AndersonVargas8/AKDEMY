@@ -31,67 +31,60 @@
 
 <body>
     <div th:include="coordinador/navbar.html" th:remove="tag"></div>
-    <section class="layout">
-        <div class="main card w-100">
-            <div class="card-title row titletable">
-                <div class="col text-left">
-                    <h1>Cursos</h1>
+    <div class="container">
+        <section class="layout">
+            <div class="main card w-100">
+                <div class="card-title row titletable">
+                    <div class="col text-left">
+                        <h2>Cursos&nbsp;<span class="badge">Coordinador</span></h2>
+                        <p>Listado de Cursos</h2>
+                    </div>
+                    <div class="col text-right">
+                        <button type="button" class="btn boton__cursos mb-2 row" data-toggle="modal"
+                            data-target="#modalFormCurso">
+                            <span class="material-icons align-middle">add</span>
+                            <span class="align-middle">Crear Curso</span>
+                        </button>
+                    </div>
                 </div>
-                <div class="col text-right">
-                    <button type="button" class="btn btn-success mb-2 row" data-toggle="modal"
-                        data-target="#modalFormCurso">
-                        <span class="material-icons align-middle">add</span>
-                        <span class="align-middle">Crear Curso</span>
-                    </button>
+                <div class="card-body ">
+                    <table id="courses" class="table table-borderless table-hover" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Nombre del curso</th>
+                                <th>Año del curso</th>
+                                <th>Director de curso</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="curso:${cursos}">
+                                <td th:text="${curso.id}"></td>
+                                <td th:text="${curso.nombre_Curso}"></td>
+                                <td th:text="${curso.anio_Curso}"></td>
+                                <td th:text="${curso.profesor.nombres} + ' ' + ${curso.profesor.apellidos}"></td>
+                                <td>
+                                    <button type='button' class='btn btn-info btn-sm' th:onclick="editarCurso([[${curso.id}]])">
+                                        <span class='material-icons align-middle'>edit</span>
+                                        <span class='align-middle'></span>
+                                    </button>
+                                    <button type='button' class='btn btn-danger btn-sm' th:onclick="confirmDelete([[${curso.id}]])">
+                                        <span class='material-icons align-middle'>delete</span>
+                                        <span class='align-middle'></span>
+                                    </button>
+                                </td>
+
+                            </tr>
+                        </tbody>
+                        
+                    </table>
                 </div>
-
-
-
             </div>
-            <div class="card-body">
-                <table id="courses" class="display" style="width:100%">
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Nombre del curso</th>
-                            <th>Año del curso</th>
-                            <th>Director de curso</th>
-                            <th>Acciones</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr th:each="curso:${cursos}">
-                            <td th:text="${curso.id}"></td>
-                            <td th:text="${curso.nombre_Curso}"></td>
-                            <td th:text="${curso.anio_Curso}"></td>
-                            <td th:text="${curso.profesor.nombres} + ' ' + ${curso.profesor.apellidos}"></td>
-                            <td>
-                                <button type='button' class='btn btn-info btn-sm' th:onclick="editarCurso([[${curso.id}]])">
-                                    <span class='material-icons align-middle'>edit</span>
-                                    <span class='align-middle'>Editar</span>
-                                </button>
-                                <button type='button' class='btn btn-danger btn-sm' th:onclick="confirmDelete([[${curso.id}]])">
-                                    <span class='material-icons align-middle'>delete</span>
-                                    <span class='align-middle'>Eliminar</span>
-                                </button>
-                            </td>
 
-                        </tr>
-                    </tbody>
-                    <tfoot>
-                        <tr>
-                            <th>ID</th>
-                            <th>Nombre del curso</th>
-                            <th>Año del curso</th>
-                            <th>Director de curso</th>
-                            <th>Acciones</th>
-                        </tr>
-                    </tfoot>
-                </table>
-            </div>
-        </div>
-
-    </section>
+        </section> 
+    </div>
+    
 
     <!--Formulario crear curso-->
     <div class="modal fade" tabindex="-1" role="dialog" id="modalFormCurso">
@@ -99,7 +92,7 @@
             <div class="modal-content" style="max-width:80%">
                 <div class="modal-header">
                     <h5 class="modal-title">Nuevo Curso</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <button type="button" class="close icon-cerrar" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
@@ -122,7 +115,7 @@
                             </select>
                         </div>
                         <br>
-                        <button type="submit" class="w-100 btn btn-primary" width="100%">Guardar</button>
+                        <button type="submit" class="w-100 btn guardar" width="100%">Guardar</button>
                     </form>
                 </div>
             </div>

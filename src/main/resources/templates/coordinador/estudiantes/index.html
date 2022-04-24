@@ -38,7 +38,7 @@
             <div class="modal-content" style="max-width:80%">
                 <div class="modal-header">
                     <h5 class="modal-title">Nuevo Estudiante</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <button type="button" class="close icon-cerrar" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
@@ -81,6 +81,7 @@
                         <button type="button" class="btn mb-2 row boton__crearEstudiante"
                                 data-toggle="modal"
                                 data-target="#modalFormEstudiantes">
+
                                 <span class="fa fa-user-plus fa-1x"></span>
                                 <span class="align-middle">Crear Estudiante</span>
                         </button>
@@ -93,6 +94,7 @@
                             <th>Nombres</th>
                             <th>Apellidos</th>
                             <th>Fecha de Nacimiento</th>
+                            <th>Tipo Documento</th>
                             <th>Documento</th>
                             <th>Usuario</th>
                             <th>Acciones</th>
@@ -108,10 +110,9 @@
                             <td th:text="${estudiante.usuario.username}"></td>
                             <td>
                                 <button type='button' class='btn btn-info
-                                            btn-sm' th:onclick="editarEstudiante([${estudiante.id}]])">
-                                            <span class='material-icons
-                                                align-middle'>edit</span>
-                                    <span class="fa fa-user-pen"></span>
+                                            btn-sm' th:onclick="editarEstudiante([[${estudiante.id}]])">
+                                    <span class="fas fa-user-pen"></span>
+
                                 </button>
                                 <button type='button' class='btn btn-danger btn-sm' title="Eliminar">
                                     <span class="fas fa-user-times"></span>
