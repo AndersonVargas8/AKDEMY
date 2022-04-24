@@ -34,7 +34,7 @@ public class ProfesorController {
 
         model.addAttribute("profesor", new Profesor());
         model.addAttribute("profesores", serProfesor.getAllProfesors());
-        model.addAttribute("users", serUser.getAllUsers());
+        model.addAttribute("users", serUser.getAvailableUsersProfesores());
         model.addAttribute("itemNavbar","profesores");
         return "coordinador/profesores/index";
     }
@@ -52,7 +52,7 @@ public class ProfesorController {
         Profesor profesor = serProfesor.getById(id);
         model.addAttribute("editarProfesor", profesor);
         model.addAttribute("profesores", serProfesor.getAllProfesors());
-        model.addAttribute("users", serUser.getAllUsers());
+        model.addAttribute("users", serUser.getAvailableUsersProfesores());
         model.addAttribute("itemNavbar","profesores");
         return "coordinador/profesores/editarProfesor.html";
     }

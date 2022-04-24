@@ -102,4 +102,9 @@ public class UserServiceImpl implements UserService {
     public User guardarUsuario(User user) {
         return repUser.save(user);
     }
+
+    @Override
+    public Iterable<User> getAvailableUsersProfesores() {
+        return repUser.usersAvaliablesProfesores();
+    }
 }
