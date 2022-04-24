@@ -22,7 +22,7 @@
     <!-- Icons-->
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <!-- Local Files-->
-    <script type="text/javascript" th:src="@{/js/cursos.js}"></script>
+    <script type="text/javascript" th:src="@{/js/coordinador/cursos.js}"></script>
     <link rel="stylesheet" type="text/css" th:href="@{/css/coordinador/cursos.css}">
 
     <script src="https://cdn.datatables.net/plug-ins/1.11.5/i18n/es-ES.json"></script>
@@ -151,6 +151,8 @@
     <div id="deleteError" th:if="${deleteError}" class="alert alert-danger text-center" role="alert">
         <span th:text="${deleteError}"></span>
     </div>
+
+    <div th:include="common/modalLoading.html" th:remove="tag"></div> 
 
 </body>
 

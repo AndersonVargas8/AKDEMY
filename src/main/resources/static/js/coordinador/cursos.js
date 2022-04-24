@@ -11,10 +11,18 @@ $(document).ready(function() {
 
 function editarCurso(id){
     // let mes = document.getElementById("selMesCalendar").value;
+    $('#modalLoading').modal({
+        backdrop: "static", //remove ability to close modal with click
+        keyboard: false, //remove option to close with keyboard
+        show: true //Display loader!
+      });
     var url = "/coordinador/cursos/" + id;
-    $("#formEditarCursos").load(url);
+    $("#formEditarCursos").load(url, function(){
+        $('#modalLoading').modal('hide');
+        $("#modalFormEditarCursos").modal();
+    });
     
-    $("#modalFormEditarCursos").modal();
+    
 }
 
 function confirmDelete(id){
