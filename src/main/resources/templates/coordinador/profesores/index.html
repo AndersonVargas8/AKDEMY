@@ -12,23 +12,19 @@
         <script
             src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <!-- FRAMEWORK BOOTSTRAP para el estilo de la pagina-->
-        <link rel="stylesheet"
-            href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-        <script
-            src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
         <!-- Datables-->
         <link rel="stylesheet" type="text/css"
             href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
         <script type="text/javascript" charset="utf8"
             src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
         <!-- Icons-->
-        <link rel="stylesheet" type="text/css"
-            href="https://fonts.googleapis.com/icon?family=Material+Icons">
+        <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/icon?family=Material+Icons">
         <!-- Local Files-->
-        <script type="text/javascript" th:src="@{/js/profesores.js}"></script>
+        <script type="text/javascript" th:src="@{/js/coordinador/profesores.js}"></script>
         <link rel="stylesheet" type="text/css" th:href="@{/css/profesores.css}">
-        <script
-            src="https://cdn.datatables.net/plug-ins/1.11.5/i18n/es-ES.json"></script>
+
     </head>
 
     <body>
@@ -80,7 +76,7 @@
                                         <span class='align-middle'>Editar</span>
                                     </button>
                                     <button type='button' class='btn btn-danger
-                                        btn-sm'>
+                                        btn-sm' th:onclick="confirmDeleteProfesor([[${profesor.id}]])">
                                         <span class='material-icons
                                             align-middle'>delete</span>
                                         <span class='align-middle'>Eliminar</span>
@@ -124,32 +120,32 @@
                             th:object="${profesor}" method="POST">
                             <div class="form-group">
                                 <label for="names"><b>Nombres</b></label>
-                                <input th:field="*{nombres}" type="text"
+                                <input required th:field="*{nombres}" type="text"
                                     class="form-control" id="names"
                                     placeholder="Nombre(s)">
                             </div>
                             <div class="form-group">
                                 <label for="lastnames"><b>Apellidos</b></label>
-                                <input th:field="*{apellidos}" type="text"
+                                <input required th:field="*{apellidos}" type="text"
                                     class="form-control" id="lastnames"
                                     placeholder="Apellido(s)">
                             </div>
                             <div class="form-group">
                                 <label for="birthdate"><b>Fecha de Nacimiento</b></label>
-                                <input th:field="*{fechaNacimiento}" type="date"
+                                <input required th:field="*{fechaNacimiento}" type="date"
                                     class="form-control" id="birthdate"
                                     placeholder="Password">
                             </div>
                             <div class="form-group">
                                 <label for="document"><b>Documento</b></label>
-                                <input th:field="*{documento}" type="number"
+                                <input required th:field="*{documento}" type="number"
                                     class="form-control" id="document"
                                     placeholder="Documento">
                             </div>
                             <div>
                                 <label for="user"><b>Usuario Asociado</b></label>
                                 <select class="form-control"
-                                    th:field="${profesor.usuario.id}" id="user">
+                                required th:field="${profesor.usuario.id}" id="user">
                                     <option th:each="user:${users}"
                                         th:value="${user.id}"
                                         th:text="${user.username}"></option>
@@ -182,6 +178,18 @@
                         class="modal-body justify-content-center" id="formEditarProfesor">
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <div th:include="coordinador/profesores/confirmDelete.html" th:remove="tag"></div>
+
+    <div id="deleteError" th:if="${deleteError}" class="alert alert-danger text-center" role="alert">
+        <span th:text="${deleteError}"></span>
+    
+        <div class="modal fade" tabindex="-1" role="dialog" id="spinnerModal">
+            <div class="modal-dialog modal-dialog-centered text-center" role="document">
+                <span class="fa fa-spinner fa-spin fa-3x w-100"></span>
             </div>
         </div>
     </body>

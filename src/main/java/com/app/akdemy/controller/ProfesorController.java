@@ -56,4 +56,14 @@ public class ProfesorController {
         model.addAttribute("itemNavbar","profesores");
         return "coordinador/profesores/editarProfesor.html";
     }
+
+    @GetMapping("/coordinador/eliminarProfesor/{id}")
+    public String deleteProfesor(@PathVariable long id, Model model) throws ProfesorNotFound {
+        try {
+            serProfesor.deleteProfesor(serProfesor.getById(id));
+        } catch (Exception e) {
+            model.addAttribute("deleteError","No se puede borrar el usuario");
+        }
+        return "redirect:/coordinador/profesores";
+    }
 }

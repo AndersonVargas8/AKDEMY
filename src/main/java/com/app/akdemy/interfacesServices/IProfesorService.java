@@ -9,4 +9,5 @@ public interface IProfesorService {
     public void saveProfesor(Profesor profesor);
     public List<Profesor> getAllProfesors();
     public Profesor getById(Long id) throws ProfesorNotFound;
+    public void deleteProfesor(Profesor profesor) throws Exception;
 }

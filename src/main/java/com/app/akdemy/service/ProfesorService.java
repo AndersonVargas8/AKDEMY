@@ -34,4 +34,10 @@ public class ProfesorService implements IProfesorService{
         return profesor;
     }
 
+    @Override
+    public void deleteProfesor(Profesor profesor) {
+        repProfesor.delete(profesor);
+        
+    }
+
 }
