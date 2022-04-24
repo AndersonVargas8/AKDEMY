@@ -1,6 +1,9 @@
 html{
     box-sizing: border-box;
 }
+.letterBlack{
+    color: #000000;
+}
 
 body{
     background: url("../img/fondo-login.png");
@@ -71,4 +74,21 @@ legend::before {
 
 legend:hover::before{
     transform: rotate(1deg);
+}
+
+.containerBox {
+
+}
+.fade-in {
+    /*background-color: rgb(52, 58, 64);*/
+    transition: background-color 0.3s ease-in-out;
+    right: 0;
+    height: 100%;
+    width: 100%;
+    /*background: #428bca;*/
+}
+.containerBox:hover .fade-in {
+    height: 100%;
+    width: 100%;
+    background-color: rgb(91, 108, 114);
 }
