@@ -34,14 +34,21 @@ body{
   align-items: center;
   justify-content: right;
 }
+
 .boton__crearProfe {
-  background-color: rgb(55,80,130);
+  background-color: #28a745;
+  color: floralwhite;
+  width: 70%;
+}
+
+.boton__crearProfe:hover {
+  background-color: #218838;
   color: floralwhite;
   width: 70%;
 }
 
 .table thead{
-  background-color: rgb(71, 91, 131);
+  background-color: rgb(52, 58, 64);
   color: floralwhite;
 }
 .table td{
@@ -60,5 +67,10 @@ body{
 }
 .guardar{
   background-color: rgb(55,80,130);
+  color: floralwhite;
+}
+
+.guardar:hover{
+  background-color: rgb(50, 81, 141);
   color: floralwhite;
 }
