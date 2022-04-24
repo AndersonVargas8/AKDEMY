@@ -105,4 +105,8 @@ public class UserServiceImpl implements UserService {
         return null;
     }
 
+    @Override
+    public Iterable<User> getAvailableUsersProfesores() {
+        return repUser.usersAvaliablesProfesores();
+    }
 }

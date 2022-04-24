@@ -15,11 +15,12 @@ function editarProfesor(id){
         keyboard: false, //remove option to close with keyboard
         show: true //Display loader!
       });
+
     var url = "/coordinador/profesores/" + id;
     $("#formEditarProfesor").load(url, function(){
         $('#modalLoading').modal('hide');
         $("#modalFormEditarProfesor").modal();});
-    
+
     
 }
 
