@@ -29,4 +29,13 @@ public class CursoService implements ICursoService{
     public Curso buscarPorId(long id) {
         return repCurso.findById(id).get();
     }
+
+    @Override
+    public void deleteCurso(Long id) throws Exception {
+
+        Curso curso = repCurso.findById(id)
+				.orElseThrow(() -> new Exception("UsernotFound in deleteUser -"+this.getClass().getName()));
+
+		repCurso.delete(curso);
+    }
 }

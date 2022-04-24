@@ -3,12 +3,9 @@ package com.app.akdemy.controller;
 import javax.validation.Valid;
 
 import com.app.akdemy.Exception.ProfesorNotFound;
-import com.app.akdemy.Exception.UsernameOrIdNotFound;
 import com.app.akdemy.entity.Curso;
-import com.app.akdemy.entity.Profesor;
 import com.app.akdemy.interfacesServices.ICursoService;
 import com.app.akdemy.interfacesServices.IProfesorService;
-import com.app.akdemy.repository.CursoRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -60,4 +57,14 @@ public class CursoController {
 
         return "coordinador/cursos/editarCursos.html";
     }
+
+    @GetMapping("/coordinador/eliminarCursos/{id}")
+	public String deleteCurso(Model model, @PathVariable Long id) {
+		try {
+			serCurso.deleteCurso(id);
+		} catch (Exception e) {
+			model.addAttribute("deleteError","The user could not be deleted.");
+		}
+		return "redirect:/coordinador/cursos";
+	}
 }

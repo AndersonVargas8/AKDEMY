@@ -16,3 +16,12 @@ function editarCurso(id){
     
     $("#modalFormEditarCursos").modal();
 }
+
+function confirmDelete(id){
+	$('#deleteModal').modal('show');
+	$("#courseIdHiddenInput").val(id);
+}
+
+function deleteCurso(){
+    window.location = "/coordinador/eliminarCursos/" + $("#courseIdHiddenInput").val();
+}
