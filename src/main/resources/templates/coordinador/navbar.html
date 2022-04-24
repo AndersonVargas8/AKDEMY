@@ -9,19 +9,24 @@
                 th:src="@{/img/avatar1.png}" height="40" width="35" alt="AKDEMY"></a>
         <div class="collapse navbar-collapse" id="Navbar">
             <ul class="navbar-nav mr-auto">
-                <li th:class="${itemNavbar == 'inicio'} ? 'nav-item active' : 'nav-item'"><a class="nav-link"
+                <ul class="menu">
+                    <li th:class="${itemNavbar == 'inicio'} ? 'nav-item active' : 'nav-item'"><a class="nav-link"
                         href="/coordinador"><span class="fa fa-home fa-lg"></span> Inicio</a></li>
-                <li class="nav-item"><a class="nav-link" href="/coordinador/cursos"><span
+
+
+                    <li class="nav-item"><a class="nav-link" href="/coordinador/cursos"><span
                             class="fa fa-info fa-lg"></span>
                         Cursos</a></li>
-                <li class="nav-item"><a class="nav-link" href="#"><span class="fa fa-list fa-lg"></span> Horarios</a>
-                </li>
-                <li th:class="${itemNavbar == 'estudiantes'} ? 'nav-item active' : 'nav-item'"><a class="nav-link"
-                        href="/coordinador/estudiantes"><span class="fa fa-users fa-lg"></span> Estudiantes</a>
-                </li>
-                <li th:class="${itemNavbar == 'profesores'} ? 'nav-item active' : 'nav-item'"><a class="nav-link"
-                        th:href="@{/coordinador/profesores}"><span class="fa fa-suitcase fa-lg"></span> Profesores</a>
-                </li>
+
+                    <li class="nav-item"><a class="nav-link" href="#"><span class="fa fa-list fa-lg"></span> Horarios</a>
+                    </li>
+                    <li th:class="${itemNavbar == 'estudiantes'} ? 'nav-item active' : 'nav-item'"><a class="nav-link"
+                            href="/coordinador/estudiantes"><span class="fa fa-users fa-lg"></span> Estudiantes</a>
+                    </li>
+                    <li th:class="${itemNavbar == 'profesores'} ? 'nav-item active' : 'nav-item'"><a class="nav-link"
+                            th:href="@{/coordinador/profesores}"><span class="fa fa-suitcase fa-lg"></span> Profesores</a>
+                    </li>
+                </ul>
             </ul>
             <ul class="menu">
                 <span class="navbar-text">
