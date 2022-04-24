@@ -107,4 +107,15 @@ public class UserServiceImpl implements UserService {
     public Iterable<User> getAvailableUsersProfesores() {
         return repUser.usersAvaliablesProfesores();
     }
+
+    @Override
+    public void setRoleProfesor(User user) {
+        repUser.setRoleProfesor(user.getId());
+        
+    }
+
+    @Override
+    public void removeRoleProfesor(User user) {
+        repUser.removeRoleProfesor(user.getId());
+    }
 }

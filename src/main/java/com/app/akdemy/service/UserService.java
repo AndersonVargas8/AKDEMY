@@ -15,4 +15,8 @@ public interface UserService {
     public User guardarUsuario(User user);
 
     public Iterable<User> getAvailableUsersProfesores();
+
+    public void setRoleProfesor(User user);
+
+    public void removeRoleProfesor(User user);
 }
