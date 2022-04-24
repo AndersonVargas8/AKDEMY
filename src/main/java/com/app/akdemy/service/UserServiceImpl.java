@@ -41,7 +41,7 @@ public class UserServiceImpl implements UserService {
         Optional<User> userFound = repUser.findByUsername(user.getUsername());
 
         if (userFound.isPresent()) {
-            throw new CustomeFieldValidationException("Nombre de usuario no disponible","username");
+            throw new CustomeFieldValidationException("Nombre de usuario no disponible","usuario.username");
         }
         return true;
     }
@@ -99,7 +99,10 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User guardarUsuario(User user) {
-        return repUser.save(user);
+    public User guardarUsuario(User user) throws Exception{
+        if(checkUserNameAvailable(user))
+            return repUser.save(user);
+        return null;
     }
+
 }

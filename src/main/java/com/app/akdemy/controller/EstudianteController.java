@@ -5,9 +5,9 @@ import java.util.Set;
 
 import javax.validation.Valid;
 
+import com.app.akdemy.Exception.CustomeFieldValidationException;
 import com.app.akdemy.entity.Acudiente;
 import com.app.akdemy.entity.Estudiante;
-import com.app.akdemy.entity.GrupoSanguineoRH;
 import com.app.akdemy.entity.Role;
 import com.app.akdemy.entity.User;
 import com.app.akdemy.interfacesServices.IEstudianteService;
@@ -42,7 +42,7 @@ public class EstudianteController {
 
     @Autowired
     AcudienteService serAcudiente;
-    
+
     @Autowired
     TipoDocumentoRepository repTipoDoc;
 
@@ -59,19 +59,14 @@ public class EstudianteController {
     public String index(Model model) {
 
         model.addAttribute("nuevoEstudiante", new Estudiante());
-        model.addAttribute("tiposDoc", repTipoDoc.findAll());
-        model.addAttribute("eps", repEps.findAll());
-        model.addAttribute("gsrh", repGrupoSanguineoRH.findAll());
-        model.addAttribute("estudiantes", serEstudiante.listarEstudiantes());
-
-        model.addAttribute("itemNavbar", "estudiantes");
+        model = addAttributtes(model);
         return "coordinador/estudiantes/index";
     }
 
     @PostMapping("/coordinador/estudiantes")
-    public String guardarEstudiante(@Valid @ModelAttribute("estudiante") Estudiante estudiante, BindingResult result,
+    public String guardarEstudiante(@Valid @ModelAttribute("nuevoEstudiante") Estudiante estudiante, BindingResult result,
             Model model) {
-
+        
         // Se pone la contraseña de usuario igual al documento
         String encodePassword = bCryptPasswordEncoder.encode(estudiante.getDocumento());
         estudiante.getUsuario().setPassword(encodePassword);
@@ -82,15 +77,40 @@ public class EstudianteController {
         estudiante.getUsuario().setRoles(roles);
 
         // Se guarda el user y se le asigna al estudiante
-        estudiante.setUsuario(serUser.guardarUsuario(estudiante.getUsuario()));
+        try {
+            User usuario = serUser.guardarUsuario(estudiante.getUsuario());
+            estudiante.setUsuario(usuario);
+        } catch (CustomeFieldValidationException e) {
+            String a = e.getFieldName();
+            result.rejectValue(e.getFieldName(), null, e.getMessage());
+            model.addAttribute("nuevoEstudiante", estudiante);
+            model = addAttributtes(model);
+            
+            return "coordinador/estudiantes/index";
+
+        } catch (Exception e) {
+
+        }
 
         // Se agrega un conjunto vacío de acudientes
         Set<Acudiente> acudientes = new HashSet<>();
         estudiante.setAcudientes(acudientes);
 
         // Se guarda el estudiante
-        serEstudiante.guardarEstudiante(estudiante);
+        try{
+            serEstudiante.guardarEstudiante(estudiante);
+        }catch(CustomeFieldValidationException e){
+            result.rejectValue(e.getFieldName(), null, e.getMessage());
+            model.addAttribute("nuevoEstudiante", estudiante);
+            model = addAttributtes(model);
+            return "coordinador/estudiantes/index";
+        } catch (Exception e) {
+           
+        };
 
+        if(result.getErrorCount() > 0){
+            return "coordinador/estudiantes/index";
+        }
         return "redirect:/coordinador/estudiantes";
     }
 
@@ -98,24 +118,20 @@ public class EstudianteController {
     public String getEditarEstudiante(@PathVariable int id, Model model) {
         Estudiante estudiante = serEstudiante.buscarPorId(id);
         model.addAttribute("editarEstudiante", estudiante);
-        model.addAttribute("tiposDoc", repTipoDoc.findAll());
-        model.addAttribute("estudiantes", serEstudiante.listarEstudiantes());
-        model.addAttribute("eps", repEps.findAll());
-        model.addAttribute("gsrh", repGrupoSanguineoRH.findAll());
-        model.addAttribute("itemNavbar", "estudiantes");
+        model = addAttributtes(model);
         return "coordinador/estudiantes/editarEstudiante.html";
     }
 
     @PostMapping("/coordinador/editarEstudiante")
     public String editarEstudiante(@Valid @ModelAttribute("estudiante") Estudiante estudiante, BindingResult result,
-            Model model) {
+            Model model) throws Exception {
         User user = serEstudiante.buscarPorId(estudiante.getId()).getUsuario();
         if (!user.getUsername().equals(estudiante.getUsuario().getUsername())) {// Si el username cambia
             // Se pone la contraseña de usuario igual al documento
             String encodePassword = bCryptPasswordEncoder.encode(estudiante.getDocumento());
             user.setPassword(encodePassword);
             user.setConfirmPassword(encodePassword);
-            //Se modifica el username que tenía por el nuevo
+            // Se modifica el username que tenía por el nuevo
             user.setUsername(estudiante.getUsuario().getUsername());
         }
 
@@ -133,5 +149,15 @@ public class EstudianteController {
         serEstudiante.guardarEstudiante(estudiante);
 
         return "redirect:/coordinador/estudiantes";
+    }
+
+    private Model addAttributtes(Model model) {
+        model.addAttribute("tiposDoc", repTipoDoc.findAll());
+        model.addAttribute("eps", repEps.findAll());
+        model.addAttribute("gsrh", repGrupoSanguineoRH.findAll());
+        model.addAttribute("estudiantes", serEstudiante.listarEstudiantes());
+
+        model.addAttribute("itemNavbar", "estudiantes");
+        return model;
     }
 }
