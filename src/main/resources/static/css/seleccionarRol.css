@@ -45,7 +45,7 @@ body{
     margin: 0 5px;
 }
 .boton:hover {
-    background-color: floralwhite;
+    background-color: #ded8d5;
     transition: all 1s ease;
     color: rgb(82, 187, 138);
     font-weight: bold;

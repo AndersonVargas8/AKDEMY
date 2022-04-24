@@ -23,22 +23,22 @@
             <h3>Seleccione su Rol</h3>
         </div>
         <div class="contenedor_boton">
-            <div th:each="rol: ${roles}" th:remove="tag">
-                <a th:if="${rol.name == 'COORDINADOR'}" th:href="@{/coordinador}" class="boton">Coordinador  
-                    <img src="../static/img/coordinador1.png" th:src="@{/img/coordinador1.png}" width="50" height="50" alt="Coordinador">
+            <div th:each="rol: ${roles}" th:remove="tag" th:align="center">
+                <a th:if="${rol.name == 'COORDINADOR'}" th:href="@{/coordinador}" class="boton" >Coordinador
+                    <img src="../static/img/coordinador1.png" th:src="@{/img/coordinador1.png}" width="50" height="50" alt="Coordinador" th:align="right">
                 </a>
                 <a th:if="${rol.name == 'PROFESOR'}" th:href="@{/profesor}" class="boton">Profesor
-                    <img src="../static/profesor.png" th:src="@{/img/profesor.png}" width="50" height="50" alt="Profesor">
+                    <img src="../static/profesor.png" th:src="@{/img/profesor.png}" width="50" height="50" alt="Profesor" th:align="right">
                 </a>
             </div>
         </div>
         <div class="contenedor_boton">
-            <div th:each="rol: ${roles}" th:remove="tag">
+            <div th:each="rol: ${roles}" th:remove="tag" th:align="center">
                 <a th:if="${rol.name == 'ACUDIENTE'}" th:href="@{/acudiente}" class="boton">Acudiente 
-                    <img src="../static/img/acudiente.png" th:src="@{/img/acudiente.png}" width="50" height="50" alt="Acudiente">
+                    <img src="../static/img/acudiente.png" th:src="@{/img/acudiente.png}" width="50" height="50" alt="Acudiente" th:align="right">
                 </a>
                 <a th:if="${rol.name == 'ESTUDIANTE'}" th:href="@{/estudiante}" class="boton">Estudiante 
-                    <img src="../static/img/estudiante.png" th:src="@{/img/estudiante.png}" width="50" height="50" alt="Estudiante">
+                    <img src="../static/img/estudiante.png" th:src="@{/img/estudiante.png}" width="50" height="50" alt="Estudiante" th:align="right">
                 </a>
             </div>
         </div>
