@@ -43,6 +43,10 @@ body{
     -webkit-border-radius: 50px;
     text-align: center;
     margin: 0 5px;
+    align-items: center;
+}
+.boton span {
+    line-height: 45px;
 }
 .boton:hover {
     background-color: #ded8d5;

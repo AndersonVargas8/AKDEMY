@@ -24,18 +24,9 @@ a {
     color: var(--text-color);
 }*/
 
-hr {
-    border-color: var(--hr-color);
-    margin: 20px 0;
-}
-
 .menu {
     display: flex;
     justify-content: center;
-}
-
-.menu li {
-    /*margin-right: 70px;*/
 }
 
 .menu a {
@@ -43,7 +34,11 @@ hr {
     display: block;
     /*padding: 5px;*/
 }
-
+.navbar-text a{
+    position: absolute;
+    right: 175px;
+    bottom: 20px;
+}
 .menu a::before {
     content: '';
     position: absolute;
@@ -61,7 +56,6 @@ hr {
 .menu a:hover::before {
     transform: scaleX(1);
 }
-
 
 /* ANIMATIONS
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
