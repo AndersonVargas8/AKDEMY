@@ -49,7 +49,7 @@
                             <button type="button" class="btn mb-2 row boton__crearProfe"
                                 data-toggle="modal"
                                 data-target="#modalFormProfesor">
-                                <span class="material-icons align-middle">add</span>
+                                <span class="fa fa-user-plus fa-1x"></span>
                                 <span class="align-middle">Crear Profesor</span>
                             </button>
                         </div>
@@ -78,14 +78,12 @@
                                     <td>
                                         <button type='button' class='btn btn-info
                                             btn-sm' th:onclick="editarProfesor([[${profesor.id}]])">
-                                            <span class='material-icons
-                                                align-middle'>edit</span>
+                                            <span class="fas fa-user-pen"></span>
                                             
                                         </button>
                                         <button type='button' class='btn btn-danger
                                             btn-sm' th:onclick="confirmDeleteProfesor([[${profesor.id}]])">
-                                            <span class='material-icons
-                                                align-middle'>delete</span>
+                                            <span class="fas fa-user-times"></span>
                                         </button>
                                     </td>
                                 </tr>

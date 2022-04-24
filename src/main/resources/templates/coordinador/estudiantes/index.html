@@ -93,6 +93,7 @@
                             <th>Nombres</th>
                             <th>Apellidos</th>
                             <th>Fecha de Nacimiento</th>
+                            <th>Tipo Documento</th>
                             <th>Documento</th>
                             <th>Usuario</th>
                             <th>Acciones</th>
@@ -108,10 +109,9 @@
                             <td th:text="${estudiante.usuario.username}"></td>
                             <td>
                                 <button type='button' class='btn btn-info
-                                            btn-sm' th:onclick="editarEstudiante([${estudiante.id}]])">
-                                            <span class='material-icons
-                                                align-middle'>edit</span>
-                                    <span class="fa fa-user-pen"></span>
+                                            btn-sm' th:onclick="editarEstudiante([[${estudiante.id}]])">
+                                    <span class="fas fa-user-pen"></span>
+
                                 </button>
                                 <button type='button' class='btn btn-danger btn-sm' title="Eliminar">
                                     <span class="fas fa-user-times"></span>
