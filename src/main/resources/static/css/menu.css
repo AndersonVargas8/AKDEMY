@@ -23,7 +23,9 @@ body{
 .row-header {
     color: rgb(55,80,130);
 }
-
+.row-header p {
+    width: 100%;
+}
 .row-content {
     margin: 0px auto;
     padding: 50px 0px;
@@ -46,7 +48,10 @@ body{
     margin: 0px auto;
     padding: 20px 0px;
 }
-
+.items-menu:hover {
+    text-decoration: none;
+    color: white;
+}
 .table {
     background-color: rgb(155,180,230);
 }
