@@ -144,7 +144,6 @@ public class EstudianteController {
             try {
                 serUser.validarUsuario(estudiante.getUsuario());
             } catch (CustomeFieldValidationException e) {
-                String a = e.getFieldName();
                 result.rejectValue(e.getFieldName(), null, e.getMessage());
             } catch (Exception e) {
             }
@@ -199,6 +198,7 @@ public class EstudianteController {
         Estudiante estudiante = serEstudiante.buscarPorId(id);
         serEstudiante.eliminarEstudiante(estudiante);
 
-        return "redirect:/coordinador/estudiantes";
+        model = addAttributtes(model);
+        return "coordinador/estudiantes/listaEstudiantes";
     }
 }

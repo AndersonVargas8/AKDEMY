@@ -12,11 +12,11 @@ $(document).ready(function() {
 
 function editarEstudiante(id){
     // let mes = document.getElementById("selMesCalendar").value;
-    // $('#modalLoading').modal({
-    //     backdrop: "static", //remove ability to close modal with click
-    //     keyboard: false, //remove option to close with keyboard
-    //     show: true //Display loader!
-    //   });
+    $('#modalLoading').modal({
+        backdrop: "static", //remove ability to close modal with click
+        keyboard: false, //remove option to close with keyboard
+        show: true //Display loader!
+      });
 
     var url = "/coordinador/estudiantes/" + id;
     $("#formEditarEstudiantes").load(url, function(){
@@ -42,5 +42,11 @@ function confirmDeleteEstudiante(id){
 }
 
 function deleteEstudiante(){
-    window.location = "/coordinador/eliminarEstudiante/" + $("#estudianteIdHiddenInput").val();
+    let id = $("#estudianteIdHiddenInput").val();
+    var url = "/coordinador/eliminarEstudiante/" + id;
+    $("#listaEstudiantes").load(url);
+    
+	$('#deleteModalEstudiante').modal('hide');
+    
+    // window.location = "/coordinador/eliminarEstudiante/" + ;
 }

@@ -1,0 +1,37 @@
+<table id="tablaEstudiantes" class=" table table-borderless table-hover" style="width:100%">
+    <thead>
+        <tr>
+            <th>Nombres</th>
+            <th>Apellidos</th>
+            <th>Fecha de Nacimiento</th>
+            <th>Tipo Documento</th>
+            <th>Documento</th>
+            <th>Usuario</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr th:each="estudiante:${estudiantes}">
+            <td th:text="${estudiante.nombres}"></td>
+            <td th:text="${estudiante.apellidos}"></td>
+            <td th:text="${#dates.format(estudiante.fechaNacimiento,'dd-MM-yyyy')}"> </td>
+            <td th:text="${estudiante.tipoDocumento.descripcion}"></td>
+            <td th:text="${estudiante.documento}"></td>
+            <td th:text="${estudiante.usuario.username}"></td>
+            <td>
+                <button type='button' class='btn btn-info
+                    btn-sm' th:onclick="editarEstudiante([[${estudiante.id}]])">
+                    <span class="fas fa-user-pen"></span>
+
+                </button>
+                <button type='button' class='btn btn-danger btn-sm' title="Eliminar"
+                    th:onclick="confirmDeleteEstudiante([[${estudiante.id}]])">
+                    <span class="fas fa-user-times"></span>
+                </button>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<!-- Local Files-->
+<script type="text/javascript" th:src="@{/js/coordinador/estudiantes.js}"></script>
