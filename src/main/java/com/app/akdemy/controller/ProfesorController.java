@@ -44,6 +44,7 @@ public class ProfesorController {
 
         profesor.setUsuario(serUser.getUserById(profesor.getUsuario().getId()));
         serProfesor.saveProfesor(profesor);
+        serUser.setRoleProfesor(profesor.getUsuario());
         return "redirect:/coordinador/profesores";
     }
 
@@ -60,7 +61,9 @@ public class ProfesorController {
     @GetMapping("/coordinador/eliminarProfesor/{id}")
     public String deleteProfesor(@PathVariable long id, Model model) throws ProfesorNotFound {
         try {
-            serProfesor.deleteProfesor(serProfesor.getById(id));
+            Profesor profesor = serProfesor.getById(id);
+            serUser.removeRoleProfesor(profesor.getUsuario());
+            serProfesor.deleteProfesor(profesor);
         } catch (Exception e) {
             model.addAttribute("deleteError","No se puede borrar el usuario");
         }

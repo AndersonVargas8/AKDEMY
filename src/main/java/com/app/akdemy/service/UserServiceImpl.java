@@ -112,4 +112,15 @@ public class UserServiceImpl implements UserService {
     public boolean validarUsuario(User user) throws Exception {
         return checkUserNameAvailable(user);
     }
+    
+    @Override
+    public void setRoleProfesor(User user) {
+        repUser.setRoleProfesor(user.getId());
+        
+    }
+
+    @Override
+    public void removeRoleProfesor(User user) {
+        repUser.removeRoleProfesor(user.getId());
+    }
 }

@@ -31,18 +31,18 @@
 
 <body>
     <div th:include="coordinador/navbar.html" th:remove="tag"></div>
-    <div class="container">
+    <div class="container-lg pr-4 pl-4">
         <section class="layout">
             <div class="main card w-100">
                 <div class="card-title row titletable">
                     <div class="col text-left">
                         <h2>Cursos&nbsp;<span class="badge">Coordinador</span></h2>
-                        <p>Listado de Cursos</h2>
+                        <p>Listado de Cursos</p>
                     </div>
                     <div class="col text-right">
-                        <button type="button" class="btn boton__cursos mb-2 row" data-toggle="modal"
+                        <button type="button" class="btn boton__cursos mb-2 row w-50" data-toggle="modal"
                             data-target="#modalFormCurso">
-                            <span class="material-icons align-middle">add</span>
+                            <span class="fa fa-user-plus fa-1x"></span>
                             <span class="align-middle">Crear Curso</span>
                         </button>
                     </div>
@@ -66,11 +66,11 @@
                                 <td th:text="${curso.profesor.nombres} + ' ' + ${curso.profesor.apellidos}"></td>
                                 <td>
                                     <button type='button' class='btn btn-info btn-sm' th:onclick="editarCurso([[${curso.id}]])">
-                                        <span class='material-icons align-middle'>edit</span>
+                                        <span class="fas fa-user-pen"></span>
                                         <span class='align-middle'></span>
                                     </button>
                                     <button type='button' class='btn btn-danger btn-sm' th:onclick="confirmDelete([[${curso.id}]])">
-                                        <span class='material-icons align-middle'>delete</span>
+                                        <span class="fas fa-user-times"></span>
                                         <span class='align-middle'></span>
                                     </button>
                                 </td>

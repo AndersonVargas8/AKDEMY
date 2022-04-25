@@ -18,4 +18,8 @@ public interface UserService {
     public Iterable<User> getAvailableUsersProfesores();
 
     public boolean validarUsuario(User user) throws Exception;
+    
+    public void setRoleProfesor(User user);
+
+    public void removeRoleProfesor(User user);
 }

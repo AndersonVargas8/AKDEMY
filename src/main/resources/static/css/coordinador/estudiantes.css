@@ -9,8 +9,13 @@ select{
     cursor: pointer;
 }
 
+.container-fluid{
+    max-height: 200px;
+}
+
 .layout {
     padding: 20px;
+
     justify-items: center;
     align-items: center;
 
@@ -71,6 +76,7 @@ select{
 .modal-header {
     background-color: rgb(55,80,130);
     color: floralwhite;
+    border-radius: 0px;
 }
 
 .icon-cerrar, .icon-cerrar:hover {
