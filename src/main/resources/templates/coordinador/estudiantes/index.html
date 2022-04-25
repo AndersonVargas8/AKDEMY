@@ -31,7 +31,7 @@
 <!-- NAVBAR -->
 <div th:include="coordinador/navbar.html" th:remove="tag"></div>
 
-<div class="container mt-4">
+<div class="container-lg pl-4 pr-4">
     <!--Formulario nuevo estudiante-->
     <div class="modal fade" tabindex="-1" role="dialog" id="modalFormEstudiantes">
         <div class="modal-dialog modal-lg d-flex justify-content-center" role="document">
@@ -69,7 +69,7 @@
     </div>
 
     <!-- LISTA DE ESTUDIANTES -->
-    <div class="container">
+    <div class="container-lg">
         <section class="layout">
             <div class="main card w-100">
                 <div class="card-title row titletable">
@@ -78,7 +78,7 @@
                         <p>Listado de estudiantes</p>
                     </div>
                     <div class="col crearEstudiante">
-                        <button type="button" class="btn mb-2 row boton__crearEstudiante"
+                        <button type="button" class="btn mb-2 row boton__crearEstudiante w-50"
                                 data-toggle="modal"
                                 data-target="#modalFormEstudiantes">
 
