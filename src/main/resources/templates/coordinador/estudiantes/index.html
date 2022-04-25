@@ -25,13 +25,10 @@
 
 </head>
 
-<!-- <body th:onload="editarEstudiante(1)"> --> 
-
-<body>
+<body th:onload="activarModalNuevo([[${errorCrear != null}]],[[${errorEditar}]])">
 <!-- NAVBAR -->
 <div th:include="coordinador/navbar.html" th:remove="tag"></div>
-
-<div class="container mt-4">
+<div class="container mt-4 p-0">
     <!--Formulario nuevo estudiante-->
     <div class="modal fade" tabindex="-1" role="dialog" id="modalFormEstudiantes">
         <div class="modal-dialog modal-lg d-flex justify-content-center" role="document">
@@ -69,6 +66,7 @@
     </div>
 
     <!-- LISTA DE ESTUDIANTES -->
+    
     <div class="container">
         <section class="layout">
             <div class="main card w-100">

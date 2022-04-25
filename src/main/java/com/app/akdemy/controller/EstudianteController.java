@@ -64,9 +64,10 @@ public class EstudianteController {
     }
 
     @PostMapping("/coordinador/estudiantes")
-    public String guardarEstudiante(@Valid @ModelAttribute("nuevoEstudiante") Estudiante estudiante, BindingResult result,
+    public String guardarEstudiante(@Valid @ModelAttribute("nuevoEstudiante") Estudiante estudiante,
+            BindingResult result,
             Model model) {
-        
+
         // Se pone la contraseña de usuario igual al documento
         String encodePassword = bCryptPasswordEncoder.encode(estudiante.getDocumento());
         estudiante.getUsuario().setPassword(encodePassword);
@@ -76,41 +77,42 @@ public class EstudianteController {
         roles.add(serRole.buscarPorNombre("ESTUDIANTE"));
         estudiante.getUsuario().setRoles(roles);
 
-        // Se guarda el user y se le asigna al estudiante
+        // Validar estudiante
         try {
-            User usuario = serUser.guardarUsuario(estudiante.getUsuario());
-            estudiante.setUsuario(usuario);
+            serEstudiante.validarEstudiante(estudiante);
         } catch (CustomeFieldValidationException e) {
-            String a = e.getFieldName();
             result.rejectValue(e.getFieldName(), null, e.getMessage());
+        } catch (Exception e) {
+        }
+
+        // Validar usuario
+        try {
+            serUser.validarUsuario(estudiante.getUsuario());
+        } catch (CustomeFieldValidationException e) {
+            result.rejectValue(e.getFieldName(), null, e.getMessage());
+        } catch (Exception e) {
+        }
+
+        // Retornar a la página mostrando los errores
+        if (result.getErrorCount() > 0) {
             model.addAttribute("nuevoEstudiante", estudiante);
             model = addAttributtes(model);
-            
+
+            model.addAttribute("errorCrear", 1);
             return "coordinador/estudiantes/index";
-
-        } catch (Exception e) {
-
         }
+
+        // Se guarda el user y se le asigna al estudiante
+        User usuario = serUser.guardarUsuario(estudiante.getUsuario());
+        estudiante.setUsuario(usuario);
 
         // Se agrega un conjunto vacío de acudientes
         Set<Acudiente> acudientes = new HashSet<>();
         estudiante.setAcudientes(acudientes);
 
         // Se guarda el estudiante
-        try{
-            serEstudiante.guardarEstudiante(estudiante);
-        }catch(CustomeFieldValidationException e){
-            result.rejectValue(e.getFieldName(), null, e.getMessage());
-            model.addAttribute("nuevoEstudiante", estudiante);
-            model = addAttributtes(model);
-            return "coordinador/estudiantes/index";
-        } catch (Exception e) {
-           
-        };
+        serEstudiante.guardarEstudiante(estudiante);
 
-        if(result.getErrorCount() > 0){
-            return "coordinador/estudiantes/index";
-        }
         return "redirect:/coordinador/estudiantes";
     }
 
@@ -123,9 +125,40 @@ public class EstudianteController {
     }
 
     @PostMapping("/coordinador/editarEstudiante")
-    public String editarEstudiante(@Valid @ModelAttribute("estudiante") Estudiante estudiante, BindingResult result,
+    public String editarEstudiante(@Valid @ModelAttribute("editarEstudiante") Estudiante estudiante, BindingResult result,
             Model model) throws Exception {
-        User user = serEstudiante.buscarPorId(estudiante.getId()).getUsuario();
+        Estudiante estudianteFound = serEstudiante.buscarPorId(estudiante.getId());
+        User user = estudianteFound.getUsuario();
+
+        // Validar estudiante
+        if (!estudianteFound.getDocumento().equals(estudiante.getDocumento())){//Si el documento cambia
+            try {
+                serEstudiante.validarEstudiante(estudiante);
+            } catch (CustomeFieldValidationException e) {
+                result.rejectValue(e.getFieldName(), null, e.getMessage());
+            } catch (Exception e) {}
+        }
+
+        if (!user.getUsername().equals(estudiante.getUsuario().getUsername())) {// Si el username cambia
+            // Validar usuario
+            try {
+                serUser.validarUsuario(estudiante.getUsuario());
+            } catch (CustomeFieldValidationException e) {
+                String a = e.getFieldName();
+                result.rejectValue(e.getFieldName(), null, e.getMessage());
+            } catch (Exception e) {
+            }
+        }
+
+        // Retornar a la página mostrando los errores
+        if (result.getErrorCount() > 0) {
+            model.addAttribute("nuevoEstudiante", new Estudiante());
+            model.addAttribute("editarEstudiante", estudiante);
+            model = addAttributtes(model);
+
+            model.addAttribute("errorEditar", 1);
+            return "coordinador/estudiantes/index";
+        }
         if (!user.getUsername().equals(estudiante.getUsuario().getUsername())) {// Si el username cambia
             // Se pone la contraseña de usuario igual al documento
             String encodePassword = bCryptPasswordEncoder.encode(estudiante.getDocumento());

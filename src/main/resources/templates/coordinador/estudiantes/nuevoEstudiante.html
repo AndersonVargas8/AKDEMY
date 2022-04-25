@@ -36,7 +36,7 @@
         <label class="col-lg-3 col-lg form-label form-control-label"><b>Documento</b></label>
         <div class="col-lg-7 search_select_box">
             <input th:field="${nuevoEstudiante.documento}" type="number" class="form-control" required>
-            <div class="alert-danger" th:if="${#fields.hasErrors('documento')}" th:errors="*{documento}">Name Error
+            <div class="alert-danger p-2" th:if="${#fields.hasErrors('documento')}" th:errors="*{documento}">Name Error
             </div>
         </div>  
     </div>
@@ -63,7 +63,7 @@
         <label class="col-lg-3 col-lg form-label form-control-label"><b>Nombre de usuario</b></label>
         <div class="col-lg-7 search_select_box">
             <input th:field="${nuevoEstudiante.usuario.username}" class="form-control">
-            <div class="alert-danger" th:if="${#fields.hasErrors('usuario.username')}" th:errors="*{usuario.username}">Name Error
+            <div class="alert-danger p-2" th:if="${#fields.hasErrors('usuario.username')}" th:errors="*{usuario.username}">Name Error
                 </div>
         </div>
     </div>

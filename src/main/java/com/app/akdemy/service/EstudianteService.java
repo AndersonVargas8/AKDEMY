@@ -17,10 +17,8 @@ public class EstudianteService implements IEstudianteService {
     EstudianteRepository repEstudiante;
 
     @Override
-    public void guardarEstudiante(Estudiante estudiante) throws Exception {
-        if(!checkEstudianteExiste(estudiante))
-            repEstudiante.save(estudiante);
-
+    public void guardarEstudiante(Estudiante estudiante){
+        repEstudiante.save(estudiante);
     }
 
     @Override
@@ -45,6 +43,12 @@ public class EstudianteService implements IEstudianteService {
             throw new CustomeFieldValidationException("Ya existe un estudiante con este documento","documento");
         }
         return false;
+    }
+
+    @Override
+    public boolean validarEstudiante(Estudiante estudiante) throws Exception {
+        checkEstudianteExiste(estudiante);
+        return true;
     }
 
 }

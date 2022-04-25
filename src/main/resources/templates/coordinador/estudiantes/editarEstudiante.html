@@ -35,6 +35,8 @@
         <label class="col-lg-3 col-lg form-label form-control-label"><b>Documento</b></label>
         <div class="col-lg-7 search_select_box">
             <input th:field="${editarEstudiante.documento}" type="number" class="form-control">
+            <div class="alert-danger p-2" th:if="${#fields.hasErrors('documento')}" th:errors="*{documento}">Name Error
+            </div>
         </div>
     </div>
 
@@ -60,6 +62,8 @@
         <label class="col-lg-3 col-lg form-label form-control-label"><b>Nombre de usuario</b></label>
         <div class="col-lg-7">
             <input th:field="${editarEstudiante.usuario.username}" class="form-control">
+            <div class="alert-danger p-2" th:if="${#fields.hasErrors('usuario.username')}" th:errors="*{usuario.username}">Name Error
+            </div>
         </div>
     </div>
 

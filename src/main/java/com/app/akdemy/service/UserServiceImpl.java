@@ -99,14 +99,17 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User guardarUsuario(User user) throws Exception{
-        if(checkUserNameAvailable(user))
-            return repUser.save(user);
-        return null;
+    public User guardarUsuario(User user){
+        return repUser.save(user);
     }
 
     @Override
     public Iterable<User> getAvailableUsersProfesores() {
         return repUser.usersAvaliablesProfesores();
+    }
+
+    @Override
+    public boolean validarUsuario(User user) throws Exception {
+        return checkUserNameAvailable(user);
     }
 }

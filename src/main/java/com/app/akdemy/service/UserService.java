@@ -13,7 +13,9 @@ public interface UserService {
     public boolean loggedUserHasRole(String roleName) throws Exception;
 
 
-    public User guardarUsuario(User user) throws Exception;
+    public User guardarUsuario(User user);
 
     public Iterable<User> getAvailableUsersProfesores();
+
+    public boolean validarUsuario(User user) throws Exception;
 }
