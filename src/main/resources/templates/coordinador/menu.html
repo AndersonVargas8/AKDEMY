@@ -1,151 +1,172 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Inicio Coordinador</title>
-        
-        <link rel="shortcut icon" type="image/x-icon" href="../../static/img/avatar1.png" th:href="@{/img/avatar1.png}">
-    
-        <!--JQUERY-->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    
-        <!-- FRAMEWORK BOOTSTRAP para el estilo de la pagina-->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
- 
-    
-        <!-- Nuestro css-->
-        <link rel="stylesheet" type="text/css" href="../../static/css/menu.css" th:href="@{/css/menu.css}">
-        <link rel="stylesheet" href="../../static/css/normalize.css">
-    </head>
-<body>
-    
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicio Coordinador</title>
 
-    <div th:include="coordinador/navbar.html" th:remove="tag"></div>
-    <header class="jumbotron">
-        
-        <div class="container">
-            <div class="row row-header">
-                <div class="col-12 align-items-center">
-                    <h2>AKDEMY <span class="badge badge-dark">Coordinador</span></h2>
-                    <p class="letterBlack">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus cum eveniet et autem neque aliquam placeat dolorem minima aperiam illo ut quo molestias, odit similique earum laboriosam rem, dolorum facilis!</p>
-                </div>
+    <link rel="shortcut icon" type="image/x-icon" href="../../static/img/avatar1.png" th:href="@{/img/avatar1.png}">
+
+    <!--JQUERY-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <!-- FRAMEWORK BOOTSTRAP para el estilo de la pagina-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+
+    <!-- Nuestro css-->
+    <link rel="stylesheet" type="text/css" href="../../static/css/menu.css" th:href="@{/css/menu.css}">
+    <link rel="stylesheet" href="../../static/css/normalize.css">
+</head>
+<body>
+
+
+<div th:include="coordinador/navbar.html" th:remove="tag"></div>
+<header class="jumbotron">
+
+    <div class="container">
+        <div class="row row-header">
+            <div class="col-12 align-items-center">
+                <h2>AKDEMY <span class="badge badge-dark">Coordinador</span></h2>
+                <p class="letterBlack">Aquí puedes organizar, consultar y administrar la información de los profesores, estudiantes,
+                    horarios, coordinadores,  y cursos. </p>
             </div>
         </div>
-        <div class="container">
-            <div class="row row-content">
-                <div class="col">
-                    <div id="mycarousel" class="carousel slide" data-ride="carousel">
-                        <div class="carousel-inner" role="listbox">
-                            <div class="carousel-item active">
-                                <div class="carousel-caption d-none d-md-block">
-                                    <h2>Cursos</h2>
-                                    <p class="d-none d-sm-block">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aspernatur mollitia officia adipisci quas unde quam, similique ducimus voluptatem doloribus rerum, modi aut at, nihil quo reprehenderit dolorem ullam delectus. Necessitatibus!</p>
-                                </div>
-                            </div>
-                            <div class="carousel-item">
-                                <div class="carousel-caption d-none d-md-block">
-                                    <h2>Horarios</h2>
-                                    <p class="d-none d-sm-block">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab adipisci ratione, expedita numquam inventore consequuntur pariatur dicta harum odio voluptate eum laudantium nobis minus magnam nam esse explicabo cupiditate exercitationem! </p>
-                                </div>
-                            </div>
-                            <div class="carousel-item">
-                                <div class="carousel-caption d-none d-md-block">
-                                    <h2>Estudiantes</h2>
-                                    <p class="d-none d-sm-block">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab adipisci ratione, expedita numquam inventore consequuntur pariatur dicta harum odio voluptate eum laudantium nobis minus magnam nam esse explicabo cupiditate exercitationem! </p>
-                                </div>
-                            </div>
-                            <div class="carousel-item">
-                                <div class="carousel-caption d-none d-md-block">
-                                    <h2>Profesores</h2>
-                                    <p class="d-none d-sm-block">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab adipisci ratione, expedita numquam inventore consequuntur pariatur dicta harum odio voluptate eum laudantium nobis minus magnam nam esse explicabo cupiditate exercitationem! </p>
-                                </div>
+    </div>
+    <div class="container">
+        <div class="row row-content">
+            <div class="col">
+                <div id="mycarousel" class="carousel slide" data-ride="carousel">
+                    <div class="carousel-inner" role="listbox">
+                        <div class="carousel-item active">
+                            <div class="carousel-caption d-none d-md-block">
+                                <img src="../../static/img/classroom.png" th:src="@{/img/classroom.png}"  width="15%" height="15%">
+                                <h2>Cursos</h2>
+                                <p class="d-none d-sm-block">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aspernatur mollitia officia adipisci quas unde quam, similique ducimus voluptatem doloribus rerum, modi aut at, nihil quo reprehenderit dolorem ullam delectus. Necessitatibus!</p>
                             </div>
                         </div>
-                        <ol class="carousel-indicators">
-                            <li data-target="#mycarousel" data-slide-to="0" class="active"></li>
-                            <li data-target="#mycarousel" data-slide-to="1"></li>
-                            <li data-target="#mycarousel" data-slide-to="2"></li>
-                            <li data-target="#mycarousel" data-slide-to="3"></li>
-                        </ol>
-                        <a class="carousel-control-prev" href="#mycarousel" role="button" data-slide="prev">
-                            <span class="carousel-control-prev-icon"></span>
-                        </a>
-                        <a class="carousel-control-next" href="#mycarousel" role="button" data-slide="next">
-                            <span class="carousel-control-next-icon"></span>
-                        </a>
+                        <div class="carousel-item">
+                            <div class="carousel-caption d-none d-md-block">
+                                <img src="../../static/img/calendario.png" th:src="@{/img/calendario.png}"  width="15%" height="15%">
+                                <h2>Horarios</h2>
+                                <p class="d-none d-sm-block">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab adipisci ratione, expedita numquam inventore consequuntur pariatur dicta harum odio voluptate eum laudantium nobis minus magnam nam esse explicabo cupiditate exercitationem! </p>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="carousel-caption d-none d-md-block">
+                                <img src="../../static/img/estudiantes.png" th:src="@{/img/estudiantes.png}"  width="15%" height="15%">
+                                <h2>Estudiantes</h2>
+                                <p class="d-none d-sm-block">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab adipisci ratione, expedita numquam inventore consequuntur pariatur dicta harum odio voluptate eum laudantium nobis minus magnam nam esse explicabo cupiditate exercitationem! </p>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="carousel-caption d-none d-md-block">
+                                <img src="../../static/img/profesorRol.png" th:src="@{/img/profesorRol.png}"  width="15%" height="15%">
+                                <h2>Profesores</h2>
+                                <p class="d-none d-sm-block">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab adipisci ratione, expedita numquam inventore consequuntur pariatur dicta harum odio voluptate eum laudantium nobis minus magnam nam esse explicabo cupiditate exercitationem! </p>
+                            </div>
+                        </div>
                     </div>
-                 </div>
+                    <ol class="carousel-indicators">
+                        <li data-target="#mycarousel" data-slide-to="0" class="active"></li>
+                        <li data-target="#mycarousel" data-slide-to="1"></li>
+                        <li data-target="#mycarousel" data-slide-to="2"></li>
+                        <li data-target="#mycarousel" data-slide-to="3"></li>
+                    </ol>
+                    <a class="carousel-control-prev" href="#mycarousel" role="button" data-slide="prev">
+                        <span class="carousel-control-prev-icon"></span>
+                    </a>
+                    <a class="carousel-control-next" href="#mycarousel" role="button" data-slide="next">
+                        <span class="carousel-control-next-icon"></span>
+                    </a>
+                </div>
             </div>
         </div>
-        <div class="container">
-            <div class="row row-content align-items-center curso">
-                <!-- para todo el contenido (col-12) habrá 4 columns de tamaño sm y 3 md-->
+    </div>
 
-                <div class="col-12 col-sm-5 align-self-center order-sm-last col-md-5 text-center rounded">
-                    <div class="containerBox">
-<!--                        <div class="fade-in">-->
+
+    <div class="container">
+        <div class="row row-content align-items-center curso">
+            <!-- para todo el contenido (col-12) habrá 4 columns de tamaño sm y 3 md-->
+
+            <div class="col-12 col-sm-5 align-self-center order-sm-last col-md-5 text-center">
+                <div class="containerBox rounded">
+                    <div class="fade-in">
                         <h2>Horarios</h2>
+                        <p class="d-none d-sm-block">iditate exercitationem! </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-10 col-sm-2">
+
+            </div>
+            <div class="col col-sm-5 order-sm-first col-md-5 text-center border-secondary">
+                <div class="containerBox rounded">
+                    <div class="fade-in">
+                        <h2>Cursos</h2>
+                        <p class="d-none d-sm-block">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aspernatur mollitia officia adipisci quas unde quam, similique ducimus voluptatem doloribus rerum, modi aut at, nihil quo reprehenderit dolorem ullam delectus. Necessitatibus!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row row-content align-items-center curso">
+            <!-- para todo el contenido (col-12) habrá 4 columns de tamaño sm y 3 md-->
+            <div class="col-12 col-sm-5 align-self-center order-sm-last col-md-5 text-center">
+                <div class="containerBox rounded">
+                    <div class="fade-in">
+                        <h2>Estudiantes</h2>
                         <p class="d-none d-sm-block">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab adipisci ratione, expedita numquam inventore consequuntur pariatur dicta harum odio voluptate eum laudantium nobis minus magnam nam esse explicabo cupiditate exercitationem! </p>
-<!--                        </div>-->
                     </div>
-                    </div>
-                <div class="col-12 col-sm-2">
-
-                </div>
-                <div class="col col-sm-5 order-sm-first col-md-5 text-center bg-dark border border-secondary rounded">
-                    <h2>Cursos</h2>
-                    <p class="d-none d-sm-block">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aspernatur mollitia officia adipisci quas unde quam, similique ducimus voluptatem doloribus rerum, modi aut at, nihil quo reprehenderit dolorem ullam delectus. Necessitatibus!</p>
                 </div>
             </div>
-            <div class="row row-content align-items-center curso">
-                <!-- para todo el contenido (col-12) habrá 4 columns de tamaño sm y 3 md-->
-                <div class="col-12 col-sm-5 align-self-center order-sm-last col-md-5 text-center bg-dark rounded">
-                    <h2>Estudiantes</h2>
-                    <p class="d-none d-sm-block">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab adipisci ratione, expedita numquam inventore consequuntur pariatur dicta harum odio voluptate eum laudantium nobis minus magnam nam esse explicabo cupiditate exercitationem! </p>
-                </div>
-                <div class="col-12 col-sm-2">
-    
-                </div>
-                <div class="col col-sm-5 order-sm-first col-md-5 text-center bg-dark border border-secondary rounded">
-                    <h2>Profesores</h2>
-                    <p class="d-none d-sm-block">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aspernatur mollitia officia adipisci quas unde quam, similique ducimus voluptatem doloribus rerum, modi aut at, nihil quo reprehenderit dolorem ullam delectus. Necessitatibus!</p>
-                </div>
+            <div class="col-10 col-sm-2">
+
+            </div>
+            <div class="col col-sm-5 order-sm-first col-md-5 text-center border-secondary">
+                <div class="containerBox rounded">
+                    <div class="fade-in">
+                <h2>Profesores</h2>
+                <p class="d-none d-sm-block">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aspernatur mollitia officia adipisci quas unde quam, similique ducimus voluptatem doloribus rerum, modi aut at, nihil quo reprehenderit dolorem ullam delectus. Necessitatibus!</p>
+            </div>
+            </div>
             </div>
         </div>
-    </header>
-    <footer class="footer">
-        <div class="container">
-            <div class="row">     
-                <div class="col-12 col-sm-3">
+    </div>
+</header>
 
-                </div>        
-                <div class="col-12 col-sm-4 align-items-center">
-                    <h5>Links</h5>
-                    <ul class="list-unstyled">
-                        <li><a href="#">Inicio</a></li>
-                        <li><a href="../../templates/cursos.html">Curso</a></li>
-                        <li><a href="#">Horario</a></li>
-                    </ul>
-                </div>
-                <div class="col col-sm">
-                    <h5>Our Address</h5>
-                    <address>
-                        <i class="fa fa-phone fa-lg"></i>: +852 1234 5678<br>
-                        <i class="fa fa-fax fa-lg"></i>: +852 8765 4321<br>
-		           </address>
-                </div>
-           </div>
-           <div class="row justify-content-center">             
-                <div class="col-auto">
-                    <p>© Copyright 2022 AKDEMY</p>
-                </div>
-           </div>
+
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-sm-3">
+
+            </div>
+            <div class="col-12 col-sm-4 align-items-center">
+                <h5>Links</h5>
+                <ul class="list-unstyled">
+                    <li><a href="#">Inicio</a></li>
+                    <li><a href="../../templates/cursos.html">Curso</a></li>
+                    <li><a href="#">Horario</a></li>
+                </ul>
+            </div>
+            <div class="col col-sm">
+                <h5>Our Address</h5>
+                <address>
+                    <i class="fa fa-phone fa-lg"></i>: +852 1234 5678<br>
+                    <i class="fa fa-fax fa-lg"></i>: +852 8765 4321<br>
+                </address>
+            </div>
         </div>
-    </footer>
-    
-    
+        <div class="row justify-content-center">
+            <div class="col-auto">
+                <p>© Copyright 2022 AKDEMY</p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
 </body>
 </html>
