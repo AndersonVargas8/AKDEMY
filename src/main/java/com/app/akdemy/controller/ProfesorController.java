@@ -5,9 +5,7 @@ import javax.validation.Valid;
 import com.app.akdemy.Exception.ProfesorNotFound;
 import com.app.akdemy.Exception.UsernameOrIdNotFound;
 import com.app.akdemy.entity.Profesor;
-import com.app.akdemy.entity.User;
 import com.app.akdemy.interfacesServices.IProfesorService;
-import com.app.akdemy.repository.ProfesorRepository;
 import com.app.akdemy.service.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +28,7 @@ public class ProfesorController {
 
     
     @GetMapping("/coordinador/profesores")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_COORDINADOR')")
     public String index(Model model) {
 
         model.addAttribute("profesor", new Profesor());
@@ -40,6 +39,7 @@ public class ProfesorController {
     }
 
     @PostMapping("/saveprofesor")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_COORDINADOR')")
     public String createProfesor(@Valid @ModelAttribute("profesor")Profesor profesor, Model model) throws UsernameOrIdNotFound {
 
         profesor.setUsuario(serUser.getUserById(profesor.getUsuario().getId()));
@@ -49,6 +49,7 @@ public class ProfesorController {
     }
 
     @GetMapping("/coordinador/profesores/{id}")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_COORDINADOR')")
     public String getEditarProfesor(@PathVariable long id, Model model) throws ProfesorNotFound {
         Profesor profesor = serProfesor.getById(id);
         model.addAttribute("editarProfesor", profesor);
@@ -59,6 +60,7 @@ public class ProfesorController {
     }
 
     @GetMapping("/coordinador/eliminarProfesor/{id}")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_COORDINADOR')")
     public String deleteProfesor(@PathVariable long id, Model model) throws ProfesorNotFound {
         try {
             Profesor profesor = serProfesor.getById(id);

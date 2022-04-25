@@ -8,6 +8,7 @@ import com.app.akdemy.interfacesServices.ICursoService;
 import com.app.akdemy.interfacesServices.IProfesorService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,6 +30,7 @@ public class CursoController {
 
 
     @GetMapping("/coordinador/cursos")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_COORDINADOR')")
     public String index(Model model) {
         model.addAttribute("curso", new Curso());
         model.addAttribute("cursos", serCurso.getAllCourses());
@@ -38,6 +40,7 @@ public class CursoController {
     }
 
     @PostMapping("/savecurso")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_COORDINADOR')")
     public String createCurso(@Valid @ModelAttribute("curso")Curso curso, Model model) throws  ProfesorNotFound {
 
         curso.setProfesor(serProfesor.getById(curso.getProfesor().getId()));
@@ -47,6 +50,7 @@ public class CursoController {
     }
 
     @GetMapping("/coordinador/cursos/{id}")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_COORDINADOR')")
     public String editarCurso(@PathVariable int id, Model model) {
 
         Curso curso= serCurso.buscarPorId(id);
@@ -59,6 +63,7 @@ public class CursoController {
     }
 
     @GetMapping("/coordinador/eliminarCursos/{id}")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_COORDINADOR')")
 	public String deleteCurso(Model model, @PathVariable Long id) {
 		try {
 			serCurso.deleteCurso(id);

@@ -19,6 +19,7 @@ import com.app.akdemy.service.RoleService;
 import com.app.akdemy.service.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -56,6 +57,7 @@ public class EstudianteController {
     BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @GetMapping("/coordinador/estudiantes")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_COORDINADOR')")
     public String index(Model model) {
 
         model.addAttribute("nuevoEstudiante", new Estudiante());
@@ -64,6 +66,7 @@ public class EstudianteController {
     }
 
     @PostMapping("/coordinador/estudiantes")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_COORDINADOR')")
     public String guardarEstudiante(@Valid @ModelAttribute("nuevoEstudiante") Estudiante estudiante,
             BindingResult result,
             Model model) {
@@ -117,6 +120,7 @@ public class EstudianteController {
     }
 
     @GetMapping("/coordinador/estudiantes/{id}")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_COORDINADOR')")
     public String getEditarEstudiante(@PathVariable int id, Model model) {
         Estudiante estudiante = serEstudiante.buscarPorId(id);
         model.addAttribute("editarEstudiante", estudiante);
@@ -125,6 +129,7 @@ public class EstudianteController {
     }
 
     @PostMapping("/coordinador/editarEstudiante")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_COORDINADOR')")
     public String editarEstudiante(@Valid @ModelAttribute("editarEstudiante") Estudiante estudiante, BindingResult result,
             Model model) throws Exception {
         Estudiante estudianteFound = serEstudiante.buscarPorId(estudiante.getId());
@@ -194,6 +199,7 @@ public class EstudianteController {
     }
 
     @GetMapping("/coordinador/eliminarEstudiante/{id}")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_COORDINADOR')")
     public String eliminarEstudiante(@PathVariable int id, Model model) {
         Estudiante estudiante = serEstudiante.buscarPorId(id);
         serEstudiante.eliminarEstudiante(estudiante);
