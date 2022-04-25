@@ -80,9 +80,10 @@ legend:hover::before{
 }
 
 .containerBox {
-    background-color: #000000;
+    background-color: #5d6d7e;
     height: 200px;
     width: 420px;
+    padding: 5px;
 }
 
 .fade-in {
@@ -91,8 +92,10 @@ legend:hover::before{
     right: 0;
     height: 100%;
     width: 100%;
+    padding: 5px;
     /*background: #428bca;*/
 }
 .containerBox:hover .fade-in {
-    background-color: rgb(37, 74, 144);
+    background-color: rgb(133, 146, 158);
+    padding: 5px;
 }
