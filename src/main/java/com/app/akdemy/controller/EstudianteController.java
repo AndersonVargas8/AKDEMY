@@ -193,4 +193,12 @@ public class EstudianteController {
         model.addAttribute("itemNavbar", "estudiantes");
         return model;
     }
+
+    @GetMapping("/coordinador/eliminarEstudiante/{id}")
+    public String eliminarEstudiante(@PathVariable int id, Model model) {
+        Estudiante estudiante = serEstudiante.buscarPorId(id);
+        serEstudiante.eliminarEstudiante(estudiante);
+
+        return "redirect:/coordinador/estudiantes";
+    }
 }

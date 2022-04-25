@@ -35,3 +35,12 @@ function activarModalNuevo(errorCrear,errorEditar){
         $("#modalFormEditarEstudiantes").modal();
     }
 }
+
+function confirmDeleteEstudiante(id){
+	$('#deleteModalEstudiante').modal();
+	$("#estudianteIdHiddenInput").val(id);
+}
+
+function deleteEstudiante(){
+    window.location = "/coordinador/eliminarEstudiante/" + $("#estudianteIdHiddenInput").val();
+}

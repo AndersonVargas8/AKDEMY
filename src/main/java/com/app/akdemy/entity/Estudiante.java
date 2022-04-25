@@ -4,6 +4,7 @@ import java.sql.Date;
 import java.util.Objects;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -50,8 +51,8 @@ public class Estudiante {
     @JoinColumn(name = "est_gsrh")
     private GrupoSanguineoRH grupoSanguineoRH;
 
-    @OneToOne
-    @JoinColumn(name = "est_usuario", updatable = false, nullable = false)
+    @OneToOne(cascade=CascadeType.ALL)
+    @JoinColumn(name = "est_usuario", nullable = false)
     private User usuario;
 
     @ManyToMany
