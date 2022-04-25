@@ -52,6 +52,9 @@ body{
     text-decoration: none;
     color: white;
 }
+.items-menu p{
+    padding-top: 12px;
+}
 .table {
     background-color: rgb(155,180,230);
 }
