@@ -26,7 +26,7 @@ public class ProfesorController {
     @Autowired
     private UserService serUser;
 
-    
+    // controlador de profesor desde coordinador
     @GetMapping("/coordinador/profesores")
     @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_COORDINADOR')")
     public String index(Model model) {
@@ -34,13 +34,14 @@ public class ProfesorController {
         model.addAttribute("profesor", new Profesor());
         model.addAttribute("profesores", serProfesor.getAllProfesors());
         model.addAttribute("users", serUser.getAvailableUsersProfesores());
-        model.addAttribute("itemNavbar","profesores");
+        model.addAttribute("itemNavbar", "profesores");
         return "coordinador/profesores/index";
     }
 
     @PostMapping("/saveprofesor")
     @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_COORDINADOR')")
-    public String createProfesor(@Valid @ModelAttribute("profesor")Profesor profesor, Model model) throws UsernameOrIdNotFound {
+    public String createProfesor(@Valid @ModelAttribute("profesor") Profesor profesor, Model model)
+            throws UsernameOrIdNotFound {
 
         profesor.setUsuario(serUser.getUserById(profesor.getUsuario().getId()));
         serProfesor.saveProfesor(profesor);
@@ -55,7 +56,7 @@ public class ProfesorController {
         model.addAttribute("editarProfesor", profesor);
         model.addAttribute("profesores", serProfesor.getAllProfesors());
         model.addAttribute("users", serUser.getAvailableUsersProfesores());
-        model.addAttribute("itemNavbar","profesores");
+        model.addAttribute("itemNavbar", "profesores");
         return "coordinador/profesores/editarProfesor.html";
     }
 
@@ -67,8 +68,16 @@ public class ProfesorController {
             serUser.removeRoleProfesor(profesor.getUsuario());
             serProfesor.deleteProfesor(profesor);
         } catch (Exception e) {
-            model.addAttribute("deleteError","No se puede borrar el usuario");
+            model.addAttribute("deleteError", "No se puede borrar el usuario");
         }
         return "redirect:/coordinador/profesores";
+    }
+
+    // controlador profesor
+    @GetMapping("/profesor")
+    @PreAuthorize("hasAnyRole('ROLE_PROFESOR', 'ROLE_ACUDIENTE')")
+    public String inicioCoordinador(Model model) {
+        model.addAttribute("itemNavbar", "inicio");
+        return "profesor/index";
     }
 }
