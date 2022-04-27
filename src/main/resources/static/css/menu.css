@@ -117,3 +117,15 @@ legend:hover::before{
     text-decoration: none;
     color: lightgrey;
 }
+
+/*contenedor para index de la vista del estudiante y profesor*/
+.containerBoxEP {
+    background-color: #5d6d7e;
+    height: 200px;
+    width: 340px;
+    padding: 5px;
+}
+.containerBoxEP:hover .fade-in {
+    background-color: rgb(133, 146, 158);
+    padding: 5px;
+}

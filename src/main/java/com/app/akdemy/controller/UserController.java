@@ -47,11 +47,11 @@ public class UserController {
 
         // Si el usuario es acudiente
         if (serUser.loggedUserHasRole("ACUDIENTE"))
-            return "redirect:/acudiente";
+            return "redirect:/seleccionarRol";
 
         // Si el usuario es estudiante
         if (serUser.loggedUserHasRole("ESTUDIANTE"))
-            return "redirect:/estudiante";
+            return "redirect:/seleccionarRol";
 
         return "redirect:/seleccionarRol";
     }

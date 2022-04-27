@@ -1,0 +1,41 @@
+<link rel="stylesheet" type="text/css" href="../../static/css/navbar.css" th:href="@{/css/navbar.css}">
+
+<!-- Los iconos tipo Solid de Fontawesome-->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+
+<nav class="navbar navbar-dark navbar-expand-sm">
+    <div class="container">
+        <a class="navbar-brand mr-auto"><img src="../../static/img/avatar1.png"
+                th:src="@{/img/avatar1.png}" height="40" width="35" alt="AKDEMY"></a>
+        <div class="collapse navbar-collapse" id="Navbar">
+            <ul class="navbar-nav mr-auto">
+                <ul class="menu">
+                    <li th:class="${itemNavbar == 'inicio'} ? 'nav-item active' : 'nav-item'"><a class="nav-link"
+                        href="/estudiante"><span class="fa fa-home fa-lg"></span> Inicio</a></li>
+
+
+                    <li th:class="${itemNavbar == 'curso'} ? 'nav-item active' : 'nav-item'"><a class="nav-link" href="/profesor/cursos"><span
+                            class="fa fa-info fa-lg"></span>
+                        Curso</a></li>
+
+<!--                    <li class="nav-item"><a class="nav-link" href="#"><span class="fa fa-list fa-lg"></span> Horarios</a>-->
+<!--                    </li>-->
+                    <li th:class="${itemNavbar == 'horario'} ? 'nav-item active' : 'nav-item'"><a class="nav-link"
+                            href="/estudiante/horario"><span class="fa fa-users fa-lg"></span> Horario</a>
+                    </li>
+                    <li th:class="${itemNavbar == 'observador'} ? 'nav-item active' : 'nav-item'"><a class="nav-link"
+                            th:href="@{/estudiante/observador}"><span class="fa fa-suitcase fa-lg"></span> Observador</a>
+                    </li>
+                </ul>
+            </ul>
+            <ul class="menu">
+                <span class="navbar-text">
+                    <li>
+                        <a th:href="@{/logout}" style="text-decoration:none"><span class="fa fa-sign-out fa-lg"></span> Cerrar Sesión</a>
+                    </li>
+                </span>
+            </ul>
+
+        </div>
+    </div>
+</nav>

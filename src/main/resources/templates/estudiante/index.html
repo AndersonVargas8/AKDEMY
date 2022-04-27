@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inicio Profesor</title>
+    <title>Inicio Estudiante</title>
 
     <link rel="shortcut icon" type="image/x-icon" href="../../static/img/avatar1.png" th:href="@{/img/avatar1.png}">
 
@@ -23,15 +23,15 @@
 <body>
 
 
-<div th:include="/profesor/navbar.html" th:remove="tag"></div>
+<div th:include="/estudiante/navbar.html" th:remove="tag"></div>
 
     <header class="jumbotron">
         <div class="container">
             <div class="row row-header">
                 <div class="col-12 align-items-center">
-                    <h2>AKDEMY <span class="badge badge-dark"><a th:href="@{/seleccionarRol}" class="selRol" title="Cambiar de Rol"> Profesor</a></span></h2>
+                    <h2>AKDEMY <span class="badge badge-dark"><a th:href="@{/seleccionarRol}" class="selRol" title="Cambiar de Rol"> Estudiante</a></span></h2>
                     <p class="letterBlack">AKDEMY es un sistema de información electrónico que facilita la gestión y transición de información a un entorno virtual a fin de brindarle mayor comunicación a todas sus partes.</p>
-                    <p class="letterBlack">Dado tu acceso como Profesor de la institución, podrá revisar los cursos a los cuales debe dictar clase, sus estudiantes, subir calificaciones y usar el observador.</p>
+                    <p class="letterBlack">Dado tu acceso como Estudiante de la institución, solo tendrá la posibilidad de visualizar el curso en el que está inscrito, sus compañerosy profesores y su horario de clases.</p>
                 </div>
             </div>
         </div>
@@ -44,22 +44,22 @@
                         <div class="carousel-item active">
                             <div class="carousel-caption d-none d-md-block">
                                 <img src="../../static/img/classroom.png" th:src="@{/img/classroom.png}"  width="15%" height="15%">
-                                <h2>Cursos</h2>
-                                <p class="d-none d-sm-block">Visualización de cursos a los cuales debe dictar clase al igual que podrá ver a los estudiantes del mismo.</p>
+                                <h2>Curso</h2>
+                                <p class="d-none d-sm-block">Visualización del curso que se le fue asignado junto con sus compañeros.</p>
                             </div>
                         </div>
                         <div class="carousel-item">
                             <div class="carousel-caption d-none d-md-block">
                                 <img src="../../static/img/calendario.png" th:src="@{/img/calendario.png}"  width="15%" height="15%">
                                 <h2>Horario</h2>
-                                <p class="d-none d-sm-block">Tendrá un horario para profesores en los que verá la hora en la que debe impartir clase a los diferentes cursos.</p>
+                                <p class="d-none d-sm-block">Podrá revisar su horario que se le fue asignado al inicio del año académico.</p>
                             </div>
                         </div>
                         <div class="carousel-item">
                             <div class="carousel-caption d-none d-md-block">
                                 <img src="../../static/img/estudiantes.png" th:src="@{/img/estudiantes.png}"  width="15%" height="15%">
                                 <h2>Observador</h2>
-                                <p class="d-none d-sm-block">Creación, eliminación y edición de notas en el observador donde podrá hacer registro de las faltas cometidas por los estudiantes de un curso en específico.</p>
+                                <p class="d-none d-sm-block">Tendrá acceso a ver cuales son las faltas que ha cometido y con el profesor y la fecha de infracción.</p>
                             </div>
                         </div>
                     </div>
@@ -83,13 +83,12 @@
     <div class="container">
         <div class="row row-content align-items-center curso">
             <!-- para todo el contenido (col-12) habrá 4 columns de tamaño sm y 3 md-->
-
             <div class="col-12 col-sm-4 align-self-center order-sm-last text-center">
                 <div class="containerBoxEP rounded">
-                    <a  class="items-menu pt-2">
+                    <a href="" class="items-menu pt-2">
                         <div class="fade-in">
                             <h2>Horario</h2>
-                            <p class="d-none d-sm-block">Tendrá un horario para profesores en los que verá la hora en la que debe impartir clase a los diferentes cursos.</p>
+                            <p class="d-none d-sm-block">Podrá revisar su horario que se le fue asignado al inicio del año académico.</p>
                         </div>
                     </a>
                 </div>
@@ -98,8 +97,8 @@
                 <div class="containerBoxEP rounded">
                     <a href="" class="items-menu">
                         <div class="fade-in">
-                            <h2>Cursos</h2>
-                            <p class="d-none d-sm-block">Visualización de cursos a los cuales debe dictar clase al igual que podrá ver a los estudiantes del mismo.</p>
+                            <h2>Curso</h2>
+                            <p class="d-none d-sm-block">Visualización del curso que se le fue asignado junto con sus compañeros.</p>
                         </div>
                     </a>
                 </div>
@@ -109,7 +108,7 @@
                     <a href="" class="items-menu">
                         <div class="fade-in">
                             <h2>Observador</h2>
-                            <p class="d-none d-sm-block">Creación, eliminación y edición de notas en el observador donde podrá hacer registro de las faltas cometidas por los estudiantes de un curso en específico.</p>
+                            <p class="d-none d-sm-block">Tendrá acceso a ver cuales son las faltas que ha cometido y con el profesor y la fecha de infracción.</p>
                         </div>
                     </a>
                 </div>
@@ -128,8 +127,9 @@
                 <h5>Enlaces</h5>
                 <ul class="list-unstyled pt-2">
                     <li><a href="/profesor/index">Inicio</a></li>
-                    <li><a href="#">Cursos</a></li>
+                    <li><a href="#">Curso</a></li>
                     <li><a href="#">Horario</a></li>
+                    <li><a href="#">Observador</a></li>
                 </ul>
             </div>
             <div class="col col-sm">
