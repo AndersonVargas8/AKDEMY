@@ -20,7 +20,7 @@ function editarEstudiante(id){
 
     var url = "/coordinador/estudiantes/" + id;
     $("#formEditarEstudiantes").load(url, function(){
-        // $('#modalLoading').modal('hide');
+        $('#modalLoading').modal('hide');
         $("#modalFormEditarEstudiantes").modal();
     });
     
