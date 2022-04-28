@@ -11,7 +11,7 @@ $(document).ready(function() {
 } );
 
 function editarEstudiante(id){
-    // let mes = document.getElementById("selMesCalendar").value;
+    let mes = document.getElementById("selMesCalendar").value;
     $('#modalLoading').modal({
         backdrop: "static", //remove ability to close modal with click
         keyboard: false, //remove option to close with keyboard
@@ -20,7 +20,7 @@ function editarEstudiante(id){
 
     var url = "/coordinador/estudiantes/" + id;
     $("#formEditarEstudiantes").load(url, function(){
-        $('#modalLoading').modal('hide');
+        // $('#modalLoading').modal('hide');
         $("#modalFormEditarEstudiantes").modal();
     });
     
