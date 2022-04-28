@@ -130,18 +130,20 @@ public class EstudianteController {
 
     @PostMapping("/coordinador/editarEstudiante")
     @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_COORDINADOR')")
-    public String editarEstudiante(@Valid @ModelAttribute("editarEstudiante") Estudiante estudiante, BindingResult result,
+    public String editarEstudiante(@Valid @ModelAttribute("editarEstudiante") Estudiante estudiante,
+            BindingResult result,
             Model model) throws Exception {
         Estudiante estudianteFound = serEstudiante.buscarPorId(estudiante.getId());
         User user = estudianteFound.getUsuario();
 
         // Validar estudiante
-        if (!estudianteFound.getDocumento().equals(estudiante.getDocumento())){//Si el documento cambia
+        if (!estudianteFound.getDocumento().equals(estudiante.getDocumento())) {// Si el documento cambia
             try {
                 serEstudiante.validarEstudiante(estudiante);
             } catch (CustomeFieldValidationException e) {
                 result.rejectValue(e.getFieldName(), null, e.getMessage());
-            } catch (Exception e) {}
+            } catch (Exception e) {
+            }
         }
 
         if (!user.getUsername().equals(estudiante.getUsuario().getUsername())) {// Si el username cambia
@@ -206,5 +208,13 @@ public class EstudianteController {
 
         model = addAttributtes(model);
         return "coordinador/estudiantes/listaEstudiantes";
+    }
+
+    // controlador vista estudiante
+    @GetMapping("/estudiante")
+    @PreAuthorize("hasAnyRole('ROLE_ESTUDIANTE')")
+    public String inicioCoordinador(Model model) {
+        model.addAttribute("itemNavbar", "inicio");
+        return "estudiante/index";
     }
 }

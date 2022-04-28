@@ -30,8 +30,9 @@
         <div class="row row-header">
             <div class="col-12 align-items-center">
                 <h2>AKDEMY <span class="badge badge-dark"><a th:href="@{/seleccionarRol}" class="selRol" title="Cambiar de Rol"> Coordinador</a></span></h2>
-                <p class="letterBlack">Aquí puedes organizar, consultar y administrar la información de los profesores, estudiantes,
-                    horarios, coordinadores,  y cursos. </p>
+                <p class="letterBlack">AKDEMY es un sistema de información electrónico que facilita la gestión y transición de información a un entorno virtual a fin de brindarle mayor comunicación a todas sus partes.</p>
+                <p class="letterBlack">Dado tu acceso como Coordinador de la institución, aquí puedes organizar, consultar y administrar la información de los profesores, estudiantes,
+                    horarios, coordinadores, y cursos.</p>
             </div>
         </div>
     </div>
@@ -44,28 +45,28 @@
                             <div class="carousel-caption d-none d-md-block">
                                 <img src="../../static/img/classroom.png" th:src="@{/img/classroom.png}"  width="15%" height="15%">
                                 <h2>Cursos</h2>
-                                <p class="d-none d-sm-block">Se registra los cursos con el año respectivo y asociar un profesor como director de curso al igual que un grupo de estudiantes.</p>
+                                <p class="d-none d-sm-block">Creación de cursos con su respectivo listado de estudiantes y profesores ya previamente registrados en el sistema. Adicionalmente se le asocia el año para mantener registros pasados y posteriores del mismo curso.</p>
                             </div>
                         </div>
                         <div class="carousel-item">
                             <div class="carousel-caption d-none d-md-block">
                                 <img src="../../static/img/calendario.png" th:src="@{/img/calendario.png}"  width="15%" height="15%">
                                 <h2>Horarios</h2>
-                                <p class="d-none d-sm-block">Se administra los horarios de los diferentes cursos y las materias con un profesor y una hora especifica.</p>
+                                <p class="d-none d-sm-block">Creación de horarios para los diferentes cursos creados. Se tendrán en cuenta materias y horas registradas para organizar un horario único para cada curso de cada grado.</p>
                             </div>
                         </div>
                         <div class="carousel-item">
                             <div class="carousel-caption d-none d-md-block">
                                 <img src="../../static/img/estudiantes.png" th:src="@{/img/estudiantes.png}"  width="15%" height="15%">
                                 <h2>Estudiantes</h2>
-                                <p class="d-none d-sm-block">Se administra la información de los estudiantes almacenando datos personales y de acceso</p>
+                                <p class="d-none d-sm-block">Creación, edición y administración de los estudiantes matriculados en la institución. Cada uno tendrá un curso y horario asociado, al igual que el director de curso.</p>
                             </div>
                         </div>
                         <div class="carousel-item">
                             <div class="carousel-caption d-none d-md-block">
                                 <img src="../../static/img/profesorRol.png" th:src="@{/img/profesorRol.png}"  width="15%" height="15%">
                                 <h2>Profesores</h2>
-                                <p class="d-none d-sm-block">Se administra la información de los profesores almacenando datos personales y de acceso</p>
+                                <p class="d-none d-sm-block">Creación, edición y administración de los profesores vinculados con la institución de forma que puedan tener su horarios sobre a cuales cursos enseñarles.</p>
                             </div>
                         </div>
                     </div>
@@ -93,10 +94,12 @@
 
             <div class="col-12 col-sm-5 align-self-center order-sm-last col-md-5 text-center">
                 <div class="containerBox rounded">
-                    <div class="fade-in">
-                        <h2>Horarios</h2>
-                        <p class="d-none d-sm-block">Se administra los horarios de los diferentes cursos y las materias con un profesor y una hora especifica. </p>
-                    </div>
+                    <a  class="items-menu pt-2">
+                        <div class="fade-in">
+                            <h2>Horarios (Proximamente)</h2>
+                            <p class="d-none d-sm-block">Creación de horarios para los diferentes cursos creados. Se tendrán en cuenta materias y horas registradas para organizar un horario único para cada curso de cada grado.</p>
+                        </div>
+                    </a>
                 </div>
             </div>
             <div class="col-10 col-sm-2">
@@ -104,10 +107,12 @@
             </div>
             <div class="col col-sm-5 order-sm-first col-md-5 text-center border-secondary">
                 <div class="containerBox rounded">
-                    <div class="fade-in">
-                        <h2>Cursos</h2>
-                        <p class="d-none d-sm-block">Se registra los cursos con el año respectivo y asociar un profesor como director de curso al igual que un grupo de estudiantes.</p>
-                    </div>
+                    <a href="/coordinador/cursos" class="items-menu">
+                        <div class="fade-in">
+                            <h2>Cursos</h2>
+                            <p class="d-none d-sm-block">Creación de cursos con su respectivo listado de estudiantes y profesores ya previamente registrados en el sistema. Adicionalmente se le asocia el año para mantener registros pasados y posteriores del mismo curso.</p>
+                        </div>
+                    </a>
                 </div>
             </div>
         </div>
@@ -115,10 +120,12 @@
             <!-- para todo el contenido (col-12) habrá 4 columns de tamaño sm y 3 md-->
             <div class="col-12 col-sm-5 align-self-center order-sm-last col-md-5 text-center">
                 <div class="containerBox rounded">
-                    <div class="fade-in">
-                        <h2>Estudiantes</h2>
-                        <p class="d-none d-sm-block">Se administra la información de los estudiantes almacenando datos personales y de acceso</p>
-                    </div>
+                    <a href="/coordinador/estudiantes" class="items-menu">
+                        <div class="fade-in">
+                            <h2>Estudiantes</h2>
+                            <p class="d-none d-sm-block">Creación, edición y administración de los estudiantes matriculados en la institución. Cada uno tendrá un curso y horario asociado, al igual que el director de curso.</p>
+                        </div>
+                    </a>
                 </div>
             </div>
             <div class="col-10 col-sm-2">
@@ -126,11 +133,13 @@
             </div>
             <div class="col col-sm-5 order-sm-first col-md-5 text-center border-secondary">
                 <div class="containerBox rounded">
-                    <div class="fade-in">
-                <h2>Profesores</h2>
-                <p class="d-none d-sm-block">Se administra la información de los profesores almacenando datos personales y de acceso</p>
-            </div>
-            </div>
+                    <a href="/coordinador/profesores" class="items-menu">
+                        <div class="fade-in">
+                            <h2>Profesores</h2>
+                            <p class="d-none d-sm-block">Creación, edición y administración de los profesores vinculados con la institución de forma que puedan tener su horarios sobre a cuales cursos enseñarles.</p>
+                        </div>
+                    </a>
+                </div>
             </div>
         </div>
     </div>
@@ -144,18 +153,24 @@
 
             </div>
             <div class="col-12 col-sm-4 align-items-center">
-                <h5>Links</h5>
-                <ul class="list-unstyled">
-                    <li><a href="#">Inicio</a></li>
-                    <li><a href="../../templates/cursos.html">Curso</a></li>
+                <h5>Enlaces</h5>
+                <ul class="list-unstyled pt-2">
+                    <li><a href="/coordinador/menu">Inicio</a></li>
+                    <li><a href="/coordinador/cursos">Cursos</a></li>
+                    <li><a href="/coordinador/estudiantes">Estudiantes</a></li>
+                    <li><a href="/coordinador/profesores">Profesores</a></li>
                     <li><a href="#">Horario</a></li>
+
                 </ul>
             </div>
             <div class="col col-sm">
-                <h5>Our Address</h5>
+                <h5>Contactenos</h5>
                 <address>
-                    <i class="fa fa-phone fa-lg"></i>: +852 1234 5678<br>
-                    <i class="fa fa-fax fa-lg"></i>: +852 8765 4321<br>
+                    Universidad Nacional de Colombia, sede Bogotá<br>
+		            Cra 45 #26-85<br>
+		            Bogotá, Colombia<br>
+                    <i href="tel:+573165000" class="fa fa-phone fa-lg "></i>: +57 3165000<br>
+                    <i href="tel:+574166563" class="fa fa-fax fa-lg "></i>: +57 4166563<br>
                 </address>
             </div>
         </div>

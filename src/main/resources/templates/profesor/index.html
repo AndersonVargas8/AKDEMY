@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicio Profesor</title>
+
+    <link rel="shortcut icon" type="image/x-icon" href="../../static/img/avatar1.png" th:href="@{/img/avatar1.png}">
+
+    <!--JQUERY-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <!-- FRAMEWORK BOOTSTRAP para el estilo de la pagina-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+
+    <!-- Nuestro css-->
+    <link rel="stylesheet" type="text/css" href="../../static/css/menu.css" th:href="@{/css/menu.css}">
+    <link rel="stylesheet" href="../../static/css/normalize.css">
+</head>
+<body>
+
+
+<div th:include="/profesor/navbar.html" th:remove="tag"></div>
+
+    <header class="jumbotron">
+        <div class="container">
+            <div class="row row-header">
+                <div class="col-12 align-items-center">
+                    <h2>AKDEMY <span class="badge badge-dark"><a th:href="@{/seleccionarRol}" class="selRol" title="Cambiar de Rol"> Profesor</a></span></h2>
+                    <p class="letterBlack">AKDEMY es un sistema de información electrónico que facilita la gestión y transición de información a un entorno virtual a fin de brindarle mayor comunicación a todas sus partes.</p>
+                    <p class="letterBlack">Dado tu acceso como Profesor de la institución, podrá revisar los cursos a los cuales debe dictar clase, sus estudiantes, subir calificaciones y usar el observador.</p>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="container">
+        <div class="row row-content">
+            <div class="col">
+                <div id="mycarousel" class="carousel slide" data-ride="carousel">
+                    <div class="carousel-inner" role="listbox">
+                        <div class="carousel-item active">
+                            <div class="carousel-caption d-none d-md-block">
+                                <img src="../../static/img/classroom.png" th:src="@{/img/classroom.png}"  width="15%" height="15%">
+                                <h2>Cursos</h2>
+                                <p class="d-none d-sm-block">Visualización de cursos a los cuales debe dictar clase al igual que podrá ver a los estudiantes del mismo.</p>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="carousel-caption d-none d-md-block">
+                                <img src="../../static/img/calendario.png" th:src="@{/img/calendario.png}"  width="15%" height="15%">
+                                <h2>Horario</h2>
+                                <p class="d-none d-sm-block">Tendrá un horario para profesores en los que verá la hora en la que debe impartir clase a los diferentes cursos.</p>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="carousel-caption d-none d-md-block">
+                                <img src="../../static/img/estudiantes.png" th:src="@{/img/estudiantes.png}"  width="15%" height="15%">
+                                <h2>Observador</h2>
+                                <p class="d-none d-sm-block">Creación, eliminación y edición de notas en el observador donde podrá hacer registro de las faltas cometidas por los estudiantes de un curso en específico.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <ol class="carousel-indicators">
+                        <li data-target="#mycarousel" data-slide-to="0" class="active"></li>
+                        <li data-target="#mycarousel" data-slide-to="1"></li>
+                        <li data-target="#mycarousel" data-slide-to="2"></li>
+                    </ol>
+                    <a class="carousel-control-prev" href="#mycarousel" role="button" data-slide="prev">
+                        <span class="carousel-control-prev-icon"></span>
+                    </a>
+                    <a class="carousel-control-next" href="#mycarousel" role="button" data-slide="next">
+                        <span class="carousel-control-next-icon"></span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="container">
+        <div class="row row-content align-items-center curso">
+            <!-- para todo el contenido (col-12) habrá 4 columns de tamaño sm y 3 md-->
+
+            <div class="col-12 col-sm-4 align-self-center order-sm-last text-center">
+                <div class="containerBoxEP rounded">
+                    <a  class="items-menu pt-2">
+                        <div class="fade-in">
+                            <h2>Horario</h2>
+                            <p class="d-none d-sm-block">Tendrá un horario para profesores en los que verá la hora en la que debe impartir clase a los diferentes cursos.</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="col col-sm-4 order-sm-first text-center border-secondary">
+                <div class="containerBoxEP rounded">
+                    <a href="" class="items-menu">
+                        <div class="fade-in">
+                            <h2>Cursos</h2>
+                            <p class="d-none d-sm-block">Visualización de cursos a los cuales debe dictar clase al igual que podrá ver a los estudiantes del mismo.</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="col col-sm-4 text-center border-secondary">
+                <div class="containerBoxEP rounded">
+                    <a href="" class="items-menu">
+                        <div class="fade-in">
+                            <h2>Observador</h2>
+                            <p class="d-none d-sm-block">Creación, eliminación y edición de notas en el observador donde podrá hacer registro de las faltas cometidas por los estudiantes de un curso en específico.</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-sm-3">
+
+            </div>
+            <div class="col-12 col-sm-4 align-items-center">
+                <h5>Enlaces</h5>
+                <ul class="list-unstyled pt-2">
+                    <li><a href="/profesor/index">Inicio</a></li>
+                    <li><a href="#">Cursos</a></li>
+                    <li><a href="#">Horario</a></li>
+                    <li><a href="#">Observador</a></li>
+                </ul>
+            </div>
+            <div class="col col-sm">
+                <h5>Contactenos</h5>
+                <address>
+                    Universidad Nacional de Colombia, sede Bogotá<br>
+		            Cra 45 #26-85<br>
+		            Bogotá, Colombia<br>
+                    <i href="tel:+573165000" class="fa fa-phone fa-lg "></i>: +57 3165000<br>
+                    <i href="tel:+574166563" class="fa fa-fax fa-lg "></i>: +57 4166563<br>
+                </address>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-auto">
+                <p>© Copyright 2022 AKDEMY</p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+</body>
+</html>

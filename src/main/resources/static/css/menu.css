@@ -6,7 +6,7 @@ html{
 }
 
 body{
-    background: url("../img/fondo-login.png");
+    background-color: white;
     background-size: cover;
     margin: 0 auto;
 }
@@ -23,7 +23,9 @@ body{
 .row-header {
     color: rgb(55,80,130);
 }
-
+.row-header p {
+    width: 100%;
+}
 .row-content {
     margin: 0px auto;
     padding: 50px 0px;
@@ -46,7 +48,13 @@ body{
     margin: 0px auto;
     padding: 20px 0px;
 }
-
+.items-menu:hover {
+    text-decoration: none;
+    color: white;
+}
+.items-menu p{
+    padding-top: 12px;
+}
 .table {
     background-color: rgb(155,180,230);
 }
@@ -108,4 +116,16 @@ legend:hover::before{
 .selRol:hover{
     text-decoration: none;
     color: lightgrey;
+}
+
+/*contenedor para index de la vista del estudiante y profesor*/
+.containerBoxEP {
+    background-color: #5d6d7e;
+    height: 200px;
+    width: 340px;
+    padding: 5px;
+}
+.containerBoxEP:hover .fade-in {
+    background-color: rgb(133, 146, 158);
+    padding: 5px;
 }
