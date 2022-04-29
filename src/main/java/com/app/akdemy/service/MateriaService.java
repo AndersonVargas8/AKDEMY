@@ -1,5 +1,6 @@
 package com.app.akdemy.service;
 
+import com.app.akdemy.Exception.MateriaNotFound;
 import com.app.akdemy.entity.Materia;
 import com.app.akdemy.interfacesServices.IMateriaService;
 import com.app.akdemy.repository.MateriaRepository;
@@ -39,6 +40,11 @@ public class MateriaService implements IMateriaService{
 		repMateria.delete(materia);
     }
 
+    @Override
+    public Materia getById(Long id) throws MateriaNotFound {
+        Materia materia = repMateria.findById(id).orElseThrow(() -> new MateriaNotFound("La materia no ha sido encontrada"));
+        return materia;
+    }
 
     
 }
