@@ -35,7 +35,7 @@ public class MateriaGradoController {
         model.addAttribute("materiaGrado", new MateriaGrado());
         model.addAttribute("materiasGrado", serMateriaGrado.getAllMateriasGrado());
         model.addAttribute("materias", serMateria.getAllMaterias());
-        model.addAttribute("itemNavbar","materiasGrado");
+        model.addAttribute("itemNavbar","materias");
         return "coordinador/materiasGrado/index";
     }
 
@@ -57,7 +57,7 @@ public class MateriaGradoController {
         model.addAttribute("editarMateriaGrado", materiaGrado);
         model.addAttribute("materiasGrado", serMateriaGrado.getAllMateriasGrado());
         model.addAttribute("materias", serMateria.getAllMaterias());
-        model.addAttribute("itemNavbar","materiasGrado");
+        model.addAttribute("itemNavbar","materias");
 
         return "coordinador/materiasGrado/editarMateriasGrado.html";
     }
