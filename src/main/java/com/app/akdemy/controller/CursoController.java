@@ -68,7 +68,7 @@ public class CursoController {
 		try {
 			serCurso.deleteCurso(id);
 		} catch (Exception e) {
-			model.addAttribute("deleteError","The user could not be deleted.");
+			model.addAttribute("deleteError","The course could not be deleted.");
 		}
 		return "redirect:/coordinador/cursos";
 	}
