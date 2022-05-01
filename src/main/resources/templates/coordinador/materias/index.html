@@ -1,0 +1,138 @@
+<!--MATERIAS-->
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,
+                initial-scale=1.0">
+    <title>Coordinador | Materias</title>
+
+    <link rel="shortcut icon" type="image/x-icon" href="../static/img/avatar1.png" th:href="@{../img/avatar1.png}">
+    <!--JQUERY-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!-- FRAMEWORK BOOTSTRAP para el estilo de la pagina-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <!-- DataTables-->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
+    <script type="text/javascript" charset="utf8"
+        src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
+    <!-- Icons-->
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <!-- Local Files-->
+    <script type="text/javascript" th:src="@{/js/coordinador/materias.js}"></script>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/coordinador/materias.css}">
+
+    <script src="https://cdn.datatables.net/plug-ins/1.11.5/i18n/es-ES.json"></script>
+</head>
+
+<body>
+    <div th:include="coordinador/navbar.html" th:remove="tag"></div>
+    <div class="container-lg pr-4 pl-4">
+        <section class="layout">
+            <div class="main card w-100">
+                <div class="card-title row titletable">
+                    <div class="col text-left">
+                        <h2>Materias&nbsp;<span class="badge">Coordinador</span></h2>
+                        <p>Listado de Materias</p>
+                    </div>
+                    <div class="col text-right">
+                        <button type="button" class="btn boton__materias mb-2 row w-50" data-toggle="modal"
+                            data-target="#modalFormMateria">
+                            <span class="fa fa-user-plus fa-1x"></span>
+                            <span class="align-middle">Crear Materia</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="card-body ">
+                    <table id="materias" class="table table-borderless table-hover" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Nombre de la materia</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="materia:${materias}">
+                                <td th:text="${materia.id}"></td>
+                                <td th:text="${materia.nombre}"></td>
+                                <td>
+                                    <button type='button' class='btn btn-info btn-sm' th:onclick="editarMateria([[${materia.id}]])">
+                                        <span class="fas fa-user-pen"></span>
+                                        <span class='align-middle'></span>
+                                    </button>
+                                    <button type='button' class='btn btn-danger btn-sm' th:onclick="confirmDelete([[${materia.id}]])">
+                                        <span class="fas fa-user-times"></span>
+                                        <span class='align-middle'></span>
+                                    </button>
+                                </td>
+
+                            </tr>
+                        </tbody>
+                        
+                    </table>
+                </div>
+            </div>
+
+        </section> 
+    </div>
+    
+
+    <!--Formulario crear materia-->
+    <div class="modal fade" tabindex="-1" role="dialog" id="modalFormMateria">
+        <div class="modal-dialog modal-lg d-flex justify-content-center" role="document">
+            <div class="modal-content" style="max-width:80%">
+                <div class="modal-header">
+                    <h5 class="modal-title">Nueva Materia</h5>
+                    <button type="button" class="close icon-cerrar" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body p-5 justify-content-center">
+                    <form th:action="@{/savemateria}" th:object="${materia}" method="POST">
+                        <div class="form-group">
+                            <label for="name"><b>Nombre de la materia</b></label>
+                            <input th:field="*{nombre}" type="text" class="form-control" id="name"
+                                placeholder="Nombre" required>
+                        </div>
+                        <br>
+                        <button type="submit" class="w-100 btn guardar" width="100%">Guardar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Formulario editar Materia-->
+    <div class="modal fade" tabindex="-1" role="dialog" id="modalFormEditarMaterias">
+        <div class="modal-dialog modal-lg d-flex justify-content-center" role="document">
+            <div class="modal-content" style="max-width:80%">
+                <div class="modal-header">
+                    <h5 class="modal-title">Editar materia</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div th:include="coordinador/materias/editarMaterias"
+                    class="modal-body p-4 d-flex justify-content-center" id="formEditarMaterias">
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div th:include="/coordinador/materias/confirm-delete-dialog.html" th:remove="tag"></div>
+
+    <div id="deleteError" th:if="${deleteError}" class="alert alert-danger text-center" role="alert">
+        <span th:text="${deleteError}"></span>
+    </div>
+
+    <div th:include="common/modalLoading.html" th:remove="tag"></div> 
+
+</body>
+
+</html>

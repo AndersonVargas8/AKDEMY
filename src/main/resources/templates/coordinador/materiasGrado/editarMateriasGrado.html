@@ -1,0 +1,32 @@
+<form id="editarMateriasGradoForm" th:object="${editarMateriaGrado}" method="post" class="form col-lg" role="form"
+    autocomplete="off" th:action="@{/savemateriaGrado}" th:if="${editarMateriaGrado != null}">
+    <!--Es necesario para poder pasar la validacion del Model-->
+    <input class="form-control" hidden th:field="*{id}">
+
+    <div class="form-group row">
+        <label class="col-lg-3 form-label form-control-label"><b>Materia</b></label>
+        <select th:field="${editarMateriaGrado.materia}" required class="col-lg-6 m-2 ml-3 btn dropdown-toggle border">
+            <option th:each="materia:${materias}" th:value="${materia.id}" th:text="${materia.nombre}"></option>
+        </select>
+    </div>
+
+    
+    <div class="form-group row">
+        <label class="col-lg-3 col-lg form-label form-control-label"><b>Grado</b></label>
+        <div class="col-lg-7 search_select_box">
+            <input th:field="${editarMateriaGrado.grado}" class="form-control">
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label class="col-lg-3 col-lg form-label form-control-label"><b>Descripción</b></label>
+        <div class="col-lg-7 search_select_box">
+            <input th:field="${editarMateriaGrado.descripcion}" class="form-control">
+        </div>
+    </div>
+
+
+    <div class="form-group row d-flex justify-content-center">
+        <input type="submit" value="Guardar" class="btn guardar w-100" />
+    </div>
+</form>

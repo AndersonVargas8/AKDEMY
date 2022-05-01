@@ -1,0 +1,16 @@
+<form id="editarMateriasForm" th:object="${editarMateria}" method="post" class="form col-lg" role="form"
+    autocomplete="off" th:action="@{/savemateria}" th:if="${editarMateria != null}">
+    <!--Es necesario para poder pasar la validacion del Model-->
+    <input class="form-control" hidden th:field="*{id}">
+
+    <div class="form-group row">
+        <label class="col-lg-3 col-lg form-label form-control-label"><b>Nombre de la materia</b></label>
+        <div class="col-lg-7 search_select_box">
+            <input th:field="${editarMateria.nombre}" class="form-control">
+        </div>
+    </div>
+
+    <div class="form-group row d-flex justify-content-center">
+        <input type="submit" value="Guardar" class="btn guardar w-100" />
+    </div>
+</form>
