@@ -9,4 +9,5 @@ public interface IHorarioService {
     public HorarioCurso obtenerPorId(long id);
     public void guardarHorario(HorarioCurso horario);
     public void eliminarHorario(HorarioCurso horario);
+    public List<HorarioCurso> obtenerPorCurso(long idCurso);
 }
