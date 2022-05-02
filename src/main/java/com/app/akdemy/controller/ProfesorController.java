@@ -75,9 +75,23 @@ public class ProfesorController {
 
     // controlador profesor
     @GetMapping("/profesor")
-    @PreAuthorize("hasAnyRole('ROLE_PROFESOR', 'ROLE_ACUDIENTE')")
+    @PreAuthorize("hasAnyRole('ROLE_PROFESOR', 'ROLE_ADMIN')")
     public String inicioCoordinador(Model model) {
         model.addAttribute("itemNavbar", "inicio");
         return "profesor/index";
+    }
+
+    @GetMapping("/profesor/horario")
+    @PreAuthorize("hasAnyRole('ROLE_PROFESOR', 'ROLE_ADMIN')")
+    public String verHorarioProfesor(Model model) {
+        model.addAttribute("itemNavbar", "horario");
+        return "profesor/horario/index";
+    }
+
+    @GetMapping("/profesor/cursos")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_PROFESOR')")
+    public String verCursosProfesor(Model model) {
+        model.addAttribute("itemNavbar", "cursos");
+        return "profesor/cursos/index";
     }
 }

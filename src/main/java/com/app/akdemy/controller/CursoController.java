@@ -28,23 +28,22 @@ public class CursoController {
     @Autowired
     private IProfesorService serProfesor;
 
-
     @GetMapping("/coordinador/cursos")
     @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_COORDINADOR')")
     public String index(Model model) {
         model.addAttribute("curso", new Curso());
         model.addAttribute("cursos", serCurso.getAllCourses());
         model.addAttribute("profesores", serProfesor.getAllProfesors());
-        model.addAttribute("itemNavbar","cursos");
+        model.addAttribute("itemNavbar", "cursos");
         return "coordinador/cursos/index";
     }
 
     @PostMapping("/savecurso")
     @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_COORDINADOR')")
-    public String createCurso(@Valid @ModelAttribute("curso")Curso curso, Model model) throws  ProfesorNotFound {
+    public String createCurso(@Valid @ModelAttribute("curso") Curso curso, Model model) throws ProfesorNotFound {
 
         curso.setProfesor(serProfesor.getById(curso.getProfesor().getId()));
-        //profesor.setUsuario(serUser.getUserById(profesor.getUsuario().getId()));
+        // profesor.setUsuario(serUser.getUserById(profesor.getUsuario().getId()));
         service.saveCurso(curso);
         return "redirect:/coordinador/cursos";
     }
@@ -53,23 +52,26 @@ public class CursoController {
     @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_COORDINADOR')")
     public String editarCurso(@PathVariable int id, Model model) {
 
-        Curso curso= serCurso.buscarPorId(id);
+        Curso curso = serCurso.buscarPorId(id);
         model.addAttribute("editarCurso", curso);
         model.addAttribute("cursos", serCurso.getAllCourses());
         model.addAttribute("profesores", serProfesor.getAllProfesors());
-        model.addAttribute("itemNavbar","cursos");
+        model.addAttribute("itemNavbar", "cursos");
 
         return "coordinador/cursos/editarCursos.html";
     }
 
     @GetMapping("/coordinador/eliminarCursos/{id}")
     @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_COORDINADOR')")
-	public String deleteCurso(Model model, @PathVariable Long id) {
-		try {
-			serCurso.deleteCurso(id);
-		} catch (Exception e) {
-			model.addAttribute("deleteError","The course could not be deleted.");
-		}
-		return "redirect:/coordinador/cursos";
-	}
+    public String deleteCurso(Model model, @PathVariable Long id) {
+        try {
+            serCurso.deleteCurso(id);
+        } catch (Exception e) {
+            model.addAttribute("deleteError", "The course could not be deleted.");
+        }
+        return "redirect:/coordinador/cursos";
+    }
+
+    // controlador cursos para el profesor
+
 }
