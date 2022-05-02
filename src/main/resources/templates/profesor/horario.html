@@ -1,0 +1,110 @@
+<!--MATERIAS-->
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,
+                initial-scale=1.0">
+    <title>Profesor | Horario</title>
+
+    <link rel="shortcut icon" type="image/x-icon" href="../static/img/avatar1.png" th:href="@{../img/avatar1.png}">
+    <!--JQUERY-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!-- FRAMEWORK BOOTSTRAP para el estilo de la pagina-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <!-- DataTables-->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
+    <script type="text/javascript" charset="utf8"
+        src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
+    <!-- Icons-->
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+    <script src="https://cdn.datatables.net/plug-ins/1.11.5/i18n/es-ES.json"></script>
+</head>
+
+<body>
+    <div th:include="profesor/navbar.html" th:remove="tag"></div>
+    <div class="container-lg pr-4 pl-4">
+        <section class="layout">
+            <div class="main card w-100">
+                <div class="card-title row titletable">
+                    <div class="col text-left">
+                        <h2>Horario&nbsp;<span class="badge">Profesor</span></h2>
+                        <p>Despliegue del horario para el profesor.</p>
+                    </div>
+                    
+                </div>
+                <div class="card-body ">
+                    <table id="materias" class="table table-borderless table-hover" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Nombre de la materia</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="materia:${materias}">
+                                <td th:text="${materia.id}"></td>
+                                <td th:text="${materia.nombre}"></td>
+                                <td>
+                                    <button type='button' class='btn btn-info btn-sm' th:onclick="editarMateria([[${materia.id}]])">
+                                        <span class="fas fa-user-pen"></span>
+                                        <span class='align-middle'></span>
+                                    </button>
+                                    <button type='button' class='btn btn-danger btn-sm' th:onclick="confirmDelete([[${materia.id}]])">
+                                        <span class="fas fa-user-times"></span>
+                                        <span class='align-middle'></span>
+                                    </button>
+                                </td>
+
+                            </tr>
+                        </tbody>
+                        
+                    </table>
+                </div>
+            </div>
+
+        </section> 
+    </div>
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-sm-3">
+    
+                </div>
+                <div class="col-12 col-sm-4 align-items-center">
+                    <h5>Enlaces</h5>
+                    <ul class="list-unstyled pt-2">
+                        <li><a href="/profesor/index">Inicio</a></li>
+                        <li><a href="#">Cursos</a></li>
+                        <li><a href="/profesor/horario">Horario</a></li>
+                        <li><a href="/profesor/observador">Observador</a></li>
+                    </ul>
+                </div>
+                <div class="col col-sm">
+                    <h5>Contactenos</h5>
+                    <address>
+                        Universidad Nacional de Colombia, sede Bogotá<br>
+                        Cra 45 #26-85<br>
+                        Bogotá, Colombia<br>
+                        <i href="tel:+573165000" class="fa fa-phone fa-lg "></i>: +57 3165000<br>
+                        <i href="tel:+574166563" class="fa fa-fax fa-lg "></i>: +57 4166563<br>
+                    </address>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-auto">
+                    <p>© Copyright 2022 AKDEMY</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</body>
+
+</html>
