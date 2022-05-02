@@ -23,8 +23,7 @@
     <!-- Icons-->
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <!-- Local Files-->
-    <script type="text/javascript" th:src="@{/js/coordinador/cursos.js}"></script>
-    <link rel="stylesheet" type="text/css" th:href="@{/css/coordinador/cursos.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/profesor/cursos.css}">
 
     <script src="https://cdn.datatables.net/plug-ins/1.11.5/i18n/es-ES.json"></script>
 </head>
@@ -40,41 +39,33 @@
                         <p>Listado de Cursos a los cuales debe atender a clase.</p>
                     </div>
                     <div class="col text-right">
-                        <button type="button" class="btn boton__cursos mb-2 row w-50" data-toggle="modal"
-                            data-target="#modalFormCurso">
-                            <span class="fa fa-calendar-alt fa-1x"></span>
-                            <span class="align-middle">Ver Horario</span>
-                        </button>
+                        <a href="/profesor/horario">
+                            <button type="button" class="btn boton__cursos mb-2 row w-50 verHorario" >
+                                <span class="fa fa-calendar-alt fa-1x"></span>
+                                <span class="align-middle">Ver Horario</span> 
+                           </button> 
+                        </a>
                     </div>
                 </div>
                 <div class="card-body ">
                     <table id="courses" class="table table-borderless table-hover" style="width:100%">
                         <thead>
                             <tr>
-                                <th>ID</th>
-                                <th>Nombre del curso</th>
-                                <th>Año del curso</th>
-                                <th>Director de curso</th>
-                                <th>Acciones</th>
+                                <th>ID del Curso</th>
+                                <th>Curso</th>
+                                <th>Materias a Dictar</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr th:each="curso:${cursos}">
-                                <td th:text="${curso.id}"></td>
-                                <td th:text="${curso.nombre_Curso}"></td>
-                                <td th:text="${curso.anio_Curso}"></td>
-                                <td th:text="${curso.profesor.nombres} + ' ' + ${curso.profesor.apellidos}"></td>
-                                <td>
-                                    <button type='button' class='btn btn-info btn-sm' th:onclick="editarCurso([[${curso.id}]])">
-                                        <span class="fas fa-user-pen"></span>
-                                        <span class='align-middle'></span>
-                                    </button>
-                                    <button type='button' class='btn btn-danger btn-sm' th:onclick="confirmDelete([[${curso.id}]])">
-                                        <span class="fas fa-user-times"></span>
-                                        <span class='align-middle'></span>
-                                    </button>
-                                </td>
-
+                            <tr>
+                                <td>0001</td>
+                                <td>405</td>
+                                <td>Matemáticas, Lenguaje</td>
+                            </tr>
+                            <tr>
+                                <td>0002</td>
+                                <td>405</td>
+                                <td>Matemáticas, Lenguaje</td>
                             </tr>
                         </tbody>
                         
