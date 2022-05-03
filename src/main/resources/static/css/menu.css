@@ -139,9 +139,15 @@ body{
 /*contenedor para index de la vista del estudiante y profesor*/
 .containerBoxEP {
     background-color: #5d6d7e;
-    height: 200px;
-    width: 340px;
-    padding: 5px;
+    margin: 5px auto;
+}
+@media (min-width: 768px) {
+    .containerBoxEP {
+        background-color: #5d6d7e;
+        width: auto;
+        height: max-content;
+        padding: 5px;
+    }
 }
 .containerBoxEP:hover .fade-in {
     background-color: rgb(133, 146, 158);
