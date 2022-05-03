@@ -65,6 +65,7 @@ public class HorarioController {
         HorarioCurso horario = serHorario.obtenerPorId(idHorario);
         serHorario.eliminarHorario(idHorario);
         model = cargarTablaHorarios(model, horario.getCurso().getId());
+        
         return "coordinador/horarios/horario";
     }
 }
