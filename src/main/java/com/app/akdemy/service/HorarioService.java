@@ -34,8 +34,8 @@ public class HorarioService implements IHorarioService{
     }
 
     @Override
-    public void eliminarHorario(HorarioCurso horario) {
-        repHorario.delete(horario);
+    public void eliminarHorario(long idHorario) {
+        repHorario.deleteById(idHorario);
     }
 
     @Override

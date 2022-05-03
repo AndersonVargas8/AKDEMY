@@ -1,0 +1,25 @@
+<div class="modal-header">
+    <label class="modal-title">
+        <h4 id="infoNombreMateria">Materia</h4>
+        <h6 id="infoDiaHora">Dia - Hora</h6>
+    </label>
+
+    <button type="button" class="close icon-cerrar" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+    <div>
+        <b>Profesor: </b><label id="infoNombreProfesor">Nombre del profesor</label>
+    </div><br>
+
+    <b>Información de la materia</b>
+    <div id="infoDescMateria">Descripción de la materia</div>
+
+    
+</div>
+<div class="modal-footer d-flex justify-content-center">
+    <div>
+        <button class="btn btn-danger" th:onclick="confirmarEliminarHorario()"><span class="fa fa-trash"></span>&nbsp;Eliminar</button>
+    </div>
+</div>

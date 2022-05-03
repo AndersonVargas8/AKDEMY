@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 @Controller
 public class HorarioController {
@@ -32,17 +33,24 @@ public class HorarioController {
     @GetMapping("/coordinador/horarios")
     //@PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_COORDINADOR')")
     public String index(Model model){
-        model = cargarTablaHorarios(model);
-        return "coordinador/horarios/index";
-    }
-
-    private Model cargarTablaHorarios(Model model){
         //Obtener los cursos
         List<Curso> cursos = serCurso.getAllCourses();
         model.addAttribute("cursos",cursos);
+        //Cargar los horarios
+        model = cargarTablaHorarios(model, cursos.get(0).getId());
+        return "coordinador/horarios/index";
+    }
+
+    @GetMapping("/coordinador/consultaHorario/{idCurso}")
+    public String consultaHorario(Model model, @PathVariable int idCurso){
+        model = cargarTablaHorarios(model, idCurso);
+        return "coordinador/horarios/horario";
+    }
+
+    private Model cargarTablaHorarios(Model model, long idCurso){
 
         //Obtener los horarios
-        List<HorarioCurso> horarios = serHorario.obtenerPorCurso(2);
+        List<HorarioCurso> horarios = serHorario.obtenerPorCurso(idCurso);
 
         model.addAttribute("horarios",horarios);
         //Crear las horas del horario
@@ -50,5 +58,13 @@ public class HorarioController {
         
         model.addAttribute("horas",horas);
         return model;
+    }
+
+    @GetMapping("/coordinador/eliminarHorario/{idHorario}")
+    public String eliminarHorario(Model model, @PathVariable int idHorario){
+        HorarioCurso horario = serHorario.obtenerPorId(idHorario);
+        serHorario.eliminarHorario(idHorario);
+        model = cargarTablaHorarios(model, horario.getCurso().getId());
+        return "coordinador/horarios/horario";
     }
 }
