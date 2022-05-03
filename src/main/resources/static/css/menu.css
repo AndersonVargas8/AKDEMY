@@ -81,7 +81,7 @@ body{
 /*Para los cuadros after el jumbotron*/
 .containerBox {
     background-color: #5d6d7e;
-    margin: 5px auto;
+    margin: 8px auto;
 }
 @media (min-width: 768px) {
     .containerBox {
@@ -139,7 +139,11 @@ body{
 /*contenedor para index de la vista del estudiante y profesor*/
 .containerBoxEP {
     background-color: #5d6d7e;
-    margin: 5px auto;
+    margin: 10px auto;
+}
+.containerBoxEP a:hover{
+    color: white;
+    text-decoration: none;
 }
 @media (min-width: 768px) {
     .containerBoxEP {
