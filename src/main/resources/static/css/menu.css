@@ -13,9 +13,8 @@ body{
 .navbar-dark {
     background-color: rgb(55,80,130);
 }
-
 .jumbotron {
-    margin: 0px auto;
+    margin: 0 auto;
     padding: 70px 30px;
     color: floralwhite;
 }
@@ -27,13 +26,21 @@ body{
     width: 100%;
 }
 .row-content {
-    margin: 0px auto;
-    padding: 50px 0px;
-    border-bottom: 1px ridge;
-    min-height: 180px;
     color: floralwhite;
 }
-
+@media (min-width: 768px) {
+    .row-content {
+        margin: 0px auto;
+        padding: 50px 0px;
+        border-bottom: 1px ridge;
+        border-color: rgb(155,180,230);
+        min-height: 180px;
+        color: floralwhite;
+    } 
+}
+.row-content:nth-child(2){
+    border-bottom: none;
+}
 .carousel {
    background: rgb(55,80,130);
 }
@@ -41,12 +48,30 @@ body{
 .carousel .carousel-item {
    height: 300px;
 }
-
+.carousel .carousel-item img {
+    position: absolute;
+    top: 20px;
+    left: 28%;
+    min-height: 200px;
+    width: 130px;
+}
+@media (min-width: 768px) {
+    .carousel .carousel-item img {
+        position: absolute;
+        top: 20px;
+        left: 44%;
+        min-height: 120px;
+        width: 130px;
+    }   
+}
 .footer {
     background-color: rgb(55,80,130);
     color: floralwhite;
     margin: 0px auto;
     padding: 20px 0px;
+}
+@media (min-width: 768px) {
+    
 }
 .items-menu:hover {
     text-decoration: none;
@@ -86,13 +111,19 @@ legend::before {
 legend:hover::before{
     transform: rotate(1deg);
 }
-
 .containerBox {
     background-color: #5d6d7e;
-    height: 200px;
-    width: 420px;
-    padding: 5px;
+    margin: 5px auto;
 }
+@media (min-width: 768px) {
+    .containerBox {
+        background-color: #5d6d7e;
+        height: 200px;
+        width: 420px;
+        padding: 5px;
+    }    
+}
+
 
 .fade-in {
     /*background-color: rgb(52, 58, 64);*/
