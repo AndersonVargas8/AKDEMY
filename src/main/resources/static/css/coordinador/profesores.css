@@ -1,6 +1,9 @@
 body{
   background-color: #F5F5F5;
 }
+.container-lg {
+  margin-top: 60px;
+}
 .layout {
   padding: 20px;
 

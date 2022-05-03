@@ -20,6 +20,10 @@ body{
 .main { grid-area: main; }
 .footer { grid-area: footer; }
 
+.container-lg {
+    margin-top: 60px;
+}
+
 .titletable{
     padding-top: 40px;
     padding-left: 30px;
