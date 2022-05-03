@@ -19,6 +19,10 @@ body{
     color: floralwhite;
 }
 
+
+
+
+/*Contenido general de las filas*/
 .row-header {
     color: rgb(55,80,130);
 }
@@ -41,76 +45,40 @@ body{
 .row-content:nth-child(2){
     border-bottom: none;
 }
+
+
+/*Carrusel de elementos*/
 .carousel {
    background: rgb(55,80,130);
 }
 
 .carousel .carousel-item {
    height: 300px;
+   align-self: center;
 }
-.carousel .carousel-item img {
-    position: absolute;
-    top: 20px;
-    left: 28%;
-    min-height: 200px;
-    width: 130px;
+.carousel-item img {
+    margin: 0 85px;
+    height: 240px;
+    width: 175px;
 }
 @media (min-width: 768px) {
-    .carousel .carousel-item img {
-        position: absolute;
-        top: 20px;
-        left: 44%;
-        min-height: 120px;
-        width: 130px;
+    .carousel-item img {
+        margin: 0 42%;
+        height: 125px;
+        width: 100px;
     }   
 }
-.footer {
-    background-color: rgb(55,80,130);
-    color: floralwhite;
-    margin: 0px auto;
-    padding: 20px 0px;
-}
-@media (min-width: 768px) {
-    
-}
-.items-menu:hover {
-    text-decoration: none;
-    color: white;
-}
-.items-menu p{
-    padding-top: 12px;
-}
-.table {
-    background-color: rgb(155,180,230);
+@media (min-width: 1200px) {
+    .carousel-item img {
+        margin: 0 44.5%;
+        height: 150px;
+        width: 125px;
+    }  
 }
 
-legend {
-    top: -10px;
-    position: relative;
-    z-index: 2;
-    display: inline-block;
-    width: 100%;
-    color: rgb(255, 255, 255);
-}
 
-legend::before {
-    top: -10px;
-    position: absolute;
-    content: '';
-    width: calc(120% );
-    display: block;
-    background-color: #1d4890;
-    height: 50px;
-    z-index:-1;
-    left: -20px;
-    right: -40px;
-    transform: rotate(-1deg);
-    transition: transform .3s ease;
-}
 
-legend:hover::before{
-    transform: rotate(1deg);
-}
+/*Para los cuadros after el jumbotron*/
 .containerBox {
     background-color: #5d6d7e;
     margin: 5px auto;
@@ -118,12 +86,15 @@ legend:hover::before{
 @media (min-width: 768px) {
     .containerBox {
         background-color: #5d6d7e;
-        height: 200px;
-        width: 420px;
+        width: auto;
+        height: max-content;
         padding: 5px;
     }    
 }
-
+.containerBox:hover .fade-in {
+    background-color: rgb(133, 146, 158);
+    padding: 5px;
+}
 
 .fade-in {
     /*background-color: rgb(52, 58, 64);*/
@@ -134,11 +105,20 @@ legend:hover::before{
     padding: 5px;
     /*background: #428bca;*/
 }
-.containerBox:hover .fade-in {
-    background-color: rgb(133, 146, 158);
-    padding: 5px;
+
+
+
+.footer {
+    background-color: rgb(55,80,130);
+    color: floralwhite;
+    margin: 0px auto;
+    padding: 20px 0px;
 }
 
+
+
+
+/*Ventana de Selección de Rol*/
 .selRol{
     text-decoration: none;
     color: floralwhite;
@@ -148,6 +128,10 @@ legend:hover::before{
     text-decoration: none;
     color: lightgrey;
 }
+
+
+
+
 
 /*contenedor para index de la vista del estudiante y profesor*/
 .containerBoxEP {
