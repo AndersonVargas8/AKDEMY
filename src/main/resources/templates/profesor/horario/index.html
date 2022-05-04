@@ -41,33 +41,45 @@
                     
                 </div>
                 <div class="card-body ">
-                    <table id="materias" class="table table-borderless table-hover" style="width:100%">
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Nombre de la materia</th>
-                                <th>Acciones</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr th:each="materia:${materias}">
-                                <td th:text="${materia.id}"></td>
-                                <td th:text="${materia.nombre}"></td>
-                                <td>
-                                    <button type='button' class='btn btn-info btn-sm' th:onclick="editarMateria([[${materia.id}]])">
-                                        <span class="fas fa-user-pen"></span>
-                                        <span class='align-middle'></span>
-                                    </button>
-                                    <button type='button' class='btn btn-danger btn-sm' th:onclick="confirmDelete([[${materia.id}]])">
-                                        <span class="fas fa-user-times"></span>
-                                        <span class='align-middle'></span>
-                                    </button>
-                                </td>
+                    <!-- TABLA DE HORARIOS -->
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th>Hora</th>
+                                    <th>Lunes</th>
+                                    <th>Martes</th>
+                                    <th>Miércoles</th>
+                                    <th>Jueves</th>
+                                    <th>Viernes</th>
+                                </tr>
+                            </thead>
+                            <tbody id="seccionHorario" th:include="coordinador/horarios/horario.html">
 
-                            </tr>
-                        </tbody>
-                        
-                    </table>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- MODAL AGREGAR UNA MATERIA -->
+                    <div class="modal fade show" tabindex="-1" role="dialog" id="modalAgregarMateria">
+                        <div class="modal-dialog modal d-flex justify-content-center" role="document">
+                            <div class="modal-content " th:include="coordinador/horarios/agregarMateria.html">
+
+                            </div>
+                        </div>
+                    </div>
+                    <!-- MODAL DE INFORMACIÓN PARA LAS MATERIAS -->
+
+                    <div class="modal fade show" tabindex="-1" role="dialog" id="modalInfoMaterias">
+                        <div class="modal-dialog modal d-flex justify-content-center" role="document">
+                            <div class="modal-content mt-5" th:include="coordinador/horarios/infoMaterias.html">
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- MODAL ELIMINAR MATERIA -->
+
+                    <div th:include="coordinador/horarios/confirmDelete" th:remove="tag"></div>
                 </div>
             </div>
 
