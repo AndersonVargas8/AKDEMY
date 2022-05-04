@@ -5,28 +5,28 @@
 
 <nav class="navbar navbar-dark navbar-expand-sm fixed-top">
     <div class="container">
-        <a class="navbar-brand mr-auto"><img src="../../static/img/avatar1.png"
-                th:src="@{/img/avatar1.png}" height="40" width="35" alt="AKDEMY"></a>
+        <a class="navbar-brand mr-auto"><img src="../../static/img/avatar1.png" th:src="@{/img/avatar1.png}" height="40"
+                width="35" alt="AKDEMY"></a>
         <div class="collapse navbar-collapse" id="Navbar">
             <ul class="navbar-nav mr-auto">
                 <ul class="menu align-items-center">
                     <li th:class="${itemNavbar == 'inicio'} ? 'nav-item active' : 'nav-item'">
                         <a class="nav-link" href="/coordinador">
-                            <span class="fa fa-home fa-lg"></span> 
+                            <span class="fa fa-home fa-lg"></span>
                             <span class="texto_navbarItem"> Inicio</span>
                         </a>
                     </li>
-                    
+
                     <li th:class="${itemNavbar == 'cursos'} ? 'nav-item active' : 'nav-item'">
                         <a class="nav-link" href="/coordinador/cursos">
-                            <span class="fa fa-info fa-lg"></span> 
+                            <span class="fa fa-info fa-lg"></span>
                             <span class="texto_navbarItem"> Cursos</span>
                         </a>
                     </li>
 
                     <li th:class="${itemNavbar == 'materias'} ? 'nav-item active dropdown' : 'nav-item dropdown'">
                         <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">
-                            <span class="fa fa-book-open-reader fa-lg"></span> 
+                            <span class="fa fa-book-open-reader fa-lg"></span>
                             <span class="texto_navbarItem"> Materias</span>
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
@@ -35,23 +35,24 @@
                         </div>
                     </li>
 
-                    <li th:class="${itemNavbar == 'estudiantes'} ? 'nav-item active' : 'nav-item'">
-                        <a class="nav-link" href="/coordinador/estudiantes">
-                            <span class="fa fa-users fa-lg"></span>
-                            <span class="texto_navbarItem"> Estudiantes</span> 
-                        </a>
+                    <li th:class="${itemNavbar == 'horarios'} ? 'nav-item active' : 'nav-item'"><a class="nav-link" href="/coordinador/horarios"><span
+                                class="fa fa-list fa-lg"></span> Horarios</a>
+                    </li>
+
+                    <li th:class="${itemNavbar == 'estudiantes'} ? 'nav-item active' : 'nav-item'"><a class="nav-link"
+                            href="/coordinador/estudiantes"><span class="fa fa-users fa-lg"></span> Estudiantes</a>
                     </li>
 
                     <li th:class="${itemNavbar == 'profesores'} ? 'nav-item active' : 'nav-item'">
                         <a class="nav-link" th:href="@{/coordinador/profesores}">
                             <span class="fa fa-suitcase fa-lg"></span>
-                            <span class="texto_navbarItem"> Profesores</span> 
+                            <span class="texto_navbarItem"> Profesores</span>
                         </a>
                     </li>
                 </ul>
             </ul>
             <span class="navbar-text menu align-items-center">
-                <a th:href="@{/logout}" style="text-decoration:none" >
+                <a th:href="@{/logout}" style="text-decoration:none">
                     <span class="fa fa-sign-out fa-lg"></span>
                     <span class="texto_cerrarSesion"> Cerrar Sesión</span>
                 </a>

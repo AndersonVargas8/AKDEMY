@@ -212,7 +212,7 @@ public class EstudianteController {
 
     // controlador vista estudiante
     @GetMapping("/estudiante")
-    @PreAuthorize("hasAnyRole('ROLE_ESTUDIANTE')")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_ESTUDIANTE')")
     public String inicioCoordinador(Model model) {
         model.addAttribute("itemNavbar", "inicio");
         return "estudiante/index";

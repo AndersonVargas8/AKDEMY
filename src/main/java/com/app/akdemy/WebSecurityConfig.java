@@ -12,47 +12,48 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Configuration
 @EnableWebSecurity
-public class WebSecurityConfig  extends  WebSecurityConfigurerAdapter{
+public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-	String[] resources = new String[]{
-            "/include/**","/css/**","/icons/**","/img/**","/js/**","/layer/**"
+    String[] resources = new String[] {
+            "/include/**", "/css/**", "/icons/**", "/img/**", "/js/**", "/layer/**"
     };
-	
-	@Override
+
+    @Override
     protected void configure(HttpSecurity http) throws Exception {
-    	http
-        .authorizeRequests()
-        .antMatchers(resources).permitAll()  
-        .antMatchers("/","/index","/estudiantes", "/profesores").permitAll()
-            .anyRequest().authenticated()
-            .and()
-        .formLogin()
-            .loginPage("/login")
-            .permitAll()
-            .defaultSuccessUrl("/conmutador")
-            .failureUrl("/login?error=true")
-            .usernameParameter("username")
-            .passwordParameter("password")
-            .and()
-            .csrf().disable()
-        .logout()
-            .permitAll()
-            .logoutSuccessUrl("/login?logout");
+        http
+                .authorizeRequests()
+                .antMatchers(resources).permitAll()
+                .antMatchers("/", "/index", "/estudiantes", "/profesores", "/coordinador/horarios",
+                        "/coordinador/consultaHorario/{idCurso}", "/coordinador/eliminarHorario/{idHorario}")
+                .permitAll()
+                .anyRequest().authenticated()
+                .and()
+                .formLogin()
+                .loginPage("/login")
+                .permitAll()
+                .defaultSuccessUrl("/conmutador")
+                .failureUrl("/login?error=true")
+                .usernameParameter("username")
+                .passwordParameter("password")
+                .and()
+                .csrf().disable()
+                .logout()
+                .permitAll()
+                .logoutSuccessUrl("/login?logout");
     }
-    
+
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
-		BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder(4);
+        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder(4);
         return bCryptPasswordEncoder;
     }
-    
+
     @Autowired
     UserDetailsService userDetailsService;
-    
-    
-    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception { 
-    	//Especificar el encargado del login y encriptacion del password
+
+    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+        // Especificar el encargado del login y encriptacion del password
         auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
     }
-    
+
 }
