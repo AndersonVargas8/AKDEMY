@@ -48,6 +48,14 @@ public class ProfesorController {
         return "coordinador/profesores/index";
     }
 
+    // controlador profesor
+    @GetMapping("/profesor")
+    @PreAuthorize("hasAnyRole('ROLE_PROFESOR', 'ROLE_ADMIN')")
+    public String inicioCoordinador(Model model) {
+        model.addAttribute("itemNavbar", "inicio");
+        return "profesor/index";
+    }
+
     @PostMapping("/saveprofesor")
     @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_COORDINADOR')")
     public String createProfesor(@Valid @ModelAttribute("profesor") Profesor profesor, Model model)
@@ -83,14 +91,6 @@ public class ProfesorController {
         return "redirect:/coordinador/profesores";
     }
 
-    // controlador profesor
-    @GetMapping("/profesor")
-    @PreAuthorize("hasAnyRole('ROLE_PROFESOR', 'ROLE_ADMIN')")
-    public String inicioCoordinador(Model model) {
-        model.addAttribute("itemNavbar", "inicio");
-        return "profesor/index";
-    }
-
     @GetMapping("/profesor/horario")
     @PreAuthorize("hasAnyRole('ROLE_PROFESOR', 'ROLE_ADMIN')")
     public String verHorarioProfesor(Model model) throws Exception {
@@ -103,9 +103,9 @@ public class ProfesorController {
     private Model cargarTablaHorarios(Model model) throws Exception {
         User user = serUser.getLoggedUser();
         Profesor profesor;
-        try{
+        try {
             profesor = serProfesor.getByUser(user);
-        }catch(Exception e){
+        } catch (Exception e) {
             return model;
         }
         // Obtener los horarios
@@ -117,14 +117,14 @@ public class ProfesorController {
 
         model.addAttribute("horas", horas);
 
-        model.addAttribute("nombreProfesor", profesor.getNombres().concat(" "+profesor.getApellidos()));
+        model.addAttribute("nombreProfesor", profesor.getNombres().concat(" " + profesor.getApellidos()));
         return model;
     }
 
-    @GetMapping("/profesor/cursos")
+    @GetMapping("/profesor/observador")
     @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_PROFESOR')")
-    public String verCursosProfesor(Model model) {
-        model.addAttribute("itemNavbar", "cursos");
-        return "profesor/cursos/index";
+    public String verObservacionProfesor(Model model) {
+        model.addAttribute("itemNavbar", "observador");
+        return "profesor/observador/index";
     }
 }

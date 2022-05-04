@@ -41,10 +41,9 @@ public class HorarioController {
         List<Curso> cursos = serCurso.getAllCourses();
         model.addAttribute("cursos", cursos);
         // Cargar los horarios
-        if(cursos != null && cursos.size() > 0)
+        if (cursos != null && cursos.size() > 0)
             model = cargarTablaHorarios(model, cursos.get(0).getId());
 
-        
         model.addAttribute("itemNavbar", "horarios");
         return "coordinador/horarios/index";
     }
@@ -107,4 +106,5 @@ public class HorarioController {
         model = cargarTablaHorarios(model, idCurso);
         return "coordinador/horarios/horario";
     }
+
 }

@@ -42,24 +42,24 @@
                 <div id="mycarousel" class="carousel slide" data-ride="carousel">
                     <div class="carousel-inner" role="listbox">
                         <div class="carousel-item active">
-                            <img src="../../static/img/classroom.png" th:src="@{/img/classroom.png}"  width="15%" height="15%">
-                            <div class="carousel-caption d-none d-md-block">
+                            <div class="carousel-caption d-md-block">
+                                <img src="../../static/img/classroom.png" th:src="@{/img/classroom.png}"  width="15%" height="15%">
                                 <h2>Cursos</h2>
-                                <p class="d-none d-sm-block">Visualización de cursos a los cuales debe dictar clase al igual que podrá ver a los estudiantes del mismo.</p>
+                                <p class="d-none d-sm-block">Visualización de cursos a los cuales debe dictar clase al igual que podrá ver a los estudiantes del mismo y la materia que debe dictar.</p>
                             </div>
                         </div>
                         <div class="carousel-item">
-                            <img src="../../static/img/calendario.png" th:src="@{/img/calendario.png}"  width="15%" height="15%">
-                            <div class="carousel-caption d-none d-md-block">
+                            <div class="carousel-caption d-md-block">
+                                <img src="../../static/img/calendario.png" th:src="@{/img/calendario.png}"  width="15%" height="15%">
                                 <h2>Horario</h2>
                                 <p class="d-none d-sm-block">Tendrá un horario para profesores en los que verá la hora en la que debe impartir clase a los diferentes cursos.</p>
                             </div>
                         </div>
                         <div class="carousel-item">
-                            <img src="../../static/img/estudiantes.png" th:src="@{/img/estudiantes.png}"  width="15%" height="15%">
-                            <div class="carousel-caption d-none d-md-block">
+                            <div class="carousel-caption d-md-block">
+                                <img src="../../static/img/estudiantes.png" th:src="@{/img/estudiantes.png}"  width="15%" height="15%">
                                 <h2>Observador</h2>
-                                <p class="d-none d-sm-block">Creación, eliminación y edición de notas en el observador donde podrá hacer registro de las faltas cometidas por los estudiantes de un curso en específico.</p>
+                                <p class="d-none d-sm-block">Creación, eliminación y edición de notas en el observador donde podrá hacer registro de las faltas de los estudiantes.</p>
                             </div>
                         </div>
                     </div>
@@ -122,10 +122,10 @@
             <div class="col-12 col-sm-6">
                 <h5>Enlaces</h5>
                 <ul class="list-unstyled pt-2">
-                    <li><a href="/profesor/index">Inicio</a></li>
-                    <li><a href="#">Cursos</a></li>
-                    <li><a href="#">Horario</a></li>
-                    <li><a href="#">Observador</a></li>
+                    <li><a href="/profesor">Inicio</a></li>
+                    <li><a href="/profesor/cursos">Cursos</a></li>
+                    <li><a href="/profesor/horario">Horario</a></li>
+                    <li><a href="/profesor/observador">Observador</a></li>
                 </ul>
             </div>
             <div class="col col-sm-6">
