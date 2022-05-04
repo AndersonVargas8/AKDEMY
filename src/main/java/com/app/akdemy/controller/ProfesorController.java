@@ -102,7 +102,12 @@ public class ProfesorController {
 
     private Model cargarTablaHorarios(Model model) throws Exception {
         User user = serUser.getLoggedUser();
-        Profesor profesor = serProfesor.getByUser(user);
+        Profesor profesor;
+        try{
+            profesor = serProfesor.getByUser(user);
+        }catch(Exception e){
+            return model;
+        }
         // Obtener los horarios
         List<HorarioCurso> horarios = serHorario.obtenerPorProfesor(profesor);
 
