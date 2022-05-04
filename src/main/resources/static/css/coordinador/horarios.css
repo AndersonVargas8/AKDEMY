@@ -20,6 +20,12 @@ table .dia div{
     border-left: 3px solid brown;
 }
 
+table .dia div label{
+    overflow: hidden;
+    white-space:nowrap;
+    margin: 0;
+}
+
 table .dia div:hover{
     background-color: rgb(231, 218, 95);
 }
