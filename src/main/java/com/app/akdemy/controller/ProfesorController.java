@@ -1,10 +1,17 @@
 package com.app.akdemy.controller;
 
+import java.util.Arrays;
+import java.util.List;
+
 import javax.validation.Valid;
 
 import com.app.akdemy.Exception.ProfesorNotFound;
 import com.app.akdemy.Exception.UsernameOrIdNotFound;
+import com.app.akdemy.entity.HorarioCurso;
+import com.app.akdemy.entity.MateriaGrado;
 import com.app.akdemy.entity.Profesor;
+import com.app.akdemy.entity.User;
+import com.app.akdemy.interfacesServices.IHorarioService;
 import com.app.akdemy.interfacesServices.IProfesorService;
 import com.app.akdemy.service.UserService;
 
@@ -25,6 +32,9 @@ public class ProfesorController {
 
     @Autowired
     private UserService serUser;
+
+    @Autowired
+    private IHorarioService serHorario;
 
     // controlador de profesor desde coordinador
     @GetMapping("/coordinador/profesores")
@@ -83,9 +93,27 @@ public class ProfesorController {
 
     @GetMapping("/profesor/horario")
     @PreAuthorize("hasAnyRole('ROLE_PROFESOR', 'ROLE_ADMIN')")
-    public String verHorarioProfesor(Model model) {
+    public String verHorarioProfesor(Model model) throws Exception {
+
         model.addAttribute("itemNavbar", "horario");
+        model = cargarTablaHorarios(model);
         return "profesor/horario/index";
+    }
+
+    private Model cargarTablaHorarios(Model model) throws Exception {
+        User user = serUser.getLoggedUser();
+        Profesor profesor = serProfesor.getByUser(user);
+        // Obtener los horarios
+        List<HorarioCurso> horarios = serHorario.obtenerPorProfesor(profesor);
+
+        model.addAttribute("horarios", horarios);
+        // Crear las horas del horario
+        List<String> horas = Arrays.asList("06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17");
+
+        model.addAttribute("horas", horas);
+
+        model.addAttribute("nombreProfesor", profesor.getNombres().concat(" "+profesor.getApellidos()));
+        return model;
     }
 
     @GetMapping("/profesor/cursos")
