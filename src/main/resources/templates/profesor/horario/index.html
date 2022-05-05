@@ -18,8 +18,8 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
    <!-- Local Files-->
     <link rel="stylesheet" type="text/css" th:href="@{/css/profesor/horario.css}">
-    <link rel="stylesheet" type="text/css" th:href="@{/css/coordinador/horarios.css}">
     <script type="text/javascript" th:src="@{/js/profesor/horarios.js}"></script>
+    <link rel="stylesheet" type="text/css" href="../../static/css/normalize.css" th:href="@{/css/normalize.css}">
 
 </head>
 
@@ -62,6 +62,15 @@
                             </tbody>
                         </table>
                     </div>
+                    <!-- MODAL AGREGAR UNA MATERIA -->
+                    <!--
+                    <div class="modal fade show" tabindex="-1" role="dialog" id="modalAgregarMateria">
+                        <div class="modal-dialog modal d-flex justify-content-center" role="document">
+                            <div class="modal-content " th:include="coordinador/horarios/agregarMateria.html">
+
+                            </div>
+                        </div>
+                    </div>-->
                     <!-- MODAL DE INFORMACIÓN PARA LAS MATERIAS -->
 
                     <div class="modal fade show" tabindex="-1" role="dialog" id="modalInfoMaterias">

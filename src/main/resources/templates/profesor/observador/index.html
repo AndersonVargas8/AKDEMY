@@ -1,0 +1,86 @@
+<!--MATERIAS-->
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,
+                initial-scale=1.0">
+    <title>Profesor | Horario</title>
+
+    <link rel="shortcut icon" type="image/x-icon" href="../static/img/avatar1.png" th:href="@{../img/avatar1.png}">
+    <!--JQUERY-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!-- FRAMEWORK BOOTSTRAP para el estilo de la pagina-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <!-- DataTables-->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
+    <script type="text/javascript" charset="utf8"
+        src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
+    <!-- Icons-->
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <!-- Local Files-->
+    <link rel="stylesheet" type="text/css" th:href="@{/css/profesor/observador.css}">
+    <link rel="stylesheet" type="text/css" href="../../static/css/normalize.css" th:href="@{/css/normalize.css}">
+
+    <script src="https://cdn.datatables.net/plug-ins/1.11.5/i18n/es-ES.json"></script>
+</head>
+
+<body>
+    <div th:include="profesor/navbar.html" th:remove="tag"></div>
+    <div class="container-lg pr-4 pl-4">
+        <section class="layout">
+            <div class="main card w-100">
+                <div class="card-title row titletable">
+                    <div class="col text-left">
+                        <h2>Observador&nbsp;<span class="badge">Profesor</span></h2>
+                        <p>Crear observaciones sobre las faltas cometidas por los estudiantes durante la hora de clase.</p>
+                    </div>
+                    <div class="col text-right">
+                        <button type="button" class="btn boton__materias mb-2 row w-50" data-toggle="modal"
+                            data-target="#modalFormMateria">
+                            <span class="fa fa-user-plus fa-1x"></span>
+                            <span class="align-middle">Añadir Observación</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="card-body ">
+                    <!-- TABLA DE HORARIOS -->
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Estudiante</th>
+                                    <th>Curso</th>
+                                    <th>Materia</th>
+                                    <th>Descripción de la Falta</th>
+                                </tr>
+                            </thead>
+                            <!--
+                            <tbody id="seccionHorario" th:include="coordinador/horarios/horario.html">
+
+                            </tbody>-->
+                        </table>
+                    </div>
+                    <!-- MODAL AGREGAR UNA MATERIA -->
+                    <!--
+                    <div class="modal fade show" tabindex="-1" role="dialog" id="modalAgregarMateria">
+                        <div class="modal-dialog modal d-flex justify-content-center" role="document">
+                            <div class="modal-content " th:include="coordinador/horarios/agregarMateria.html">
+
+                            </div>
+                        </div>
+                    </div>-->
+                </div>
+            </div>
+
+        </section> 
+    </div>
+
+</body>
+
+</html>
