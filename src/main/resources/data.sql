@@ -1,4 +1,10 @@
 USE akdemy;
+INSERT INTO role (description, name) VALUES
+('ROLE_ADMIN', 'ADMIN'),
+('ROLE_COORDINADOR','COORDINADOR'),
+('ROLE_PROFESOR','PROFESOR'),
+('ROLE_ACUDIENTE','ACUDIENTE'),
+('ROLE_ESTUDIANTE','ESTUDIANTE');
 
 INSERT INTO `user`(`id`, `password`, `username`) VALUES
                                                      (NULL,'$2a$04$n6WIRDQlIByVFi.5rtQwEOTAzpzLPzIIG/O6quaxRKY2LlIHG8uty','admin'),

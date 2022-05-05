@@ -1,16 +1,22 @@
 package com.app.akdemy.controller;
 
+import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.validation.Valid;
 
 import com.app.akdemy.Exception.CustomeFieldValidationException;
 import com.app.akdemy.entity.Acudiente;
+import com.app.akdemy.entity.Curso;
 import com.app.akdemy.entity.Estudiante;
+import com.app.akdemy.entity.HorarioCurso;
 import com.app.akdemy.entity.Role;
 import com.app.akdemy.entity.User;
+import com.app.akdemy.interfacesServices.ICursoService;
 import com.app.akdemy.interfacesServices.IEstudianteService;
+import com.app.akdemy.interfacesServices.IHorarioService;
 import com.app.akdemy.repository.EpsRepository;
 import com.app.akdemy.repository.GrupoSanguineoRHRepository;
 import com.app.akdemy.repository.TipoDocumentoRepository;
@@ -52,6 +58,12 @@ public class EstudianteController {
 
     @Autowired
     EpsRepository repEps;
+
+    @Autowired
+    IHorarioService serHorario;
+
+    @Autowired
+    ICursoService serCurso;
 
     @Autowired
     BCryptPasswordEncoder bCryptPasswordEncoder;
@@ -216,5 +228,41 @@ public class EstudianteController {
     public String inicioCoordinador(Model model) {
         model.addAttribute("itemNavbar", "inicio");
         return "estudiante/index";
+    }
+
+    @GetMapping("/estudiante/horario")
+    @PreAuthorize("hasAnyRole('ROLE_ESTUDIANTE', 'ROLE_ADMIN')")
+    public String verHorarioEstudiante(Model model) throws Exception {
+
+        model.addAttribute("itemNavbar", "horario");
+        model = cargarTablaHorarios(model);
+        return "estudiante/horario/index";
+    }
+
+    private Model cargarTablaHorarios(Model model) throws Exception {
+        User user = serUser.getLoggedUser();
+        Estudiante estudiante;
+        try{
+            estudiante = serEstudiante.getByUser(user);
+        }catch(Exception e){
+            return model;
+        }
+        model.addAttribute("nombreEstudiante", estudiante.getNombres().concat(" "+estudiante.getApellidos()));
+       
+        // Obtener los horarios
+        Curso cursoActual = estudiante.getCursoActual();
+        if(cursoActual == null)
+            return model;
+
+        List<HorarioCurso> horarios = serHorario.obtenerPorCurso(cursoActual.getId());
+
+        model.addAttribute("horarios", horarios);
+        // Crear las horas del horario
+        List<String> horas = Arrays.asList("06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17");
+
+        model.addAttribute("horas", horas);
+
+        model.addAttribute("nombreCurso",cursoActual.getNombre_Curso());
+        return model;
     }
 }

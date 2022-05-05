@@ -83,7 +83,8 @@ public class ProfesorController {
         return "redirect:/coordinador/profesores";
     }
 
-    // controlador profesor
+    // controlador profesor-----------------------------------------------
+    
     @GetMapping("/profesor")
     @PreAuthorize("hasAnyRole('ROLE_PROFESOR', 'ROLE_ADMIN')")
     public String inicioCoordinador(Model model) {

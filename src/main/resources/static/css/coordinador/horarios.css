@@ -24,6 +24,7 @@ table .dia div label{
     overflow: hidden;
     white-space:nowrap;
     margin: 0;
+    cursor:pointer;
 }
 
 table .dia div:hover{

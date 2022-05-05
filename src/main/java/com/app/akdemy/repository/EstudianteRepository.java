@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import com.app.akdemy.entity.Estudiante;
+import com.app.akdemy.entity.User;
 
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
@@ -12,4 +13,5 @@ import org.springframework.stereotype.Repository;
 public interface EstudianteRepository extends CrudRepository<Estudiante,Long>{
     public List<Estudiante> findByNombres(String nombres);
     public Optional<Estudiante> findByDocumento(String documento);
+    public Optional<Estudiante> findByUsuario(User user);
 }

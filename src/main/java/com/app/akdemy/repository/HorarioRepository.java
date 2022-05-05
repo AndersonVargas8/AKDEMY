@@ -3,6 +3,7 @@ package com.app.akdemy.repository;
 import java.util.List;
 
 import com.app.akdemy.entity.Curso;
+import com.app.akdemy.entity.Estudiante;
 import com.app.akdemy.entity.HorarioCurso;
 import com.app.akdemy.entity.Profesor;
 

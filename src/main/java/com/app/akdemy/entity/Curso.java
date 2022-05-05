@@ -5,6 +5,7 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -35,13 +36,12 @@ public class Curso {
 
     @ManyToMany
     @JoinTable(name = "curso_estudiante"
-            , joinColumns = @JoinColumn(name = "id_estudiante")
-            , inverseJoinColumns = @JoinColumn(name = "id_curso"))
+            , joinColumns = @JoinColumn(name = "id_curso")
+            , inverseJoinColumns = @JoinColumn(name = "id_estudiante"))
     private Set<Estudiante> estudiantes;
 
 
     //Constructor clase Curso 
-
 
     public Curso() {
     }
