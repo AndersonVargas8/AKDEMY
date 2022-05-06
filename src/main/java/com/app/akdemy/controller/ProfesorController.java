@@ -1,5 +1,6 @@
 package com.app.akdemy.controller;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -7,10 +8,12 @@ import javax.validation.Valid;
 
 import com.app.akdemy.Exception.ProfesorNotFound;
 import com.app.akdemy.Exception.UsernameOrIdNotFound;
+import com.app.akdemy.entity.Estudiante;
 import com.app.akdemy.entity.HorarioCurso;
 import com.app.akdemy.entity.MateriaGrado;
 import com.app.akdemy.entity.Profesor;
 import com.app.akdemy.entity.User;
+import com.app.akdemy.interfacesServices.ICursoService;
 import com.app.akdemy.interfacesServices.IHorarioService;
 import com.app.akdemy.interfacesServices.IProfesorService;
 import com.app.akdemy.service.UserService;
@@ -35,6 +38,9 @@ public class ProfesorController {
 
     @Autowired
     private IHorarioService serHorario;
+
+    @Autowired
+    private ICursoService serCurso;
 
     // controlador de profesor desde coordinador
     @GetMapping("/coordinador/profesores")
@@ -126,6 +132,8 @@ public class ProfesorController {
     @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_PROFESOR')")
     public String verObservacionProfesor(Model model) {
         model.addAttribute("itemNavbar", "observador");
+        model.addAttribute("courses", serCurso.getAllCourses());
+        model.addAttribute("estudiantes", new ArrayList<Estudiante>());
         return "profesor/observador/index";
     }
 }

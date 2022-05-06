@@ -265,4 +265,11 @@ public class EstudianteController {
         model.addAttribute("nombreCurso",cursoActual.getNombre_Curso());
         return model;
     }
+
+    @GetMapping("/profesor/observador/estudiantes")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_PROFESOR')")
+    public String getEstudiantes(Model model) {
+        model.addAttribute("estudiantes", serEstudiante.listarEstudiantes());
+        return "profesor/observador/selectestudiantes";
+    }
 }

@@ -67,4 +67,10 @@ body{
     color: floralwhite;
   }
   
-  
+select{
+    cursor: pointer;
+}
+
+.filter-container{
+  margin-bottom: 30px;
+}

@@ -3,6 +3,7 @@ package com.app.akdemy.service;
 import java.util.List;
 
 import com.app.akdemy.entity.Curso;
+import com.app.akdemy.entity.Profesor;
 import com.app.akdemy.interfacesServices.ICursoService;
 import com.app.akdemy.repository.CursoRepository;
 
@@ -37,5 +38,11 @@ public class CursoService implements ICursoService{
 				.orElseThrow(() -> new Exception("UsernotFound in deleteUser -"+this.getClass().getName()));
 
 		repCurso.delete(curso);
+    }
+
+    @Override
+    public List<Curso> getCoursesbyProfesor(Profesor profesor) {
+        // TODO Auto-generated method stub
+        return null;
     }
 }
