@@ -270,6 +270,6 @@ public class EstudianteController {
     @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_PROFESOR')")
     public String getEstudiantes(Model model) {
         model.addAttribute("estudiantes", serEstudiante.listarEstudiantes());
-        return "profesor/observador/selectestudiantes";
+        return "profesor/observador/selectestudiantes.html";
     }
 }

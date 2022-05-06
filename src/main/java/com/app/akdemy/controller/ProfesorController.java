@@ -133,7 +133,7 @@ public class ProfesorController {
     public String verObservacionProfesor(Model model) {
         model.addAttribute("itemNavbar", "observador");
         model.addAttribute("courses", serCurso.getAllCourses());
-        model.addAttribute("estudiantes", new ArrayList<Estudiante>());
+        //model.addAttribute("estudiantes", new ArrayList<Estudiante>());
         return "profesor/observador/index";
     }
 }
