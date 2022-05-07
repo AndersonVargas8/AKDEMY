@@ -11,6 +11,7 @@ import com.app.akdemy.Exception.UsernameOrIdNotFound;
 import com.app.akdemy.entity.Estudiante;
 import com.app.akdemy.entity.HorarioCurso;
 import com.app.akdemy.entity.MateriaGrado;
+import com.app.akdemy.entity.Observador;
 import com.app.akdemy.entity.Profesor;
 import com.app.akdemy.entity.User;
 import com.app.akdemy.interfacesServices.ICursoService;
@@ -130,10 +131,11 @@ public class ProfesorController {
 
     @GetMapping("/profesor/observador")
     @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_PROFESOR')")
-    public String verObservacionProfesor(Model model) {
+    public String verObservacionProfesor(Model model) throws ProfesorNotFound, Exception {
+        Profesor currentProfesor = serProfesor.getByUser(serUser.getLoggedUser());
         model.addAttribute("itemNavbar", "observador");
-        model.addAttribute("courses", serCurso.getAllCourses());
-        //model.addAttribute("estudiantes", new ArrayList<Estudiante>());
+        model.addAttribute("courses", serCurso.getCoursesObservadorbyProfesor(currentProfesor));
+        model.addAttribute("nuevaObservacion", new Observador());
         return "profesor/observador/index";
     }
 }
