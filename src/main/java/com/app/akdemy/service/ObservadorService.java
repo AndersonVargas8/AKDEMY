@@ -1,5 +1,7 @@
 package com.app.akdemy.service;
 
+import java.util.Optional;
+
 import com.app.akdemy.entity.Estudiante;
 import com.app.akdemy.entity.Observador;
 import com.app.akdemy.interfacesServices.IObservadorService;
@@ -22,6 +24,17 @@ public class ObservadorService implements IObservadorService{
     @Override
     public void saveObservador(Observador observador) {
         repObservador.save(observador);
+    }
+
+    @Override
+    public Observador getObservadorByID(Long id) {
+        return repObservador.findById(id).get();
+    }
+
+    @Override
+    public void deleteObservador(Observador observador) {
+        repObservador.delete(observador);
+        
     }
     
 }
