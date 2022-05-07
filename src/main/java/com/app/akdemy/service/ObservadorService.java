@@ -18,5 +18,10 @@ public class ObservadorService implements IObservadorService{
     public Iterable<Observador> getObservadorEstudiante(Estudiante estudiante) {
         return repObservador.findByEstudiante(estudiante);
     }
+
+    @Override
+    public void saveObservador(Observador observador) {
+        repObservador.save(observador);
+    }
     
 }

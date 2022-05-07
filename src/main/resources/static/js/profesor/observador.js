@@ -18,7 +18,13 @@ $(document).ready(function() {
     $('#estudiantesSelect').change(function() {
 
         var url = "observador/" + $(this).val();
-        $('#observador').load(url);
+        $('#observador').load(url, function(){
+            
+        });
+
+        var url2 = "observador/new/" + $(this).val();
+
+        $('#formNewObservador').load(url2);
     })
 } );
 

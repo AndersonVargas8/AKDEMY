@@ -25,7 +25,7 @@ public class Observador {
      @Column(name = "obs_descargos", nullable = false)
      private String descargos;
  
-     @Column(name = "obs_fecha", nullable = false)
+     @Column(name = "obs_fecha", nullable = true)
      private Date fecha;
 
     @ManyToOne

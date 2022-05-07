@@ -133,9 +133,14 @@ public class ProfesorController {
     @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_PROFESOR')")
     public String verObservacionProfesor(Model model) throws ProfesorNotFound, Exception {
         Profesor currentProfesor = serProfesor.getByUser(serUser.getLoggedUser());
+
+        Observador observador = new Observador();
+        observador.setEstudiante(new Estudiante());
+        observador.setProfesor(currentProfesor);
+
         model.addAttribute("itemNavbar", "observador");
         model.addAttribute("courses", serCurso.getCoursesObservadorbyProfesor(currentProfesor));
-        model.addAttribute("nuevaObservacion", new Observador());
+        //model.addAttribute("observacion", observador);
         return "profesor/observador/index";
     }
 }

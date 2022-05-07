@@ -52,7 +52,7 @@
                     </div>
                     <div class="col text-right">
                         <button type="button" class="btn boton__materias mb-2 row w-50" data-toggle="modal"
-                            data-target="#modalFormMateria">
+                            data-target="#modalFormObservacion">
                             <span class="fa fa-user-plus fa-1x"></span>
                             <span class="align-middle">Añadir Observación</span>
                         </button>
@@ -88,9 +88,27 @@
                     
                         </tbody>
                     </table>
-
-
                 </div>
+
+                    <!--Formulario-->
+                <div class="modal fade" tabindex="-1" role="dialog" id="modalFormObservacion" th:if="observador">
+                    <div class="modal-dialog modal-lg d-flex justify-content-center" role="document">
+                        <div class="modal-content" style="max-width:80%">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Nueva Observación</h5>
+                                <button type="button" class="close icon-cerrar" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body p-5 justify-content-center">
+                                <div th:include="profesor/observador/form.html"
+                                class="modal-body justify-content-center" id="formNewObservador">
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
 
         </section> 

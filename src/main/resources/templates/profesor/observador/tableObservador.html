@@ -2,8 +2,8 @@
     <td th:text="${observacion.id}"></td>
     <td th:text="${observacion.fecha}"></td>
     <td th:text="${observacion.descargos}"></td>
-    <td th:text="${observacion.estudiante.nombres}"></td>
-    <td th:text="${observacion.profesor.nombres}"></td>
+    <td th:text="${observacion.estudiante.nombres} + ' ' + ${observacion.estudiante.apellidos}"></td>
+    <td th:text="${observacion.profesor.nombres} + ' ' + ${observacion.profesor.apellidos}"></td>
     <td>
     </td>
 </tr>

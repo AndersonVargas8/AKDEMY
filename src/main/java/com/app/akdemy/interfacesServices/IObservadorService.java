@@ -6,5 +6,6 @@ import com.app.akdemy.entity.Observador;
 public interface IObservadorService {
 
     Iterable<Observador> getObservadorEstudiante(Estudiante estudiante);
+    void saveObservador(Observador observador);
     
 }
