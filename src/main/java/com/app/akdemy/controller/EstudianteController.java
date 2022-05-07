@@ -266,10 +266,10 @@ public class EstudianteController {
         return model;
     }
 
-    @GetMapping("/profesor/observador/estudiantes")
+    @GetMapping("/profesor/observador/estudiantes/{id}")
     @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_PROFESOR')")
-    public String getEstudiantes(Model model) {
-        model.addAttribute("estudiantes", serEstudiante.listarEstudiantes());
+    public String getEstudiantes(@PathVariable Long id,Model model) {
+        model.addAttribute("estudiantes", serEstudiante.getEstudiantesCursoID(id));
         return "profesor/observador/selectestudiantes.html";
     }
 }

@@ -41,8 +41,9 @@ public class CursoService implements ICursoService{
     }
 
     @Override
-    public List<Curso> getCoursesbyProfesor(Profesor profesor) {
-        // TODO Auto-generated method stub
-        return null;
+    public Iterable<Curso> getCoursesObservadorbyProfesor(Profesor profesor) {
+        return repCurso.getObservadorCursosProfesor(profesor.getId());
     }
+
+
 }

@@ -1,0 +1,9 @@
+<tr th:each="observacion:${observaciones}">
+    <td th:text="${observacion.id}"></td>
+    <td th:text="${observacion.fecha}"></td>
+    <td th:text="${observacion.descargos}"></td>
+    <td th:text="${observacion.estudiante.nombres}"></td>
+    <td th:text="${observacion.profesor.nombres}"></td>
+    <td>
+    </td>
+</tr>

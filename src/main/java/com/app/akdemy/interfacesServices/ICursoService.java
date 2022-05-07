@@ -10,5 +10,6 @@ public interface ICursoService {
     public List<Curso> getAllCourses();
     public Curso buscarPorId(long id);
     public void deleteCurso(Long id) throws Exception;
-    public List<Curso> getCoursesbyProfesor(Profesor profesor);
+    public Iterable<Curso> getCoursesObservadorbyProfesor(Profesor profesor);
+
 }

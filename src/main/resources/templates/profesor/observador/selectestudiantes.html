@@ -1,8 +1,8 @@
 <script type="text/javascript" th:src="@{/js/profesor/observador.js}"></script>
 
 <label class="col-lg-3"><b>Estudiante</b></label>
-<select class="w-50 border" data-live-search="true"
+<select id="estudiantesSelect" class="w-50 border" data-live-search="true"
     data-none-results-text="No se encontró {0}">
     <option disabled th:selected="${true}" th:text="${'Selecciona un Estudiante'}" th:value="${0}"></option>
-    <option th:each="estudiante:${estudiantes}" th:value="${estudiante.id}" th:text="${estudiante.nombres}"></option>
+    <option th:each="estudiante:${estudiantes}" th:value="${estudiante.id}" th:text="${estudiante.nombres} + ' ' + ${estudiante.apellidos}"></option>
 </select>
