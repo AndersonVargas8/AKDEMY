@@ -82,12 +82,12 @@ public class ObservadorController {
 
     @GetMapping("/profesor/observador/eliminar/{id}")
     @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_PROFESOR')")
-    public String deleteProfesor(@PathVariable long id, Model model) throws ProfesorNotFound {
+    public String deleteObservador(@PathVariable long id, Model model) throws ProfesorNotFound {
         try {
             Observador observador = serObservador.getObservadorByID(id);
             serObservador.deleteObservador(observador);
         } catch (Exception e) {
-            model.addAttribute("deleteError", "No se puede borrar el usuario");
+            model.addAttribute("deleteError", "No se puede borrar el observador");
         }
         return "redirect:/profesor/observador";
     }
