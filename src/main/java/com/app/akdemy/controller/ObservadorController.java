@@ -91,4 +91,15 @@ public class ObservadorController {
         }
         return "redirect:/profesor/observador";
     }
+
+    @GetMapping("/estudiante/observador")
+    @PreAuthorize("hasAnyRole('ROLE_ESTUDIANTE')")
+    public String getObservadorEstudiante(Model model) throws Exception{
+
+        Estudiante estudiante = serEstudiante.getByUser(serUser.getLoggedUser());
+
+        model.addAttribute("itemNavbar", "observador");
+        model.addAttribute("observaciones", serObservador.getObservadorEstudiante(estudiante));
+        return "estudiante/observador/index";
+    }
 }
