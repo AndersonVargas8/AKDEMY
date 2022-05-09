@@ -1,5 +1,6 @@
 package com.app.akdemy.controller;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -7,10 +8,13 @@ import javax.validation.Valid;
 
 import com.app.akdemy.Exception.ProfesorNotFound;
 import com.app.akdemy.Exception.UsernameOrIdNotFound;
+import com.app.akdemy.entity.Estudiante;
 import com.app.akdemy.entity.HorarioCurso;
 import com.app.akdemy.entity.MateriaGrado;
+import com.app.akdemy.entity.Observador;
 import com.app.akdemy.entity.Profesor;
 import com.app.akdemy.entity.User;
+import com.app.akdemy.interfacesServices.ICursoService;
 import com.app.akdemy.interfacesServices.IHorarioService;
 import com.app.akdemy.interfacesServices.IProfesorService;
 import com.app.akdemy.service.UserService;
@@ -35,6 +39,9 @@ public class ProfesorController {
 
     @Autowired
     private IHorarioService serHorario;
+
+    @Autowired
+    private ICursoService serCurso;
 
     // controlador de profesor desde coordinador
     @GetMapping("/coordinador/profesores")
@@ -84,7 +91,7 @@ public class ProfesorController {
     }
 
     // controlador profesor-----------------------------------------------
-    
+
     @GetMapping("/profesor")
     @PreAuthorize("hasAnyRole('ROLE_PROFESOR', 'ROLE_ADMIN')")
     public String inicioCoordinador(Model model) {
@@ -124,8 +131,29 @@ public class ProfesorController {
 
     @GetMapping("/profesor/observador")
     @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_PROFESOR')")
-    public String verObservacionProfesor(Model model) {
+    public String verObservacionProfesor(Model model) throws Exception {
+        Profesor currentProfesor = serProfesor.getByUser(serUser.getLoggedUser());
+
+        Observador observador = new Observador();
+        observador.setEstudiante(new Estudiante());
+        observador.setProfesor(currentProfesor);
+
         model.addAttribute("itemNavbar", "observador");
+        model.addAttribute("courses", serCurso.getCoursesObservadorbyProfesor(currentProfesor));
+        // model.addAttribute("observacion", observador);
         return "profesor/observador/index";
     }
+
+    @GetMapping("/profesor/cursos")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_PROFESOR')")
+    public String verCursosProfesor(Model model) throws Exception {
+        User user = serUser.getLoggedUser();
+        Profesor profesor = serProfesor.getByUser(user);
+
+        model.addAttribute("itemNavBar", "cursos");
+        model.addAttribute("cursos", serCurso.getCursosProfesor(profesor));
+
+        return "profesor/cursos/index";
+    }
+
 }

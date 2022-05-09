@@ -1,0 +1,81 @@
+<!--MATERIAS-->
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,
+                initial-scale=1.0">
+    <title>Estudiante | Observador</title>
+
+    <link rel="shortcut icon" type="image/x-icon" href="../static/img/avatar1.png" th:href="@{../img/avatar1.png}">
+    <!--JQUERY-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- FRAMEWORK BOOTSTRAP para el estilo de la pagina-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
+    <!-- DataTables-->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
+    <!--SELECTPICKER-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.3/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
+    <!-- Icons-->
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <!-- Local Files-->
+    <link rel="stylesheet" type="text/css" th:href="@{/css/estudiante/observador.css}">
+    <link rel="stylesheet" type="text/css" href="../../static/css/normalize.css" th:href="@{/css/normalize.css}">
+    <script type="text/javascript" th:src="@{/js/estudiante/observador.js}"></script>
+ 
+
+
+</head>
+
+<body>
+    <div th:include="/estudiante/navbar.html" th:remove="tag"></div>
+    <div class="container-lg pr-1 pl-1">
+        <section class="layout">
+            <div class="main card w-100">
+                <div class="card-title row titletable">
+                    <div class="col text-left">
+                        <h2>Observador&nbsp;<span class="badge">Estudiante</span></h2>
+                        <p>Consulta sobre el histórico de observaciones.</p>
+                    </div>
+                </div>
+                <div class="card-body ">
+                    <table id="observadorTable" class=" table table-borderless table-hover" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Fecha</th>
+                                <th>Observación</th>
+                                <th>Estudiante</th>
+                                <th>Profesor</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="observacion:${observaciones}">
+                                <td th:text="${observacion.id}"></td>
+                                <td th:text="${#dates.format(observacion.fecha,'dd-MM-yyyy')}"></td>
+                                <td th:text="${observacion.descargos}"></td>
+                                <td th:text="${observacion.estudiante.nombres} + ' ' + ${observacion.estudiante.apellidos}"></td>
+                                <td th:text="${observacion.profesor.nombres} + ' ' + ${observacion.profesor.apellidos}"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    
+                </div>
+
+            </div>
+
+        </section> 
+    </div>
+
+
+</body>
+
+</html>

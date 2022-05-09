@@ -1,0 +1,15 @@
+<script type="text/javascript" th:src="@{/js/estudiante/curso.js}"></script>
+<table id="cursosTable" class="table table-borderless table-hover" style="width:100%">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nombre Completo</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr th:each="estudiante:${estudiantes}">
+            <td th:text="${estudiante.id}"></td>
+            <td th:text="${estudiante.nombres} + ' ' + ${estudiante.apellidos}"></td>
+        </tr>
+    </tbody>
+</table>

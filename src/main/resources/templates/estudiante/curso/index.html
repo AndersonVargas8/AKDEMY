@@ -1,4 +1,4 @@
-<!--CURSOS-->
+<!--MATERIAS-->
 
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
@@ -8,7 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,
                 initial-scale=1.0">
-    <title>Profesor | Cursos</title>
+    <title>Estudiante | Curso</title>
 
     <link rel="shortcut icon" type="image/x-icon" href="../static/img/avatar1.png" th:href="@{../img/avatar1.png}">
     <!--JQUERY-->
@@ -16,31 +16,25 @@
     <!-- FRAMEWORK BOOTSTRAP para el estilo de la pagina-->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-    <!-- DataTables-->
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
-    <script type="text/javascript" charset="utf8"
-        src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
-    <!-- Icons-->
-    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <!-- Local Files-->
-    <link rel="stylesheet" type="text/css" th:href="@{/css/profesor/cursos.css}">
+   <!-- Local Files-->
+    <link rel="stylesheet" type="text/css" th:href="@{/css/estudiante/cursos.css}">
     <link rel="stylesheet" type="text/css" href="../../static/css/normalize.css" th:href="@{/css/normalize.css}">
+    <script type="text/javascript" th:src="@{/js/estudiante/curso.js}"></script>
 
-    <script src="https://cdn.datatables.net/plug-ins/1.11.5/i18n/es-ES.json"></script>
 </head>
 
 <body>
-    <div th:include="profesor/navbar.html" th:remove="tag"></div>
+    <div th:include="/estudiante/navbar.html" th:remove="tag"></div>
     <div class="container-lg pr-4 pl-4">
         <section class="layout">
             <div class="main card w-100">
                 <div class="card-title row titletable">
                     <div class="col text-left">
-                        <h2>Cursos&nbsp;<span class="badge">Profesor</span></h2>
-                        <p>Listado de Cursos a los cuales debe atender a clase.</p>
+                        <h2>Curso&nbsp;<span class="badge">Estudiante</span></h2>
+                        <p>Listado de los compañeros de curso del estudiante.</p>
                     </div>
                     <div class="col text-right">
-                        <a href="/profesor/horario">
+                        <a href="/estudiante/horario">
                             <button type="button" class="btn boton__cursos mb-2 row w-50 verHorario" >
                                 <span class="fa fa-calendar-alt fa-1x"></span>
                                 <span class="align-middle">Ver Horario</span> 
@@ -49,12 +43,26 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <div th:include="profesor/cursos/tablaCursos.html"></div>
+                    <table id="cursosTable" class="table table-borderless table-hover" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Nombre Completo</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="estudiante:${estudiantes}">
+                                <td th:text="${estudiante.id}"></td>
+                                <td th:text="${estudiante.nombres} + ' ' + ${estudiante.apellidos}"></td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
 
         </section> 
     </div>
+
 </body>
 
 </html>

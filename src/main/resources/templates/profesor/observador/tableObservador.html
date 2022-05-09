@@ -1,0 +1,30 @@
+<script type="text/javascript" th:src="@{/js/profesor/observador.js}"></script>
+<table id="observadorTable" class=" table table-borderless table-hover" style="width:100%">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Fecha</th>
+            <th>Observación</th>
+            <th>Estudiante</th>
+            <th>Profesor</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+    <tr th:each="observacion:${observaciones}">
+        <td th:text="${observacion.id}"></td>
+        <td th:text="${#dates.format(observacion.fecha,'dd-MM-yyyy')}"></td>
+        <td th:text="${observacion.descargos}"></td>
+        <td th:text="${observacion.estudiante.nombres} + ' ' + ${observacion.estudiante.apellidos}"></td>
+        <td th:text="${observacion.profesor.nombres} + ' ' + ${observacion.profesor.apellidos}"></td>
+        <td>
+            <button type='button' class='btn btn-danger
+            btn-sm' th:onclick="confirmDeleteObservacion([[${observacion.id}]])" th:if="${observacion.profesor.id == profesor.id}">
+                <span class="fas fa-user-times"></span>
+            </button>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+
