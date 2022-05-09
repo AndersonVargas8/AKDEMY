@@ -20,5 +20,6 @@ public interface IEstudianteService {
     public Estudiante getByUser(User user);
 
     public Iterable<Estudiante> getEstudiantesCursoID(Long id);
+
     
 }
