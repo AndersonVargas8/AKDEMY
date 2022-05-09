@@ -48,20 +48,8 @@
                         </a>
                     </div>
                 </div>
-                <div class="card-body ">
-                    <table id="courses" class="table table-borderless table-hover" style="width:100%">
-                        <thead>
-                            <tr>
-                                <th>ID del Curso</th>
-                                <th>Curso</th>
-                                <th>Materias a Dictar</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            
-                        </tbody>
-                        
-                    </table>
+                <div class="card-body">
+                    <div th:include="profesor/cursos/tablaCursos.html"></div>
                 </div>
             </div>
 

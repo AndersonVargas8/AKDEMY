@@ -27,7 +27,7 @@
     <!-- Icons-->
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <!-- Local Files-->
-    <link rel="stylesheet" type="text/css" th:href="@{/css/profesor/observador.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/estudiante/observador.css}">
     <link rel="stylesheet" type="text/css" href="../../static/css/normalize.css" th:href="@{/css/normalize.css}">
     <script type="text/javascript" th:src="@{/js/estudiante/observador.js}"></script>
  
@@ -36,8 +36,8 @@
 </head>
 
 <body>
-    <div th:include="profesor/navbar.html" th:remove="tag"></div>
-    <div class="container-lg pr-4 pl-4">
+    <div th:include="/estudiante/navbar.html" th:remove="tag"></div>
+    <div class="container-lg pr-1 pl-1">
         <section class="layout">
             <div class="main card w-100">
                 <div class="card-title row titletable">
@@ -58,13 +58,13 @@
                             </tr>
                         </thead>
                         <tbody>
-                        <tr th:each="observacion:${observaciones}">
-                            <td th:text="${observacion.id}"></td>
-                            <td th:text="${#dates.format(observacion.fecha,'dd-MM-yyyy')}"></td>
-                            <td th:text="${observacion.descargos}"></td>
-                            <td th:text="${observacion.estudiante.nombres} + ' ' + ${observacion.estudiante.apellidos}"></td>
-                            <td th:text="${observacion.profesor.nombres} + ' ' + ${observacion.profesor.apellidos}"></td>
-                        </tr>
+                            <tr th:each="observacion:${observaciones}">
+                                <td th:text="${observacion.id}"></td>
+                                <td th:text="${#dates.format(observacion.fecha,'dd-MM-yyyy')}"></td>
+                                <td th:text="${observacion.descargos}"></td>
+                                <td th:text="${observacion.estudiante.nombres} + ' ' + ${observacion.estudiante.apellidos}"></td>
+                                <td th:text="${observacion.profesor.nombres} + ' ' + ${observacion.profesor.apellidos}"></td>
+                            </tr>
                         </tbody>
                     </table>
                     

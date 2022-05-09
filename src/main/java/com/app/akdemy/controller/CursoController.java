@@ -38,13 +38,6 @@ public class CursoController {
         return "coordinador/cursos/index";
     }
 
-    @GetMapping("/profesor/cursos")
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_PROFESOR')")
-    public String verCursosProfesor(Model model) {
-        model.addAttribute("itemNavbar", "cursos");
-        return "profesor/cursos/index";
-    }
-
     @PostMapping("/savecurso")
     @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_COORDINADOR')")
     public String createCurso(@Valid @ModelAttribute("curso") Curso curso, Model model) throws ProfesorNotFound {

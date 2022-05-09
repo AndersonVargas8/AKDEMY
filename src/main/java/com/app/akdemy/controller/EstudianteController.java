@@ -239,19 +239,27 @@ public class EstudianteController {
         return "estudiante/horario/index";
     }
 
+    @GetMapping("/estudiante/curso")
+    @PreAuthorize("hasAnyRole('ROLE_ESTUDIANTE', 'ROLE_ADMIN')")
+    public String verCursoEstudiante(Model model) throws Exception {
+        model.addAttribute("itemNavbar", "curso");
+        model.addAttribute("estudiantes", serEstudiante.listarEstudiantes());
+        return "estudiante/curso/index";
+    }
+
     private Model cargarTablaHorarios(Model model) throws Exception {
         User user = serUser.getLoggedUser();
         Estudiante estudiante;
-        try{
+        try {
             estudiante = serEstudiante.getByUser(user);
-        }catch(Exception e){
+        } catch (Exception e) {
             return model;
         }
-        model.addAttribute("nombreEstudiante", estudiante.getNombres().concat(" "+estudiante.getApellidos()));
-       
+        model.addAttribute("nombreEstudiante", estudiante.getNombres().concat(" " + estudiante.getApellidos()));
+
         // Obtener los horarios
         Curso cursoActual = estudiante.getCursoActual();
-        if(cursoActual == null)
+        if (cursoActual == null)
             return model;
 
         List<HorarioCurso> horarios = serHorario.obtenerPorCurso(cursoActual.getId());
@@ -262,13 +270,13 @@ public class EstudianteController {
 
         model.addAttribute("horas", horas);
 
-        model.addAttribute("nombreCurso",cursoActual.getNombre_Curso());
+        model.addAttribute("nombreCurso", cursoActual.getNombre_Curso());
         return model;
     }
 
     @GetMapping("/profesor/observador/estudiantes/{id}")
     @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_PROFESOR')")
-    public String getEstudiantes(@PathVariable Long id,Model model) {
+    public String getEstudiantes(@PathVariable Long id, Model model) {
         model.addAttribute("estudiantes", serEstudiante.getEstudiantesCursoID(id));
         return "profesor/observador/selectestudiantes.html";
     }

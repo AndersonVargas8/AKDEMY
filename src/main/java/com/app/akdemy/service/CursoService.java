@@ -11,7 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class CursoService implements ICursoService{
+public class CursoService implements ICursoService {
 
     @Autowired
     CursoRepository repCurso;
@@ -35,9 +35,9 @@ public class CursoService implements ICursoService{
     public void deleteCurso(Long id) throws Exception {
 
         Curso curso = repCurso.findById(id)
-				.orElseThrow(() -> new Exception("UsernotFound in deleteUser -"+this.getClass().getName()));
+                .orElseThrow(() -> new Exception("UsernotFound in deleteUser -" + this.getClass().getName()));
 
-		repCurso.delete(curso);
+        repCurso.delete(curso);
     }
 
     @Override
@@ -45,5 +45,9 @@ public class CursoService implements ICursoService{
         return repCurso.getObservadorCursosProfesor(profesor.getId());
     }
 
+    @Override
+    public List<Curso> getCursosProfesor(Profesor profesor) {
+        return (List<Curso>) repCurso.getCursosProfesor(profesor.getId());
+    }
 
 }

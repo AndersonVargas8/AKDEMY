@@ -91,7 +91,7 @@ public class ProfesorController {
     }
 
     // controlador profesor-----------------------------------------------
-    
+
     @GetMapping("/profesor")
     @PreAuthorize("hasAnyRole('ROLE_PROFESOR', 'ROLE_ADMIN')")
     public String inicioCoordinador(Model model) {
@@ -131,7 +131,7 @@ public class ProfesorController {
 
     @GetMapping("/profesor/observador")
     @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_PROFESOR')")
-    public String verObservacionProfesor(Model model) throws ProfesorNotFound, Exception {
+    public String verObservacionProfesor(Model model) throws Exception {
         Profesor currentProfesor = serProfesor.getByUser(serUser.getLoggedUser());
 
         Observador observador = new Observador();
@@ -140,7 +140,20 @@ public class ProfesorController {
 
         model.addAttribute("itemNavbar", "observador");
         model.addAttribute("courses", serCurso.getCoursesObservadorbyProfesor(currentProfesor));
-        //model.addAttribute("observacion", observador);
+        // model.addAttribute("observacion", observador);
         return "profesor/observador/index";
     }
+
+    @GetMapping("/profesor/cursos")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_PROFESOR')")
+    public String verCursosProfesor(Model model) throws Exception {
+        User user = serUser.getLoggedUser();
+        Profesor profesor = serProfesor.getByUser(user);
+
+        model.addAttribute("itemNavBar", "cursos");
+        model.addAttribute("cursos", serCurso.getCursosProfesor(profesor));
+
+        return "profesor/cursos/index";
+    }
+
 }
