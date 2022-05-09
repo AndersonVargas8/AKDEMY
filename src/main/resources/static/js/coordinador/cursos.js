@@ -9,6 +9,10 @@ $(document).ready(function() {
     
 } );
 
+function verEstudiantes(id){
+    window.location="/coordinador/cursos/estudiantes/"+id;
+}
+
 function editarCurso(id){
     // let mes = document.getElementById("selMesCalendar").value;
     $('#modalLoading').modal({

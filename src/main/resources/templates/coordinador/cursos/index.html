@@ -66,6 +66,10 @@
                                 <td th:text="${curso.anio_Curso}"></td>
                                 <td th:text="${curso.profesor.nombres} + ' ' + ${curso.profesor.apellidos}"></td>
                                 <td>
+                                    <button type='button' class='btn btn-info btn-sm' th:onclick="verEstudiantes([[${curso.id}]])">
+                                        <span class="fas fa-edit"></span>
+                                        <span class='align-middle'></span>
+                                    </button>
                                     <button type='button' class='btn btn-info btn-sm' th:onclick="editarCurso([[${curso.id}]])">
                                         <span class="fas fa-user-pen"></span>
                                         <span class='align-middle'></span>

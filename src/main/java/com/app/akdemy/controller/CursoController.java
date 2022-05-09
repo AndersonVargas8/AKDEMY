@@ -4,7 +4,9 @@ import javax.validation.Valid;
 
 import com.app.akdemy.Exception.ProfesorNotFound;
 import com.app.akdemy.entity.Curso;
+import com.app.akdemy.entity.Estudiante;
 import com.app.akdemy.interfacesServices.ICursoService;
+import com.app.akdemy.interfacesServices.IEstudianteService;
 import com.app.akdemy.interfacesServices.IProfesorService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +17,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+
+import java.util.List;
 
 @Controller
 public class CursoController {
@@ -27,6 +31,9 @@ public class CursoController {
 
     @Autowired
     private IProfesorService serProfesor;
+
+    @Autowired
+    private IEstudianteService serEstudiante;
 
     @GetMapping("/coordinador/cursos")
     @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_COORDINADOR')")
@@ -72,6 +79,24 @@ public class CursoController {
         return "redirect:/coordinador/cursos";
     }
 
+    @GetMapping("/coordinador/cursos/estudiantes/{idCurso}")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_COORDINADOR')")
+    public String estudiantes(@PathVariable long idCurso,Model model) {
+        List<Estudiante> estudianteList = serEstudiante.listarEstudiantes();
+        model.addAttribute("estudiantes", estudianteList);
+
+        Curso curso = serCurso.buscarPorId(idCurso);
+        model.addAttribute("curso",curso);
+        return "coordinador/cursos/cursosEstudiantes";
+    }
+
+    @PostMapping("/coordinador/cursos/estudiantes")
+    public String guardarEstudiantes(@ModelAttribute("curso") Curso cursoAct) {
+        Curso curso = serCurso.buscarPorId(cursoAct.getId());
+        curso.setEstudiantes(cursoAct.getEstudiantes());
+        serCurso.saveCurso(curso);
+        return "redirect:/coordinador/cursos";
+    }
     // controlador cursos para el profesor
 
 }
