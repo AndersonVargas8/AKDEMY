@@ -242,11 +242,10 @@ public class EstudianteController {
     private Model cargarTablaHorarios(Model model) throws Exception {
         User user = serUser.getLoggedUser();
         Estudiante estudiante;
-        try{
-            estudiante = serEstudiante.getByUser(user);
-        }catch(Exception e){
+        
+        estudiante = serEstudiante.getByUser(user);
+        if(estudiante == null)
             return model;
-        }
         model.addAttribute("nombreEstudiante", estudiante.getNombres().concat(" "+estudiante.getApellidos()));
        
         // Obtener los horarios
