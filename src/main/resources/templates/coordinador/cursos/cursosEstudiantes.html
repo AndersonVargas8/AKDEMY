@@ -31,13 +31,52 @@
 </head>
 
 <body>
-<h4>Estudiantes</h4>
-<form th:object="${curso}" method="post" th:action="@{/coordinador/cursos/estudiantes}">
-    <input type="text" hidden th:field="${curso.id}">
-    <div th:each="est:${estudiantes}">
-        <input th:type="checkbox" th:field="${curso.estudiantes}" th:value="${est.id}" th:text="${est.nombres}"></input>
-    </div>
-    <input type="submit" value="Enviar">
-</form>
+<div th:include="coordinador/navbar.html" th:remove="tag"></div>
+<div class="container-lg pr-1 pl-1">
+    <section class="layout">
+        <div class="main card w-100">
+            <div class="card-title row titletable">
+                <div class="col text-left">
+                    <h2>Estudiantes en Cursos&nbsp;<span class="badge">Coordinador</span></h2>
+                </div>
+                <div class="col text-right">
+                    <form th:action="@{/coordinador/cursos}">
+                        <input type="submit" value="Retornar a Cursos" class="btn boton__cursos mb-2 row w-50"/>
+                    </form>
+                </div>
+            </div>
+            <div class="card-body ">
+                <!-- ESTUDIANTES EN CHECKBOX -->
+                <ul class="list-inline">
+                    <li>Elija los estudiantes que desea para el curso : </li>
+                    <li th:text="${curso.nombre_Curso}"></li>
+                </ul>
+                <div class="col text-right">
+                    <p ></p>
+                </div>
+                <form th:object="${curso}" method="post" th:action="@{/coordinador/cursos/estudiantes}">
+
+
+                    <input type="text" hidden th:field="${curso.id}">
+
+                    <div class="custom-control custom-checkbox">
+                        <div th:each="est:${estudiantes}">
+                            <input th:class="form-check-input" th:id="flexCheckDefault" th:type="checkbox" th:field="${curso.estudiantes}" th:value="${est.id}"
+                                   th:text="${est.nombres}"/>
+                        </div>
+                    </div>
+                    <div class="my-2"></div>
+                    <input type="submit" class="btn btn-primary" value="Enviar">
+                </form>
+
+                <section class="section-preview">
+
+
+                </section>
+
+            </div>
+        </div>
+    </section>
+</div>
 </body>
 </html>
