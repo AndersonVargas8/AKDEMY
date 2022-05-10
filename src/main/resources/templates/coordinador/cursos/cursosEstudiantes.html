@@ -38,31 +38,42 @@
             <div class="card-title row titletable">
                 <div class="col text-left">
                     <h2>Estudiantes en Cursos&nbsp;<span class="badge">Coordinador</span></h2>
-                    <p>Despliegue los estudiantes de cada curso.</p>
                 </div>
-
                 <div class="col text-right">
                     <form th:action="@{/coordinador/cursos}">
                         <input type="submit" value="Retornar a Cursos" class="btn boton__cursos mb-2 row w-50"/>
                     </form>
-<!--                    <a th:href="@{/coordinador/cursos}"><input type="button" value="Ir"></a>-->
-<!--                    <button th:href="@{/coordinador/cursos}" class="retCursos" title="Retornar a Cursos"> Cursos</button></span></h2>-->
                 </div>
             </div>
             <div class="card-body ">
                 <!-- ESTUDIANTES EN CHECKBOX -->
+                <ul class="list-inline">
+                    <li>Elija los estudiantes que desea para el curso : </li>
+                    <li th:text="${curso.nombre_Curso}"></li>
+                </ul>
+                <div class="col text-right">
+                    <p ></p>
+                </div>
                 <form th:object="${curso}" method="post" th:action="@{/coordinador/cursos/estudiantes}">
-                    <label>
-                        <input type="text" hidden th:field="${curso.id}">
-                    </label>
-                    <div th:each="est:${estudiantes}">
-                        <label>
-                            <input th:type="checkbox" th:field="${curso.estudiantes}" th:value="${est.id}"
+
+
+                    <input type="text" hidden th:field="${curso.id}">
+
+                    <div class="custom-control custom-checkbox">
+                        <div th:each="est:${estudiantes}">
+                            <input th:class="form-check-input" th:id="flexCheckDefault" th:type="checkbox" th:field="${curso.estudiantes}" th:value="${est.id}"
                                    th:text="${est.nombres}"/>
-                        </label>
+                        </div>
                     </div>
-                    <input type="submit" value="Enviar">
+                    <div class="my-2"></div>
+                    <input type="submit" class="btn btn-primary" value="Enviar">
                 </form>
+
+                <section class="section-preview">
+
+
+                </section>
+
             </div>
         </div>
     </section>
