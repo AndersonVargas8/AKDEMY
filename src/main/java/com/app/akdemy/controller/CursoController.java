@@ -1,5 +1,8 @@
 package com.app.akdemy.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.validation.Valid;
 
 import com.app.akdemy.Exception.ProfesorNotFound;
@@ -17,8 +20,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-
-import java.util.List;
 
 @Controller
 public class CursoController {
@@ -83,9 +84,16 @@ public class CursoController {
     @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_COORDINADOR')")
     public String estudiantes(@PathVariable long idCurso,Model model) {
         List<Estudiante> estudianteList = serEstudiante.listarEstudiantes();
-        model.addAttribute("estudiantes", estudianteList);
-
+        List<Estudiante> estudiantes = new ArrayList<>();
         Curso curso = serCurso.buscarPorId(idCurso);
+        for(Estudiante estudiante: estudianteList){
+            Curso cursoActual = estudiante.getCursoActual();
+            if(cursoActual == null || cursoActual.equals(curso)){
+                estudiantes.add(estudiante);
+            }
+        }
+
+        model.addAttribute("estudiantes", estudiantes);
         model.addAttribute("curso",curso);
         return "coordinador/cursos/cursosEstudiantes";
     }
