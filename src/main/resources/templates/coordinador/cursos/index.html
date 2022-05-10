@@ -52,7 +52,6 @@
                     <table id="courses" class="table table-borderless table-hover" style="width:100%">
                         <thead>
                             <tr>
-                                <th>ID</th>
                                 <th>Nombre del curso</th>
                                 <th>Año del curso</th>
                                 <th>Director de curso</th>
@@ -61,7 +60,6 @@
                         </thead>
                         <tbody>
                             <tr th:each="curso:${cursos}">
-                                <td th:text="${curso.id}"></td>
                                 <td th:text="${curso.nombre_Curso}"></td>
                                 <td th:text="${curso.anio_Curso}"></td>
                                 <td th:text="${curso.profesor.nombres} + ' ' + ${curso.profesor.apellidos}"></td>
