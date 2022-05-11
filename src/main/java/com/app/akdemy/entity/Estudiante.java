@@ -204,7 +204,7 @@ public class Estudiante {
             ", grupoSanguineoRH='" + getGrupoSanguineoRH() + "'" +
             ", usuario='" + getUsuario() + "'" +
             ", acudientes='" + getAcudientes() + "'" +
-            ", cursos='" + getCursos() + "'" +
+            ", cursos='" + getCursos().size()    + "'" +
             "}";
     }
 

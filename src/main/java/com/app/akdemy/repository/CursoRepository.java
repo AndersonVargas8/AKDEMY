@@ -22,4 +22,6 @@ public interface CursoRepository extends CrudRepository<Curso, Long> {
     // @Query(value = "(SELECT * FROM curso WHERE cur_anio = year(current_date) AND
     // cur_director = :profesorID)", nativeQuery= true)
     Iterable<Curso> getCursosProfesor(@Param("profesorID") Long profesorID);
+
+    Optional<Curso> findById (Long id);
 }
