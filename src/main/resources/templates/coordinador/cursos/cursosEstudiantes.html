@@ -38,6 +38,7 @@
             <div class="card-title row titletable">
                 <div class="col text-left">
                     <h2>Estudiantes en Cursos&nbsp;<span class="badge">Coordinador</span></h2>
+                    <p class="mb-0 fw-bold">Inscripción de estudiantes al curso </p>
                 </div>
                 <div class="col text-right">
                     <form th:action="@{/coordinador/cursos}">
@@ -51,15 +52,31 @@
                 <section>
 
                     <div class="card">
-                        <div class="card-header bg-white text-left py-3">
-                            <p class="mb-0 fw-bold">Inscripción de estudiantes al curso </p>
-                        </div>
-                        <div class="bg-white text-center py-3">
-                            <h3 class="mb-0 fw-bold" th:text=" 'Curso: ' + ${curso.nombre_Curso}"></h3>
-                        </div>
+
+
+
 
                         <div class="card-body">
-                            <ul>
+                            <div th:class="container">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <table class="table table-bordered">
+                                            <thead class="thead-dark">
+                                            <tr>
+                                                <th colspan="6" class="bg-dark border border-dark">
+                                                    <div class="d-flex justify-content-center">
+                                                        <h3 class="mb-0 fw-bold" th:text=" 'Curso: ' + ${curso.nombre_Curso}"></h3>
+                                                    </div>
+                                                </th>
+                                            </tr>
+                                            <str>
+                                            <th>Lista de Estudiantes</th>
+                                            </str>
+                                            </thead>
+                                            <tbody>
+                                            <tr>
+                                                <td>
+                                                    <div class="custom-control custom-checkbox">
                                 <form th:object="${curso}" method="post" th:action="@{/coordinador/cursos/estudiantes}">
                                     <input type="text" hidden th:field="${curso.id}">
                                     <div class="custom-control custom-checkbox">
@@ -71,7 +88,14 @@
                                     <div class="my-2"></div>
                                     <input type="submit" class="btn btn-primary" value="Inscribir estudiantes">
                                 </form>
-                            </ul>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                            </div>
+                            </div>
+                            </div>
                         </div>
                     </div>
                 </section>
