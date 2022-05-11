@@ -6,6 +6,7 @@
             <th>Fecha de Nacimiento</th>
             <th>Tipo Documento</th>
             <th>Documento</th>
+            <th>Curso</th>
             <th>Usuario</th>
             <th>Acciones</th>
         </tr>
@@ -17,6 +18,8 @@
             <td th:text="${#dates.format(estudiante.fechaNacimiento,'dd-MM-yyyy')}"> </td>
             <td th:text="${estudiante.tipoDocumento.descripcion}"></td>
             <td th:text="${estudiante.documento}"></td>
+            <td th:if="${estudiante.cursoActual != null}" th:text="${estudiante.cursoActual.nombre_Curso}"></td>
+            <td th:unless="${estudiante.cursoActual != null}">
             <td th:text="${estudiante.usuario.username}"></td>
             <td>
                 <button type='button' class='btn btn-info

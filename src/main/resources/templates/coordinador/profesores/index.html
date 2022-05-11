@@ -61,7 +61,6 @@
                     <table id="teachers" class=" table table-borderless table-hover" style="width:100%">
                         <thead>
                             <tr>
-                                <th>ID</th>
                                 <th>Nombres</th>
                                 <th>Apellidos</th>
                                 <th>Fecha de Nacimiento</th>
@@ -72,7 +71,6 @@
                         </thead>
                         <tbody>
                             <tr th:each="profesor:${profesores}">
-                                <td th:text="${profesor.id}"></td>
                                 <td th:text="${profesor.nombres}"></td>
                                 <td th:text="${profesor.apellidos}"></td>
                                 <td th:text="${profesor.fechaNacimiento}"></td>
