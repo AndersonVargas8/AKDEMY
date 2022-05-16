@@ -17,8 +17,10 @@ public class FirebaseInitialize {
     public void initialize(){
         try {
             
+            String path = getClass().getClassLoader().getResource("serviceAccountKey.json").toString();
+            
             FileInputStream serviceAccount =
-            new FileInputStream("./serviceAccountKey.json");
+            new FileInputStream(path);
 
             FirebaseOptions options = new FirebaseOptions.Builder()
             .setCredentials(GoogleCredentials.fromStream(serviceAccount))
