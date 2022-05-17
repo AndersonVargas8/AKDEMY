@@ -1,9 +1,9 @@
 package com.app.akdemy.service;
 
-import java.util.Collection;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
-import java.util.concurrent.ExecutionException;
 
 import com.app.akdemy.entity.Curso;
 import com.app.akdemy.entity.Difusion;
@@ -11,9 +11,8 @@ import com.app.akdemy.firebase.FirebaseInitialize;
 import com.app.akdemy.interfacesServices.IDifusionService;
 import com.google.api.core.ApiFuture;
 import com.google.cloud.firestore.CollectionReference;
-import com.google.cloud.firestore.WriteResult;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
+import com.google.cloud.firestore.DocumentSnapshot;
+import com.google.cloud.firestore.QuerySnapshot;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,8 +23,15 @@ public class DifusionService implements IDifusionService{
     @Autowired
     private FirebaseInitialize firebase;
 
+    private CollectionReference getCollection(Long id){
+        return firebase.getFirestore().collection("Broadcast")
+        .document(Long.toString(id)).collection("messages");
+    }
+
     @Override
     public void saveDifusion(Difusion difusion) {
+
+        // Create Document to save in Database
         Map<String, Object> docData = new HashMap<String, Object>();
         docData.put("subject", difusion.getSubject());
         docData.put("message", difusion.getMessage());
@@ -33,9 +39,10 @@ public class DifusionService implements IDifusionService{
         docData.put("profesor", difusion.getProfesor().getId());
         docData.put("curso", difusion.getCurso().getId());
 
-        CollectionReference Broadcast = firebase.getFirestore().collection("Broadcast")
-        .document(Long.toString(difusion.getCurso().getId())).collection("messages");
+        // Set reference to save document
+        CollectionReference Broadcast = getCollection(difusion.getCurso().getId());
 
+        // Save document
         Broadcast.document().create(docData);
 
 
@@ -50,8 +57,30 @@ public class DifusionService implements IDifusionService{
 
     @Override
     public Iterable<Difusion> getDifusionesCurso(Curso curso) {
-        // TODO Auto-generated method stub
-        return null;
+        
+        // Return Iterable
+        List<Difusion> difusiones = new ArrayList<Difusion>();
+
+        // Query Collection
+        ApiFuture<QuerySnapshot> querySnapshot = getCollection(curso.getId()).get();
+
+        try {
+            // Iterate results and crete objects list
+            for(DocumentSnapshot docSnapshot : querySnapshot.get().getDocuments()){
+                Difusion difusion = docSnapshot.toObject(Difusion.class);
+                difusion.setId(docSnapshot.getId());
+                difusiones.add(difusion);
+            }
+
+            // Cast and return collection
+            return (Iterable<Difusion>) difusiones;
+            
+        } catch (Exception e) {
+
+            return null;
+        }
+
+
     }
 
 }

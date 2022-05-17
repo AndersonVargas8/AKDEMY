@@ -7,7 +7,6 @@ import com.app.akdemy.entity.Difusion;
 import com.app.akdemy.interfacesServices.ICursoService;
 import com.app.akdemy.interfacesServices.IDifusionService;
 import com.app.akdemy.interfacesServices.IProfesorService;
-import com.app.akdemy.service.DifusionService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

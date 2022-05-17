@@ -4,6 +4,7 @@ import java.util.Date;
 
 public class Difusion {
 
+    private String id;
     private Curso curso;
     private Profesor profesor;
     private Date date;
@@ -26,8 +27,28 @@ public class Difusion {
     }
 
 
+    public Difusion(String id, Curso curso, Profesor profesor, Long date, String subject, String message) {
+        this.id = id;
+        this.curso = curso;
+        this.profesor = profesor;
+        this.date = new Date(date);
+        this.subject = subject;
+        this.message = message;
+    }
+
+
+
 
     //Getters y Setters
+
+    public String getId() {
+        return this.id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
     public Curso getCurso() {
         return this.curso;
     }
