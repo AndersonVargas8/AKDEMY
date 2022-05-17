@@ -2,6 +2,7 @@ package com.app.akdemy.controller;
 
 import com.app.akdemy.entity.Difusion;
 import com.app.akdemy.interfacesServices.IDifusionService;
+import com.app.akdemy.service.DifusionService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,7 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class DifusionController {
 
     @Autowired
-    IDifusionService serDifusion;
+    DifusionService serDifusion;
 
     @GetMapping("/coordinador/prueba")
     public String index(Model model) {

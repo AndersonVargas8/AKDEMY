@@ -25,7 +25,10 @@ public class FirebaseInitialize {
             .setDatabaseUrl("https://akdemy-7d7bc-default-rtdb.firebaseio.com")
             .build();
 
-            FirebaseApp.initializeApp(options);
+            if(FirebaseApp.getApps().isEmpty()){
+                FirebaseApp.initializeApp(options);
+            }
+
 
         } catch (Exception e) {
             e.printStackTrace();
