@@ -1,6 +1,6 @@
 package com.app.akdemy.entity;
 
-import com.google.cloud.Date;
+import java.util.Date;
 
 public class Difusion {
 
