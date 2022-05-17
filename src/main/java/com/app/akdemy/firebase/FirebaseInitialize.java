@@ -1,6 +1,7 @@
 package com.app.akdemy.firebase;
 
 import java.io.FileInputStream;
+import java.io.InputStream;
 
 import javax.annotation.PostConstruct;
 
@@ -17,10 +18,7 @@ public class FirebaseInitialize {
     public void initialize(){
         try {
             
-            String path = getClass().getClassLoader().getResource("serviceAccountKey.json").toString();
-            
-            FileInputStream serviceAccount =
-            new FileInputStream(path);
+            InputStream serviceAccount = getClass().getClassLoader().getResourceAsStream("serviceAccountKey.json");
 
             FirebaseOptions options = new FirebaseOptions.Builder()
             .setCredentials(GoogleCredentials.fromStream(serviceAccount))
