@@ -1,6 +1,7 @@
 package com.app.akdemy.service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -9,6 +10,7 @@ import com.app.akdemy.entity.Curso;
 import com.app.akdemy.entity.Difusion;
 import com.app.akdemy.firebase.FirebaseInitialize;
 import com.app.akdemy.interfacesServices.IDifusionService;
+import com.app.akdemy.interfacesServices.IProfesorService;
 import com.google.api.core.ApiFuture;
 import com.google.cloud.firestore.CollectionReference;
 import com.google.cloud.firestore.DocumentSnapshot;
@@ -22,6 +24,9 @@ public class DifusionService implements IDifusionService{
 
     @Autowired
     private FirebaseInitialize firebase;
+
+    @Autowired
+    private IProfesorService serProfesor;
 
     private CollectionReference getCollection(Long id){
         return firebase.getFirestore().collection("Broadcast")
@@ -67,9 +72,15 @@ public class DifusionService implements IDifusionService{
         try {
             // Iterate results and crete objects list
             for(DocumentSnapshot docSnapshot : querySnapshot.get().getDocuments()){
-                Difusion difusion = docSnapshot.toObject(Difusion.class);
-                difusion.setId(docSnapshot.getId());
-                difusiones.add(difusion);
+                Map<String, Object> data = docSnapshot.getData();
+                difusiones.add(new Difusion(
+                    docSnapshot.getId(), 
+                    curso, 
+                    serProfesor.getById((Long) data.get("profesor")), 
+                    ((Long) data.get("date")), 
+                    ((String) data.get("subject")), 
+                    ((String) data.get("message"))
+                    ));
             }
 
             // Cast and return collection
