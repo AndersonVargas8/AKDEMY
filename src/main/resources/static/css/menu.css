@@ -41,6 +41,10 @@ body{
         min-height: 180px;
         color: floralwhite;
     } 
+    .row-contentA {
+        display: grid;
+        grid-template-columns: repeat(2,1fr);
+    }
 }
 .row-content:nth-child(2){
     border-bottom: none;
@@ -152,6 +156,28 @@ body{
     }
 }
 .containerBoxEP:hover .fade-in {
+    background-color: rgb(133, 146, 158);
+    padding: 5px;
+}
+
+/*contenedor para el index de la vista del acudiente*/
+.containerBoxA {
+    background-color: #5d6d7e;
+    margin: 10px auto;
+}
+.containerBoxA a:hover{
+    color: white;
+    text-decoration: none;
+}
+@media (min-width: 768px) {
+    .containerBoxA {
+        background-color: #5d6d7e;
+        width: 522px;
+        height: max-content;
+        padding: 5px;
+    }
+}
+.containerBoxA:hover .fade-in {
     background-color: rgb(133, 146, 158);
     padding: 5px;
 }
