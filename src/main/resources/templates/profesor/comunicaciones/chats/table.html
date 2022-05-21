@@ -1,0 +1,19 @@
+<script type="text/javascript" th:src="@{/js/profesor/comunicaciones.js}"></script>
+<table id="chatsTable" class="table table-borderless table-hover" style="width:100%">
+    <thead>
+        <tr>
+            <th>Última actualización</th>
+            <th>Acudiente</th>
+            <th>Estudiante</th>
+            <th>Iniciar chat</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr th:each="chat:${chats}">
+            <td th:text="${#dates.format(chat.lastUpdate,'dd-MM-yyyy')}"></td>
+            <td th:text="${chat.acudiente.nombres} + ' ' + ${chat.acudiente.apellidos}"></td>
+            <td th:text="${chat.estudiante.nombres} + ' ' + ${chat.estudiante.apellidos}"></td>
+            <td></td>
+        </tr>
+    </tbody>
+</table>

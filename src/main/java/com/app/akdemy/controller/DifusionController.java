@@ -9,6 +9,7 @@ import com.app.akdemy.entity.Profesor;
 import com.app.akdemy.interfacesServices.ICursoService;
 import com.app.akdemy.interfacesServices.IDifusionService;
 import com.app.akdemy.interfacesServices.IProfesorService;
+import com.app.akdemy.service.ChatService;
 import com.app.akdemy.service.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +33,9 @@ public class DifusionController {
     @Autowired
     UserService serUser;
 
+    @Autowired
+    ChatService serChat;
+
     @GetMapping("/acudiente/comunicaciones")
     public String index(Model model) throws ProfesorNotFound {
         Difusion Aviso = new Difusion();
@@ -51,6 +55,7 @@ public class DifusionController {
         Profesor currentProfesor = serProfesor.getByUser(serUser.getLoggedUser());
 
         model.addAttribute("courses", serCurso.getCoursesObservadorbyProfesor(currentProfesor));
+        model.addAttribute("chats", serChat.getChats(currentProfesor));
 
         return "profesor/comunicaciones/index";
     }

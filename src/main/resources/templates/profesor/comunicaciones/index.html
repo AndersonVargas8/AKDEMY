@@ -103,25 +103,24 @@
                             </div>
                         </div>
                         <div class="card-body ">
-                            <table id="observadorTable" class=" table table-borderless table-hover" style="width:100%">
+                            <table id="chatsTable" class="table table-borderless table-hover" style="width:100%">
                                 <thead>
                                     <tr>
-                                        <th>Fecha</th>
-                                        <th>Asunto</th>
-                                        <th>Detalle</th>
-                                        <th>Profesor</th>
+                                        <th>Última actualización</th>
+                                        <th>Acudiente</th>
+                                        <th>Estudiante</th>
+                                        <th>Iniciar chat</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr th:each="difusion:${difusiones}">
-                                        <td th:text="${#dates.format(difusion.date,'dd-MM-yyyy')}"></td>
-                                        <td th:text="${difusion.subject}"></td>
-                                        <td th:text="${difusion.message}"></td>
-                                        <td th:text="${difusion.profesor.nombres} + ' ' + ${difusion.profesor.apellidos}"></td>
+                                    <tr th:each="chat:${chats}">
+                                        <td th:text="${#dates.format(chat.lastUpdate,'dd-MM-yyyy')}"></td>
+                                        <td th:text="${chat.acudiente.nombres} + ' ' + ${chat.acudiente.apellidos}"></td>
+                                        <td th:text="${chat.estudiante.nombres} + ' ' + ${chat.estudiante.apellidos}"></td>
+                                        <td></td>
                                     </tr>
                                 </tbody>
                             </table>
-                            
                         </div>
         
                     </div>
