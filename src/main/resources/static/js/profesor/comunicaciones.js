@@ -17,21 +17,11 @@ $(document).ready(function() {
         table.rows().remove().draw();
 
         var url2 = "comunicaciones/difusiones/new/{id}" + $(this).val
+
+        $('#formNewDifusion').load(url2);
         
     })
 
-    $('#estudiantesSelect').change(function() {
-
-        var url = "observador/" + $(this).val();
-        $('#observador').load(url, function(){
-            
-        });
-
-        var url2 = "observador/new/" + $(this).val();
-
-        $('#formNewObservador').load(url2);
-
-    })
 } );
 
 function confirmDeleteObservacion(id){
