@@ -108,6 +108,7 @@ public class UserServiceImpl implements UserService {
         return repUser.usersAvaliablesProfesores();
     }
 
+
     @Override
     public boolean validarUsuario(User user) throws Exception {
         return checkUserNameAvailable(user);
@@ -116,11 +117,26 @@ public class UserServiceImpl implements UserService {
     @Override
     public void setRoleProfesor(User user) {
         repUser.setRoleProfesor(user.getId());
-        
     }
 
     @Override
     public void removeRoleProfesor(User user) {
         repUser.removeRoleProfesor(user.getId());
     }
+
+    @Override
+    public void setRoleAcudiente(User user) {
+        repUser.setRoleAcudiente(user.getId());
+    }
+
+    @Override
+    public Iterable<User> getAvailableUsersAcudientes() {
+        return repUser.usersAvaliablesAcudientes();
+    }
+
+    @Override
+    public void removeRoleAcudiente(User user) {
+        repUser.removeRoleAcudiente(user.getId());
+    }
+
 }

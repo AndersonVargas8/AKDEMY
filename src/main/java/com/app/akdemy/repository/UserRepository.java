@@ -27,4 +27,19 @@ public interface UserRepository extends CrudRepository<User,Long>{
     @Modifying
     @Query(value = "DELETE FROM user_roles WHERE user_id = :userID AND role_id = 3", nativeQuery = true)
     void removeRoleProfesor(@Param("userID") Long userID);
+
+
+    @Query(value="select u.id, password, username from user u left join acudiente a on u.id = a.pro_usuario where a.pro_usuario is null", nativeQuery=true)
+    Iterable<User> usersAvaliablesAcudientes();
+
+    @Transactional
+    @Modifying
+    @Query(value = "INSERT INTO user_roles values(:userID, 3)", nativeQuery = true)
+    void setRoleAcudiente(@Param("userID") Long userID);
+
+    @Transactional
+    @Modifying
+    @Query(value = "DELETE FROM user_roles WHERE user_id = :userID AND role_id = 3", nativeQuery = true)
+    void removeRoleAcudiente(@Param("userID") Long userID);
+
 }

@@ -42,7 +42,7 @@ public class Acudiente {
     @JoinColumn(name = "acu_usuario", updatable = false, nullable = false)
     private User usuario;
 
-    //Constructores de la calse Calificacion
+    //Constructores de la clase Coordinador
 
     public Acudiente() {
     }

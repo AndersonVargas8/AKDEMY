@@ -49,6 +49,12 @@
                             <span class="texto_navbarItem"> Profesores</span>
                         </a>
                     </li>
+                    <li th:class="${itemNavbar == 'acudientes'} ? 'nav-item active' : 'nav-item'">
+                        <a class="nav-link" th:href="@{/coordinador/acudientes}">
+                            <span class="fa fa-address-card fa-lg"></span>
+                            <span class="texto_navbarItem"> Acudientes</span>
+                        </a>
+                    </li>
                 </ul>
             </ul>
             <span class="navbar-text menu align-items-center">
