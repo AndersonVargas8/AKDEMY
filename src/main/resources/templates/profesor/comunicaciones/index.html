@@ -38,7 +38,7 @@
     <div class="container-lg pr-1 pl-1">
         <div class="row">
             <div class="col-lg-7">
-                <section class="layout">
+                <section class="layout nopaddingright">
                     <div class="main card w-100">
                         <div class="card-title row titletable">
                             <div class="col text-left">
@@ -94,7 +94,7 @@
                 </section> 
             </div>
             <div class="col-lg-5">
-                <section class="layout">
+                <section class="layout nopaddingleft">
                     <div class="main card w-100">
                         <div class="card-title row titletable">
                             <div class="col text-left">
@@ -131,6 +131,8 @@
         </div>
 
     </div>
+
+    <div th:include="profesor/comunicaciones/difusiones/confirmDelete" th:remove="tag"></div>
 
 
 </body>

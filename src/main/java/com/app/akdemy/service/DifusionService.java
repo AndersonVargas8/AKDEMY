@@ -1,7 +1,6 @@
 package com.app.akdemy.service;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -15,6 +14,7 @@ import com.google.api.core.ApiFuture;
 import com.google.cloud.firestore.CollectionReference;
 import com.google.cloud.firestore.DocumentSnapshot;
 import com.google.cloud.firestore.QuerySnapshot;
+import com.google.cloud.firestore.WriteResult;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -56,7 +56,7 @@ public class DifusionService implements IDifusionService{
 
     @Override
     public void deleteDifusion(Difusion difusion) {
-        // TODO Auto-generated method stub
+       getCollection(difusion.getCurso().getId()).document(difusion.getId()).delete();
         
     }
 

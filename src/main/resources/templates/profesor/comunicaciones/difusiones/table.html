@@ -6,6 +6,7 @@
             <th>Asunto</th>
             <th>Detalle</th>
             <th>Profesor</th>
+            <th>Eliminar</th>
         </tr>
     </thead>
     <tbody>
@@ -14,6 +15,12 @@
             <td th:text="${difusion.subject}"></td>
             <td th:text="${difusion.message}"></td>
             <td th:text="${difusion.profesor.nombres} + ' ' + ${difusion.profesor.apellidos}"></td>
+            <td>
+                <button type='button' class='btn btn-danger
+                btn-sm' th:onclick="confirmDeleteDifusion([[${difusion.id}]], [[${difusion.curso.id}]])" th:if="${difusion.profesor.id == profesor.id}">
+                    <span class="fas fa-trash-can"></span>
+                </button>
+            </td>
         </tr>
     </tbody>
 </table>

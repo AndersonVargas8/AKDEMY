@@ -28,7 +28,7 @@ $(document).ready(function() {
 
         table.rows().remove().draw();
 
-        var url2 = "comunicaciones/difusiones/new/{id}" + $(this).val
+        var url2 = "comunicaciones/difusiones/new/" + $(this).val();
 
         $('#formNewDifusion').load(url2);
         
@@ -36,11 +36,13 @@ $(document).ready(function() {
 
 } );
 
-function confirmDeleteObservacion(id){
-	$('#deleteModalObservacion').modal('show');
-	$("#observacionIdHiddenInput").val(id);
+function confirmDeleteDifusion(id, curso){
+	$('#deleteModalDifusion').modal('show');
+	$("#difusionIdHiddenInput").val(id);
+    $("#cursoIdHiddenInput").val(curso);
 }
 
-function deleteObservacion(){
-    window.location = "observador/eliminar/" + $("#observacionIdHiddenInput").val();
+function deleteDifusion(){
+    alert("im here")
+    window.location = "comunicaciones/difusiones/delete/" + $("#difusionIdHiddenInput").val() + "/" + $("#cursoIdHiddenInput").val();
 }
