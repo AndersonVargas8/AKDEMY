@@ -1,0 +1,19 @@
+<script type="text/javascript" th:src="@{/js/profesor/comunicaciones.js}"></script>
+<table id="difusionesTable" class="table table-borderless table-hover" style="width:100%">
+    <thead>
+        <tr>
+            <th>Fecha</th>
+            <th>Asunto</th>
+            <th>Detalle</th>
+            <th>Profesor</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr th:each="difusion:${difusiones}">
+            <td th:text="${#dates.format(difusion.date,'dd-MM-yyyy')}"></td>
+            <td th:text="${difusion.subject}"></td>
+            <td th:text="${difusion.message}"></td>
+            <td th:text="${difusion.profesor.nombres} + ' ' + ${difusion.profesor.apellidos}"></td>
+        </tr>
+    </tbody>
+</table>
