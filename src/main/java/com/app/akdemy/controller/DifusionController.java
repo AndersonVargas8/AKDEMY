@@ -13,7 +13,6 @@ import com.app.akdemy.interfacesServices.IChatService;
 import com.app.akdemy.interfacesServices.ICursoService;
 import com.app.akdemy.interfacesServices.IDifusionService;
 import com.app.akdemy.interfacesServices.IProfesorService;
-import com.app.akdemy.service.ChatService;
 import com.app.akdemy.service.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,14 +44,6 @@ public class DifusionController {
 
     @GetMapping("/acudiente/comunicaciones")
     public String index(Model model) throws ProfesorNotFound {
-        Difusion Aviso = new Difusion();
-        Aviso.setMessage("Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.");
-        Aviso.setSubject("Interface");
-        Aviso.setCurso(serCurso.buscarPorId(1L));
-        Aviso.setDate(new Date());
-        Aviso.setProfesor(serProfesor.getById(1L));
-        serDifusion.saveDifusion(Aviso);
-        model.addAttribute("difusiones", serDifusion.getDifusionesCurso(serCurso.buscarPorId(1L)));
 
         return "acudiente/comunicaciones/index";
     }
@@ -61,10 +52,10 @@ public class DifusionController {
     public String comunicacionesProfesor(Model model) throws ProfesorNotFound, Exception{
         Profesor currentProfesor = serProfesor.getByUser(serUser.getLoggedUser());
 
-        Iterable<Chat> chats =  serChat.getChats(currentProfesor);
-
+        model.addAttribute("profesor", currentProfesor);
         model.addAttribute("courses", serCurso.getCoursesObservadorbyProfesor(currentProfesor));
-        model.addAttribute("chats", chats);
+        model.addAttribute("chats", serChat.getChats(currentProfesor));
+        model.addAttribute("chat", new Chat());
 
         return "profesor/comunicaciones/index";
     }

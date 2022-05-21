@@ -64,7 +64,8 @@ public class ChatService implements IChatService{
         CollectionReference PrivateMessages = getCollection();
 
         // Save document
-        PrivateMessages.document().create(docData);
+        PrivateMessages.document("chat-" + chat.getEstudiante().getId() + "-" + chat.getAcudiente().getId() + "-" + chat.getProfesor().getId())
+        .create(docData);
         
     }
 

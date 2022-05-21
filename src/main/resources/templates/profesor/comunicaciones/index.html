@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
@@ -34,7 +34,7 @@
 </head>
 
 <body>
-    <div th:include="/estudiante/navbar.html" th:remove="tag"></div>
+    <div th:include="profesor/navbar.html" th:remove="tag"></div>
     <div class="container-lg pr-1 pl-1">
         <div class="row">
             <div class="col-lg-7">
@@ -80,7 +80,7 @@
                                             <span aria-hidden="true">&times;</span>
                                         </button>
                                     </div>
-                                    <div class="modal-body p-5 justify-content-center">
+                                    <div class="modal-body p-3 justify-content-center">
                                         <div th:include="profesor/comunicaciones/difusiones/form"
                                         class="modal-body justify-content-center" id="formNewDifusion">
                                     </div>
@@ -96,10 +96,17 @@
             <div class="col-lg-5">
                 <section class="layout nopaddingleft">
                     <div class="main card w-100">
-                        <div class="card-title row titletable">
-                            <div class="col text-left">
-                                <h2>Mensajes Directos&nbsp;<span class="badge">Profesor</span></h2>
+                        <div class="card-title titletable">
+                            <div class="col text-right">
+                                <h2>Mensajes&nbsp;<span class="badge">Profesor</span></h2>
                                 <p>Conmunicación directa con los acudientes.</p>
+                            </div>
+                            <div class="col text-right">
+                                <button type="button" class="btn boton__materias mb-2 row w-50" data-toggle="modal"
+                                    data-target="#modalFormChat">
+                                    <span class="fa fa-plus fa-1x"></span>
+                                    <span class="align-middle">Nueva Conversación</span>
+                                </button>
                             </div>
                         </div>
                         <div class="card-body ">
@@ -109,7 +116,7 @@
                                         <th>Última actualización</th>
                                         <th>Acudiente</th>
                                         <th>Estudiante</th>
-                                        <th>Iniciar chat</th>
+                                        <th>Abrir</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -121,6 +128,24 @@
                                     </tr>
                                 </tbody>
                             </table>
+                        </div>
+                        <!--Formulario Chat-->
+                        <div class="modal fade" tabindex="-1" role="dialog" id="modalFormChat">
+                            <div class="modal-dialog modal-sm d-flex justify-content-center" role="document">
+                                <div class="modal-content" style="max-width:100%">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">Nueva Conversación</h5>
+                                        <button type="button" class="close icon-cerrar" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body p-3 justify-content-center">
+                                        <div th:include="profesor/comunicaciones/chats/form"
+                                        class="modal-body justify-content-center" id="formNewChat">
+                                    </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
         
                     </div>

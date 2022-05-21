@@ -34,6 +34,19 @@ $(document).ready(function() {
         
     })
 
+    $('#cursosChat').change(function() {
+        var url = "comunicaciones/estudiantes/" + $(this).val();
+        $('#estudiantes').load(url);
+        
+    })
+
+
+    $('#estudiantesSelect').change(function() {
+
+       alert("change")
+
+    })
+
 } );
 
 function confirmDeleteDifusion(id, curso){
@@ -43,6 +56,5 @@ function confirmDeleteDifusion(id, curso){
 }
 
 function deleteDifusion(){
-    alert("im here")
     window.location = "comunicaciones/difusiones/delete/" + $("#difusionIdHiddenInput").val() + "/" + $("#cursoIdHiddenInput").val();
 }
