@@ -23,5 +23,10 @@ public class AcudienteService implements IAcudienteService{
     public List<Acudiente> obtenerTodo() {
         return (List<Acudiente>)repAcudiente.findAll();
     }
+
+    @Override
+    public Acudiente getById(Long id) {
+        return repAcudiente.findById(id).get();
+    }
     
 }
