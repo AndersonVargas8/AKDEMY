@@ -7,6 +7,7 @@ import java.util.List;
 import com.app.akdemy.dto.Message;
 import com.app.akdemy.entity.Acudiente;
 import com.app.akdemy.entity.Chat;
+import com.app.akdemy.entity.Estudiante;
 import com.app.akdemy.entity.Profesor;
 import com.app.akdemy.firebase.FirebaseInitialize;
 import com.app.akdemy.interfacesServices.IAcudienteService;
@@ -91,7 +92,7 @@ public class ChatService implements IChatService{
             Map<String, Object> data = document.getData();
             return new Chat(
                 id,
-                new Acudiente(),
+                serAcudiente.getById((Long) data.get("acudiente")),
                 serProfesor.getById((Long) data.get("profesor")),
                 serEstudiante.buscarPorId((Long) data.get("estudiante")),
                 ((Long) data.get("lastUpdate"))
@@ -119,7 +120,7 @@ public class ChatService implements IChatService{
                  Map<String, Object> data = docSnapshot.getData();
                  chats.add(new Chat(
                     docSnapshot.getId(),
-                    new Acudiente(),
+                    serAcudiente.getById((Long) data.get("acudiente")),
                     serProfesor.getById((Long) data.get("profesor")),
                     serEstudiante.buscarPorId((Long) data.get("estudiante")),
                     ((Long) data.get("lastUpdate"))
@@ -137,9 +138,36 @@ public class ChatService implements IChatService{
     }
 
     @Override
-    public Iterable<Chat> getChats(Acudiente acudiente) {
-        // TODO Auto-generated method stub
-        return null;
+    public Iterable<Chat> getChats(Acudiente acudiente, Estudiante estudiante) {
+         // Return Iterable
+         List<Chat> chats = new ArrayList<Chat>();
+
+         // Create a query against the collection.
+         Query query = getCollection().whereEqualTo("acudiente", acudiente.getId()).whereEqualTo("estudiante", estudiante.getId());
+
+         // retrieve  query results asynchronously using query.get()
+         ApiFuture<QuerySnapshot> querySnapshot = query.get();
+ 
+         try {
+             // Iterate results and crete objects list
+             for(DocumentSnapshot docSnapshot : querySnapshot.get().getDocuments()){
+                 Map<String, Object> data = docSnapshot.getData();
+                 chats.add(new Chat(
+                    docSnapshot.getId(),
+                    serAcudiente.getById((Long) data.get("acudiente")),
+                    serProfesor.getById((Long) data.get("profesor")),
+                    serEstudiante.buscarPorId((Long) data.get("estudiante")),
+                    ((Long) data.get("lastUpdate"))
+                 ));
+             }
+ 
+             // Cast and return collection
+             return (Iterable<Chat>) chats;
+             
+         } catch (Exception e) {
+ 
+             return null;
+         }
     }
 
 }
