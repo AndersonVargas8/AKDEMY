@@ -42,8 +42,11 @@ $(document).ready(function() {
 
 
     $('#estudiantesSelect').change(function() {
-
-       alert("change")
+        // Set value on hidden input for form
+       $('#estudianteid').val($(this).val());
+       
+       // Find acudientes estudiantes
+       var url = "comunicaciones/acudientes/" + $(this).val();
 
     })
 
