@@ -2,10 +2,11 @@
 <table id="chatsTable" class="table table-borderless table-hover" style="width:100%">
     <thead>
         <tr>
-            <th>Última actualización</th>
+            <th>Actualizado</th>
             <th>Acudiente</th>
             <th>Estudiante</th>
-            <th>Iniciar chat</th>
+            <th>Curso</th>
+            <th>Abrir</th>
         </tr>
     </thead>
     <tbody>
@@ -13,7 +14,12 @@
             <td th:text="${#dates.format(chat.lastUpdate,'dd-MM-yyyy')}"></td>
             <td th:text="${chat.acudiente.nombres} + ' ' + ${chat.acudiente.apellidos}"></td>
             <td th:text="${chat.estudiante.nombres} + ' ' + ${chat.estudiante.apellidos}"></td>
-            <td></td>
+            <td th:if="${chat.estudiante.cursoActual != null}" th:text="${chat.estudiante.cursoActual.nombre_Curso}"></td>
+            <td>
+                <button type='button' class='btn btn-info btn-sm' th:onclick="">
+                    <span class="fas fa-square-up-right"></span>
+                </button>
+            </td>
         </tr>
     </tbody>
 </table>

@@ -9,9 +9,11 @@ import com.app.akdemy.entity.Chat;
 import com.app.akdemy.entity.Curso;
 import com.app.akdemy.entity.Difusion;
 import com.app.akdemy.entity.Profesor;
+import com.app.akdemy.interfacesServices.IAcudienteService;
 import com.app.akdemy.interfacesServices.IChatService;
 import com.app.akdemy.interfacesServices.ICursoService;
 import com.app.akdemy.interfacesServices.IDifusionService;
+import com.app.akdemy.interfacesServices.IEstudianteService;
 import com.app.akdemy.interfacesServices.IProfesorService;
 import com.app.akdemy.service.UserService;
 
@@ -41,6 +43,12 @@ public class DifusionController {
 
     @Autowired
     IChatService serChat;
+
+    @Autowired
+    IAcudienteService serAcudiente;
+
+    @Autowired
+    IEstudianteService serEstudiante;
 
     @GetMapping("/acudiente/comunicaciones")
     public String index(Model model) throws ProfesorNotFound {
@@ -99,6 +107,17 @@ public class DifusionController {
         return "redirect:/profesor/comunicaciones";
     }
 
+    @PostMapping("/profesor/comunicaciones/save/chat")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_PROFESOR')")
+    public String newChat(@Valid @ModelAttribute("chat") Chat chat, Model model){
+
+        chat.setLastUpdate(new Date());
+
+        serChat.saveChat(chat);
+
+        return "redirect:/profesor/comunicaciones";
+    }
+
     @GetMapping("/profesor/comunicaciones/difusiones/delete/{id}/{id_curso}")
     public String deleteDifusion(@PathVariable String id, @PathVariable Long id_curso, Model model) throws ProfesorNotFound, Exception{
 
@@ -112,4 +131,10 @@ public class DifusionController {
         return "redirect:/profesor/comunicaciones";
     }
     
+    @GetMapping("/profesor/comunicaciones/acudientes/{id}")
+    public String getAcudientes(@PathVariable Long id, Model model) throws ProfesorNotFound, Exception{
+
+        model.addAttribute("acudientes", serAcudiente.getAcudientesEstudiante(serEstudiante.buscarPorId(id)));
+        return "profesor/comunicaciones/chats/selectacudientes";
+    }
 }

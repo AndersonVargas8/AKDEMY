@@ -6,7 +6,13 @@ $(document).ready(function() {
             },
 
             bDestroy: true,
-            order: [[ 0, "desc" ]]
+            order: [[ 0, "desc" ]],
+            columnDefs: [
+                {
+                    targets: -1,
+                    className: 'text-center'
+                }
+              ]
         }
     );
 
@@ -17,7 +23,14 @@ $(document).ready(function() {
             },
 
             bDestroy: true,
-            order: [[ 0, "desc" ]]
+            order: [[ 0, "desc" ]],
+            columnDefs: [
+                {
+                    targets: -1,
+                    className: 'text-center'
+                }
+              ]
+        
         }
     );
 
@@ -48,6 +61,13 @@ $(document).ready(function() {
        // Find acudientes estudiantes
        var url = "comunicaciones/acudientes/" + $(this).val();
 
+       $('#acudientes').load(url);
+
+    })
+
+    $('#acudientesSelect').change(function() {
+        // Set value on hidden input for form
+       $('#acudienteid').val($(this).val());
     })
 
 } );

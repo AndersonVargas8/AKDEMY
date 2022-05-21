@@ -5,8 +5,10 @@
         <option readonly th:value="${profesor.id}" th:text="${profesor.nombres} + ' ' + ${profesor.apellidos}"></option>
     </select>
     <div hidden class="form-group">
-        <label for="names"><b>Asunto</b></label>
         <input required th:field="*{estudiante.id}" class="form-control" id="estudianteid" type="text"></input>
+    </div>
+    <div hidden class="form-group">
+        <input required th:field="*{acudiente.id}" class="form-control" id="acudienteid" type="text"></input>
     </div>
     </div>
     <div class="form-group">
@@ -26,7 +28,7 @@
     <div class="form-group">
         <label for="estudiante"><b>Acudiente</b></label>
         <br>
-        <div id="estudiantes" th:include="profesor/comunicaciones/chats/selectacudientes"></div>
+        <div id="acudientes" th:include="profesor/comunicaciones/chats/selectacudientes"></div>
     </div>
 
     <button type="submit" class="w-100 btn guardar" width="100%">Iniciar Conversación</button>
