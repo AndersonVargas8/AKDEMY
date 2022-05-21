@@ -3,11 +3,15 @@ package com.app.akdemy.controller;
 import java.util.Date;
 
 import com.app.akdemy.Exception.ProfesorNotFound;
+import com.app.akdemy.entity.Chat;
 import com.app.akdemy.entity.Curso;
 import com.app.akdemy.entity.Difusion;
 import com.app.akdemy.entity.Profesor;
+import com.app.akdemy.interfacesServices.IAcudienteService;
+import com.app.akdemy.interfacesServices.IChatService;
 import com.app.akdemy.interfacesServices.ICursoService;
 import com.app.akdemy.interfacesServices.IDifusionService;
+import com.app.akdemy.interfacesServices.IEstudianteService;
 import com.app.akdemy.interfacesServices.IProfesorService;
 import com.app.akdemy.service.ChatService;
 import com.app.akdemy.service.UserService;
@@ -34,7 +38,13 @@ public class DifusionController {
     UserService serUser;
 
     @Autowired
-    ChatService serChat;
+    IChatService serChat;
+
+    @Autowired
+    IAcudienteService serAcudiente;
+
+    @Autowired
+    IEstudianteService serEstudiante;
 
     @GetMapping("/acudiente/comunicaciones")
     public String index(Model model) throws ProfesorNotFound {
@@ -46,6 +56,13 @@ public class DifusionController {
         Aviso.setProfesor(serProfesor.getById(1L));
         serDifusion.saveDifusion(Aviso);
         model.addAttribute("difusiones", serDifusion.getDifusionesCurso(serCurso.buscarPorId(1L)));
+
+        Chat chat = new Chat();
+        chat.setAcudiente(serAcudiente.getById(1L));
+        chat.setProfesor(serProfesor.getById(1L));
+        chat.setEstudiante(serEstudiante.buscarPorId(1L));
+        chat.setLastUpdate(new Date());
+        serChat.saveChat(chat);
 
         return "acudiente/comunicaciones/index";
     }
