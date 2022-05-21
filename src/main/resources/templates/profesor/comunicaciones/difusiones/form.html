@@ -1,0 +1,31 @@
+<div th:if="${difusion}">
+    <form  th:object="${difusion}"  th:action="@{/profesor/comunicaciones/save/difusion}" method="POST">
+        <div class="form-group">
+            <label for="estudiante"><b>Estudiante</b></label>
+            <select readonly th:field="*{estudiante.id}" id="estudiante" class="form-control border">
+            <option readonly th:value="${observacion.estudiante.id}" th:text="${observacion.estudiante.nombres} + ' ' + ${observacion.estudiante.apellidos}"></option>
+        </select>
+        </div>
+        <div class="form-group">
+            <label for="profesor"><b>Profesor</b></label>
+            <select readonly th:field="*{profesor.id}" id="profesor" class="form-control border">
+            <option readonly th:value="${observacion.profesor.id}" th:text="${observacion.profesor.nombres} + ' ' + ${observacion.profesor.apellidos}"></option>
+        </select>
+        </div>
+        <div class="form-group">
+            <label for="date"><b>Fecha</b></label>
+            <input readonly required th:field="*{fecha}" type="date" class="form-control" id="date">
+        </div>
+        <div class="form-group">
+            <label for="names"><b>Observación</b></label>
+            <textarea required maxlength="255" th:field="*{descargos}" class="form-control" id="descargos" rows="3" type="text" placeholder="Descripción de la Observación"></textarea>
+    </div>
+        
+    
+        <button type="submit" class="w-100 btn guardar" width="100%">Guardar</button>
+    </form>
+</div>
+<div class="alert alert-warning" role="alert" th:unless="${observacion}">
+    No se ha seleccionado un curso para la difusión.
+</div>
+
