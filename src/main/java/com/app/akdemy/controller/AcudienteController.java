@@ -75,4 +75,25 @@ public class AcudienteController {
         return "redirect:/coordinador/acudientes";
     }
 
+    @GetMapping("/acudiente")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_ACUDIENTE')")
+    public String inicioAcudiente(Model model) {
+        model.addAttribute("itemNavbar", "inicio");
+        return "acudiente/index";
+    }
+
+    @GetMapping("/acudiente/estudiantes")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_ACUDIENTE')")
+    public String estudiantesAcudiente(Model model) {
+        model.addAttribute("itemNavbar", "estudiantes");
+        return "acudiente/estudiantes/index";
+    }
+
+    @GetMapping("/acudiente/observaciones")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_ACUDIENTE')")
+    public String observacionesAcudiente(Model model) {
+        model.addAttribute("itemNavbar", "observaciones");
+        return "acudiente/observaciones/index";
+    }
+
 }

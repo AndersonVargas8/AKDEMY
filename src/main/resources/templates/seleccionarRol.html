@@ -34,7 +34,7 @@
         </div>
         <div class="contenedor_boton">
             <div th:each="rol: ${roles}" th:remove="tag" th:align="center">
-                <a th:if="${rol.name == 'ACUDIENTE'}" th:href="@{/templates/acudiente}" class="boton"><span> Acudiente</span>
+                <a th:if="${rol.name == 'ACUDIENTE'}" th:href="@{/acudiente}" class="boton"><span> Acudiente</span>
                     <img src="../static/img/acudiente.png" th:src="@{/img/acudiente.png}" width="50" height="50" alt="Acudiente" th:align="right">
                 </a>
                 <a th:if="${rol.name == 'ESTUDIANTE'}" th:href="@{/estudiante}" class="boton"><span> Estudiante</span> 

@@ -1,0 +1,68 @@
+<!--CURSOS-->
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,
+                initial-scale=1.0">
+    <title>Acudiente | Estudiantes</title>
+
+    <link rel="shortcut icon" type="image/x-icon" href="../static/img/avatar1.png" th:href="@{../img/avatar1.png}">
+    <!--JQUERY-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!-- FRAMEWORK BOOTSTRAP para el estilo de la pagina-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <!-- DataTables-->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
+    <script type="text/javascript" charset="utf8"
+        src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
+    <!-- Icons-->
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <!-- Local Files-->
+    <link rel="stylesheet" type="text/css" th:href="@{/css/profesor/cursos.css}">
+    <link rel="stylesheet" type="text/css" href="../../static/css/normalize.css" th:href="@{/css/normalize.css}">
+
+    <script src="https://cdn.datatables.net/plug-ins/1.11.5/i18n/es-ES.json"></script>
+</head>
+
+<body>
+    <div th:include="acudiente/navbar.html" th:remove="tag"></div>
+    <div class="container-lg pr-4 pl-4">
+        <section class="layout">
+            <div class="main card w-100">
+                <div class="card-title row titletable">
+                    <div class="col text-left">
+                        <h2>Estudiantes&nbsp;<span class="badge">Acudiente</span></h2>
+                        <p>Listado de los estudiantes matriculados en la institución.</p>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <script type="text/javascript" th:src="@{/js/profesor/cursos.js}"></script>
+                    <table id="cursosTable" class="table table-borderless table-hover" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Nombre del Estudiante</th>
+                                <th>Documento</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="curso:${cursos}">
+                                <td th:text="${curso.id}"></td>
+                                <td th:text="${curso.nombre_Curso}"></td>
+                                <td th:text="${curso.anio_Curso}"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </section> 
+    </div>
+</body>
+
+</html>
