@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.app.akdemy.Exception.ProfesorNotFound;
 import com.app.akdemy.entity.Profesor;
+import com.app.akdemy.entity.User;
 import com.app.akdemy.interfacesServices.IProfesorService;
 import com.app.akdemy.repository.ProfesorRepository;
 
@@ -38,6 +39,12 @@ public class ProfesorService implements IProfesorService{
     public void deleteProfesor(Profesor profesor) {
         repProfesor.delete(profesor);
         
+    }
+
+    @Override
+    public Profesor getByUser(User user) throws ProfesorNotFound{
+        Profesor profesor = repProfesor.findByUsuario(user).orElseThrow(() -> new ProfesorNotFound("El profesor no ha sido encontrado"));
+        return profesor;
     }
 
 }

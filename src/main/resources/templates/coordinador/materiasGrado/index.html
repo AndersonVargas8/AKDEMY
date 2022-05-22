@@ -51,7 +51,6 @@
                     <table id="materiasGrado" class="table table-borderless table-hover" style="width:100%">
                         <thead>
                             <tr>
-                                <th>ID</th>
                                 <th>Materia</th>
                                 <th>Grado</th>
                                 <th>Descripción</th>
@@ -60,7 +59,6 @@
                         </thead>
                         <tbody>
                             <tr th:each="materiaGrado:${materiasGrado}">
-                                <td th:text="${materiaGrado.id}"></td>
                                 <td th:text="${materiaGrado.materia.nombre}"></td>
                                 <td th:text="${materiaGrado.grado}"></td>
                                 <td th:text="${materiaGrado.descripcion}"></td>
@@ -112,7 +110,7 @@
                                 placeholder="Grado" required>
                         </div>
                         <div class="form-group">
-                            <label for="year"><b>Año</b></label>
+                            <label for="year"><b>Descripción</b></label>
                             <input th:field="*{descripcion}" type="text" class="form-control" id="descripcion"
                                 placeholder="Descripción" required>
                         </div>

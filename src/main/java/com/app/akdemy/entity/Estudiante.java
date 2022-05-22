@@ -1,6 +1,9 @@
 package com.app.akdemy.entity;
 
 import java.sql.Date;
+import java.time.LocalDate;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -17,6 +20,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.query.criteria.internal.path.ListAttributeJoin;
 
 @Entity
 public class Estudiante {
@@ -61,13 +65,15 @@ public class Estudiante {
             , inverseJoinColumns = @JoinColumn(name = "id_acudiente"))
     private Set<Acudiente> acudientes;
 
+    @ManyToMany(mappedBy = "estudiantes")
+    private List<Curso> cursos;
+
     //Constructor
 
     public Estudiante() {
     }
 
-
-    public Estudiante(long id, String nombres, String apellidos, Date fechaNacimiento, TipoDocumento tipoDocumento, String documento, Eps eps, GrupoSanguineoRH grupoSanguineoRH, User usuario, Set<Acudiente> acudientes) {
+    public Estudiante(long id, String nombres, String apellidos, Date fechaNacimiento, TipoDocumento tipoDocumento, String documento, Eps eps, GrupoSanguineoRH grupoSanguineoRH, User usuario, Set<Acudiente> acudientes, List<Curso> cursos) {
         this.id = id;
         this.nombres = nombres;
         this.apellidos = apellidos;
@@ -78,10 +84,9 @@ public class Estudiante {
         this.grupoSanguineoRH = grupoSanguineoRH;
         this.usuario = usuario;
         this.acudientes = acudientes;
+        this.cursos = cursos;
     }
 
-    //Getter y Setter
-    
     public long getId() {
         return this.id;
     }
@@ -162,6 +167,13 @@ public class Estudiante {
         this.acudientes = acudientes;
     }
 
+    public List<Curso> getCursos() {
+        return this.cursos;
+    }
+
+    public void setCursos(List<Curso> cursos) {
+        this.cursos = cursos;
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -171,12 +183,12 @@ public class Estudiante {
             return false;
         }
         Estudiante estudiante = (Estudiante) o;
-        return id == estudiante.id && Objects.equals(nombres, estudiante.nombres) && Objects.equals(apellidos, estudiante.apellidos) && Objects.equals(fechaNacimiento, estudiante.fechaNacimiento) && Objects.equals(tipoDocumento, estudiante.tipoDocumento) && Objects.equals(documento, estudiante.documento) && Objects.equals(eps, estudiante.eps) && Objects.equals(grupoSanguineoRH, estudiante.grupoSanguineoRH) && Objects.equals(usuario, estudiante.usuario) && Objects.equals(acudientes, estudiante.acudientes);
+        return id == estudiante.id && Objects.equals(nombres, estudiante.nombres) && Objects.equals(apellidos, estudiante.apellidos) && Objects.equals(fechaNacimiento, estudiante.fechaNacimiento) && Objects.equals(tipoDocumento, estudiante.tipoDocumento) && Objects.equals(documento, estudiante.documento) && Objects.equals(eps, estudiante.eps) && Objects.equals(grupoSanguineoRH, estudiante.grupoSanguineoRH) && Objects.equals(usuario, estudiante.usuario) && Objects.equals(acudientes, estudiante.acudientes) && Objects.equals(cursos, estudiante.cursos);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, nombres, apellidos, fechaNacimiento, tipoDocumento, documento, eps, grupoSanguineoRH, usuario, acudientes);
+        return Objects.hash(id, nombres, apellidos, fechaNacimiento, tipoDocumento, documento, eps, grupoSanguineoRH, usuario, acudientes, cursos);
     }
 
     @Override
@@ -192,9 +204,22 @@ public class Estudiante {
             ", grupoSanguineoRH='" + getGrupoSanguineoRH() + "'" +
             ", usuario='" + getUsuario() + "'" +
             ", acudientes='" + getAcudientes() + "'" +
+            ", cursos='" + getCursos().size()    + "'" +
             "}";
     }
-    
-    
 
+    public Curso getCursoActual(){
+        List<Curso> cursos= this.cursos;
+        if(cursos == null || cursos.isEmpty())
+            return null;
+        
+        Integer anioActual = LocalDate.now().getYear();
+        for(Curso curso: cursos){
+            if(curso.getAnio_Curso().equals(anioActual))
+                return curso;
+        }
+
+        return null;
+    }
+    
 }

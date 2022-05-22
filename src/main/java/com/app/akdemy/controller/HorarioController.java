@@ -15,6 +15,7 @@ import com.app.akdemy.service.MateriaGradoService;
 import com.app.akdemy.service.ProfesorService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -35,17 +36,22 @@ public class HorarioController {
     MateriaGradoService serMateriaGrado;
 
     @GetMapping("/coordinador/horarios")
-    // @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_COORDINADOR')")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_COORDINADOR')")
     public String index(Model model) {
         // Obtener los cursos
         List<Curso> cursos = serCurso.getAllCourses();
         model.addAttribute("cursos", cursos);
         // Cargar los horarios
-        model = cargarTablaHorarios(model, cursos.get(0).getId());
+        if (cursos != null && cursos.size() > 0)
+            model = cargarTablaHorarios(model, cursos.get(0).getId());
+
+        model.addAttribute("itemNavbar", "horarios");
         return "coordinador/horarios/index";
     }
 
+    
     @GetMapping("/coordinador/consultaHorario/{idCurso}")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_COORDINADOR')")
     public String consultaHorario(Model model, @PathVariable int idCurso) {
         model = cargarTablaHorarios(model, idCurso);
         return "coordinador/horarios/horario";
@@ -74,6 +80,7 @@ public class HorarioController {
     }
 
     @GetMapping("/coordinador/eliminarHorario/{idHorario}")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_COORDINADOR')")
     public String eliminarHorario(Model model, @PathVariable int idHorario) {
         HorarioCurso horario = serHorario.obtenerPorId(idHorario);
         serHorario.eliminarHorario(idHorario);
@@ -83,6 +90,7 @@ public class HorarioController {
     }
 
     @GetMapping("/coordinador/agregarHorario/{idCurso}/{dia}/{horaInicio}/{horaFin}/{idMateria}/{idProfesor}")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_COORDINADOR')")
     public String agregarHorario(Model model, @PathVariable int idCurso, @PathVariable String dia,
             @PathVariable String horaInicio, @PathVariable String horaFin, @PathVariable int idMateria,
             @PathVariable int idProfesor) {
@@ -99,8 +107,9 @@ public class HorarioController {
         }
 
         serHorario.guardarHorario(horario);
-        
+
         model = cargarTablaHorarios(model, idCurso);
         return "coordinador/horarios/horario";
     }
+
 }

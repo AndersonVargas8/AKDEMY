@@ -25,6 +25,7 @@
     <!-- Local Files-->
     <script type="text/javascript" th:src="@{/js/coordinador/cursos.js}"></script>
     <link rel="stylesheet" type="text/css" th:href="@{/css/coordinador/cursos.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/normalize.css}">
 
     <script src="https://cdn.datatables.net/plug-ins/1.11.5/i18n/es-ES.json"></script>
 </head>
@@ -51,26 +52,30 @@
                     <table id="courses" class="table table-borderless table-hover" style="width:100%">
                         <thead>
                             <tr>
-                                <th>ID</th>
                                 <th>Nombre del curso</th>
                                 <th>Año del curso</th>
                                 <th>Director de curso</th>
+                                <th>Num. de estudiantes</th>
                                 <th>Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr th:each="curso:${cursos}">
-                                <td th:text="${curso.id}"></td>
                                 <td th:text="${curso.nombre_Curso}"></td>
                                 <td th:text="${curso.anio_Curso}"></td>
                                 <td th:text="${curso.profesor.nombres} + ' ' + ${curso.profesor.apellidos}"></td>
+                                <td th:text="${curso.estudiantes.size}"></td>
                                 <td>
-                                    <button type='button' class='btn btn-info btn-sm' th:onclick="editarCurso([[${curso.id}]])">
-                                        <span class="fas fa-user-pen"></span>
+                                    <button type='button' class='btn btn-primary btn-sm' th:onclick="verEstudiantes([[${curso.id}]])" title="Ver estudiantes">
+                                        <span class="fas fa-users"></span>
                                         <span class='align-middle'></span>
                                     </button>
-                                    <button type='button' class='btn btn-danger btn-sm' th:onclick="confirmDelete([[${curso.id}]])">
-                                        <span class="fas fa-user-times"></span>
+                                    <button type='button' class='btn btn-info btn-sm' th:onclick="editarCurso([[${curso.id}]])" title="Editar curso">
+                                        <span class="fas fa-edit"></span>
+                                        <span class='align-middle'></span>
+                                    </button>
+                                    <button type='button' class='btn btn-danger btn-sm' th:onclick="confirmDelete([[${curso.id}]])" title="Eliminar curso">
+                                        <span class="fas fa-trash"></span>
                                         <span class='align-middle'></span>
                                     </button>
                                 </td>

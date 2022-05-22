@@ -4,7 +4,9 @@ import java.util.List;
 import java.util.Optional;
 
 import com.app.akdemy.Exception.CustomeFieldValidationException;
+import com.app.akdemy.entity.Curso;
 import com.app.akdemy.entity.Estudiante;
+import com.app.akdemy.entity.User;
 import com.app.akdemy.interfacesServices.IEstudianteService;
 import com.app.akdemy.repository.EstudianteRepository;
 
@@ -49,6 +51,19 @@ public class EstudianteService implements IEstudianteService {
     public boolean validarEstudiante(Estudiante estudiante) throws Exception {
         checkEstudianteExiste(estudiante);
         return true;
+    }
+
+    @Override
+    public Estudiante getByUser(User user) {
+        Optional<Estudiante> estudiante = repEstudiante.findByUsuario(user);
+        if(estudiante.isPresent())
+            return estudiante.get();
+        return null;
+    }
+
+    @Override
+    public Iterable<Estudiante> getEstudiantesCursoID(Long id) {
+        return repEstudiante.getEstudiantesbyCurso(id);
     }
 
 }

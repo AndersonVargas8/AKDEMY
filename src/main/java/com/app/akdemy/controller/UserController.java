@@ -43,15 +43,15 @@ public class UserController {
 
         // Si el usuario es profesor
         if (serUser.loggedUserHasRole("PROFESOR"))
-            return "redirect:/seleccionarRol";
+            return "redirect:/profesor";
 
         // Si el usuario es acudiente
         if (serUser.loggedUserHasRole("ACUDIENTE"))
-            return "redirect:/seleccionarRol";
+            return "redirect:/acudiente";
 
         // Si el usuario es estudiante
         if (serUser.loggedUserHasRole("ESTUDIANTE"))
-            return "redirect:/seleccionarRol";
+            return "redirect:/estudiante";
 
         return "redirect:/seleccionarRol";
     }

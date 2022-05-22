@@ -1,10 +1,11 @@
 package com.app.akdemy.entity;
 
+import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -35,18 +36,17 @@ public class Curso {
 
     @ManyToMany
     @JoinTable(name = "curso_estudiante"
-            , joinColumns = @JoinColumn(name = "id_estudiante")
-            , inverseJoinColumns = @JoinColumn(name = "id_curso"))
-    private Set<Estudiante> estudiantes;
+            , joinColumns = @JoinColumn(name = "id_curso")
+            , inverseJoinColumns = @JoinColumn(name = "id_estudiante"))
+    private List<Estudiante> estudiantes;
 
 
     //Constructor clase Curso 
 
-
     public Curso() {
     }
 
-    public Curso(long id, String nombre_Curso, Integer anio_Curso, Profesor profesor, Set<Estudiante> estudiantes) {
+    public Curso(long id, String nombre_Curso, Integer anio_Curso, Profesor profesor, List<Estudiante> estudiantes) {
         this.id = id;
         this.nombre_Curso = nombre_Curso;
         this.anio_Curso = anio_Curso;
@@ -87,11 +87,11 @@ public class Curso {
         this.profesor = profesor;
     }
 
-    public Set<Estudiante> getEstudiantes() {
+    public List<Estudiante> getEstudiantes() {
         return this.estudiantes;
     }
 
-    public void setEstudiantes(Set<Estudiante> estudiantes) {
+    public void setEstudiantes(List<Estudiante> estudiantes) {
         this.estudiantes = estudiantes;
     }
 
@@ -103,7 +103,8 @@ public class Curso {
             return false;
         }
         Curso curso = (Curso) o;
-        return id == curso.id && Objects.equals(nombre_Curso, curso.nombre_Curso) && Objects.equals(anio_Curso, curso.anio_Curso) && Objects.equals(profesor, curso.profesor) && Objects.equals(estudiantes, curso.estudiantes);
+        return id == curso.id && Objects.equals(nombre_Curso, curso.nombre_Curso)
+                && Objects.equals(anio_Curso, curso.anio_Curso) && Objects.equals(profesor, curso.profesor) && Objects.equals(estudiantes, curso.estudiantes);
     }
 
     @Override

@@ -13,13 +13,16 @@ body{
 .navbar-dark {
     background-color: rgb(55,80,130);
 }
-
 .jumbotron {
-    margin: 0px auto;
+    margin: 0 auto;
     padding: 70px 30px;
     color: floralwhite;
 }
 
+
+
+
+/*Contenido general de las filas*/
 .row-header {
     color: rgb(55,80,130);
 }
@@ -27,73 +30,77 @@ body{
     width: 100%;
 }
 .row-content {
-    margin: 0px auto;
-    padding: 50px 0px;
-    border-bottom: 1px ridge;
-    min-height: 180px;
     color: floralwhite;
 }
+@media (min-width: 768px) {
+    .row-content {
+        margin: 0px auto;
+        padding: 50px 0px;
+        border-bottom: 1px ridge;
+        border-color: rgb(155,180,230);
+        min-height: 180px;
+        color: floralwhite;
+    } 
+    .row-contentA {
+        display: grid;
+        grid-template-columns: repeat(2,1fr);
+    }
+}
+.row-content:nth-child(2){
+    border-bottom: none;
+}
 
+
+/*Carrusel de elementos*/
 .carousel {
    background: rgb(55,80,130);
 }
 
 .carousel .carousel-item {
    height: 300px;
+   align-self: center;
+}
+.carousel-item img {
+    height: 240px;
+    width: 175px;
+}
+.carousel-item h2{
+    display: none;
+}
+@media (min-width: 768px) {
+    .carousel-item img {
+        height: 110px;
+        width: 100px;
+    } 
+    .carousel-item h2{
+        display: block;
+    }  
 }
 
-.footer {
-    background-color: rgb(55,80,130);
-    color: floralwhite;
-    margin: 0px auto;
-    padding: 20px 0px;
-}
-.items-menu:hover {
-    text-decoration: none;
-    color: white;
-}
-.items-menu p{
-    padding-top: 12px;
-}
-.table {
-    background-color: rgb(155,180,230);
-}
 
-legend {
-    top: -10px;
-    position: relative;
-    z-index: 2;
-    display: inline-block;
-    width: 100%;
-    color: rgb(255, 255, 255);
-}
 
-legend::before {
-    top: -10px;
-    position: absolute;
-    content: '';
-    width: calc(120% );
-    display: block;
-    background-color: #1d4890;
-    height: 50px;
-    z-index:-1;
-    left: -20px;
-    right: -40px;
-    transform: rotate(-1deg);
-    transition: transform .3s ease;
-}
 
-legend:hover::before{
-    transform: rotate(1deg);
-}
-
+/*Para los cuadros after el jumbotron*/
 .containerBox {
     background-color: #5d6d7e;
-    height: 200px;
-    width: 420px;
+    margin: 8px auto;
+}
+@media (min-width: 768px) {
+    .containerBox {
+        background-color: #5d6d7e;
+        width: auto;
+        height: max-content;
+        padding: 5px;
+    }    
+}
+.containerBox:hover .fade-in {
+    background-color: rgb(133, 146, 158);
     padding: 5px;
 }
-
+.containerBox a:hover{
+    color: white;
+    text-decoration: none;
+}
 .fade-in {
     /*background-color: rgb(52, 58, 64);*/
     transition: background-color 0.3s ease-in-out;
@@ -103,11 +110,20 @@ legend:hover::before{
     padding: 5px;
     /*background: #428bca;*/
 }
-.containerBox:hover .fade-in {
-    background-color: rgb(133, 146, 158);
-    padding: 5px;
+
+
+
+.footer {
+    background-color: rgb(55,80,130);
+    color: floralwhite;
+    margin: 0px auto;
+    padding: 20px 0px;
 }
 
+
+
+
+/*Ventana de Selección de Rol*/
 .selRol{
     text-decoration: none;
     color: floralwhite;
@@ -118,14 +134,50 @@ legend:hover::before{
     color: lightgrey;
 }
 
+
+
+
+
 /*contenedor para index de la vista del estudiante y profesor*/
 .containerBoxEP {
     background-color: #5d6d7e;
-    height: 200px;
-    width: 340px;
-    padding: 5px;
+    margin: 10px auto;
+}
+.containerBoxEP a:hover{
+    color: white;
+    text-decoration: none;
+}
+@media (min-width: 768px) {
+    .containerBoxEP {
+        background-color: #5d6d7e;
+        width: auto;
+        height: max-content;
+        padding: 5px;
+    }
 }
 .containerBoxEP:hover .fade-in {
+    background-color: rgb(133, 146, 158);
+    padding: 5px;
+}
+
+/*contenedor para el index de la vista del acudiente*/
+.containerBoxA {
+    background-color: #5d6d7e;
+    margin: 10px auto;
+}
+.containerBoxA a:hover{
+    color: white;
+    text-decoration: none;
+}
+@media (min-width: 768px) {
+    .containerBoxA {
+        background-color: #5d6d7e;
+        width: 522px;
+        height: max-content;
+        padding: 5px;
+    }
+}
+.containerBoxA:hover .fade-in {
     background-color: rgb(133, 146, 158);
     padding: 5px;
 }

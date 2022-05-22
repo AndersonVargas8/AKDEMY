@@ -20,6 +20,10 @@ body{
 .main { grid-area: main; }
 .footer { grid-area: footer; }
 
+.container-lg {
+    margin-top: 60px;
+}
+
 .titletable{
     padding-top: 40px;
     padding-left: 30px;
@@ -63,3 +67,13 @@ body{
   color: floralwhite;
 }
 
+/* Retornar a Cursos*/
+.retCursos{
+    text-decoration: none;
+    color: floralwhite;
+}
+
+.retCursos:hover{
+    text-decoration: none;
+    color: lightgrey;
+}

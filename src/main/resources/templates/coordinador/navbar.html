@@ -3,53 +3,63 @@
 <!-- Los iconos tipo Solid de Fontawesome-->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
 
-<nav class="navbar navbar-dark navbar-expand-sm">
+<nav class="navbar navbar-dark navbar-expand-sm fixed-top">
     <div class="container">
-        <a class="navbar-brand mr-auto"><img src="../../static/img/avatar1.png"
-                th:src="@{/img/avatar1.png}" height="40" width="35" alt="AKDEMY"></a>
+        <a class="navbar-brand mr-auto"><img src="../../static/img/avatar1.png" th:src="@{/img/avatar1.png}" height="40"
+                width="35" alt="AKDEMY"></a>
         <div class="collapse navbar-collapse" id="Navbar">
             <ul class="navbar-nav mr-auto">
-                <ul class="menu">
-                    <li th:class="${itemNavbar == 'inicio'} ? 'nav-item active' : 'nav-item'"><a class="nav-link"
-                        href="/coordinador"><span class="fa fa-home fa-lg"></span> Inicio</a></li>
+                <ul class="menu align-items-center">
+                    <li th:class="${itemNavbar == 'inicio'} ? 'nav-item active' : 'nav-item'">
+                        <a class="nav-link" href="/coordinador">
+                            <span class="fa fa-home fa-lg"></span>
+                            <span class="texto_navbarItem"> Inicio</span>
+                        </a>
+                    </li>
 
-
-                    <li th:class="${itemNavbar == 'cursos'} ? 'nav-item active' : 'nav-item'"><a class="nav-link" href="/coordinador/cursos"><span
-                            class="fa fa-info fa-lg"></span>
-                        Cursos</a></li>
+                    <li th:class="${itemNavbar == 'cursos'} ? 'nav-item active' : 'nav-item'">
+                        <a class="nav-link" href="/coordinador/cursos">
+                            <span class="fa fa-info fa-lg"></span>
+                            <span class="texto_navbarItem"> Cursos</span>
+                        </a>
+                    </li>
 
                     <li th:class="${itemNavbar == 'materias'} ? 'nav-item active dropdown' : 'nav-item dropdown'">
-                        <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown"><span
-                            class="fa fa-book-open-reader fa-lg"></span>
-                        Materias</a>
-
+                        <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">
+                            <span class="fa fa-book-open-reader fa-lg"></span>
+                            <span class="texto_navbarItem"> Materias</span>
+                        </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                             <a class="dropdown-item" href="/coordinador/materias">Materias</a>
                             <a class="dropdown-item" href="/coordinador/materiasGrado">Materias por grado</a>
-                          </div>
-                    
+                        </div>
                     </li>
 
+                    <li th:class="${itemNavbar == 'horarios'} ? 'nav-item active' : 'nav-item'"><a class="nav-link" href="/coordinador/horarios"><span
+                                class="fa fa-calendar-alt fa-lg"></span> Horarios</a>
+                    </li>
 
-
-                   <li class="nav-item"><a class="nav-link" href="/coordinador/horarios"><span class="fa fa-list fa-lg"></span> Horarios</a>
-                   </li>
                     <li th:class="${itemNavbar == 'estudiantes'} ? 'nav-item active' : 'nav-item'"><a class="nav-link"
                             href="/coordinador/estudiantes"><span class="fa fa-users fa-lg"></span> Estudiantes</a>
                     </li>
-                    <li th:class="${itemNavbar == 'profesores'} ? 'nav-item active' : 'nav-item'"><a class="nav-link"
-                            th:href="@{/coordinador/profesores}"><span class="fa fa-suitcase fa-lg"></span> Profesores</a>
+
+                    <li th:class="${itemNavbar == 'profesores'} ? 'nav-item active' : 'nav-item'">
+                        <a class="nav-link" th:href="@{/coordinador/profesores}">
+                            <span class="fa fa-suitcase fa-lg"></span>
+                            <span class="texto_navbarItem"> Profesores</span>
+                        </a>
                     </li>
                 </ul>
             </ul>
-            <ul class="menu">
-                <span class="navbar-text">
-                    <li>
-                        <a th:href="@{/logout}" style="text-decoration:none"><span class="fa fa-sign-out fa-lg"></span> Cerrar Sesión</a>
-                    </li>
-                </span>
-            </ul>
-
+            <span class="navbar-text menu align-items-center">
+                <a th:href="@{/logout}" style="text-decoration:none">
+                    <span class="fa fa-sign-out fa-lg"></span>
+                    <span class="texto_cerrarSesion"> Cerrar Sesión</span>
+                </a>
+            </span>
         </div>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#Navbar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
     </div>
 </nav>

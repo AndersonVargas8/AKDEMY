@@ -1,10 +1,21 @@
 package com.app.akdemy.controller;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import javax.validation.Valid;
 
 import com.app.akdemy.Exception.ProfesorNotFound;
 import com.app.akdemy.Exception.UsernameOrIdNotFound;
+import com.app.akdemy.entity.Estudiante;
+import com.app.akdemy.entity.HorarioCurso;
+import com.app.akdemy.entity.MateriaGrado;
+import com.app.akdemy.entity.Observador;
 import com.app.akdemy.entity.Profesor;
+import com.app.akdemy.entity.User;
+import com.app.akdemy.interfacesServices.ICursoService;
+import com.app.akdemy.interfacesServices.IHorarioService;
 import com.app.akdemy.interfacesServices.IProfesorService;
 import com.app.akdemy.service.UserService;
 
@@ -25,6 +36,12 @@ public class ProfesorController {
 
     @Autowired
     private UserService serUser;
+
+    @Autowired
+    private IHorarioService serHorario;
+
+    @Autowired
+    private ICursoService serCurso;
 
     // controlador de profesor desde coordinador
     @GetMapping("/coordinador/profesores")
@@ -73,11 +90,70 @@ public class ProfesorController {
         return "redirect:/coordinador/profesores";
     }
 
-    // controlador profesor
+    // controlador profesor-----------------------------------------------
+
     @GetMapping("/profesor")
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_PROFESOR')")
+    @PreAuthorize("hasAnyRole('ROLE_PROFESOR', 'ROLE_ADMIN')")
     public String inicioCoordinador(Model model) {
         model.addAttribute("itemNavbar", "inicio");
         return "profesor/index";
     }
+
+    @GetMapping("/profesor/horario")
+    @PreAuthorize("hasAnyRole('ROLE_PROFESOR', 'ROLE_ADMIN')")
+    public String verHorarioProfesor(Model model) throws Exception {
+
+        model.addAttribute("itemNavbar", "horario");
+        model = cargarTablaHorarios(model);
+        return "profesor/horario/index";
+    }
+
+    private Model cargarTablaHorarios(Model model) throws Exception {
+        User user = serUser.getLoggedUser();
+        Profesor profesor;
+        try {
+            profesor = serProfesor.getByUser(user);
+        } catch (Exception e) {
+            return model;
+        }
+        // Obtener los horarios
+        List<HorarioCurso> horarios = serHorario.obtenerPorProfesor(profesor);
+
+        model.addAttribute("horarios", horarios);
+        // Crear las horas del horario
+        List<String> horas = Arrays.asList("06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17");
+
+        model.addAttribute("horas", horas);
+
+        model.addAttribute("nombreProfesor", profesor.getNombres().concat(" " + profesor.getApellidos()));
+        return model;
+    }
+
+    @GetMapping("/profesor/observador")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_PROFESOR')")
+    public String verObservacionProfesor(Model model) throws Exception {
+        Profesor currentProfesor = serProfesor.getByUser(serUser.getLoggedUser());
+
+        Observador observador = new Observador();
+        observador.setEstudiante(new Estudiante());
+        observador.setProfesor(currentProfesor);
+
+        model.addAttribute("itemNavbar", "observador");
+        model.addAttribute("courses", serCurso.getCoursesObservadorbyProfesor(currentProfesor));
+        // model.addAttribute("observacion", observador);
+        return "profesor/observador/index";
+    }
+
+    @GetMapping("/profesor/cursos")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_PROFESOR')")
+    public String verCursosProfesor(Model model) throws Exception {
+        User user = serUser.getLoggedUser();
+        Profesor profesor = serProfesor.getByUser(user);
+
+        model.addAttribute("itemNavBar", "cursos");
+        model.addAttribute("cursos", serCurso.getCursosProfesor(profesor));
+
+        return "profesor/cursos/index";
+    }
+
 }

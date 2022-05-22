@@ -25,6 +25,7 @@
     <!-- Local Files-->
     <script type="text/javascript" th:src="@{/js/coordinador/materias.js}"></script>
     <link rel="stylesheet" type="text/css" th:href="@{/css/coordinador/materias.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/normalize.css}">
 
     <script src="https://cdn.datatables.net/plug-ins/1.11.5/i18n/es-ES.json"></script>
 </head>
@@ -51,14 +52,12 @@
                     <table id="materias" class="table table-borderless table-hover" style="width:100%">
                         <thead>
                             <tr>
-                                <th>ID</th>
                                 <th>Nombre de la materia</th>
                                 <th>Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr th:each="materia:${materias}">
-                                <td th:text="${materia.id}"></td>
                                 <td th:text="${materia.nombre}"></td>
                                 <td>
                                     <button type='button' class='btn btn-info btn-sm' th:onclick="editarMateria([[${materia.id}]])">

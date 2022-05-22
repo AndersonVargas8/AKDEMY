@@ -18,7 +18,7 @@
 
     <!-- Nuestro css-->
     <link rel="stylesheet" type="text/css" href="../../static/css/menu.css" th:href="@{/css/menu.css}">
-    <link rel="stylesheet" href="../../static/css/normalize.css">
+    <link rel="stylesheet" type="text/css" href="../../static/css/normalize.css" th:href="@{/css/normalize.css}">
 </head>
 <body>
 
@@ -26,7 +26,7 @@
 <div th:include="/profesor/navbar.html" th:remove="tag"></div>
 
     <header class="jumbotron">
-        <div class="container">
+        <div class="container mt-5">
             <div class="row row-header">
                 <div class="col-12 align-items-center">
                     <h2>AKDEMY <span class="badge badge-dark"><a th:href="@{/seleccionarRol}" class="selRol" title="Cambiar de Rol"> Profesor</a></span></h2>
@@ -42,24 +42,24 @@
                 <div id="mycarousel" class="carousel slide" data-ride="carousel">
                     <div class="carousel-inner" role="listbox">
                         <div class="carousel-item active">
-                            <div class="carousel-caption d-none d-md-block">
+                            <div class="carousel-caption d-md-block">
                                 <img src="../../static/img/classroom.png" th:src="@{/img/classroom.png}"  width="15%" height="15%">
                                 <h2>Cursos</h2>
-                                <p class="d-none d-sm-block">Visualización de cursos a los cuales debe dictar clase al igual que podrá ver a los estudiantes del mismo.</p>
+                                <p class="d-none d-sm-block">Visualización de cursos a los cuales debe dictar clase al igual que podrá ver a los estudiantes del mismo y la materia que debe dictar.</p>
                             </div>
                         </div>
                         <div class="carousel-item">
-                            <div class="carousel-caption d-none d-md-block">
+                            <div class="carousel-caption d-md-block">
                                 <img src="../../static/img/calendario.png" th:src="@{/img/calendario.png}"  width="15%" height="15%">
                                 <h2>Horario</h2>
                                 <p class="d-none d-sm-block">Tendrá un horario para profesores en los que verá la hora en la que debe impartir clase a los diferentes cursos.</p>
                             </div>
                         </div>
                         <div class="carousel-item">
-                            <div class="carousel-caption d-none d-md-block">
+                            <div class="carousel-caption d-md-block">
                                 <img src="../../static/img/estudiantes.png" th:src="@{/img/estudiantes.png}"  width="15%" height="15%">
                                 <h2>Observador</h2>
-                                <p class="d-none d-sm-block">Creación, eliminación y edición de notas en el observador donde podrá hacer registro de las faltas cometidas por los estudiantes de un curso en específico.</p>
+                                <p class="d-none d-sm-block">Creación, eliminación y edición de notas en el observador donde podrá hacer registro de las faltas de los estudiantes.</p>
                             </div>
                         </div>
                     </div>
@@ -81,12 +81,10 @@
 
 
     <div class="container">
-        <div class="row row-content align-items-center curso">
-            <!-- para todo el contenido (col-12) habrá 4 columns de tamaño sm y 3 md-->
-
-            <div class="col-12 col-sm-4 align-self-center order-sm-last text-center">
+        <div class="row row-content align-items-center">
+            <div class="col-12 col-sm-4 text-center">
                 <div class="containerBoxEP rounded">
-                    <a  class="items-menu pt-2">
+                    <a >
                         <div class="fade-in">
                             <h2>Horario</h2>
                             <p class="d-none d-sm-block">Tendrá un horario para profesores en los que verá la hora en la que debe impartir clase a los diferentes cursos.</p>
@@ -94,9 +92,9 @@
                     </a>
                 </div>
             </div>
-            <div class="col col-sm-4 order-sm-first text-center border-secondary">
+            <div class="col col-sm-4 text-center ">
                 <div class="containerBoxEP rounded">
-                    <a href="" class="items-menu">
+                    <a href="">
                         <div class="fade-in">
                             <h2>Cursos</h2>
                             <p class="d-none d-sm-block">Visualización de cursos a los cuales debe dictar clase al igual que podrá ver a los estudiantes del mismo.</p>
@@ -104,12 +102,12 @@
                     </a>
                 </div>
             </div>
-            <div class="col col-sm-4 text-center border-secondary">
+            <div class="col col-sm-4 text-center">
                 <div class="containerBoxEP rounded">
-                    <a href="" class="items-menu">
+                    <a href="" >
                         <div class="fade-in">
                             <h2>Observador</h2>
-                            <p class="d-none d-sm-block">Creación, eliminación y edición de notas en el observador donde podrá hacer registro de las faltas cometidas por los estudiantes de un curso en específico.</p>
+                            <p class="d-none d-sm-block">Creación, eliminación y edición de notas en el observador donde podrá hacer registro de las faltas de los estudiantes.</p>
                         </div>
                     </a>
                 </div>
@@ -119,21 +117,18 @@
 
 
 <footer class="footer">
-    <div class="container">
+    <div class="container text-center">
         <div class="row">
-            <div class="col-12 col-sm-3">
-
-            </div>
-            <div class="col-12 col-sm-4 align-items-center">
+            <div class="col-12 col-sm-6">
                 <h5>Enlaces</h5>
                 <ul class="list-unstyled pt-2">
-                    <li><a href="/profesor/index">Inicio</a></li>
-                    <li><a href="#">Cursos</a></li>
-                    <li><a href="#">Horario</a></li>
-                    <li><a href="#">Observador</a></li>
+                    <li><a href="/profesor">Inicio</a></li>
+                    <li><a href="/profesor/cursos">Cursos</a></li>
+                    <li><a href="/profesor/horario">Horario</a></li>
+                    <li><a href="/profesor/observador">Observador</a></li>
                 </ul>
             </div>
-            <div class="col col-sm">
+            <div class="col col-sm-6">
                 <h5>Contactenos</h5>
                 <address>
                     Universidad Nacional de Colombia, sede Bogotá<br>
