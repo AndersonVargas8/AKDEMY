@@ -55,19 +55,19 @@
                         <tr>
                             <th colspan="6" class="bg-dark border border-dark">
                                 <div class="d-flex justify-content-center">
-                                    <h3 class="mb-0 fw-bold" th:text=" 'Curso: ' + ${curso.nombre_Curso}"></h3>
+                                    <h4 class="mb-0 fw-bold" th:text=" 'Curso: ' + ${curso.nombre_Curso}"></h4>
                                 </div>
                             </th>
                         </tr>
                         <str>
                             <th colspan="6" class="bg-dark border border-dark">
                                 <div class="d-flex justify-content-center">
-                                    <h3 class="mb-0 fw-bold">Lista de Estudiantes</h3>
+                                    <h4 class="mb-0 fw-bold">Lista de Estudiantes</h4>
                                 </div>
                             </th>
                         </str>
                         <tr>
-                            <th>Seleccionar</th>
+                            <th style="max-width:10%">Seleccionar</th>
                             <th>Nombres</th>
                             <th>Apellidos</th>
                             <th>Documento</th>
@@ -79,8 +79,8 @@
                         <tr th:each="est:${estudiantes}">
 
                             <td>
-                                <div class="custom-control custom-checkbox">
-                                    <input th:class="form-check-input" th:id="flexCheckDefault" th:type="checkbox" th:field="${curso.estudiantes}" th:value="${est.id}"></input>
+                                <div class="custom-control custom-checkbox text-center">
+                                    <input th:class="form-check-input" style="cursor:pointer; width:17px; height: 17px;" th:id="flexCheckDefault" th:type="checkbox" th:field="${curso.estudiantes}" th:value="${est.id}"></input>
                                 </div>
                             </td>
                             <td th:text="${est.nombres}"></td>

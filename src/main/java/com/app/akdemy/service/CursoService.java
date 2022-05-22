@@ -6,6 +6,7 @@ import com.app.akdemy.entity.Curso;
 import com.app.akdemy.entity.Profesor;
 import com.app.akdemy.interfacesServices.ICursoService;
 import com.app.akdemy.repository.CursoRepository;
+import com.app.akdemy.repository.HorarioRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,6 +16,9 @@ public class CursoService implements ICursoService {
 
     @Autowired
     CursoRepository repCurso;
+
+    @Autowired
+    HorarioRepository repHorario;
 
     @Override
     public List<Curso> getAllCourses() {
@@ -47,7 +51,7 @@ public class CursoService implements ICursoService {
 
     @Override
     public List<Curso> getCursosProfesor(Profesor profesor) {
-        return (List<Curso>) repCurso.getCursosProfesor(profesor.getId());
+        return (List<Curso>) repHorario.findCursoByProfesor(profesor);
     }
 
 }
