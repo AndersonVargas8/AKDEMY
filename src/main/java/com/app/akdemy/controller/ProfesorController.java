@@ -75,7 +75,7 @@ public class ProfesorController {
 
     // controlador profesor
     @GetMapping("/profesor")
-    @PreAuthorize("hasAnyRole('ROLE_PROFESOR', 'ROLE_ACUDIENTE')")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_PROFESOR')")
     public String inicioCoordinador(Model model) {
         model.addAttribute("itemNavbar", "inicio");
         return "profesor/index";

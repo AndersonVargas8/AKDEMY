@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coordinador | Horarios</title>
+
+    <link rel="shortcut icon" type="image/x-icon" href="../static/img/avatar1.png" th:href="@{../img/avatar1.png}">
+
+    <!--JQUERY-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- FRAMEWORK BOOTSTRAP para el estilo de la pagina-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+
+
+
+    <!-- Local Files-->
+    <script type="text/javascript" th:src="@{/js/coordinador/horarios.js}"></script>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/coordinador/horarios.css}">
+
+
+</head>
+
+<body>
+    <!-- NAVBAR -->
+    <div th:include="coordinador/navbar.html" th:remove="tag"></div>
+
+    <div class="container-lg pl-4 pr-4 mt-4">
+
+        <!-- TABLA DE HORARIOS -->
+        <div class="table-responsive">
+            <table class="table card-body">
+                <thead class="thead-dark">
+                    <tr>
+                        <th colspan="6" class="bg-secondary border border-dark">
+                            <div class="d-flex justify-content-center">
+                                <h4>Curso:&nbsp;</h4>
+                                <select class="btn dropdown-toggle border bg bg-light" id="selCurso">
+                                    <option th:each="curso:${cursos}" th:value="${curso.id}"
+                                        th:text="${curso.nombre_Curso}"></option>
+                                </select>
+                            </div>
+                        </th>
+                    </tr>
+                    <tr>
+                        <th>Hora</th>
+                        <th>Lunes</th>
+                        <th>Martes</th>
+                        <th>Miércoles</th>
+                        <th>Jueves</th>
+                        <th>Viernes</th>
+                    </tr>
+                </thead>
+                <tbody id="seccionHorario" th:include="coordinador/horarios/horario.html">
+
+                </tbody>
+            </table>
+        </div>
+        <!-- MODAL AGREGAR UNA MATERIA -->
+        <div class="modal fade show" tabindex="-1" role="dialog" id="modalAgregarMateria">
+            <div class="modal-dialog modal d-flex justify-content-center" role="document">
+                <div class="modal-content p-2" th:include="coordinador/horarios/agregarMateria.html">
+                    
+                </div>
+            </div>
+        </div>
+        <!-- MODAL DE INFORMACIÓN PARA LAS MATERIAS -->
+
+        <div class="modal fade show" tabindex="-1" role="dialog" id="modalInfoMaterias">
+            <div class="modal-dialog modal d-flex justify-content-center" role="document">
+                <div class="modal-content p-4" th:include="coordinador/horarios/infoMaterias.html">
+                    
+                </div>
+            </div>
+        </div>
+
+        <!-- MODAL ELIMINAR MATERIA -->
+        
+        <div th:include="coordinador/horarios/confirmDelete" th:remove="tag"></div>
+    </div>
+    <!-- <div th:include="common/modalLoading.html" th:remove="tag"></div> -->
+
+</body>
+
+</html>
