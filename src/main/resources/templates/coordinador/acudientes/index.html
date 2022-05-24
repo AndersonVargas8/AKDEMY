@@ -30,7 +30,7 @@
     <link rel="stylesheet" type="text/css" th:href="@{/css/normalize.css}">
 </head>
 
-<body th:onload="activarModalNuevo([[${errorCrear != null}]],[[${errorEditar}]])">
+<body >
     <div th:include="coordinador/navbar.html" th:remove="tag"></div>
     <header class="">
         <div class="container">
@@ -155,7 +155,7 @@
         </div>
     </div>
 
-    <div class="modal fade" tabindex="-1" role="dialog" id="modalFormEditarAcudiente">
+    <div class="modal fade" tabindex="-1" role="dialog" id="modalFormEditarAcudientes">
         <div class="modal-dialog modal-lg d-flex justify-content-center" role="document">
             <div class="modal-content" style="max-width:80%">
                 <div class="modal-header">
@@ -165,10 +165,13 @@
                     </button>
                 </div>
                 <div class="modal-body p-4 justify-content-center">
-                    <div th:include="coordinador/acudientes/editarAcudiente.html"
-                    class="modal-body p-4 d-flex justify-content-center" id="formEditarAcudiente">
+                    <div th:include="coordinador/acudientes/editarAcudiente"
+                    class="modal-body p-4 d-flex justify-content-center" id="formEditarAcudientes">
                     </div>
                 </div>
+                <!-- <div th:include="coordinador/acudientes/editarAcudiente"
+                    class="modal-body p-4 d-flex justify-content-center" id="formEditarAcudientes">
+                </div> -->
             </div>
         </div>
     </div>
@@ -180,6 +183,7 @@
     </div>|
 
     <div th:include="common/modalLoading.html" th:remove="tag"></div>
+    
 </body>
 
 </html>

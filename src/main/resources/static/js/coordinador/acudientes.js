@@ -13,8 +13,6 @@ $(document).ready(function() {
 
 
 function editarAcudiente(id){
-
-
     var url = "/coordinador/acudientes/" + id;
     $("#formEditarAcudientes").load(url, function(){
         $('#modalLoading').modal('hide');
@@ -22,15 +20,6 @@ function editarAcudiente(id){
     });
 
 }
-
-/* function activarModalNuevo(errorCrear,errorEditar){
-    if(errorCrear == true){
-        $("#modalFormAcudientes").modal();
-    }
-    if(errorEditar == true){
-        $("#modalFormEditarAcudientes").modal();
-    }
-} */
 
 function confirmDeleteAcudiente(id){
     $('#deleteModalAcudiente').modal();
