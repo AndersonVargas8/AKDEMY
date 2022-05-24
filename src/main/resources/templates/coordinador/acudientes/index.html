@@ -30,126 +30,156 @@
     <link rel="stylesheet" type="text/css" th:href="@{/css/normalize.css}">
 </head>
 
-<body>
-<div th:include="coordinador/navbar.html" th:remove="tag"></div>
-<header class="">
-    <div class="container">
-        <div class="row row-header">
-            <div class="col-12 align-items-center">
+<body th:onload="activarModalNuevo([[${errorCrear != null}]],[[${errorEditar}]])">
+    <div th:include="coordinador/navbar.html" th:remove="tag"></div>
+    <header class="">
+        <div class="container">
+            <div class="row row-header">
+                <div class="col-12 align-items-center">
+                </div>
             </div>
         </div>
-    </div>
-</header>
-<div class="container-lg pr-4 pl-4">
-    <section class="layout">
-        <div class="main card w-100">
-            <div class="card-title row titletable">
-                <div class="col text-left">
-                    <h2>Acudientes &nbsp;<span class="badge">Coordinador</span></h2>
-                    <p>Listado de Acudientes</p>
+    </header>
+    <div class="container-lg pr-4 pl-4">
+        <section class="layout">
+            <div class="main card w-100">
+                <div class="card-title row titletable">
+                    <div class="col text-left">
+                        <h2>Acudientes &nbsp;<span class="badge">Coordinador</span></h2>
+                        <p>Listado de Acudientes</p>
+                    </div>
+                    <div class="col crearAcudiente">
+                        <button type="button" class="btn mb-2 row boton__crearAcudiente w-50" data-toggle="modal"
+                                data-target="#modalFormAcudiente">
+                            <!--                                Creacion Acudiente -->
+                            <span class="fa fa-user-plus fa-1x"></span>
+                            <span class="align-middle">Crear Acudiente</span>
+                        </button>
+                    </div>
                 </div>
-                <div class="col crearAcudiente">
-                    <button type="button" class="btn mb-2 row boton__crearAcudiente w-50" data-toggle="modal"
-                            data-target="#modalFormAcudiente">
-                        <!--                                Creacion Acudiente -->
-                        <span class="fa fa-user-plus fa-1x"></span>
-                        <span class="align-middle">Crear Acudiente</span>
+                <div class="card-body">
+                    <table id="tableAttendees" class=" table table-borderless table-hover" style="width:100%">
+                        <thead>
+                        <tr>
+                            <th>Nombres</th>
+                            <th>Apellidos</th>
+                            <th>Correo</th>
+                            <th>Documento</th>
+                            <th>Telefono</th>
+                            <th>Usuario</th>
+                            <th>Acciones</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="acudiente:${acudientes}">
+                            <td th:text="${acudiente.nombres}"></td>
+                            <td th:text="${acudiente.apellidos}"></td>
+                            <td th:text="${acudiente.correo}"></td>
+                            <td th:text="${acudiente.documento}"></td>
+                            <td th:text="${acudiente.telefono}"></td>
+                            <td th:text="${acudiente.usuario.username}"></td>
+                            <td>
+                                <button type='button' class='btn btn-primary btn-sm'  title="Asignar estudiantes">
+                                    <span class="fas fa-users"></span>
+                                    <span class='align-middle'></span>
+                                </button>
+                                <button type='button' class='btn btn-info
+                                                btn-sm' th:onclick="editarAcudiente([[${acudiente.id}]])" title="Editar Acudiente">
+                                    <span class="fas fa-user-pen"></span>
+
+                                </button>
+                                <button type='button' class='btn btn-danger
+                                                btn-sm' th:onclick="confirmDeleteAcudiente([[${acudiente.id}]])" title="Eliminar Acudiente">
+                                    <span class="fas fa-user-times"></span>
+                                </button>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </div>
+
+
+    <!--Formulario Crear-->
+    <div class="modal fade" tabindex="-1" role="dialog" id="modalFormAcudiente">
+        <div class="modal-dialog modal-lg d-flex justify-content-center" role="document">
+            <div class="modal-content" style="max-width:80%">
+                <div class="modal-header">
+                    <h5 class="modal-title">Nuevo Acudiente</h5>
+                    <button type="button" class="close icon-cerrar" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-            </div>
-            <div class="card-body">
-                <table id="tableAttendees" class=" table table-borderless table-hover" style="width:100%">
-                    <thead>
-                    <tr>
-                        <th>Nombres</th>
-                        <th>Apellidos</th>
-                        <th>Correo</th>
-                        <th>Documento</th>
-                        <th>Telefono</th>
-                        <th>Usuario</th>
-                        <th>Acciones</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr th:each="acudiente:${acudientes}">
-                        <td th:text="${acudiente.nombres}"></td>
-                        <td th:text="${acudiente.apellidos}"></td>
-                        <td th:text="${acudiente.correo}"></td>
-                        <td th:text="${acudiente.documento}"></td>
-                        <td th:text="${acudiente.telefono}"></td>
-                        <td th:text="${acudiente.usuario.username}"></td>
-                        <td>
-                            <button type='button' class='btn btn-info
-                                            btn-sm' th:onclick="editarAcudiente([[${acudiente.id}]])">
-                                <span class="fas fa-user-pen"></span>
-
-                            </button>
-                            <button type='button' class='btn btn-danger
-                                            btn-sm' th:onclick="confirmDeleteAcudiente([[${acudiente.id}]])">
-                                <span class="fas fa-user-times"></span>
-                            </button>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </section>
-</div>
-
-
-<!--Formulario Crear-->
-<div class="modal fade" tabindex="-1" role="dialog" id="modalFormAcudiente">
-    <div class="modal-dialog modal-lg d-flex justify-content-center" role="document">
-        <div class="modal-content" style="max-width:80%">
-            <div class="modal-header">
-                <h5 class="modal-title">Nuevo Acudiente</h5>
-                <button type="button" class="close icon-cerrar" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body p-5 justify-content-center">
-                <form th:action="@{/saveacudiente}" th:object="${acudiente}" method="POST">
-                    <div class="form-group">
-                        <label for="names"><b>Nombres</b></label>
-                        <input required th:field="*{nombres}" type="text" class="form-control" id="names"
-                               placeholder="Nombre(s)">
-                    </div>
-                    <div class="form-group">
-                        <label for="lastnames"><b>Apellidos</b></label>
-                        <input required th:field="*{apellidos}" type="text" class="form-control" id="lastnames"
-                               placeholder="Apellido(s)">
-                    </div>
-                    <div class="form-group">
-                        <label for="email"><b>Correo</b></label>
-                        <input required th:field="*{correo}" type="text"  class="form-control"
-                               id="email" placeholder="Correo">
-                    </div>
-                    <div class="form-group">
-                        <label for="document"><b>Documento</b></label>
-                        <input required th:field="*{documento}" type="number" class="form-control" id="document"
-                               placeholder="Documento">
-                    </div>
-                    <div class="form-group">
-                        <label for="phone"><b>Telefono</b></label>
-                        <input required th:field="*{telefono}" type="number" class="form-control" id="phone"
-                               placeholder="Telefono">
-                    </div>
-                    <div>
-                        <label for="user"><b>Usuario Asociado</b></label>
-                        <select id="selectuser" class="form-control border" required th:field="${acudiente.usuario.id}" data-live-search="true"
-                                data-none-results-text="No se encontró {0}">
-                            <option th:each="user:${users}" th:value="${user.id}" th:text="${user.username}">
-                            </option>
-                        </select>
-                    </div>
-                    <br>
-                    <button type="submit" class="w-100 btn guardar" width="100%">Guardar</button>
-                </form>
+                <div class="modal-body p-5 justify-content-center">
+                    <form th:action="@{/saveacudiente}" th:object="${acudiente}" method="POST">
+                        <div class="form-group">
+                            <label for="names"><b>Nombres</b></label>
+                            <input required th:field="*{nombres}" type="text" class="form-control" id="names"
+                                placeholder="Nombre(s)">
+                        </div>
+                        <div class="form-group">
+                            <label for="lastnames"><b>Apellidos</b></label>
+                            <input required th:field="*{apellidos}" type="text" class="form-control" id="lastnames"
+                                placeholder="Apellido(s)">
+                        </div>
+                        <div class="form-group">
+                            <label for="email"><b>Correo</b></label>
+                            <input required th:field="*{correo}" type="text"  class="form-control"
+                                id="email" placeholder="Correo">
+                        </div>
+                        <div class="form-group">
+                            <label for="document"><b>Documento</b></label>
+                            <input required th:field="*{documento}" type="number" class="form-control" id="document"
+                                placeholder="Documento">
+                        </div>
+                        <div class="form-group">
+                            <label for="phone"><b>Telefono</b></label>
+                            <input required th:field="*{telefono}" type="number" class="form-control" id="phone"
+                                placeholder="Telefono">
+                        </div>
+                        <div>
+                            <label for="user"><b>Usuario Asociado</b></label>
+                            <select id="selectuser" class="form-control border" required th:field="${acudiente.usuario.id}" data-live-search="true"
+                                    data-none-results-text="No se encontró {0}">
+                                <option th:each="user:${users}" th:value="${user.id}" th:text="${user.username}">
+                                </option>
+                            </select>
+                        </div>
+                        <br>
+                        <button type="submit" class="w-100 btn guardar" width="100%">Guardar</button>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
-</div>
+
+    <div class="modal fade" tabindex="-1" role="dialog" id="modalFormEditarAcudiente">
+        <div class="modal-dialog modal-lg d-flex justify-content-center" role="document">
+            <div class="modal-content" style="max-width:80%">
+                <div class="modal-header">
+                    <h5 class="modal-title">Editar Acudiente</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body p-4 justify-content-center">
+                    <div th:include="coordinador/acudientes/editarAcudiente.html"
+                    class="modal-body p-4 d-flex justify-content-center" id="formEditarAcudiente">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div th:include="coordinador/acudientes/confirmDelete.html" th:remove="tag"></div>
+
+    <div id="deleteError" th:if="${deleteError}" class="alert alert-danger text-center" role="alert">
+        <span th:text="${deleteError}"></span>
+    </div>|
+
+    <div th:include="common/modalLoading.html" th:remove="tag"></div>
 </body>
 
 </html>

@@ -51,14 +51,17 @@ public class AcudienteController {
         return "redirect:/coordinador/acudientes";
     }
 
-    @GetMapping("/coordinador/acudiente/{id}")
+    @GetMapping("/coordinador/acudientes/{id}")
     @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_COORDINADOR')")
-    public String getEditarProfesor(@PathVariable long id, Model model) throws AcudienteNotFound {
+    public String getEditarAcudiente(@PathVariable long id, Model model) throws AcudienteNotFound {
+
         Acudiente acudiente = serAcudiente.getById(id);
+
         model.addAttribute("editarAcudiente", acudiente);
         model.addAttribute("acudientes", serAcudiente.getAllAcudientes());
         model.addAttribute("users", serUser.getAvailableUsersAcudientes());
         model.addAttribute("itemNavbar", "acudientes");
+
         return "coordinador/acudientes/editarAcudiente.html";
     }
 
@@ -67,7 +70,7 @@ public class AcudienteController {
     public String deleteAcudiente(@PathVariable long id, Model model) throws AcudienteNotFound {
         try {
             Acudiente acudiente = serAcudiente.getById(id);
-            serUser.removeRoleProfesor(acudiente.getUsuario());
+            serUser.removeRoleAcudiente(acudiente.getUsuario());
             serAcudiente.deleteAcudiente(acudiente);
         } catch (Exception e) {
             model.addAttribute("deleteError", "No se puede borrar el usuario");
