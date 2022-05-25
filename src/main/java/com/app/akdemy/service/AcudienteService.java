@@ -1,10 +1,13 @@
 package com.app.akdemy.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import com.app.akdemy.Exception.AcudienteNotFound;
+import com.app.akdemy.Exception.CustomeFieldValidationException;
 import com.app.akdemy.Exception.ProfesorNotFound;
 import com.app.akdemy.entity.Acudiente;
+import com.app.akdemy.entity.Estudiante;
 import com.app.akdemy.entity.Profesor;
 import com.app.akdemy.entity.User;
 import com.app.akdemy.interfacesServices.IAcudienteService;
@@ -47,6 +50,19 @@ public class AcudienteService implements IAcudienteService{
         return acudiente;
     }
 
+        private boolean checkAcudienteExiste(Acudiente acudiente) throws Exception {
+        Optional<Acudiente>acudienteEncontrado = repAcudiente.findByDocumento(acudiente.getDocumento());
+        if (acudienteEncontrado.isPresent()) {
+            throw new CustomeFieldValidationException("Ya existe un acudiente con este documento","documento");
+        }
+        return false;
+    }
+
+    @Override
+    public boolean validarAcudiente(Acudiente acudiente) throws Exception {
+        checkAcudienteExiste(acudiente);
+        return true;
+    }
 
 
 }

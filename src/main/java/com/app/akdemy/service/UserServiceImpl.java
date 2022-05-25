@@ -124,6 +124,7 @@ public class UserServiceImpl implements UserService {
         repUser.removeRoleProfesor(user.getId());
     }
 
+
     @Override
     public void setRoleAcudiente(User user) {
         repUser.setRoleAcudiente(user.getId());

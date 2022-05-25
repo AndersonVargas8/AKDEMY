@@ -1,23 +1,26 @@
 package com.app.akdemy.controller;
 
 import com.app.akdemy.Exception.AcudienteNotFound;
-import com.app.akdemy.Exception.ProfesorNotFound;
+import com.app.akdemy.Exception.CustomeFieldValidationException;
 import com.app.akdemy.Exception.UsernameOrIdNotFound;
 import com.app.akdemy.entity.Acudiente;
-import com.app.akdemy.entity.Profesor;
+import com.app.akdemy.entity.User;
 import com.app.akdemy.interfacesServices.IAcudienteService;
-import com.app.akdemy.interfacesServices.IProfesorService;
 import com.app.akdemy.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.validation.Valid;
+import java.util.HashSet;
+import java.util.Set;
 
 @Controller
 public class AcudienteController {
@@ -28,7 +31,10 @@ public class AcudienteController {
     @Autowired
     private IAcudienteService serAcudiente;
 
-    // controlador de profesor desde coordinador
+    @Autowired
+    BCryptPasswordEncoder bCryptPasswordEncoder;
+
+    // controlador de Acudiente desde coordinador
     @GetMapping("/coordinador/acudientes")
     @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_COORDINADOR')")
     public String index(Model model) {
@@ -53,17 +59,52 @@ public class AcudienteController {
 
     @GetMapping("/coordinador/acudientes/{id}")
     @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_COORDINADOR')")
-    public String getEditarAcudiente(@PathVariable long id, Model model) throws AcudienteNotFound {
-
+    public String getEditarAcudiente(@PathVariable Long id, Model model) throws AcudienteNotFound {
         Acudiente acudiente = serAcudiente.getById(id);
-
         model.addAttribute("editarAcudiente", acudiente);
-        model.addAttribute("acudientes", serAcudiente.getAllAcudientes());
-        model.addAttribute("users", serUser.getAvailableUsersAcudientes());
-        model.addAttribute("itemNavbar", "acudientes");
-
         return "coordinador/acudientes/editarAcudiente.html";
     }
+
+
+    @PostMapping("/coordinador/editarAcudiente")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_COORDINADOR')")
+    public String editarAcudiente(@Valid @ModelAttribute("editarAcudiente") Acudiente acudiente,
+                                   BindingResult result,
+                                   Model model) throws Exception {
+        Acudiente acudienteFound = serAcudiente.getById(acudiente.getId());
+        User user = acudienteFound.getUsuario();
+
+        // Validar acudiente
+        if (!acudienteFound.getDocumento().equals(acudiente.getDocumento())) {// Si el documento cambia
+            try {
+                serAcudiente.validarAcudiente(acudiente);
+            } catch (CustomeFieldValidationException e) {
+                result.rejectValue(e.getFieldName(), null, e.getMessage());
+            } catch (Exception e) {
+            }
+        }
+
+
+        // Retornar a la página mostrando los errores
+        if (result.getErrorCount() > 0) {
+            model.addAttribute("nuevoAcudiente", new Acudiente());
+            model.addAttribute("editarAcudiente", acudiente);
+
+            model.addAttribute("errorEditar", 1);
+            return "coordinador/acudientes/index";
+        }
+
+            // Se pone la contraseña de usuario igual al documento
+            String encodePassword = bCryptPasswordEncoder.encode(acudiente.getDocumento());
+            user.setPassword(encodePassword);
+            user.setConfirmPassword(encodePassword);
+
+        // Se guarda el estudiante
+        serAcudiente.saveAcudiente(acudiente);
+
+        return "redirect:/coordinador/acudientes";
+    }
+
 
     @GetMapping("/coordinador/eliminarAcudiente/{id}")
     @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_COORDINADOR')")
@@ -100,3 +141,5 @@ public class AcudienteController {
     }
 
 }
+
+

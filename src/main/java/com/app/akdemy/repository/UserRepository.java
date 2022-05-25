@@ -34,12 +34,12 @@ public interface UserRepository extends CrudRepository<User,Long>{
 
     @Transactional
     @Modifying
-    @Query(value = "INSERT INTO user_roles values(:userID, 3)", nativeQuery = true)
+    @Query(value = "INSERT INTO user_roles values(:userID, 4)", nativeQuery = true)
     void setRoleAcudiente(@Param("userID") Long userID);
 
     @Transactional
     @Modifying
-    @Query(value = "DELETE FROM user_roles WHERE user_id = :userID AND role_id = 3", nativeQuery = true)
+    @Query(value = "DELETE FROM user_roles WHERE user_id = :userID AND role_id = 4", nativeQuery = true)
     void removeRoleAcudiente(@Param("userID") Long userID);
 
 }
