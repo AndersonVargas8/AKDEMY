@@ -5,20 +5,23 @@ import java.util.Date;
 public class Message {
     private Date date;
     private String content;
+    private Boolean profesor;
 
 
     public Message() {
     }
 
 
-    public Message(Date date, String content) {
+    public Message(Date date, String content, Boolean isProfesor) {
         this.date = date;
         this.content = content;
+        this.profesor = isProfesor;
     }
 
-    public Message(Long date, String content) {
+    public Message(Long date, String content, Boolean isProfesor) {
         this.date = new Date(date);
         this.content = content;
+        this.profesor = isProfesor;
     }
 
 
@@ -37,6 +40,21 @@ public class Message {
     public void setContent(String content) {
         this.content = content;
     }
+
+    public Boolean isProfesor() {
+        return this.profesor;
+    }
+
+    public Boolean getProfesor() {
+        return this.profesor;
+    }
+
+    public void setProfesor(Boolean profesor) {
+        this.profesor = profesor;
+    }
+
+
+
 
 
 }

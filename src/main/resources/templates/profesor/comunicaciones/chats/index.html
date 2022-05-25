@@ -47,11 +47,15 @@
             <div class="main card w-100">
                 <div class="card-title row titletable">
                     <div class="col text-left">
-                        <h2>Mensajes Directos&nbsp;<span class="badge">Andrés Gomez</span></h2>
-                        <h4>Juan Carlos Gómez Smith</h4>
+                        <h2>Mensajes Directos&nbsp;<span class="badge" th:text="${chat.acudiente.nombres} + ' ' + ${chat.acudiente.apellidos}"></span></h2>
+                        <h4 th:text="${chat.estudiante.nombres} + ' ' + ${chat.estudiante.apellidos}"></h4>
                     </div>
                 </div>
                 <div class="card-body ">
+
+                    <div th:each="m:${messages}">
+                        <h5 th:text="${m.content}"></h5>
+                    </div>
                     
                     
     

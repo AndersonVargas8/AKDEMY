@@ -77,6 +77,7 @@ public class ChatService implements IChatService{
 
         docData.put("date", message.getDate().getTime());
         docData.put("content", message.getContent());
+        docData.put("isProfesor", message.isProfesor());
 
 
         // Set reference to save document
@@ -172,5 +173,35 @@ public class ChatService implements IChatService{
              return null;
          }
     }
+
+    @Override
+    public Iterable<Message> getMessages(Chat chat) {
+         // Return Iterable
+         List<Message> messages = new ArrayList<Message>();
+
+         // retrieve  query results asynchronously using query.get()
+         ApiFuture<QuerySnapshot> querySnapshot = getCollection(chat).get();
+ 
+         try {
+             // Iterate results and crete objects list
+             for(DocumentSnapshot docSnapshot : querySnapshot.get().getDocuments()){
+                 Map<String, Object> data = docSnapshot.getData();
+                 messages.add(new Message(
+                    ((Long) data.get("date")),
+                    ((String) data.get("content")),
+                    ((Boolean) data.get("isProfesor"))
+                 ));
+             }
+ 
+             // Cast and return collection
+             return (Iterable<Message>) messages;
+             
+         } catch (Exception e) {
+ 
+             return null;
+         }
+    }
+
+
 
 }

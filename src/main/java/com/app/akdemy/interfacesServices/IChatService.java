@@ -13,5 +13,6 @@ public interface IChatService {
     public Iterable<Chat> getChats(Profesor profesor);
     public Iterable<Chat> getChats(Acudiente acudiente, Estudiante estudiante);
     public void saveMessage(Message message, Chat chat);
+    public Iterable<Message> getMessages(Chat chat);
     
 }
