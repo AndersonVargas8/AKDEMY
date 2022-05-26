@@ -2,6 +2,7 @@ package com.app.akdemy.service;
 
 import java.util.Optional;
 
+import com.app.akdemy.entity.Acudiente;
 import com.app.akdemy.entity.Estudiante;
 import com.app.akdemy.entity.Observador;
 import com.app.akdemy.interfacesServices.IObservadorService;
@@ -11,7 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class ObservadorService implements IObservadorService{
+public class ObservadorService implements IObservadorService {
 
     @Autowired
     private ObservadorRepository repObservador;
@@ -34,7 +35,11 @@ public class ObservadorService implements IObservadorService{
     @Override
     public void deleteObservador(Observador observador) {
         repObservador.delete(observador);
-        
     }
-    
+
+    @Override
+    public Iterable<Observador> getObservadorEstudianteByAcudiente(Acudiente acudiente) {
+        return repObservador.getObservadorEstudianteAcudiente(acudiente.getId());
+    }
+
 }

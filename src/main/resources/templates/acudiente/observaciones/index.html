@@ -65,8 +65,8 @@
 
                     </div>
                     <div id="observador">
-                        <script type="text/javascript" th:src="@{/js/profesor/observador.js}"></script>
-                        <table id="observadorTable" class=" table table-borderless table-hover" style="width:100%">
+                        <script type="text/javascript" th:src="@{/js/acudiente/observacion.js}"></script>
+                        <table id="observacionTable" class=" table table-borderless table-hover" style="width:100%">
                             <thead>
                                 <tr>
                                     <th>ID</th>
@@ -74,7 +74,6 @@
                                     <th>Observación</th>
                                     <th>Estudiante</th>
                                     <th>Profesor</th>
-                                    <th>Acciones</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -84,12 +83,6 @@
                                 <td th:text="${observacion.descargos}"></td>
                                 <td th:text="${observacion.estudiante.nombres} + ' ' + ${observacion.estudiante.apellidos}"></td>
                                 <td th:text="${observacion.profesor.nombres} + ' ' + ${observacion.profesor.apellidos}"></td>
-                                <td>
-                                    <button type='button' class='btn btn-danger
-                                    btn-sm' th:onclick="confirmDeleteObservacion([[${observacion.id}]])" th:if="${observacion.profesor.id == profesor.id}">
-                                        <span class="fas fa-user-times"></span>
-                                    </button>
-                                </td>
                             </tr>
                             </tbody>
                         </table>

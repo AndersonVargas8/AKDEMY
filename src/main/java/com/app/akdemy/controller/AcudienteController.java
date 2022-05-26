@@ -4,9 +4,11 @@ import com.app.akdemy.Exception.AcudienteNotFound;
 import com.app.akdemy.Exception.CustomeFieldValidationException;
 import com.app.akdemy.Exception.UsernameOrIdNotFound;
 import com.app.akdemy.entity.Acudiente;
+import com.app.akdemy.entity.Estudiante;
 import com.app.akdemy.entity.User;
 import com.app.akdemy.interfacesServices.IAcudienteService;
 import com.app.akdemy.service.EstudianteService;
+import com.app.akdemy.service.ObservadorService;
 import com.app.akdemy.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -34,6 +36,9 @@ public class AcudienteController {
 
     @Autowired
     private EstudianteService serEstudiante;
+
+    @Autowired
+    private ObservadorService serObservador;
 
     @Autowired
     BCryptPasswordEncoder bCryptPasswordEncoder;
@@ -139,8 +144,14 @@ public class AcudienteController {
 
     @GetMapping("/acudiente/observaciones")
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_ACUDIENTE')")
-    public String observacionesAcudiente(Model model) {
+    public String verObservacionesAcudiente(Model model) throws Exception {
+        User user = serUser.getLoggedUser();
+        Acudiente acudiente = serAcudiente.getByUser(user);
+
         model.addAttribute("itemNavbar", "observaciones");
+        model.addAttribute("estudiantes", serEstudiante.getEstudiantesAcudiente(acudiente));
+        model.addAttribute("observaciones", serObservador.getObservadorEstudianteByAcudiente(acudiente));
+
         return "acudiente/observaciones/index";
     }
 

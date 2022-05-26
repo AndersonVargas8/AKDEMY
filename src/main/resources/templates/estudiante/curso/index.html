@@ -19,7 +19,6 @@
    <!-- Local Files-->
     <link rel="stylesheet" type="text/css" th:href="@{/css/estudiante/cursos.css}">
     <link rel="stylesheet" type="text/css" href="../../static/css/normalize.css" th:href="@{/css/normalize.css}">
-    <script type="text/javascript" th:src="@{/js/estudiante/curso.js}"></script>
 
 </head>
 
@@ -42,7 +41,8 @@
                         </a>
                     </div>
                 </div>
-                <div class="card-body">
+                <script type="text/javascript" th:src="@{/js/estudiante/curso.js}"></script>
+                <div id="estudiantes" class="card-body">
                     <table id="cursosTable" class="table table-borderless table-hover" style="width:100%">
                         <thead>
                             <tr>
