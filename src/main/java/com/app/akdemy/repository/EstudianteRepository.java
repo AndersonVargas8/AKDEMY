@@ -20,7 +20,7 @@ public interface EstudianteRepository extends CrudRepository<Estudiante, Long> {
 
     public Optional<Estudiante> findByUsuario(User user);
 
-    @Query(value = "SELECT id, est_apellidos, est_documento, est_fecha_nacimiento, est_nombres, est_eps,est_gsrh, est_tipo_doc, est_usuario FROM estudiante JOIN acudiente_estudiante ON estudiante.id = acudiente_estudiante.id_estudiante WHERE id_acudiente = :acudienteID", nativeQuery = true)
+    @Query(value = "SELECT id, est_apellidos, est_documento, est_fecha_nacimiento, est_nombres, est_eps,est_gsrh, est_tipo_doc, est_usuario FROM estudiante JOIN acudiente_estudiante JOIN curso_estudiante ON estudiante.id = acudiente_estudiante.id_estudiante AND estudiante.id = curso_estudiante.id_estudiante WHERE id_acudiente = :acudienteID", nativeQuery = true)
     Iterable<Estudiante> getEstudiantesByAcudiente(@Param("acudienteID") Long acudienteID);
 
     @Query(value = "SELECT id, est_apellidos, est_documento, est_fecha_nacimiento, est_nombres, est_eps,est_gsrh, est_tipo_doc, est_usuario FROM estudiante JOIN curso_estudiante ON estudiante.id = curso_estudiante.id_estudiante WHERE id_curso = :cursoID", nativeQuery = true)
