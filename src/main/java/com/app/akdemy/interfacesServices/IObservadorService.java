@@ -10,7 +10,9 @@ public interface IObservadorService {
 
     Iterable<Observador> getObservadorEstudiante(Estudiante estudiante);
 
-    Iterable<Observador> getObservadorEstudianteByAcudiente(Acudiente acudiente);
+    /*
+     * Iterable<Observador> getObservadorEstudianteByAcudiente(Acudiente acudiente);
+     */
 
     void saveObservador(Observador observador);
 

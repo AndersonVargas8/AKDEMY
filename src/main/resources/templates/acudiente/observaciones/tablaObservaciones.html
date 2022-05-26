@@ -1,0 +1,21 @@
+<script type="text/javascript" th:src="@{/js/acudiente/observacion.js}"></script>
+<table id="observacionTable" class=" table table-borderless table-hover" style="width:100%">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Fecha</th>
+            <th>Observación</th>
+            <th>Estudiante</th>
+            <th>Profesor</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr th:each="observacion:${observaciones}">
+            <td th:text="${observacion.id}"></td>
+            <td th:text="${#dates.format(observacion.fecha,'dd-MM-yyyy')}"></td>
+            <td th:text="${observacion.descargos}"></td>
+            <td th:text="${observacion.estudiante.nombres} + ' ' + ${observacion.estudiante.apellidos}"></td>
+            <td th:text="${observacion.profesor.nombres} + ' ' + ${observacion.profesor.apellidos}"></td>
+        </tr>
+    </tbody>
+</table>

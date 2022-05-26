@@ -11,6 +11,7 @@ import com.app.akdemy.service.EstudianteService;
 import com.app.akdemy.service.ObservadorService;
 import com.app.akdemy.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -150,9 +151,22 @@ public class AcudienteController {
 
         model.addAttribute("itemNavbar", "observaciones");
         model.addAttribute("estudiantes", serEstudiante.getEstudiantesAcudiente(acudiente));
-        model.addAttribute("observaciones", serObservador.getObservadorEstudianteByAcudiente(acudiente));
+        /*
+         * model.addAttribute("observaciones",
+         * serObservador.getObservadorEstudianteByAcudiente(acudiente));
+         */
 
         return "acudiente/observaciones/index";
+    }
+
+    @GetMapping("/acudiente/observaciones/{id}")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_ACUDIENTE')")
+    public String verObservacionesAcudienteByEstudiante(@PathVariable Long id, Model model) throws Exception {
+        Estudiante estudiante = serEstudiante.buscarPorId(id);
+
+        model.addAttribute("estudiante", estudiante);
+        model.addAttribute("observaciones", serObservador.getObservadorEstudiante(estudiante));
+        return "acudiente/observaciones/tablaObservaciones";
     }
 
     @GetMapping("/acudiente/horarios")

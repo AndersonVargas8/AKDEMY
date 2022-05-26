@@ -37,9 +37,11 @@ public class ObservadorService implements IObservadorService {
         repObservador.delete(observador);
     }
 
-    @Override
-    public Iterable<Observador> getObservadorEstudianteByAcudiente(Acudiente acudiente) {
-        return repObservador.getObservadorEstudianteAcudiente(acudiente.getId());
-    }
-
+    /*
+     * @Override
+     * public Iterable<Observador> getObservadorEstudianteByAcudiente(Acudiente
+     * acudiente) {
+     * return repObservador.getObservadorEstudianteAcudiente(acudiente.getId());
+     * }
+     */
 }

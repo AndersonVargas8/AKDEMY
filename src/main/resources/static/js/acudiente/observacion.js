@@ -10,17 +10,9 @@ $(document).ready(function() {
         }
     );
     $('select').selectpicker();
-    $('#cursos').change(function() {
-        var url = "observador/estudiantes/" + $(this).val();
-        $('#estudiantes').load(url);
-
-        table.rows().remove().draw();
-        
-    })
-
     $('#estudiantesSelect').change(function() {
 
-        var url = "observador/" + $(this).val();
+        var url = "observaciones/" + $(this).val();
         $('#observador').load(url, function(){
             
         });
