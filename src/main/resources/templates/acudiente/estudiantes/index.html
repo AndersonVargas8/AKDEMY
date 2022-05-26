@@ -62,7 +62,8 @@
                                 <td th:text="${estu.tipoDocumento.descripcion}"></td>
                                 <td th:text="${estu.documento}"></td>
                                 <td th:if="${estu.cursoActual != null}" th:text="${estu.cursoActual.nombre_Curso}"></td>
-                                <td th:text="${estu.usuario.username}"></td>|
+                                <td th:unless="${estu.cursoActual != null}"></td>
+                                <td th:text="${estu.usuario.username}"></td>
                             </tr>
                         </tbody>
                     </table>

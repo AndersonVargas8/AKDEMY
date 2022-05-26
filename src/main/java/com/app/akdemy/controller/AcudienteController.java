@@ -171,8 +171,12 @@ public class AcudienteController {
 
     @GetMapping("/acudiente/horarios")
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_ACUDIENTE')")
-    public String horariosAcudiente(Model model) {
+    public String horariosAcudiente(Model model) throws Exception {
+        User user = serUser.getLoggedUser();
+        Acudiente acudiente = serAcudiente.getByUser(user);
+
         model.addAttribute("itemNavbar", "horarios");
+        model.addAttribute("estudiantes", serEstudiante.getEstudiantesAcudiente(acudiente));
         return "acudiente/horarios/index";
     }
 

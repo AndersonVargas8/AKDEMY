@@ -62,7 +62,6 @@
                                 <option th:each="estudiante:${estudiantes}" th:value="${estudiante.id}" th:text="${estudiante.nombres} + ' ' + ${estudiante.apellidos}"></option>
                             </select>
                         </div>
-
                     </div>
                     <div id="observador" th:include="acudiente/observaciones/tablaObservaciones.html"></div>
                 </div>

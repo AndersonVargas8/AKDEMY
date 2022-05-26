@@ -110,3 +110,6 @@ table .dia div:hover{
   padding: .5%;
   vertical-align: middle;
 }
+.filter-container{
+  margin-bottom: 30px;
+}
