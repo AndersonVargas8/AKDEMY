@@ -27,6 +27,7 @@
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <!-- Local Files-->
     <link rel="stylesheet" type="text/css" th:href="@{/css/profesor/observador.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/profesor/comunicaciones.css}">
     <link rel="stylesheet" type="text/css" href="../../static/css/normalize.css" th:href="@{/css/normalize.css}">
     <script type="text/javascript" th:src="@{/js/profesor/observador.js}"></script>
     <!--SELECTPICKER-->
@@ -44,7 +45,7 @@
     <div th:include="profesor/navbar.html" th:remove="tag"></div>
     <div class="container-lg pr-4 pl-4">
         <section class="layout">
-            <div class="main card w-100">
+            <div class="main card w-75">
                 <div class="card-title row titletable">
                     <div class="col text-left">
                         <h2>Mensajes Directos&nbsp;<span class="badge" th:text="${chat.acudiente.nombres} + ' ' + ${chat.acudiente.apellidos}"></span></h2>
@@ -53,12 +54,33 @@
                 </div>
                 <div class="card-body ">
 
-                    <div th:each="m:${messages}">
-                        <h5 th:text="${m.content}"></h5>
+                    <div class="chat-container card">
+                        <div th:each="m:${messages}">
+                            <div th:unless="${m.profesor}" class="d-flex justify-content-start mb-4">
+                                <div class="msg_cotainer">
+                                    <div th:text="${m.content}"></div>
+                                    <span th:text="${#dates.format(m.date,'HH:mm, dd/MM/yy')}" class="msg_time"></span>
+                                </div>
+                            </div>
+                            <div th:if="${m.profesor}" class="d-flex justify-content-end mb-4">
+                                <div class="msg_cotainer_send">
+                                    <div th:text="${m.content}"></div>
+                                    <span th:text="${#dates.format(m.date,'HH:mm, dd/MM/yy')}" class="msg_time_send"></span>
+                                </div>
+                            </div>
+                        </div>
+                        
                     </div>
-                    
-                    
-    
+                </div>
+                <div class="card-footer">
+                    <form>
+                        <div class="input-group">
+                            <textarea name="" class="form-control type_msg" placeholder="Escribir Mensaje..."></textarea>
+                            <div class="input-group-append">
+                                <button type="submit" class="btn btn-primary mb-2"><i class="fas fa-location-arrow"></i></button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
 
             </div>
