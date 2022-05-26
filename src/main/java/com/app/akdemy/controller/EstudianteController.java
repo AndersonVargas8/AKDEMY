@@ -250,12 +250,12 @@ public class EstudianteController {
     private Model cargarTablaHorarios(Model model) throws Exception {
         User user = serUser.getLoggedUser();
         Estudiante estudiante;
-        
+
         estudiante = serEstudiante.getByUser(user);
-        if(estudiante == null)
+        if (estudiante == null)
             return model;
-        model.addAttribute("nombreEstudiante", estudiante.getNombres().concat(" "+estudiante.getApellidos()));
-       
+        model.addAttribute("nombreEstudiante", estudiante.getNombres().concat(" " + estudiante.getApellidos()));
+
         // Obtener los horarios
         Curso cursoActual = estudiante.getCursoActual();
         if (cursoActual == null)
@@ -277,6 +277,7 @@ public class EstudianteController {
     @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_PROFESOR')")
     public String getEstudiantes(@PathVariable Long id, Model model) {
         model.addAttribute("estudiantes", serEstudiante.getEstudiantesCursoID(id));
-        return "profesor/observador/selectestudiantes.html";
+        return "profesor/observador/selectestudiantes";
     }
+
 }

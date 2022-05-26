@@ -37,29 +37,36 @@
                 <div class="card-title row titletable">
                     <div class="col text-left">
                         <h2>Estudiantes&nbsp;<span class="badge">Acudiente</span></h2>
-                        <p>Listado de los estudiantes matriculados en la institución.</p>
+                        <p>Listado de sus estudiantes matriculados en la institución.</p>
                     </div>
                 </div>
-                <div class="card-body">
-                    <script type="text/javascript" th:src="@{/js/profesor/cursos.js}"></script>
-                    <table id="cursosTable" class="table table-borderless table-hover" style="width:100%">
+                <script type="text/javascript" th:src="@{/js/acudiente/estudiante.js}"></script>
+                <div id="estudiantes" class="card-body">
+                    <table id="estudiantesAcudienteTable" class=" table table-borderless table-hover" style="width:100%">
                         <thead>
                             <tr>
-                                <th>ID</th>
-                                <th>Nombre del Estudiante</th>
+                                <th>Nombres</th>
+                                <th>Apellidos</th>
+                                <th>Fecha de Nacimiento</th>
+                                <th>Tipo Documento</th>
                                 <th>Documento</th>
+                                <th>Usuario</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr th:each="curso:${cursos}">
-                                <td th:text="${curso.id}"></td>
-                                <td th:text="${curso.nombre_Curso}"></td>
-                                <td th:text="${curso.anio_Curso}"></td>
+                            <tr th:each="estu:${hijos}">
+                                <td th:text="${estu.nombres}"></td>
+                                <td th:text="${estu.apellidos}"></td>
+                                <td th:text="${#dates.format(estu.fechaNacimiento,'dd-MM-yyyy')}"> </td>
+                                <td th:text="${estu.tipoDocumento.descripcion}"></td>
+                                <td th:text="${estu.documento}"></td>
+                                <td th:text="${estu.usuario.username}"></td>|
                             </tr>
                         </tbody>
                     </table>
                 </div>
             </div>
+          
 
         </section> 
     </div>

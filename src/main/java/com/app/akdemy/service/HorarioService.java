@@ -14,7 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class HorarioService implements IHorarioService{
+public class HorarioService implements IHorarioService {
     @Autowired
     HorarioRepository repHorario;
 
@@ -51,8 +51,8 @@ public class HorarioService implements IHorarioService{
     }
 
     @Override
-    public List<HorarioCurso> obtenerPorProfesor(Profesor profesor){
-        return (List<HorarioCurso>) repHorario.findByProfesor(profesor); 
+    public List<HorarioCurso> obtenerPorProfesor(Profesor profesor) {
+        return (List<HorarioCurso>) repHorario.findByProfesor(profesor);
     }
-    
+
 }

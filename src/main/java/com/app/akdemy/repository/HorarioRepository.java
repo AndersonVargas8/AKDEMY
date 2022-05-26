@@ -11,7 +11,8 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface HorarioRepository extends CrudRepository<HorarioCurso,Long>{
+public interface HorarioRepository extends CrudRepository<HorarioCurso, Long> {
     public List<HorarioCurso> findByCurso(Curso curso);
+
     public List<HorarioCurso> findByProfesor(Profesor profesor);
 }

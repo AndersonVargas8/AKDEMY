@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import com.app.akdemy.Exception.CustomeFieldValidationException;
+import com.app.akdemy.entity.Acudiente;
 import com.app.akdemy.entity.Curso;
 import com.app.akdemy.entity.Estudiante;
 import com.app.akdemy.entity.User;
@@ -19,7 +20,7 @@ public class EstudianteService implements IEstudianteService {
     EstudianteRepository repEstudiante;
 
     @Override
-    public void guardarEstudiante(Estudiante estudiante){
+    public void guardarEstudiante(Estudiante estudiante) {
         repEstudiante.save(estudiante);
     }
 
@@ -42,7 +43,7 @@ public class EstudianteService implements IEstudianteService {
     private boolean checkEstudianteExiste(Estudiante estudiante) throws Exception {
         Optional<Estudiante> estudianteEncontrado = repEstudiante.findByDocumento(estudiante.getDocumento());
         if (estudianteEncontrado.isPresent()) {
-            throw new CustomeFieldValidationException("Ya existe un estudiante con este documento","documento");
+            throw new CustomeFieldValidationException("Ya existe un estudiante con este documento", "documento");
         }
         return false;
     }
@@ -56,7 +57,7 @@ public class EstudianteService implements IEstudianteService {
     @Override
     public Estudiante getByUser(User user) {
         Optional<Estudiante> estudiante = repEstudiante.findByUsuario(user);
-        if(estudiante.isPresent())
+        if (estudiante.isPresent())
             return estudiante.get();
         return null;
     }
@@ -64,6 +65,11 @@ public class EstudianteService implements IEstudianteService {
     @Override
     public Iterable<Estudiante> getEstudiantesCursoID(Long id) {
         return repEstudiante.getEstudiantesbyCurso(id);
+    }
+
+    @Override
+    public Iterable<Estudiante> getEstudiantesAcudiente(Acudiente acudiente) {
+        return repEstudiante.getEstudiantesByAcudiente(acudiente.getId());
     }
 
 }

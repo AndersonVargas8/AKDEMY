@@ -6,6 +6,7 @@ import com.app.akdemy.Exception.UsernameOrIdNotFound;
 import com.app.akdemy.entity.Acudiente;
 import com.app.akdemy.entity.User;
 import com.app.akdemy.interfacesServices.IAcudienteService;
+import com.app.akdemy.service.EstudianteService;
 import com.app.akdemy.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -30,6 +31,9 @@ public class AcudienteController {
 
     @Autowired
     private IAcudienteService serAcudiente;
+
+    @Autowired
+    private EstudianteService serEstudiante;
 
     @Autowired
     BCryptPasswordEncoder bCryptPasswordEncoder;
@@ -65,12 +69,11 @@ public class AcudienteController {
         return "coordinador/acudientes/editarAcudiente.html";
     }
 
-
     @PostMapping("/coordinador/editarAcudiente")
     @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_COORDINADOR')")
     public String editarAcudiente(@Valid @ModelAttribute("editarAcudiente") Acudiente acudiente,
-                                   BindingResult result,
-                                   Model model) throws Exception {
+            BindingResult result,
+            Model model) throws Exception {
         Acudiente acudienteFound = serAcudiente.getById(acudiente.getId());
         User user = acudienteFound.getUsuario();
 
@@ -84,7 +87,6 @@ public class AcudienteController {
             }
         }
 
-
         // Retornar a la página mostrando los errores
         if (result.getErrorCount() > 0) {
             model.addAttribute("nuevoAcudiente", new Acudiente());
@@ -94,17 +96,16 @@ public class AcudienteController {
             return "coordinador/acudientes/index";
         }
 
-            // Se pone la contraseña de usuario igual al documento
-            String encodePassword = bCryptPasswordEncoder.encode(acudiente.getDocumento());
-            user.setPassword(encodePassword);
-            user.setConfirmPassword(encodePassword);
+        // Se pone la contraseña de usuario igual al documento
+        String encodePassword = bCryptPasswordEncoder.encode(acudiente.getDocumento());
+        user.setPassword(encodePassword);
+        user.setConfirmPassword(encodePassword);
 
         // Se guarda el estudiante
         serAcudiente.saveAcudiente(acudiente);
 
         return "redirect:/coordinador/acudientes";
     }
-
 
     @GetMapping("/coordinador/eliminarAcudiente/{id}")
     @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_COORDINADOR')")
@@ -127,9 +128,12 @@ public class AcudienteController {
     }
 
     @GetMapping("/acudiente/estudiantes")
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_ACUDIENTE')")
-    public String estudiantesAcudiente(Model model) {
+    @PreAuthorize("hasAnyRole('ROLE_ACUDIENTE', 'ROLE_ADMIN')")
+    public String verEstudiantesAcudiente(Model model) throws Exception {
+        Acudiente acudiente = serAcudiente.getByUser(serUser.getLoggedUser());
+
         model.addAttribute("itemNavbar", "estudiantes");
+        model.addAttribute("hijos", serEstudiante.getEstudiantesAcudiente(acudiente));
         return "acudiente/estudiantes/index";
     }
 
@@ -140,6 +144,11 @@ public class AcudienteController {
         return "acudiente/observaciones/index";
     }
 
+    @GetMapping("/acudiente/horarios")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_ACUDIENTE')")
+    public String horariosAcudiente(Model model) {
+        model.addAttribute("itemNavbar", "horarios");
+        return "acudiente/horarios/index";
+    }
+
 }
-
-
