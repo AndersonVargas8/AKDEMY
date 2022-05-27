@@ -21,6 +21,8 @@ import com.google.cloud.firestore.Query;
 import com.google.cloud.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -80,11 +82,15 @@ public class ChatService implements IChatService{
         docData.put("isProfesor", message.isProfesor());
 
 
+
         // Set reference to save document
         CollectionReference ChatMessages = getCollection(chat);
 
         // Save document
         ChatMessages.document().create(docData);
+
+        //Update lastUpdate date
+        getCollection().document(chat.getId()).update("lastUpdate", message.getDate().getTime());
 
     }
 
@@ -130,6 +136,7 @@ public class ChatService implements IChatService{
                     ((Long) data.get("lastUpdate"))
                  ));
              }
+
  
              // Cast and return collection
              return (Iterable<Chat>) chats;
@@ -192,6 +199,13 @@ public class ChatService implements IChatService{
                     ((Boolean) data.get("isProfesor"))
                  ));
              }
+
+             Collections.sort(messages, new Comparator<Message>() {
+                @Override
+                public int compare(Message m1, Message m2) {
+                  return m1.getDate().compareTo(m2.getDate());
+                }
+              });
  
              // Cast and return collection
              return (Iterable<Message>) messages;

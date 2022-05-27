@@ -111,11 +111,13 @@ public class DifusionController {
     @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_PROFESOR')")
     public String newChat(@Valid @ModelAttribute("chat") Chat chat, Model model){
 
+        String id = "chat-" + chat.getEstudiante().getId() + "-" + chat.getAcudiente().getId() + "-" + chat.getProfesor().getId();
+
         chat.setLastUpdate(new Date());
 
         serChat.saveChat(chat);
 
-        return "redirect:/profesor/comunicaciones";
+        return String.format("redirect:/profesor/comunicaciones/chat/%s", id);
     }
 
     @GetMapping("/profesor/comunicaciones/difusiones/delete/{id}/{id_curso}")

@@ -17,7 +17,7 @@
             <td th:if="${chat.estudiante.cursoActual != null}" th:text="${chat.estudiante.cursoActual.nombre_Curso}"></td>
             <td th:unless="${chat.estudiante.cursoActual != null}"></td>
             <td>
-                <button type='button' class='btn btn-info btn-sm' th:onclick="">
+                <button type='button' class='btn btn-info btn-sm' th:onclick="openChat([[${chat.id}]])">
                     <span class="fas fa-square-up-right"></span>
                 </button>
             </td>
