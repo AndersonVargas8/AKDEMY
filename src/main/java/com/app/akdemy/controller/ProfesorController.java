@@ -1,6 +1,5 @@
 package com.app.akdemy.controller;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -8,6 +7,7 @@ import javax.validation.Valid;
 
 import com.app.akdemy.Exception.ProfesorNotFound;
 import com.app.akdemy.Exception.UsernameOrIdNotFound;
+import com.app.akdemy.entity.Curso;
 import com.app.akdemy.entity.Estudiante;
 import com.app.akdemy.entity.HorarioCurso;
 import com.app.akdemy.entity.MateriaGrado;
@@ -16,6 +16,7 @@ import com.app.akdemy.entity.Profesor;
 import com.app.akdemy.entity.User;
 import com.app.akdemy.interfacesServices.ICursoService;
 import com.app.akdemy.interfacesServices.IHorarioService;
+import com.app.akdemy.interfacesServices.IMateriaGradoService;
 import com.app.akdemy.interfacesServices.IProfesorService;
 import com.app.akdemy.service.UserService;
 
@@ -42,6 +43,9 @@ public class ProfesorController {
 
     @Autowired
     private ICursoService serCurso;
+
+    @Autowired
+    private IMateriaGradoService serMateriaGrado;
 
     // controlador de profesor desde coordinador
     @GetMapping("/coordinador/profesores")
@@ -154,6 +158,30 @@ public class ProfesorController {
         model.addAttribute("cursos", serCurso.getCursosProfesor(profesor));
 
         return "profesor/cursos/index";
+    }
+
+    @GetMapping("/profesor/calificaciones")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_PROFESOR')")
+    public String calificaciones(Model model) throws ProfesorNotFound, Exception{
+        Profesor profesor = serProfesor.getByUser(serUser.getLoggedUser());
+        List<Curso> cursos = serCurso.getCursosProfesor(profesor);
+        
+        model.addAttribute("cursos",cursos);
+        return "profesor/calificaciones/index";
+    }
+
+    @GetMapping("/profesor/calificaciones/estudiantesCurso/{idCurso}")
+    public String getEstudiantesCurso(Model model, @PathVariable int idCurso){
+        List<Estudiante> estudiantes = serCurso.buscarPorId(idCurso).getEstudiantes();
+        model.addAttribute("estudiantes",estudiantes);
+        return "profesor/calificaciones/selectestudiantes";
+    }
+
+    @GetMapping("/profesor/calificaciones/materiasCurso/{idCurso}")
+    public String getMateriasCurso(Model model, @PathVariable int idCurso) throws ProfesorNotFound, Exception{
+        List<MateriaGrado> materias = serMateriaGrado.getByCursoAndProfesor(idCurso,serProfesor.getByUser(serUser.getLoggedUser()));
+        model.addAttribute("materias",materias);
+        return "profesor/calificaciones/selectMaterias";
     }
 
 }

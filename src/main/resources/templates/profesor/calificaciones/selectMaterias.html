@@ -1,0 +1,10 @@
+
+<div>
+    <label class="col-lg-2"><b>Materia</b></label>
+    <select id="materiasSelect" class="w-50 border" data-live-search="true" 
+        data-none-results-text="No se encontró {0}">
+        <option th:selected="${true}" th:text="${'Selecciona una materia'}" th:value="${0}"></option>
+        <option th:each="materia:${materias}" th:value="${materia.id}" th:text="${materia.materia.nombre}"></option>
+    </select>
+</div>
+<script type="text/javascript" th:src="@{/js/profesor/calificaciones.js}"></script>

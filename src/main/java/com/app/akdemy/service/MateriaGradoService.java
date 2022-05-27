@@ -3,6 +3,8 @@ package com.app.akdemy.service;
 import java.util.List;
 
 import com.app.akdemy.entity.MateriaGrado;
+import com.app.akdemy.entity.Profesor;
+import com.app.akdemy.interfacesServices.ICursoService;
 import com.app.akdemy.interfacesServices.IMateriaGradoService;
 import com.app.akdemy.repository.MateriaGradoRepository;
 
@@ -14,6 +16,9 @@ public class MateriaGradoService implements IMateriaGradoService{
 
     @Autowired
     MateriaGradoRepository repMateriaGrado;
+
+    @Autowired
+    ICursoService serCurso;
 
     @Override
     public void saveMateriaGrado(MateriaGrado materiaGrado) {
@@ -36,6 +41,16 @@ public class MateriaGradoService implements IMateriaGradoService{
 				.orElseThrow(() -> new Exception("SchoolSubjectnotFound in deleteUser -"+this.getClass().getName()));
 
 		repMateriaGrado.delete(materiaGrado);
+    }
+
+    @Override
+    public List<MateriaGrado> getByCursoAndProfesor(int idCurso, Profesor profesor) {
+        List<MateriaGrado> materias = repMateriaGrado.getMateriasByCursoAndProfesor(serCurso.buscarPorId(idCurso),profesor);
+
+        if(materias.isEmpty()){
+            return null;
+        }
+        return materias;
     }
     
 }
