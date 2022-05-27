@@ -1,0 +1,26 @@
+<h4>Lista de estudiantes</h4><br>
+<table class="table border table-striped  table-hover" id="estudiantesTable">
+    <thead class="thead-dark">
+        <tr>
+            <th>Nombres</th>
+            <th>Apellidos</th>
+            <th>Calificación</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr th:each="estudiante: ${estudiantes}">
+            <td th:text="${estudiante.nombres}">Nombres estudiante</td>
+            <td th:text="${estudiante.apellidos}">Apellidos estudiante</td>
+            <td>
+                <div class="row">
+                    <div class="col-lg-4">
+                        <input th:id="${'nota'+estudiante.id}" class="form-control" type="number" min="0" max="5" step="0.1" th:onchange="evaluarNota([[${estudiante.id}]])">
+                    </div>
+                    <label  th:id="${'check'+estudiante.id}" style="color:lime" hidden ><i class="fa fa-check pt-3 fa-lg" ></i>&nbsp;Aprobado</label>
+                    <label  th:id="${'x'+estudiante.id}" style="color:red" hidden ><i class="fa fa-x pt-2" ></i>&nbsp;Reprobado</label>
+                </div>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<script type="text/javascript" th:src="@{/js/profesor/calificaciones.js}"></script>

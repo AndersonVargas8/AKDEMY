@@ -1,5 +1,6 @@
 package com.app.akdemy.controller;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -167,6 +168,7 @@ public class ProfesorController {
         List<Curso> cursos = serCurso.getCursosProfesor(profesor);
         
         model.addAttribute("cursos",cursos);
+        model.addAttribute("estudiantes",new ArrayList());
         return "profesor/calificaciones/index";
     }
 
@@ -174,7 +176,7 @@ public class ProfesorController {
     public String getEstudiantesCurso(Model model, @PathVariable int idCurso){
         List<Estudiante> estudiantes = serCurso.buscarPorId(idCurso).getEstudiantes();
         model.addAttribute("estudiantes",estudiantes);
-        return "profesor/calificaciones/selectestudiantes";
+        return "profesor/calificaciones/listaEstudiantes";
     }
 
     @GetMapping("/profesor/calificaciones/materiasCurso/{idCurso}")
