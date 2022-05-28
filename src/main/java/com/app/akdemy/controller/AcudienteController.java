@@ -139,13 +139,28 @@ public class AcudienteController {
             estudiantes.add(estudiante);
         }
 
-
         model.addAttribute("estudiantes", estudiantes);
         model.addAttribute("acudiente",acudiente);
         model.addAttribute("hijos", serEstudiante.getEstudiantesAcudiente(acudiente));
         return "/coordinador/acudientes/acudientesEstudiantes";
     }
 
+
+    @GetMapping("/coordinador/acudientes/estudiantes/listadoEstudiantes/{idAcudiente}")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_COORDINADOR')")
+    public String verTodosEstudiantes(@PathVariable long idAcudiente,Model model) throws AcudienteNotFound {
+        List<Estudiante> estudianteList = serEstudiante.listarEstudiantes();
+        List<Estudiante> estudiantes = new ArrayList<>();
+        Acudiente acudiente = serAcudiente.getById(idAcudiente);
+        for(Estudiante estudiante: estudianteList){
+                estudiantes.add(estudiante);
+        }
+
+        model.addAttribute("estudiantes", estudiantes);
+        model.addAttribute("acudiente",acudiente);
+        model.addAttribute("hijos", serEstudiante.getEstudiantesAcudiente(acudiente));
+        return "coordinador/acudientes/listadoEstudiantes";
+    }
     // controlador vista acudiente
 
     @GetMapping("/acudiente")

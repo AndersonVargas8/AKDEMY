@@ -41,3 +41,7 @@ function deleteAcudiente(){
 function verEstudiantes(id){
     window.location="/coordinador/acudientes/estudiantes/"+id;
 }
+
+function vertodosEstudiantes(id){
+    window.location="/coordinador/acudientes/estudiantes/listadoEstudiantes/"+id;
+}

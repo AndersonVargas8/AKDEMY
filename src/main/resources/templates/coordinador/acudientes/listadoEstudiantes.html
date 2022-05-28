@@ -8,11 +8,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,
                 initial-scale=1.0">
-    <title>Coordinador | Cursos</title>
+    <title>Coordinador | Estudiantes</title>
 
     <link rel="shortcut icon" type="image/x-icon" href="../static/img/avatar1.png" th:href="@{../img/avatar1.png}">
     <!--JQUERY-->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <!-- FRAMEWORK BOOTSTRAP para el estilo de la pagina-->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
@@ -23,13 +23,15 @@
     <!-- Icons-->
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <!-- Local Files-->
-    <script type="text/javascript" th:src="@{/js/coordinador/cursoEstudiante.js}"></script>
+    <script type="text/javascript" th:src="@{/js/coordinador/acudientesEstudiantes.js}"></script>
+    <script type="text/javascript" th:src="@{/js/coordinador/acudientes.js}"></script>
 
-    <link rel="stylesheet" type="text/css" th:href="@{/css/coordinador/cursos.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/coordinador/acudientes.css}">
     <link rel="stylesheet" type="text/css" th:href="@{/css/normalize.css}">
 
     <script src="https://cdn.datatables.net/plug-ins/1.11.5/i18n/es-ES.json"></script>
 </head>
+
 
 <body>
 <div th:include="coordinador/navbar.html" th:remove="tag"></div>
@@ -38,24 +40,24 @@
         <div class="main card w-100">
             <div class="card-title row titletable">
                 <div class="col text-left">
-                    <h2>Estudiantes en Cursos&nbsp;<span class="badge">Coordinador</span></h2>
-                    <p class="mb-0 fw-bold">Inscripción de estudiantes al curso </p>
+                    <h2>Lista de Estudiantes&nbsp;<span class="badge">Coordinador</span></h2>
+                    <p class="mb-0 fw-bold">Asignación de estudiantes al acudiente </p>
                 </div>
                 <div class="col text-right">
-                    <form th:action="@{/coordinador/cursos}">
-                        <input type="submit" value="Retornar a Cursos" class="btn btn-secondary"/>
+                    <form th:action="@{/coordinador/acudientes}">
+                        <input type="submit" value="Retornar a Acudientes" class="btn btn-secondary"/>
                     </form>
                 </div>
             </div>
             <div class="card-body ">
                 <!-- ESTUDIANTES EN CHECKBOX -->
-                <form th:object="${curso}" method="post" th:action="@{/coordinador/cursos/estudiantes}">
-                    <table id="tablaCursoEstudiantes" class=" table table-borderless table-hover" style="width:100%">
+                <form th:object="${acudiente}" method="post" th:action="@{/coordinador/acudientes/estudiantes}">
+                    <table id="tablaAcudientesConEstudiantes" class=" table table-borderless table-hover" style="width:100%">
                         <thead class="thead-dark">
                         <tr>
                             <th colspan="6" class="bg-dark border border-dark">
                                 <div class="d-flex justify-content-center">
-                                    <h3 class="mb-0 fw-bold" th:text=" 'Curso: ' + ${curso.nombre_Curso}"></h3>
+                                    <h3 class="mb-0 fw-bold" th:text=" 'Acudiente: ' + ${acudiente.nombres}"></h3>
                                 </div>
                             </th>
                         </tr>
@@ -75,26 +77,29 @@
                         </thead>
                         <tbody>
 
-                        <input type="text" hidden th:field="${curso.id}">
+                        <input type="text" hidden th:field="${acudiente.id}">
                         <tr th:each="est:${estudiantes}">
 
                             <td>
                                 <div class="custom-control custom-checkbox">
-                                    <input th:class="form-check-input" th:id="flexCheckDefault" th:type="checkbox" th:field="${curso.estudiantes}" th:value="${est.id}"></input>
+                                    <input th:class="form-check-input" th:id="flexCheckDefault" th:type="checkbox" th:field="${acudiente.estudiantes}" th:value="${est.id}"></input>
                                 </div>
                             </td>
                             <td th:text="${est.nombres}"></td>
                             <td th:text="${est.apellidos}"></td>
                             <td th:text="${est.documento}"></td>
                         </tr>
+
                         </tbody>
+
                     </table>
-                    <input type="submit" class="btn btn-primary" value="Inscribir estudiantes">
+                    <input type="submit" class="btn btn-primary" value="Asignar estudiantes">
                 </form>
+
             </div>
         </div>
     </section>
 </div>
 </body>
-</html>
 
+</html>
