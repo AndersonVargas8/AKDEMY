@@ -79,7 +79,6 @@
 
                         <input type="text" hidden th:field="${acudiente.id}">
                         <tr th:each="est:${hijos}">
-
                                 <td th:text="${est.nombres}"></td>
                                 <td th:text="${est.apellidos}"></td>
                                 <td th:text="${#dates.format(est.fechaNacimiento,'dd-MM-yyyy')}"> </td>
