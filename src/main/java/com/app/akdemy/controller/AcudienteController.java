@@ -4,6 +4,7 @@ import com.app.akdemy.Exception.AcudienteNotFound;
 import com.app.akdemy.Exception.CustomeFieldValidationException;
 import com.app.akdemy.Exception.UsernameOrIdNotFound;
 import com.app.akdemy.entity.Acudiente;
+import com.app.akdemy.entity.Curso;
 import com.app.akdemy.entity.Estudiante;
 import com.app.akdemy.entity.User;
 import com.app.akdemy.interfacesServices.IAcudienteService;
@@ -23,7 +24,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Controller
@@ -125,6 +128,25 @@ public class AcudienteController {
         }
         return "redirect:/coordinador/acudientes";
     }
+
+    @GetMapping("/coordinador/acudientes/estudiantes/{idAcudiente}")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_COORDINADOR')")
+    public String estudiantes(@PathVariable long idAcudiente,Model model) throws AcudienteNotFound {
+        List<Estudiante> estudianteList = serEstudiante.listarEstudiantes();
+        List<Estudiante> estudiantes = new ArrayList<>();
+        Acudiente acudiente = serAcudiente.getById(idAcudiente);
+        for(Estudiante estudiante: estudianteList){
+            estudiantes.add(estudiante);
+        }
+
+
+        model.addAttribute("estudiantes", estudiantes);
+        model.addAttribute("acudiente",acudiente);
+        model.addAttribute("hijos", serEstudiante.getEstudiantesAcudiente(acudiente));
+        return "/coordinador/acudientes/acudientesEstudiantes";
+    }
+
+    // controlador vista acudiente
 
     @GetMapping("/acudiente")
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_ACUDIENTE')")

@@ -37,3 +37,7 @@ function deleteAcudiente(){
 
     // window.location = "/coordinador/eliminarEstudiante/" + ;
 }
+
+function verEstudiantes(id){
+    window.location="/coordinador/acudientes/estudiantes/"+id;
+}

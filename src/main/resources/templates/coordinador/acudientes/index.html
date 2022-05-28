@@ -79,6 +79,10 @@
                         <td th:text="${acudiente.telefono}"></td>
                         <td th:text="${acudiente.usuario.username}"></td>
                         <td>
+                            <button type='button' class='btn btn-primary btn-sm' th:onclick="verEstudiantes([[${acudiente.id}]])" title="Ver estudiantes" >
+                                <span class="fas fa-users"></span>
+                                <span class='align-middle'></span>
+                            </button>
                             <button type='button' class='btn btn-info
                                             btn-sm' th:onclick="editarAcudiente([[${acudiente.id}]])">
                                 <span class="fas fa-user-pen"></span>
