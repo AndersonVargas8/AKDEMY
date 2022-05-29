@@ -24,6 +24,7 @@
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <!-- Local Files-->
     <script type="text/javascript" th:src="@{/js/coordinador/acudientesEstudiantes.js}"></script>
+    <script type="text/javascript" th:src="@{/js/coordinador/acudientes.js}"></script>
 
     <link rel="stylesheet" type="text/css" th:href="@{/css/coordinador/acudientes.css}">
     <link rel="stylesheet" type="text/css" th:href="@{/css/normalize.css}">
@@ -90,10 +91,9 @@
                             </tr>
                         </tbody>
                     </table>
+                    <input type="submit" class="btn btn-primary" value="Inscribir estudiantes" th:onclick="vertodosEstudiantes([[${acudiente.id}]])">
                 </div>
             </div>
-          
-
         </section> 
     </div>
 </body>
