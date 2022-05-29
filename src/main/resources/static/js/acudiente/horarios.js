@@ -10,11 +10,12 @@ $(document).ready(function() {
         }
     );
     $('select').selectpicker();
+    $('#cursoEstu').prop('hidden',true);
     $('#estudiantesSelect').change(function() {
 
         var url = "horarios/" + $(this).val();
         $('#horarioEst').load(url, function(){
-            
+            $('#cursoEstu').prop('hidden',false);
         });
     })
 } );

@@ -242,8 +242,9 @@ public class EstudianteController {
     @GetMapping("/estudiante/curso")
     @PreAuthorize("hasAnyRole('ROLE_ESTUDIANTE', 'ROLE_ADMIN')")
     public String verCursoEstudiante(Model model) throws Exception {
+
         model.addAttribute("itemNavbar", "curso");
-        model.addAttribute("estudiantes", serEstudiante.listarEstudiantes());
+
         return "estudiante/curso/index";
     }
 

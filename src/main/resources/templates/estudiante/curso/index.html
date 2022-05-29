@@ -57,14 +57,14 @@
                             <tr>
                                 <th>ID</th>
                                 <th>Nombre Completo</th>
-                                <th>Documento</th>
+                                <th>Usuario</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr th:each="estudiante:${estudiantes}">
                                 <td th:text="${estudiante.id}"></td>
                                 <td th:text="${estudiante.nombres} + ' ' + ${estudiante.apellidos}"></td>
-                                <td th:text="${estudiante.documento}"></td>
+                                <td th:text="${estudiante.usuario.username}"></td>
                             </tr>
                         </tbody>
                     </table>

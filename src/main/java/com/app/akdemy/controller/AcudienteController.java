@@ -6,9 +6,11 @@ import com.app.akdemy.Exception.UsernameOrIdNotFound;
 import com.app.akdemy.entity.Acudiente;
 import com.app.akdemy.entity.Curso;
 import com.app.akdemy.entity.Estudiante;
+import com.app.akdemy.entity.HorarioCurso;
 import com.app.akdemy.entity.User;
 import com.app.akdemy.interfacesServices.IAcudienteService;
 import com.app.akdemy.service.EstudianteService;
+import com.app.akdemy.service.HorarioService;
 import com.app.akdemy.service.ObservadorService;
 import com.app.akdemy.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +27,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.validation.Valid;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -43,6 +46,9 @@ public class AcudienteController {
 
     @Autowired
     private ObservadorService serObservador;
+
+    @Autowired
+    private HorarioService serHorario;
 
     @Autowired
     BCryptPasswordEncoder bCryptPasswordEncoder;
@@ -131,17 +137,16 @@ public class AcudienteController {
 
     @GetMapping("/coordinador/acudientes/estudiantes/{idAcudiente}")
     @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_COORDINADOR')")
-    public String estudiantes(@PathVariable long idAcudiente,Model model) throws AcudienteNotFound {
+    public String estudiantes(@PathVariable long idAcudiente, Model model) throws AcudienteNotFound {
         List<Estudiante> estudianteList = serEstudiante.listarEstudiantes();
         List<Estudiante> estudiantes = new ArrayList<>();
         Acudiente acudiente = serAcudiente.getById(idAcudiente);
-        for(Estudiante estudiante: estudianteList){
+        for (Estudiante estudiante : estudianteList) {
             estudiantes.add(estudiante);
         }
 
-
         model.addAttribute("estudiantes", estudiantes);
-        model.addAttribute("acudiente",acudiente);
+        model.addAttribute("acudiente", acudiente);
         model.addAttribute("hijos", serEstudiante.getEstudiantesAcudiente(acudiente));
         return "/coordinador/acudientes/acudientesEstudiantes";
     }
@@ -200,6 +205,38 @@ public class AcudienteController {
         model.addAttribute("itemNavbar", "horarios");
         model.addAttribute("estudiantes", serEstudiante.getEstudiantesAcudiente(acudiente));
         return "acudiente/horarios/index";
+    }
+
+    @GetMapping("/acudiente/horarios/{id}")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_ACUDIENTE')")
+    public String verHorariosEstudianteAcudiente(@PathVariable Long id, Model model) throws Exception {
+        Estudiante estudiante = serEstudiante.buscarPorId(id);
+        model.addAttribute("estudiantes", estudiante);
+        model = cargarTablaHorarios(id, model);
+        return "acudiente/horarios/horarioEstudiante";
+    }
+
+    private Model cargarTablaHorarios(@PathVariable Long id, Model model) throws Exception {
+        Estudiante estudiante = serEstudiante.buscarPorId(id);
+        if (estudiante == null)
+            return model;
+        model.addAttribute("nombreEstudiante", estudiante.getNombres().concat(" " + estudiante.getApellidos()));
+
+        // Obtener los horarios
+        Curso cursoActual = estudiante.getCursoActual();
+        if (cursoActual == null)
+            return model;
+
+        List<HorarioCurso> horarios = serHorario.obtenerPorCurso(cursoActual.getId());
+
+        model.addAttribute("horarios", horarios);
+        // Crear las horas del horario
+        List<String> horas = Arrays.asList("06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17");
+
+        model.addAttribute("horas", horas);
+
+        model.addAttribute("nombreCurso", cursoActual.getNombre_Curso());
+        return model;
     }
 
 }
