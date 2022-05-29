@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Optional;
 
 import com.app.akdemy.Exception.CustomeFieldValidationException;
-import com.app.akdemy.entity.Curso;
 import com.app.akdemy.entity.Estudiante;
 import com.app.akdemy.entity.User;
 import com.app.akdemy.interfacesServices.IEstudianteService;

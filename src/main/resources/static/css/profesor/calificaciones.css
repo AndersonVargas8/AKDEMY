@@ -46,5 +46,12 @@ body {
     border-right: 1px solid #292b2c !important;
 }
 
-#notaInput {
+.guardar{
+    background-color: rgb(55,80,130);
+    color: floralwhite;
+}
+
+.guardar:hover{
+    background-color: rgb(36, 59, 107);
+    color: floralwhite;
 }

@@ -2,9 +2,7 @@ package com.app.akdemy.service;
 
 import java.util.List;
 
-import com.app.akdemy.Exception.ProfesorNotFound;
 import com.app.akdemy.entity.Curso;
-import com.app.akdemy.entity.Estudiante;
 import com.app.akdemy.entity.HorarioCurso;
 import com.app.akdemy.entity.Profesor;
 import com.app.akdemy.interfacesServices.IHorarioService;
