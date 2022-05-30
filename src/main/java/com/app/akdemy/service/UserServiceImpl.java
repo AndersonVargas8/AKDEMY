@@ -79,6 +79,16 @@ public class UserServiceImpl implements UserService {
         
         return false;
     }
+
+    public boolean userHasRole(User user,String roleName){
+        Role role = serRole.buscarPorNombre(roleName);
+        Set<Role> roles = user.getRoles();
+
+        if(roles.contains(role))
+            return true;
+        
+        return false;
+    }
     
     @Override
     public User getLoggedUser() throws Exception {

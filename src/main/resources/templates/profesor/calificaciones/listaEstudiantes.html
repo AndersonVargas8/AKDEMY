@@ -1,0 +1,65 @@
+<h4>Lista de estudiantes</h4><br>
+<form id="calificacionesForm" th:object="${calificaciones}" method="post" role="form"
+    th:action="@{/profesor/calificaciones}">
+    <input th:value="${calificaciones.profesor}" th:field="${calificaciones.profesor}" hidden>
+    <input th:value="${calificaciones.curso}" th:field="${calificaciones.curso}" hidden>
+    <input th:value="${calificaciones.materia}" th:field="${calificaciones.materia}" hidden>
+    <input th:value="${calificaciones.periodo}" th:field="${calificaciones.periodo}" hidden>
+    <table class="table border table-striped  table-hover" id="estudiantesTable">
+        <thead class="thead-dark">
+            <tr>
+                <th>Nombres</th>
+                <th>Apellidos</th>
+                <th style="width: 40%;">Calificación</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="estudiante, itemStat: ${calificaciones.estudiantes}">
+                <td th:text="${estudiante.nombres}">Nombres estudiante</td>
+                <td th:text="${estudiante.apellidos}">Apellidos estudiante</td>
+                <td>
+                    <div class="row">
+                        <div class="col-lg-4 text-center">
+                            <input th:field="${calificaciones.estudiantes[__${itemStat.index}__].id}" hidden>
+                            <input th:field="${calificaciones.estudiantes[__${itemStat.index}__].idCalificacion}"
+                                hidden>
+                            <input th:hidden="${estudiante.cerrada}" type="number" min="0" max="5" step="0.1"
+                                th:id="${'nota'+estudiante.id}" class="form-control"
+                                th:onchange="evaluarNota([[${estudiante.id}]])"
+                                th:field="${calificaciones.estudiantes[__${itemStat.index}__].nota}">
+                            <b><label th:if="${estudiante.cerrada}" th:text="${estudiante.nota}"
+                                    class="mt-1"></label></b>
+                        </div>
+                        <label th:id="${'check'+estudiante.id}" style="color:limegreen" th:hidden="${estudiante.nota < 3}"><i
+                                class="fa fa-check pt-3 fa-lg"></i>&nbsp;Aprobado</label>
+                        <label th:id="${'x'+estudiante.id}" style="color:red"
+                            th:hidden="${estudiante.nota == null OR estudiante.nota >= 3}"><i
+                                class="fa fa-x pt-2"></i>&nbsp;Reprobado</label>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="d-flex justify-content-end">
+        <div id="guardadoLabel" th:if="${!calificaciones.isCerrada}">
+            <i class="fas fa-check-circle mt-2" style="color:green"></i>
+            <i class="mt-1 mr-2"> Guardado</i>
+        </div>
+        <div id="cerradoLabel" th:if="${calificaciones.isCerrada}">
+            <i class="fas fa-check-circle mt-2" style="color:green"></i>
+            <i class="mt-1 mr-2"> Cerrado</i>
+        </div>
+        <div id="guardandoLabel" hidden>
+            <i class="fa-solid fa-spinner fa-spin-pulse mt-2"></i>
+            <i class="mt-1 mr-2"> Guardando</i>
+        </div>
+        <button th:if="${!calificaciones.isCerrada}" type="button" class="w-100 btn btn-info" style="max-width: 20%;"
+            id="cerrarNotasBtn" th:onclick="confirmCerrarNotas()">Cerrar
+            calificaciones</button>&nbsp;
+        <button th:if="${!calificaciones.isCerrada}" type="submit" class="w-100 btn guardar" style="max-width: 20%;"
+            disabled id="guardarBtn">Guardar
+            borrador</button>
+    </div>
+</form>
+<div th:include="profesor/calificaciones/confirm-cerrar-dialog.html" th:remove="tag"></div>
+<script type="text/javascript" th:src="@{/js/profesor/calificaciones.js}"></script>

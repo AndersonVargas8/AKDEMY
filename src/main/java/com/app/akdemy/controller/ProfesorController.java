@@ -1,21 +1,27 @@
 package com.app.akdemy.controller;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 
 import javax.validation.Valid;
 
 import com.app.akdemy.Exception.ProfesorNotFound;
 import com.app.akdemy.Exception.UsernameOrIdNotFound;
+import com.app.akdemy.dto.CalificacionDTO;
+import com.app.akdemy.entity.Curso;
 import com.app.akdemy.entity.Estudiante;
 import com.app.akdemy.entity.HorarioCurso;
 import com.app.akdemy.entity.MateriaGrado;
 import com.app.akdemy.entity.Observador;
+import com.app.akdemy.entity.Periodo;
 import com.app.akdemy.entity.Profesor;
+import com.app.akdemy.entity.Role;
 import com.app.akdemy.entity.User;
+import com.app.akdemy.interfacesServices.ICalificacionesService;
 import com.app.akdemy.interfacesServices.ICursoService;
 import com.app.akdemy.interfacesServices.IHorarioService;
+import com.app.akdemy.interfacesServices.IMateriaGradoService;
 import com.app.akdemy.interfacesServices.IProfesorService;
 import com.app.akdemy.service.UserService;
 
@@ -43,6 +49,12 @@ public class ProfesorController {
     @Autowired
     private ICursoService serCurso;
 
+    @Autowired
+    private IMateriaGradoService serMateriaGrado;
+
+    @Autowired
+    private ICalificacionesService serCalificaciones;
+
     // controlador de profesor desde coordinador
     @GetMapping("/coordinador/profesores")
     @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_COORDINADOR')")
@@ -62,7 +74,10 @@ public class ProfesorController {
 
         profesor.setUsuario(serUser.getUserById(profesor.getUsuario().getId()));
         serProfesor.saveProfesor(profesor);
-        serUser.setRoleProfesor(profesor.getUsuario());
+
+        if(!serUser.userHasRole(profesor.getUsuario(), "PROFESOR")){
+            serUser.setRoleProfesor(profesor.getUsuario());
+        }
         return "redirect:/coordinador/profesores";
     }
 
@@ -154,6 +169,47 @@ public class ProfesorController {
         model.addAttribute("cursos", serCurso.getCursosProfesor(profesor));
 
         return "profesor/cursos/index";
+    }
+
+    @GetMapping("/profesor/calificaciones")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_PROFESOR')")
+    public String calificaciones(Model model) throws ProfesorNotFound, Exception{
+        Profesor profesor = serProfesor.getByUser(serUser.getLoggedUser());
+        List<Curso> cursos = serCurso.getCursosProfesor(profesor);
+        List<Periodo> periodos = serCalificaciones.getAllPeriodos();
+        
+        model.addAttribute("cursos",cursos);
+        model.addAttribute("calificaciones",new CalificacionDTO());
+        model.addAttribute("periodos",periodos);
+        model.addAttribute("itemNavbar", "calificaciones");
+        return "profesor/calificaciones/index";
+    }
+
+    @GetMapping("/profesor/calificaciones/estudiantesCalificaciones/{idCurso}/{idMateria}/{idPeriodo}")
+    public String getEstudiantesCurso(Model model, @PathVariable int idCurso, @PathVariable int idMateria, @PathVariable int idPeriodo) throws ProfesorNotFound, Exception{
+        long idProfesor = serProfesor.getByUser(serUser.getLoggedUser()).getId();
+        CalificacionDTO calificaciones = serCalificaciones.findEstudiantesCalificaciones(idCurso, idMateria, idPeriodo, idProfesor);
+        model.addAttribute("calificaciones",calificaciones);
+        return "profesor/calificaciones/listaEstudiantes";
+    }
+
+    @GetMapping("/profesor/calificaciones/materiasCurso/{idCurso}")
+    public String getMateriasCurso(Model model, @PathVariable int idCurso) throws ProfesorNotFound, Exception{
+        List<MateriaGrado> materias = serMateriaGrado.getByCursoAndProfesor(idCurso,serProfesor.getByUser(serUser.getLoggedUser()));
+        model.addAttribute("materias",materias);
+        return "profesor/calificaciones/selectMaterias";
+    }
+
+    @PostMapping("/profesor/calificaciones")
+    public String guardarCalificaciones(@ModelAttribute CalificacionDTO calificaciones) throws ProfesorNotFound, Exception{
+        serProfesor.guardarCalificaciones(calificaciones,false);
+        return "redirect:/profesor/calificaciones";
+    }
+
+    @PostMapping("/profesor/calificaciones/cerrar")
+    public String cerrarCalificaciones(@ModelAttribute CalificacionDTO calificaciones) throws ProfesorNotFound, Exception{
+        serProfesor.guardarCalificaciones(calificaciones,true);
+        return "redirect:/profesor/calificaciones";
     }
 
 }

@@ -54,3 +54,9 @@ INSERT INTO `grupo_sanguineo_rh`(`id`, `gsrh_descripcion`) VALUES
 (7, 'O+'),
 (8, 'O-');
 
+INSERT INTO `periodo` (`id`, `per_descripcion`) VALUES 
+('1', '1'),
+('2', '2'),
+('3', '3'),
+('4', '4')
+

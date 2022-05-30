@@ -1,0 +1,36 @@
+
+<div>
+    <label class="col-lg-3"><b>Periodo</b></label>
+    <select id="periodosSelect" class="w-60 border" data-live-search="true" 
+        data-none-results-text="No se encontró {0}">
+        <option th:selected="${true}" th:text="${'Selecciona un periodo'}" th:value="${0}"></option>
+        <option th:each="periodo: ${periodos}" th:value="${periodo.id}" th:text="${periodo.descripcion}">1</option>
+    </select>
+</div>
+<script type="text/javascript">
+    $('select').selectpicker();
+
+    $("#periodosSelect").change(function () {
+        $("#listaEstudiantes").prop("hidden", true);
+        if($(this).val() == 0){
+            return;
+        }
+
+        cargarLista();
+        
+    })
+
+    function cargarLista(){
+        let curso = $("#cursos").val();
+        let materia = $("#materiasSelect").val();
+        let periodo = $("#periodosSelect").val();
+        let url = "/profesor/calificaciones/estudiantesCalificaciones/" + curso + "/" + materia + "/" + periodo;
+        $("#listaEstudiantes").load(url,function(){
+            table.rows().remove().draw();
+            $("#listaEstudiantes").prop("hidden", false);
+
+        });
+    }
+    
+    
+</script>

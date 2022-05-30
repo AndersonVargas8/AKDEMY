@@ -11,4 +11,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ProfesorRepository extends CrudRepository<Profesor,Long>{
     public Optional<Profesor> findByUsuario(User user);
+
+   
 }

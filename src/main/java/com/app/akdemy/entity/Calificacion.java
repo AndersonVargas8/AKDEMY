@@ -42,19 +42,21 @@ public class Calificacion {
     @JoinColumn(name = "cal_materia")
     private MateriaGrado materia;
 
-    //Constructores de la clase Calificacion
+    @Column(name = "cal_cerrada")
+    private boolean cerrada;
 
-
+    //Constructores de la clase Calificacion    
     public Calificacion() {
     }
 
-    public Calificacion(long id, Float nota, Periodo periodo, Estudiante estudiante, Profesor profesor, MateriaGrado materia) {
+    public Calificacion(long id, Float nota, Periodo periodo, Estudiante estudiante, Profesor profesor, MateriaGrado materia, boolean cerrada) {
         this.id = id;
         this.nota = nota;
         this.periodo = periodo;
         this.estudiante = estudiante;
         this.profesor = profesor;
         this.materia = materia;
+        this.cerrada = cerrada;
     }
 
     //Getter y Setter
@@ -105,6 +107,18 @@ public class Calificacion {
 
     public void setMateria(MateriaGrado materia) {
         this.materia = materia;
+    }
+
+    public boolean isCerrada() {
+        return this.cerrada;
+    }
+
+    public boolean getCerrada() {
+        return this.cerrada;
+    }
+
+    public void setCerrada(boolean cerrada) {
+        this.cerrada = cerrada;
     }
 
     @Override

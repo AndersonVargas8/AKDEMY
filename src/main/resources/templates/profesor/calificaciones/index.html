@@ -1,0 +1,80 @@
+<!--MATERIAS-->
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,
+                initial-scale=1.0">
+    <title>Profesor | Calificaciones</title>
+
+    <link rel="shortcut icon" type="image/x-icon" href="../static/img/avatar1.png" th:href="@{../img/avatar1.png}">
+    <!--JQUERY-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- FRAMEWORK BOOTSTRAP para el estilo de la pagina-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+        crossorigin="anonymous">
+    
+    <!-- Local Files-->
+    <link rel="stylesheet" type="text/css" th:href="@{/css/profesor/calificaciones.css}">
+    <link rel="stylesheet" type="text/css" href="../../static/css/normalize.css" th:href="@{/css/normalize.css}">
+    <script type="text/javascript" th:src="@{/js/profesor/calificaciones.js}"></script>
+    <!--SELECTPICKER-->
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.3/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
+</head>
+
+<body>
+    <div th:include="profesor/navbar.html" th:remove="tag"></div>
+    <div class="container-lg pr-5 pl-5">
+        <section class="layout">
+            <div class="main card w-100">
+                <div class="card-title row titletable">
+                    <div class="col text-left">
+                        <h2>Calificaciones&nbsp;<span class="badge">Profesor</span></h2>
+                        <p>Ingreso de calificaciones de los estudiantes.</p>
+                    </div>
+                </div>
+                <div class="card-body ">
+                    <div class="row filter-container">
+                        <div class="col-lg-4">
+                            <label class="col-lg-3"><b>Curso</b></label>
+                            <select id="cursos" class="border" data-live-search="true"
+                                data-none-results-text="No se encontró {0}">
+                                <option th:selected="${true}" th:text="${'Selecciona un Curso'}" th:value="${0}">
+                                </option>
+                                <option th:each="curso:${cursos}" th:value="${curso.id}"
+                                    th:text="${curso.nombre_Curso}"></option>
+                            </select>
+                        </div>
+
+                        <br>
+                        <div hidden id="materias" class="col-lg-4">
+                            <div th:include="profesor/calificaciones/selectMaterias.html" th:remove="tag">
+                            </div>
+                        </div>
+                        <div hidden id="periodos" class="col-lg-4">
+                            <div th:include="profesor/calificaciones/selectPeriodos.html" th:remove="tag">
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <div id="listaEstudiantes" class="pl-2" hidden>
+                        <div th:include="profesor/calificaciones/listaEstudiantes.html" th:remove="tag"></div>
+                    </div>
+                </div>
+        </section>
+    </div>
+    <!-- DataTables-->
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
+<script type="text/javascript" charset="utf8"
+    src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
+
+</body>
+
+</html>

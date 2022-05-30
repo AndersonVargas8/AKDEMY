@@ -2,7 +2,6 @@ package com.app.akdemy.entity;
 
 import java.sql.Date;
 import java.time.LocalDate;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
@@ -20,7 +19,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
 import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.query.criteria.internal.path.ListAttributeJoin;
 
 @Entity
 public class Estudiante {

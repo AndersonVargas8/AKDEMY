@@ -1,9 +1,7 @@
 package com.app.akdemy.controller;
 
-import com.app.akdemy.entity.Role;
 import com.app.akdemy.entity.User;
 import com.app.akdemy.interfacesServices.IRoleService;
-import com.app.akdemy.repository.RoleRepository;
 import com.app.akdemy.service.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
