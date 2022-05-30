@@ -1,8 +1,11 @@
 package com.app.akdemy.service;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import com.app.akdemy.Exception.ProfesorNotFound;
+import com.app.akdemy.entity.Curso;
 import com.app.akdemy.entity.Profesor;
 import com.app.akdemy.entity.User;
 import com.app.akdemy.interfacesServices.IProfesorService;
@@ -45,6 +48,14 @@ public class ProfesorService implements IProfesorService{
     public Profesor getByUser(User user) throws ProfesorNotFound{
         Profesor profesor = repProfesor.findByUsuario(user).orElseThrow(() -> new ProfesorNotFound("El profesor no ha sido encontrado"));
         return profesor;
+    }
+
+    @Override
+    public Iterable<Profesor> getProfesoresCurso(Curso curso) {
+        HashSet<Profesor> profesores = new HashSet<Profesor>(repProfesor.getProfesorCurso(curso.getId()));
+        profesores.add(curso.getProfesor());
+
+        return (Iterable<Profesor>) profesores;
     }
 
 }

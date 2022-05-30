@@ -7,12 +7,6 @@ $(document).ready(function() {
 
             bDestroy: true,
             order: [[ 0, "desc" ]],
-            columnDefs: [
-                {
-                    targets: -1,
-                    className: 'text-center'
-                }
-              ]
         }
     );
 
@@ -35,15 +29,11 @@ $(document).ready(function() {
     );
 
     $('select').selectpicker();
-    $('#cursos').change(function() {
+    $('#estudiantes').change(function() {
         var url = "comunicaciones/difusiones/" + $(this).val();
         $('#difusiones').load(url);
 
         table.rows().remove().draw();
-
-        var url2 = "comunicaciones/difusiones/new/" + $(this).val();
-
-        $('#formNewDifusion').load(url2);
         
     })
 
@@ -57,30 +47,22 @@ $(document).ready(function() {
     $('#estudiantesSelect').change(function() {
         // Set value on hidden input for form
        $('#estudianteid').val($(this).val());
-       
-       // Find acudientes estudiantes
-       var url = "comunicaciones/acudientes/" + $(this).val();
 
-       $('#acudientes').load(url);
+       var url = "comunicaciones/profesores/" + $(this).val();
+       $('#profesores').load(url);
+
+    
 
     })
 
-    $('#acudientesSelect').change(function() {
+    $('#profesoresSelect').change(function() {
+        alert()
         // Set value on hidden input for form
-       $('#acudienteid').val($(this).val());
+       $('#profesorid').val($(this).val());
     })
 
 } );
 
-function confirmDeleteDifusion(id, curso){
-	$('#deleteModalDifusion').modal('show');
-	$("#difusionIdHiddenInput").val(id);
-    $("#cursoIdHiddenInput").val(curso);
-}
-
-function deleteDifusion(){
-    window.location = "comunicaciones/difusiones/delete/" + $("#difusionIdHiddenInput").val() + "/" + $("#cursoIdHiddenInput").val();
-}
 
 function openChat(id){
     window.location.replace("./comunicaciones/chat/" + id)

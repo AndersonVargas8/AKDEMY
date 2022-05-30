@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import com.app.akdemy.Exception.CustomeFieldValidationException;
+import com.app.akdemy.entity.Acudiente;
 import com.app.akdemy.entity.Curso;
 import com.app.akdemy.entity.Estudiante;
 import com.app.akdemy.entity.User;
@@ -64,6 +65,11 @@ public class EstudianteService implements IEstudianteService {
     @Override
     public Iterable<Estudiante> getEstudiantesCursoID(Long id) {
         return repEstudiante.getEstudiantesbyCurso(id);
+    }
+
+    @Override
+    public Iterable<Estudiante> getEstudiantesAcudiente(Acudiente acudiente) {
+        return repEstudiante.getEstudiantesAcudiente(acudiente.getId());
     }
 
 }

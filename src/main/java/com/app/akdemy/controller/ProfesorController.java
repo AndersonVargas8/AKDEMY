@@ -8,6 +8,7 @@ import javax.validation.Valid;
 
 import com.app.akdemy.Exception.ProfesorNotFound;
 import com.app.akdemy.Exception.UsernameOrIdNotFound;
+import com.app.akdemy.entity.Curso;
 import com.app.akdemy.entity.Estudiante;
 import com.app.akdemy.entity.HorarioCurso;
 import com.app.akdemy.entity.MateriaGrado;
@@ -15,6 +16,7 @@ import com.app.akdemy.entity.Observador;
 import com.app.akdemy.entity.Profesor;
 import com.app.akdemy.entity.User;
 import com.app.akdemy.interfacesServices.ICursoService;
+import com.app.akdemy.interfacesServices.IEstudianteService;
 import com.app.akdemy.interfacesServices.IHorarioService;
 import com.app.akdemy.interfacesServices.IProfesorService;
 import com.app.akdemy.service.UserService;
@@ -42,6 +44,9 @@ public class ProfesorController {
 
     @Autowired
     private ICursoService serCurso;
+
+    @Autowired
+    private IEstudianteService serEstudiante;
 
     // controlador de profesor desde coordinador
     @GetMapping("/coordinador/profesores")
@@ -154,6 +159,14 @@ public class ProfesorController {
         model.addAttribute("cursos", serCurso.getCursosProfesor(profesor));
 
         return "profesor/cursos/index";
+    }
+
+    @GetMapping("/acudiente/comunicaciones/profesores/{id}")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_PROFESOR')")
+    public String getEstudiantesChat(@PathVariable Long id, Model model) {
+        Curso currentCurso = serEstudiante.buscarPorId(id).getCursoActual();
+        model.addAttribute("profesores", serProfesor.getProfesoresCurso(currentCurso));
+        return "acudiente/comunicaciones/chats/selectProfesores";
     }
 
 }

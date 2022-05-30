@@ -5,9 +5,11 @@ import java.util.Date;
 import javax.validation.Valid;
 
 import com.app.akdemy.Exception.ProfesorNotFound;
+import com.app.akdemy.entity.Acudiente;
 import com.app.akdemy.entity.Chat;
 import com.app.akdemy.entity.Curso;
 import com.app.akdemy.entity.Difusion;
+import com.app.akdemy.entity.Estudiante;
 import com.app.akdemy.entity.Profesor;
 import com.app.akdemy.interfacesServices.IAcudienteService;
 import com.app.akdemy.interfacesServices.IChatService;
@@ -50,14 +52,26 @@ public class DifusionController {
     @Autowired
     IEstudianteService serEstudiante;
 
-    @GetMapping("/acudiente/comunicaciones")
-    public String index(Model model) throws ProfesorNotFound {
+    // Vista de pantalla de comunicaciones
 
+    @GetMapping("/acudiente/comunicaciones")
+    //@PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_ACUDIENTE')")
+    public String index(Model model) throws Exception {
+
+        Acudiente currentAcudiente = serAcudiente.getbyUser(serUser.getLoggedUser());
+
+        model.addAttribute("acudiente", currentAcudiente);
+        model.addAttribute("estudiantes", serEstudiante.getEstudiantesAcudiente(currentAcudiente));
+        model.addAttribute("chats", serChat.getChats(currentAcudiente));
+        model.addAttribute("chat", new Chat());
+        
         return "acudiente/comunicaciones/index";
     }
 
     @GetMapping("/profesor/comunicaciones")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_PROFESOR')")
     public String comunicacionesProfesor(Model model) throws ProfesorNotFound, Exception{
+
         Profesor currentProfesor = serProfesor.getByUser(serUser.getLoggedUser());
 
         model.addAttribute("profesor", currentProfesor);
@@ -68,7 +82,10 @@ public class DifusionController {
         return "profesor/comunicaciones/index";
     }
 
+    //Buscar difusiones
+
     @GetMapping("/profesor/comunicaciones/difusiones/{id}")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_PROFESOR')")
     public String getObservacionesCurso(@PathVariable Long id, Model model) throws ProfesorNotFound, Exception{
         
         Profesor currentProfesor = serProfesor.getByUser(serUser.getLoggedUser());
@@ -80,7 +97,22 @@ public class DifusionController {
         return "profesor/comunicaciones/difusiones/table";
     }
 
+    @GetMapping("/acudiente/comunicaciones/difusiones/{id}")
+    //@PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_ACUDIENTE')")
+    public String getAnunciosCurso(@PathVariable Long id, Model model) throws ProfesorNotFound, Exception{
+        
+        Estudiante estudiante = serEstudiante.buscarPorId(id);
+
+        model.addAttribute("profesor", serProfesor.getById(1L));
+        model.addAttribute("difusiones", serDifusion.getDifusionesCurso(estudiante.getCursoActual()));
+
+        return "acudiente/comunicaciones/difusiones/table";
+    }
+
+    //Crear Difusión
+
     @GetMapping("/profesor/comunicaciones/difusiones/new/{id}")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_PROFESOR')")
     public String getDifusion(@PathVariable Long id, Model model) throws ProfesorNotFound, Exception{
 
         Difusion difusion = new Difusion();
@@ -107,18 +139,7 @@ public class DifusionController {
         return "redirect:/profesor/comunicaciones";
     }
 
-    @PostMapping("/profesor/comunicaciones/save/chat")
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_PROFESOR')")
-    public String newChat(@Valid @ModelAttribute("chat") Chat chat, Model model){
-
-        String id = "chat-" + chat.getEstudiante().getId() + "-" + chat.getAcudiente().getId() + "-" + chat.getProfesor().getId();
-
-        chat.setLastUpdate(new Date());
-
-        serChat.saveChat(chat);
-
-        return String.format("redirect:/profesor/comunicaciones/chat/%s", id);
-    }
+    // Borrar difusion
 
     @GetMapping("/profesor/comunicaciones/difusiones/delete/{id}/{id_curso}")
     public String deleteDifusion(@PathVariable String id, @PathVariable Long id_curso, Model model) throws ProfesorNotFound, Exception{
@@ -133,7 +154,10 @@ public class DifusionController {
         return "redirect:/profesor/comunicaciones";
     }
     
+    //Buscar acudientes estudiantes
+
     @GetMapping("/profesor/comunicaciones/acudientes/{id}")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_PROFESOR')")
     public String getAcudientes(@PathVariable Long id, Model model) throws ProfesorNotFound, Exception{
 
         model.addAttribute("acudientes", serAcudiente.getAcudientesEstudiante(serEstudiante.buscarPorId(id)));

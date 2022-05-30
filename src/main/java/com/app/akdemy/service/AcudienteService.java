@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.app.akdemy.entity.Acudiente;
 import com.app.akdemy.entity.Estudiante;
+import com.app.akdemy.entity.User;
 import com.app.akdemy.interfacesServices.IAcudienteService;
 import com.app.akdemy.repository.AcudienteRepository;
 
@@ -33,6 +34,11 @@ public class AcudienteService implements IAcudienteService{
     @Override
     public Iterable<Acudiente> getAcudientesEstudiante(Estudiante estudiante) {
         return repAcudiente.getAcudientesEstudiante(estudiante.getId());
+    }
+
+    @Override
+    public Acudiente getbyUser(User usuario) {
+        return repAcudiente.findByUsuario(usuario).get();
     }
     
 }
