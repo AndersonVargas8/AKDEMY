@@ -2,13 +2,13 @@ package com.app.akdemy.controller;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 
 import javax.validation.Valid;
 
 import com.app.akdemy.Exception.ProfesorNotFound;
 import com.app.akdemy.Exception.UsernameOrIdNotFound;
 import com.app.akdemy.dto.CalificacionDTO;
-import com.app.akdemy.dto.EstudianteCalificacionDTO;
 import com.app.akdemy.entity.Curso;
 import com.app.akdemy.entity.Estudiante;
 import com.app.akdemy.entity.HorarioCurso;
@@ -16,6 +16,7 @@ import com.app.akdemy.entity.MateriaGrado;
 import com.app.akdemy.entity.Observador;
 import com.app.akdemy.entity.Periodo;
 import com.app.akdemy.entity.Profesor;
+import com.app.akdemy.entity.Role;
 import com.app.akdemy.entity.User;
 import com.app.akdemy.interfacesServices.ICalificacionesService;
 import com.app.akdemy.interfacesServices.ICursoService;
@@ -73,7 +74,10 @@ public class ProfesorController {
 
         profesor.setUsuario(serUser.getUserById(profesor.getUsuario().getId()));
         serProfesor.saveProfesor(profesor);
-        serUser.setRoleProfesor(profesor.getUsuario());
+
+        if(!serUser.userHasRole(profesor.getUsuario(), "PROFESOR")){
+            serUser.setRoleProfesor(profesor.getUsuario());
+        }
         return "redirect:/coordinador/profesores";
     }
 

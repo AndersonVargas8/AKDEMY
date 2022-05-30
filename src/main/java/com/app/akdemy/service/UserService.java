@@ -22,4 +22,6 @@ public interface UserService {
     public void setRoleProfesor(User user);
 
     public void removeRoleProfesor(User user);
+
+    public boolean userHasRole(User user, String roleName);
 }
