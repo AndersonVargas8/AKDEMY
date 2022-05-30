@@ -102,9 +102,11 @@ public class EstudianteService implements IEstudianteService {
 
         List<Calificacion> calificaciones = serCalificaciones.findCalficacionesByEstudiante(estudiante);
 
-        for(Calificacion calificacion: calificaciones){
-            materias.remove(calificacion.getMateria());
-            calificacionesEstudiante.agregarCalificacion(calificacion);
+        if(calificaciones != null){
+            for(Calificacion calificacion: calificaciones){
+                materias.remove(calificacion.getMateria());
+                calificacionesEstudiante.agregarCalificacion(calificacion);
+            }
         }
 
         if(!materias.isEmpty()){
