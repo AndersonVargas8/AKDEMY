@@ -84,11 +84,14 @@ public class ProfesorController {
     @GetMapping("/coordinador/profesores/{id}")
     @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_COORDINADOR')")
     public String getEditarProfesor(@PathVariable long id, Model model) throws ProfesorNotFound {
+
         Profesor profesor = serProfesor.getById(id);
+
         model.addAttribute("editarProfesor", profesor);
         model.addAttribute("profesores", serProfesor.getAllProfesors());
         model.addAttribute("users", serUser.getAvailableUsersProfesores());
         model.addAttribute("itemNavbar", "profesores");
+
         return "coordinador/profesores/editarProfesor.html";
     }
 

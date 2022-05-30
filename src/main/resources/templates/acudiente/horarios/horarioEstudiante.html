@@ -1,0 +1,21 @@
+<table class="table">
+    <thead class="thead-dark" id="cursoEstu">
+        <tr >
+            <th colspan="6" class="bg-secondary border border-dark" >
+                <div class="justify-content-center">
+                    <label class="h4">Curso:&nbsp;</label><label class="h4 font-weight-normal" th:each="estu:${estudiantes}" th:text="${estu.cursoActual.nombre_Curso}"></label>
+                </div>
+            </th>
+        </tr>
+        <tr>
+            <th>Hora</th>
+            <th>Lunes</th>
+            <th>Martes</th>
+            <th>Miércoles</th>
+            <th>Jueves</th>
+            <th>Viernes</th>
+        </tr>
+    </thead>
+    <tbody id="seccionHorario" th:include="acudiente/horarios/horario.html">
+    </tbody>
+</table>

@@ -6,11 +6,13 @@ import java.util.Calendar;
 import javax.validation.Valid;
 
 import com.app.akdemy.Exception.ProfesorNotFound;
+import com.app.akdemy.entity.Acudiente;
 import com.app.akdemy.entity.Estudiante;
 import com.app.akdemy.entity.Observador;
 import com.app.akdemy.interfacesServices.IEstudianteService;
 import com.app.akdemy.interfacesServices.IObservadorService;
 import com.app.akdemy.interfacesServices.IProfesorService;
+import com.app.akdemy.service.AcudienteService;
 import com.app.akdemy.service.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,10 +38,13 @@ public class ObservadorController {
 
     @Autowired
     private UserService serUser;
-    
+
+    @Autowired
+    private AcudienteService serAcudiente;
+
     @GetMapping("/profesor/observador/{id}")
     @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_PROFESOR')")
-    public String getObservacionesEstudiante(@PathVariable Long id, Model model) throws ProfesorNotFound, Exception{
+    public String getObservacionesEstudiante(@PathVariable Long id, Model model) throws ProfesorNotFound, Exception {
 
         Estudiante estudiante = serEstudiante.buscarPorId(id);
 
@@ -52,7 +57,7 @@ public class ObservadorController {
 
     @GetMapping("/profesor/observador/new/{id}")
     @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_PROFESOR')")
-    public String getFormObservador(@PathVariable Long id, Model model) throws ProfesorNotFound, Exception{
+    public String getFormObservador(@PathVariable Long id, Model model) throws ProfesorNotFound, Exception {
 
         Observador observador = new Observador();
         java.sql.Date timeNow = new Date(Calendar.getInstance().getTimeInMillis());
@@ -66,10 +71,10 @@ public class ObservadorController {
         return "profesor/observador/form.html";
     }
 
-
     @PostMapping("/profesor/saveobservador")
     @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_PROFESOR')")
-    public String newObservacion(@Valid @ModelAttribute("observacion") Observador observador, Model model) throws ProfesorNotFound{
+    public String newObservacion(@Valid @ModelAttribute("observacion") Observador observador, Model model)
+            throws ProfesorNotFound {
 
         observador.setEstudiante(serEstudiante.buscarPorId(observador.getEstudiante().getId()));
         observador.setProfesor(serProfesor.getById(observador.getProfesor().getId()));
@@ -78,7 +83,6 @@ public class ObservadorController {
 
         return "redirect:/profesor/observador";
     }
-
 
     @GetMapping("/profesor/observador/eliminar/{id}")
     @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_PROFESOR')")
@@ -94,7 +98,7 @@ public class ObservadorController {
 
     @GetMapping("/estudiante/observador")
     @PreAuthorize("hasAnyRole('ROLE_ESTUDIANTE')")
-    public String getObservadorEstudiante(Model model) throws Exception{
+    public String getObservadorEstudiante(Model model) throws Exception {
 
         Estudiante estudiante = serEstudiante.getByUser(serUser.getLoggedUser());
 
