@@ -2,7 +2,6 @@ package com.app.akdemy.controller;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Set;
 
 import javax.validation.Valid;
 
@@ -16,7 +15,6 @@ import com.app.akdemy.entity.MateriaGrado;
 import com.app.akdemy.entity.Observador;
 import com.app.akdemy.entity.Periodo;
 import com.app.akdemy.entity.Profesor;
-import com.app.akdemy.entity.Role;
 import com.app.akdemy.entity.User;
 import com.app.akdemy.interfacesServices.ICalificacionesService;
 import com.app.akdemy.interfacesServices.ICursoService;

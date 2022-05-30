@@ -6,7 +6,6 @@ import java.util.Calendar;
 import javax.validation.Valid;
 
 import com.app.akdemy.Exception.ProfesorNotFound;
-import com.app.akdemy.entity.Acudiente;
 import com.app.akdemy.entity.Estudiante;
 import com.app.akdemy.entity.Observador;
 import com.app.akdemy.interfacesServices.IEstudianteService;

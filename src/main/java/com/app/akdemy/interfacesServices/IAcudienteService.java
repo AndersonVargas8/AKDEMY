@@ -19,4 +19,6 @@ public interface IAcudienteService {
     public Acudiente getByUser(User user) throws AcudienteNotFound;
 
     public boolean validarAcudiente(Acudiente acudiente) throws Exception;
+    
+    public Iterable<Acudiente> getAcudientesEstudiante(Estudiante estudiante);
 }

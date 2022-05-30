@@ -58,7 +58,7 @@ public class DifusionController {
     //@PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_ACUDIENTE')")
     public String index(Model model) throws Exception {
 
-        Acudiente currentAcudiente = serAcudiente.getbyUser(serUser.getLoggedUser());
+        Acudiente currentAcudiente = serAcudiente.getByUser(serUser.getLoggedUser());
 
         model.addAttribute("acudiente", currentAcudiente);
         model.addAttribute("estudiantes", serEstudiante.getEstudiantesAcudiente(currentAcudiente));

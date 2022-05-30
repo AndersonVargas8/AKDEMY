@@ -66,7 +66,7 @@ public class ChatController {
         Chat chat = serChat.getChat(id);
 
         //Validate user
-        if(chat.getAcudiente() != serAcudiente.getbyUser(serUser.getLoggedUser()) ){
+        if(chat.getAcudiente() != serAcudiente.getByUser(serUser.getLoggedUser()) ){
             return "redirect:/acudiente/comunicaciones";
         }
 
