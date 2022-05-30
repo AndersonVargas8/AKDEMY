@@ -8,6 +8,7 @@ import java.util.Set;
 import javax.validation.Valid;
 
 import com.app.akdemy.Exception.CustomeFieldValidationException;
+import com.app.akdemy.dto.CalificacionesEstDTO;
 import com.app.akdemy.entity.Acudiente;
 import com.app.akdemy.entity.Curso;
 import com.app.akdemy.entity.Estudiante;
@@ -300,4 +301,16 @@ public class EstudianteController {
             }
         }
     }
+
+    @GetMapping("/estudiante/calificaciones")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_ESTUDIANTE')")
+    public String calificaciones(Model model) throws Exception{
+        model.addAttribute("itemNavbar", "calificaciones");
+        Estudiante estudiante = serEstudiante.getByUser(serUser.getLoggedUser());
+        CalificacionesEstDTO calificaciones = serEstudiante.getCalificaciones(estudiante);
+        model.addAttribute("calificaciones",calificaciones);
+        return "estudiante/calificaciones/index";
+    }
+
+
 }

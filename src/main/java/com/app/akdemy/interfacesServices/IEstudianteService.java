@@ -2,7 +2,9 @@ package com.app.akdemy.interfacesServices;
 
 import java.util.List;
 
+import com.app.akdemy.dto.CalificacionesEstDTO;
 import com.app.akdemy.entity.Estudiante;
+import com.app.akdemy.entity.MateriaGrado;
 import com.app.akdemy.entity.User;
 
 public interface IEstudianteService {
@@ -20,5 +22,7 @@ public interface IEstudianteService {
 
     public Iterable<Estudiante> getEstudiantesCursoID(Long id);
 
-    
+    public CalificacionesEstDTO getCalificaciones(Estudiante estudiante);
+
+
 }

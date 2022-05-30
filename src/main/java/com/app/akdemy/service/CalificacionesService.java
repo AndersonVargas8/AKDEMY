@@ -2,7 +2,6 @@ package com.app.akdemy.service;
 
 import java.util.List;
 
-import com.app.akdemy.Exception.ProfesorNotFound;
 import com.app.akdemy.dto.CalificacionDTO;
 import com.app.akdemy.dto.EstudianteCalificacionDTO;
 import com.app.akdemy.entity.Calificacion;
@@ -11,7 +10,6 @@ import com.app.akdemy.entity.Periodo;
 import com.app.akdemy.interfacesServices.ICalificacionesService;
 import com.app.akdemy.interfacesServices.ICursoService;
 import com.app.akdemy.interfacesServices.IMateriaGradoService;
-import com.app.akdemy.interfacesServices.IProfesorService;
 import com.app.akdemy.repository.CalificacionRepository;
 import com.app.akdemy.repository.PeriodoRepository;
 import com.app.akdemy.repository.ProfesorRepository;
@@ -94,6 +92,16 @@ public class CalificacionesService implements ICalificacionesService {
     @Override
     public void saveAllCalificaciones(Iterable<Calificacion> calificaciones) {
         repCalificacion.saveAll(calificaciones);   
+    }
+
+    @Override
+    public List<Calificacion> findCalficacionesByEstudiante(Estudiante estudiante) {
+        List<Calificacion> calificaciones = repCalificacion.findByEstudiante(estudiante);
+        
+        if(!calificaciones.isEmpty())
+            return calificaciones;
+
+        return null;
     }
 
 }

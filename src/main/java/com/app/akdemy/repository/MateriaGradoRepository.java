@@ -15,4 +15,7 @@ public interface MateriaGradoRepository extends CrudRepository<MateriaGrado, Lon
 
     @Query(value = "SELECT DISTINCT(h.materia) FROM HorarioCurso h WHERE h.curso = ?1 AND h.profesor = ?2")
     public List<MateriaGrado> getMateriasByCursoAndProfesor(Curso curso, Profesor profesor);
+
+    @Query(value = "SELECT DISTINCT(h.materia) FROM HorarioCurso h WHERE h.curso = ?1")
+    public List<MateriaGrado> getMateriasByCurso(Curso curso);
 }

@@ -30,13 +30,19 @@
                             <span class="texto_navbarItem"> Horario</span>
                         </a>
                     </li>
-
+                    <li th:class="${itemNavbar == 'calificaciones'} ? 'nav-item active' : 'nav-item'">
+                        <a class="nav-link" href="/estudiante/calificaciones" >
+                            <span class="fa fa-star fa-lg"></span> 
+                            <span class="texto_navbarItem"> Calificaciones</span>
+                        </a>
+                    </li>
                     <li th:class="${itemNavbar == 'observador'} ? 'nav-item active' : 'nav-item'">
                         <a class="nav-link" th:href="@{/estudiante/observador}">
                             <span class="fa fa-pen-to-square fa-lg"></span>
                             <span class="texto_navbarItem"> Observador</span>
                         </a>
                     </li>
+                    
                 </ul>
             </ul>
             <span class="navbar-text menu align-items-center">

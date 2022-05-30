@@ -30,7 +30,7 @@
                             <b><label th:if="${estudiante.cerrada}" th:text="${estudiante.nota}"
                                     class="mt-1"></label></b>
                         </div>
-                        <label th:id="${'check'+estudiante.id}" style="color:lime" th:hidden="${estudiante.nota < 3}"><i
+                        <label th:id="${'check'+estudiante.id}" style="color:limegreen" th:hidden="${estudiante.nota < 3}"><i
                                 class="fa fa-check pt-3 fa-lg"></i>&nbsp;Aprobado</label>
                         <label th:id="${'x'+estudiante.id}" style="color:red"
                             th:hidden="${estudiante.nota == null OR estudiante.nota >= 3}"><i
@@ -53,9 +53,11 @@
             <i class="fa-solid fa-spinner fa-spin-pulse mt-2"></i>
             <i class="mt-1 mr-2"> Guardando</i>
         </div>
-        <button th:if="${!calificaciones.isCerrada}" type="button" class="w-100 btn btn-info" style="max-width: 20%;" id="cerrarNotasBtn" th:onclick="confirmCerrarNotas()">Cerrar
+        <button th:if="${!calificaciones.isCerrada}" type="button" class="w-100 btn btn-info" style="max-width: 20%;"
+            id="cerrarNotasBtn" th:onclick="confirmCerrarNotas()">Cerrar
             calificaciones</button>&nbsp;
-        <button th:if="${!calificaciones.isCerrada}" type="submit" class="w-100 btn guardar" style="max-width: 20%;" disabled id="guardarBtn">Guardar
+        <button th:if="${!calificaciones.isCerrada}" type="submit" class="w-100 btn guardar" style="max-width: 20%;"
+            disabled id="guardarBtn">Guardar
             borrador</button>
     </div>
 </form>

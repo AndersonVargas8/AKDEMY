@@ -2,6 +2,7 @@ package com.app.akdemy.service;
 
 import java.util.List;
 
+import com.app.akdemy.entity.Curso;
 import com.app.akdemy.entity.MateriaGrado;
 import com.app.akdemy.entity.Profesor;
 import com.app.akdemy.interfacesServices.ICursoService;
@@ -51,6 +52,16 @@ public class MateriaGradoService implements IMateriaGradoService{
             return null;
         }
         return materias;
+    }
+
+    @Override
+    public List<MateriaGrado> getByCurso(Curso curso) {
+        List<MateriaGrado> respuesta = repMateriaGrado.getMateriasByCurso(curso);
+
+        if(!respuesta.isEmpty())
+            return respuesta;
+            
+        return null;
     }
     
 }

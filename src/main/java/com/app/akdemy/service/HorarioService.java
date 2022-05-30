@@ -4,8 +4,11 @@ import java.util.List;
 
 import com.app.akdemy.entity.Curso;
 import com.app.akdemy.entity.HorarioCurso;
+import com.app.akdemy.entity.MateriaGrado;
 import com.app.akdemy.entity.Profesor;
+import com.app.akdemy.interfacesServices.ICursoService;
 import com.app.akdemy.interfacesServices.IHorarioService;
+import com.app.akdemy.interfacesServices.IProfesorService;
 import com.app.akdemy.repository.HorarioRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,10 +20,10 @@ public class HorarioService implements IHorarioService{
     HorarioRepository repHorario;
 
     @Autowired
-    CursoService serCurso;
+    ICursoService serCurso;
 
     @Autowired
-    ProfesorService serProfesor;
+    IProfesorService serProfesor;
 
     @Override
     public List<HorarioCurso> obtenerTodos() {
@@ -51,6 +54,16 @@ public class HorarioService implements IHorarioService{
     @Override
     public List<HorarioCurso> obtenerPorProfesor(Profesor profesor){
         return (List<HorarioCurso>) repHorario.findByProfesor(profesor); 
+    }
+
+    @Override
+    public Profesor getProfesorByCursoAndMateria(Curso curso, MateriaGrado materia) {
+        List<Profesor> profesores = repHorario.findProfesorByCursoAndMateria(curso, materia);
+
+        if(profesores.isEmpty())
+            return null;
+        
+        return profesores.get(0);
     }
     
 }
