@@ -20,6 +20,7 @@ import com.app.akdemy.entity.Role;
 import com.app.akdemy.entity.User;
 import com.app.akdemy.interfacesServices.ICalificacionesService;
 import com.app.akdemy.interfacesServices.ICursoService;
+import com.app.akdemy.interfacesServices.IEstudianteService;
 import com.app.akdemy.interfacesServices.IHorarioService;
 import com.app.akdemy.interfacesServices.IMateriaGradoService;
 import com.app.akdemy.interfacesServices.IProfesorService;
@@ -54,6 +55,9 @@ public class ProfesorController {
 
     @Autowired
     private ICalificacionesService serCalificaciones;
+
+    @Autowired
+    private IEstudianteService serEstudiante;
 
     // controlador de profesor desde coordinador
     @GetMapping("/coordinador/profesores")
@@ -213,6 +217,14 @@ public class ProfesorController {
     public String cerrarCalificaciones(@ModelAttribute CalificacionDTO calificaciones) throws ProfesorNotFound, Exception{
         serProfesor.guardarCalificaciones(calificaciones,true);
         return "redirect:/profesor/calificaciones";
+    }
+        
+    @GetMapping("/acudiente/comunicaciones/profesores/{id}")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_PROFESOR')")
+    public String getEstudiantesChat(@PathVariable Long id, Model model) {
+        Curso currentCurso = serEstudiante.buscarPorId(id).getCursoActual();
+        model.addAttribute("profesores", serProfesor.getProfesoresCurso(currentCurso));
+        return "acudiente/comunicaciones/chats/selectProfesores";
     }
 
 }

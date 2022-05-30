@@ -310,4 +310,11 @@ public class EstudianteController {
         return "estudiante/calificaciones/index";
     }
 
+    @GetMapping("/profesor/comunicaciones/estudiantes/{id}")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_PROFESOR')")
+    public String getEstudiantesChat(@PathVariable Long id, Model model) {
+        model.addAttribute("estudiantes", serEstudiante.getEstudiantesCursoID(id));
+        return "profesor/comunicaciones/chats/selectestudiantes";
+    }
 }
+

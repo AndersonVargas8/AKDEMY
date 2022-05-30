@@ -1,0 +1,35 @@
+<form  th:object="${chat}"  th:action="@{/profesor/comunicaciones/save/chat}" method="POST">
+    <div hidden class="form-group">
+        <label for="profesor"><b>Profesor</b></label>
+        <select readonly th:field="*{profesor.id}" id="profesor" class="form-control border">
+        <option readonly th:value="${profesor.id}" th:text="${profesor.nombres} + ' ' + ${profesor.apellidos}"></option>
+    </select>
+    <div hidden class="form-group">
+        <input required th:field="*{estudiante.id}" class="form-control" id="estudianteid" type="text"></input>
+    </div>
+    <div hidden class="form-group">
+        <input required th:field="*{acudiente.id}" class="form-control" id="acudienteid" type="text"></input>
+    </div>
+    </div>
+    <div class="form-group">
+        <label for="estudiante"><b>Curso</b></label>
+        <br>
+        <select id="cursosChat" class="border w-100" data-live-search="true"
+        data-none-results-text="No se encontró {0}">
+        <option disabled th:selected="${true}" th:text="${'Selecciona un Curso'}" th:value="${0}"></option>
+        <option th:each="curso:${courses}" th:value="${curso.id}" th:text="${curso.nombre_Curso}"></option>
+    </select>
+    </div>
+    <div class="form-group">
+        <label for="estudiante"><b>Estudiante</b></label>
+        <br>
+        <div id="estudiantes" th:include="profesor/comunicaciones/chats/selectestudiantes"></div>
+    </div>
+    <div class="form-group">
+        <label for="estudiante"><b>Acudiente</b></label>
+        <br>
+        <div id="acudientes" th:include="profesor/comunicaciones/chats/selectacudientes"></div>
+    </div>
+
+    <button type="submit" class="w-100 btn guardar" width="100%">Iniciar Conversación</button>
+</form>

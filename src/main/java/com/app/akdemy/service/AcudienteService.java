@@ -66,4 +66,8 @@ public class AcudienteService implements IAcudienteService {
         return true;
     }
 
+    public Acudiente getbyUser(User usuario) {
+        return repAcudiente.findByUsuario(usuario).get();
+    }
+    
 }
