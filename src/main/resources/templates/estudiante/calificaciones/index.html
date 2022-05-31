@@ -21,7 +21,7 @@
     <!-- Local Files-->
     <link rel="stylesheet" type="text/css" th:href="@{/css/estudiante/calificaciones.css}">
     <link rel="stylesheet" type="text/css" href="../../static/css/normalize.css" th:href="@{/css/normalize.css}">
-    <script type="text/javascript" th:src="@{/js/estudiante/calificaciones.js}"></script>
+
 
 </head>
 
@@ -38,15 +38,15 @@
                 </div>
                 <div class="card-body p-4">
                     <hr>
-                    <div class="row">
+                    <div class="row pl-2">
                         <h4 class="col-lg-2">Estudiante: </h4><label class="lead col-lg-8"
                             th:text="${calificaciones.nombreEstudiante}"></label>
                     </div>
-                    <div class="row">
+                    <div class="row pl-2">
                         <h4 class="col-lg-2">Curso: </h4><label class="lead col-lg-8"
                             th:text="${calificaciones.curso}"></label>
                     </div>
-                    <div class="row">
+                    <div class="row pl-2">
                         <h4 class="col-lg-2">Promedio: </h4><label class="lead font-weight-bold col-lg-8"
                             th:text="${calificaciones.promedioGeneral}"></label>
                     </div>

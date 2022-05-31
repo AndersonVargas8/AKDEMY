@@ -3,12 +3,15 @@ package com.app.akdemy.controller;
 import com.app.akdemy.Exception.AcudienteNotFound;
 import com.app.akdemy.Exception.CustomeFieldValidationException;
 import com.app.akdemy.Exception.UsernameOrIdNotFound;
+import com.app.akdemy.dto.CalificacionesEstDTO;
+import com.app.akdemy.dto.CalificacionDTO;
 import com.app.akdemy.entity.Acudiente;
 import com.app.akdemy.entity.Curso;
 import com.app.akdemy.entity.Estudiante;
 import com.app.akdemy.entity.HorarioCurso;
 import com.app.akdemy.entity.User;
 import com.app.akdemy.interfacesServices.IAcudienteService;
+import com.app.akdemy.service.CalificacionesService;
 import com.app.akdemy.service.EstudianteService;
 import com.app.akdemy.service.HorarioService;
 import com.app.akdemy.service.ObservadorService;
@@ -49,6 +52,9 @@ public class AcudienteController {
 
     @Autowired
     private HorarioService serHorario;
+
+    @Autowired
+    private CalificacionesService serCalificaciones;
 
     @Autowired
     BCryptPasswordEncoder bCryptPasswordEncoder;
@@ -151,19 +157,18 @@ public class AcudienteController {
         return "/coordinador/acudientes/acudientesEstudiantes";
     }
 
-
     @GetMapping("/coordinador/acudientes/estudiantes/listadoEstudiantes/{idAcudiente}")
     @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_COORDINADOR')")
-    public String verTodosEstudiantes(@PathVariable long idAcudiente,Model model) throws AcudienteNotFound {
+    public String verTodosEstudiantes(@PathVariable long idAcudiente, Model model) throws AcudienteNotFound {
         List<Estudiante> estudianteList = serEstudiante.listarEstudiantes();
         List<Estudiante> estudiantes = new ArrayList<>();
         Acudiente acudiente = serAcudiente.getById(idAcudiente);
-        for(Estudiante estudiante: estudianteList){
-                estudiantes.add(estudiante);
+        for (Estudiante estudiante : estudianteList) {
+            estudiantes.add(estudiante);
         }
 
         model.addAttribute("estudiantes", estudiantes);
-        model.addAttribute("acudiente",acudiente);
+        model.addAttribute("acudiente", acudiente);
         model.addAttribute("hijos", serEstudiante.getEstudiantesAcudiente(acudiente));
         return "coordinador/acudientes/listadoEstudiantes";
     }
@@ -206,8 +211,6 @@ public class AcudienteController {
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_ACUDIENTE')")
     public String verObservacionesAcudienteByEstudiante(@PathVariable Long id, Model model) throws Exception {
         Estudiante estudiante = serEstudiante.buscarPorId(id);
-
-        model.addAttribute("estudiante", estudiante);
         model.addAttribute("observaciones", serObservador.getObservadorEstudiante(estudiante));
         return "acudiente/observaciones/tablaObservaciones";
     }
@@ -253,6 +256,27 @@ public class AcudienteController {
 
         model.addAttribute("nombreCurso", cursoActual.getNombre_Curso());
         return model;
+    }
+
+    @GetMapping("/acudiente/calificaciones")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_ACUDIENTE')")
+    public String calificacionesAcudiente(Model model) throws Exception {
+        Acudiente acudiente = serAcudiente.getByUser(serUser.getLoggedUser());
+        model.addAttribute("itemNavbar", "calificaciones");
+        model.addAttribute("estudiantes", serEstudiante.getEstudiantesAcudiente(acudiente));
+        return "acudiente/calificaciones/index";
+    }
+
+    @GetMapping("/acudiente/calificaciones/{id}")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_ACUDIENTE')")
+    public String verCalificacionesEstudianteAcudiente(@PathVariable Long id, Model model) throws Exception {
+        Estudiante estudiante = serEstudiante.buscarPorId(id);
+        CalificacionesEstDTO calificaciones = serEstudiante.getCalificaciones(estudiante);
+        model.addAttribute("nombreEstudiante", calificaciones.getNombreEstudiante());
+        model.addAttribute("curso", calificaciones.getCurso());
+        model.addAttribute("promedioGeneral", calificaciones.getPromedioGeneral());
+        model.addAttribute("materias", calificaciones.getMaterias());
+        return "acudiente/calificaciones/datosEstudiante";
     }
 
 }

@@ -1,0 +1,81 @@
+<div class="card-body p-4">
+    <hr>
+    <div class="row pl-3">
+        <h4 class="col-lg-2">Estudiante: </h4><label class="lead col-lg-8"
+        th:text="${nombreEstudiante}"></label>
+    </div>
+    <div class="row pl-3">
+        <h4 class="col-lg-2">Curso: </h4><label class="lead col-lg-8"
+        th:text="${curso}"></label>
+    </div>
+    <div class="row pl-3">
+        <h4 class="col-lg-2">Promedio: </h4><label class="lead font-weight-bold col-lg-8"
+        th:text="${promedioGeneral}" ></label>
+    </div>
+
+    <hr>
+
+   <div class="accordion" id="accordionMaterias">
+        <div class="accordion-item" th:each="materia,itemStat:${materias}">
+            <h2 class="accordion-header" th:id="${'header'+itemStat.index}">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                    th:data-bs-target="${'#collapse'+itemStat.index}" aria-expanded="true"
+                    th:aria-controls="${'#collapse'+itemStat.index}">
+                    <div class="row col-lg-12">
+                        <label class="font-weight-bold col-lg-1 lbAcor h6 m-0 p-0"
+                            th:text="${itemStat.index + 1}"></label>
+                        <label class="col-lg-9 lbAcor nomMateria" th:text="${materia.nombre}"></label>
+                        <div class="col-lg-2">
+                            <b>Promedio:&nbsp; </b><label class="lbAcor"
+                                th:text="${materia.promedio != null} ? ${materia.promedio} : '-'"
+                                th:style="${materia.promedio != null} ? (${materia.promedio >= 3} ? 'color:limegreen;' : 'color:red;') : ''"></label>
+                        </div>
+                    </div>
+                </button>
+            </h2>
+            <div th:id="${'collapse'+itemStat.index}" class="panel-collapse collapse"
+                th:aria-labelledby="${'header'+itemStat.index}">
+
+                <div class="d-flex justify-content-center mt-3 mb-3">
+                    <div class="w-75">
+                        <h5>Profesor: <label class="h4"><small
+                                    th:text="${' ' + materia.nombreProfesor}"></small></label></h5>
+                        <table class="table table-bordered table-striped text-center">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th class="col-lg-1">Periodo</th>
+                                    <th class="col-lg-2">Nota</th>
+                                    <th class="col-lg-1">Definitiva</th>
+                                    <th class="col-lg-3">Estado</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                <tr th:each="cal,itemStat: ${materia.calificaciones}">
+                                    <th th:text="${itemStat.index + 1}"></th>
+                                    <td>
+                                        <div th:if="${cal != null}" th:text="${cal.nota}"></div>
+                                    </td>
+                                    <td>
+                                        <div th:if="${cal != null AND cal.isCerrada}">
+                                            <i class="fa fa-circle-check" style="color:grey"></i>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div th:if="${cal != null AND cal.nota >= 3}"
+                                            style="color:limegreen">
+                                            <i class="fa fa-check fa-lg"></i>&nbsp;Aprobado
+                                        </div>
+                                        <div th:if="${cal != null AND cal.nota < 3}" style="color:red">
+                                            <i class="fa fa-x"></i>&nbsp;Reprobado
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>   
+</div> 

@@ -43,3 +43,11 @@ body{
       padding: 0;
       margin: 0;
   }
+  select{
+    cursor: pointer;
+}
+
+.filter-container{
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
