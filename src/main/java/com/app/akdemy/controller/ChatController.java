@@ -55,7 +55,7 @@ public class ChatController {
         model.addAttribute("messages", serChat.getMessages(chat));
         model.addAttribute("message", new Message());
         model.addAttribute("id", id);
-
+        model.addAttribute("itemNavbar", "comunicaciones");
         return "profesor/comunicaciones/chats/index";
     }
 
@@ -74,7 +74,7 @@ public class ChatController {
         model.addAttribute("messages", serChat.getMessages(chat));
         model.addAttribute("message", new Message());
         model.addAttribute("id", id);
-
+        model.addAttribute("itemNavbar", "comunicaciones");
         return "acudiente/comunicaciones/chats/index";
     }
 
