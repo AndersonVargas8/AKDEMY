@@ -14,11 +14,14 @@ public interface IAcudienteService {
 
     public Acudiente getById(Long id) throws AcudienteNotFound;
 
+
+    public Acudiente getById(long id);
+
     public void deleteAcudiente(Acudiente acudiente) throws Exception;
 
     public Acudiente getByUser(User user) throws AcudienteNotFound;
 
     public boolean validarAcudiente(Acudiente acudiente) throws Exception;
-    
+
     public Iterable<Acudiente> getAcudientesEstudiante(Estudiante estudiante);
 }

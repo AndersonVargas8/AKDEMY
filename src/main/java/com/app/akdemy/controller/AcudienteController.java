@@ -161,17 +161,22 @@ public class AcudienteController {
     @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_COORDINADOR')")
     public String verTodosEstudiantes(@PathVariable long idAcudiente, Model model) throws AcudienteNotFound {
         List<Estudiante> estudianteList = serEstudiante.listarEstudiantes();
-        List<Estudiante> estudiantes = new ArrayList<>();
         Acudiente acudiente = serAcudiente.getById(idAcudiente);
-        for (Estudiante estudiante : estudianteList) {
-            estudiantes.add(estudiante);
-        }
 
-        model.addAttribute("estudiantes", estudiantes);
-        model.addAttribute("acudiente", acudiente);
-        model.addAttribute("hijos", serEstudiante.getEstudiantesAcudiente(acudiente));
+        model.addAttribute("estudiantes", estudianteList);
+        model.addAttribute("acudiente",acudiente);
         return "coordinador/acudientes/listadoEstudiantes";
     }
+
+
+    @PostMapping("/coordinador/acudientes/estudiantes")
+    public String guardarEstudiantes(@ModelAttribute("acudiente") Acudiente acudienteModel) {
+        Acudiente acudiente = serAcudiente.getById(acudienteModel.getId());
+        acudiente.setEstudiantes(acudienteModel.getEstudiantes());
+        serAcudiente.saveAcudiente(acudiente);
+        return "redirect:/coordinador/acudientes";
+    }
+
     // controlador vista acudiente
 
     @GetMapping("/acudiente")
