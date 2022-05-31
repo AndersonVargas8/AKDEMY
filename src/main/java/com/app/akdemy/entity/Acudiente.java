@@ -36,15 +36,19 @@ public class Acudiente {
     @JoinColumn(name = "acu_usuario", updatable = false, nullable = false)
     private User usuario;
 
-    @ManyToMany(mappedBy = "acudientes")
+    @ManyToMany
+    @JoinTable(name = "acudiente_estudiante"
+            , joinColumns = @JoinColumn(name = "id_acudiente")
+            , inverseJoinColumns = @JoinColumn(name = "id_estudiante"))
     private List<Estudiante> estudiantes;
+
 
     //Constructores de la clase Coordinador
 
     public Acudiente() {
     }
 
-    public Acudiente(long id, String nombres, String apellidos, String documento, String telefono, String correo, User usuario,  List<Estudiante> estudiantes) {
+    public Acudiente(long id, String nombres, String apellidos, String documento, String telefono, String correo, User usuario, List<Estudiante> estudiantes) {
         this.id = id;
         this.nombres = nombres;
         this.apellidos = apellidos;
@@ -54,12 +58,10 @@ public class Acudiente {
         this.usuario = usuario;
         this.estudiantes = estudiantes;
     }
-
-
-    //Getter y Setter
+//Getter y Setter
 
     public long getId() {
-        return this.id;
+        return id;
     }
 
     public void setId(long id) {
@@ -67,7 +69,7 @@ public class Acudiente {
     }
 
     public String getNombres() {
-        return this.nombres;
+        return nombres;
     }
 
     public void setNombres(String nombres) {
@@ -75,15 +77,23 @@ public class Acudiente {
     }
 
     public String getApellidos() {
-        return this.apellidos;
+        return apellidos;
     }
 
     public void setApellidos(String apellidos) {
         this.apellidos = apellidos;
     }
 
+    public String getDocumento() {
+        return documento;
+    }
+
+    public void setDocumento(String documento) {
+        this.documento = documento;
+    }
+
     public String getTelefono() {
-        return this.telefono;
+        return telefono;
     }
 
     public void setTelefono(String telefono) {
@@ -91,7 +101,7 @@ public class Acudiente {
     }
 
     public String getCorreo() {
-        return this.correo;
+        return correo;
     }
 
     public void setCorreo(String correo) {
@@ -99,19 +109,11 @@ public class Acudiente {
     }
 
     public User getUsuario() {
-        return this.usuario;
+        return usuario;
     }
 
     public void setUsuario(User usuario) {
         this.usuario = usuario;
-    }
-    
-    public String getDocumento() {
-        return this.documento;
-    }
-
-    public void setDocumento(String documento) {
-        this.documento = documento;
     }
 
     public List<Estudiante> getEstudiantes() {
@@ -121,6 +123,9 @@ public class Acudiente {
     public void setEstudiantes(List<Estudiante> estudiantes) {
         this.estudiantes = estudiantes;
     }
+
+
+    //
 
     @Override
     public boolean equals(Object o) {
@@ -137,7 +142,7 @@ public class Acudiente {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, nombres, apellidos, telefono, correo, usuario, estudiantes);
+        return Objects.hash(id, nombres, apellidos, documento, telefono, correo, usuario, estudiantes);
     }
 
     @Override
@@ -152,5 +157,5 @@ public class Acudiente {
             ", estudiantes='" + getEstudiantes().size() + "'" +
             "}";
     }
-    
+
 }

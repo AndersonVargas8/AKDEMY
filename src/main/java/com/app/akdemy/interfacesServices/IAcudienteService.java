@@ -9,9 +9,13 @@ import com.app.akdemy.entity.User;
 
 public interface IAcudienteService {
     public void saveAcudiente(Acudiente acudiente);
+
     public List<Acudiente> getAllAcudientes();
-    public Acudiente getById(Long id) throws AcudienteNotFound;
+
+    public Acudiente getById(long id);
+
     public void deleteAcudiente(Acudiente acudiente) throws Exception;
+
     public Acudiente getByUser(User user)throws AcudienteNotFound;
 
     public boolean validarAcudiente(Acudiente acudiente)throws Exception;
