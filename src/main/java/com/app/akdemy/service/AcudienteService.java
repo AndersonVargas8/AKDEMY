@@ -30,11 +30,12 @@ public class AcudienteService implements IAcudienteService {
     }
 
     @Override
-    public Acudiente getById(Long id) throws AcudienteNotFound {
+    public Acudiente getById(long id) throws AcudienteNotFound {
         Acudiente acudiente = repAcudiente.findById(id)
                 .orElseThrow(() -> new AcudienteNotFound("El acudiente no ha sido encontrado"));
         return acudiente;
     }
+
 
     @Override
     public void deleteAcudiente(Acudiente acudiente) {

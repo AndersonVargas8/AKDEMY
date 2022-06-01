@@ -170,7 +170,7 @@ public class AcudienteController {
 
 
     @PostMapping("/coordinador/acudientes/estudiantes")
-    public String guardarEstudiantes(@ModelAttribute("acudiente") Acudiente acudienteModel) {
+    public String guardarEstudiantes(@ModelAttribute("acudiente") Acudiente acudienteModel) throws AcudienteNotFound {
         Acudiente acudiente = serAcudiente.getById(acudienteModel.getId());
         acudiente.setEstudiantes(acudienteModel.getEstudiantes());
         serAcudiente.saveAcudiente(acudiente);

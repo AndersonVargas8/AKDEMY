@@ -12,10 +12,7 @@ public interface IAcudienteService {
 
     public List<Acudiente> getAllAcudientes();
 
-    public Acudiente getById(Long id) throws AcudienteNotFound;
-
-
-    public Acudiente getById(long id);
+    public Acudiente getById(long id) throws AcudienteNotFound;
 
     public void deleteAcudiente(Acudiente acudiente) throws Exception;
 
