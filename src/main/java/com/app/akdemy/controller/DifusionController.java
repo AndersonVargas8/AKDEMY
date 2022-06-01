@@ -64,7 +64,7 @@ public class DifusionController {
         model.addAttribute("estudiantes", serEstudiante.getEstudiantesAcudiente(currentAcudiente));
         model.addAttribute("chats", serChat.getChats(currentAcudiente));
         model.addAttribute("chat", new Chat());
-        
+        model.addAttribute("itemNavbar", "comunicaciones");
         return "acudiente/comunicaciones/index";
     }
 
@@ -78,7 +78,7 @@ public class DifusionController {
         model.addAttribute("courses", serCurso.getCoursesObservadorbyProfesor(currentProfesor));
         model.addAttribute("chats", serChat.getChats(currentProfesor));
         model.addAttribute("chat", new Chat());
-
+        model.addAttribute("itemNavbar", "comunicaciones");
         return "profesor/comunicaciones/index";
     }
 
@@ -93,6 +93,8 @@ public class DifusionController {
 
         model.addAttribute("profesor", currentProfesor);
         model.addAttribute("difusiones", serDifusion.getDifusionesCurso(curso));
+        
+        model.addAttribute("itemNavbar", "comunicaciones");
 
         return "profesor/comunicaciones/difusiones/table";
     }
@@ -105,7 +107,7 @@ public class DifusionController {
 
         model.addAttribute("profesor", serProfesor.getById(1L));
         model.addAttribute("difusiones", serDifusion.getDifusionesCurso(estudiante.getCursoActual()));
-
+        model.addAttribute("itemNavbar", "comunicaciones");
         return "acudiente/comunicaciones/difusiones/table";
     }
 
@@ -120,7 +122,7 @@ public class DifusionController {
         difusion.setCurso(serCurso.buscarPorId(id));
         difusion.setProfesor(serProfesor.getByUser(serUser.getLoggedUser()));
         difusion.setDate(new Date());
-
+        model.addAttribute("itemNavbar", "comunicaciones");
         model.addAttribute("difusion", difusion);
 
         return "profesor/comunicaciones/difusiones/form";
@@ -161,6 +163,7 @@ public class DifusionController {
     public String getAcudientes(@PathVariable Long id, Model model) throws ProfesorNotFound, Exception{
 
         model.addAttribute("acudientes", serAcudiente.getAcudientesEstudiante(serEstudiante.buscarPorId(id)));
+        model.addAttribute("itemNavbar", "comunicaciones");
         return "profesor/comunicaciones/chats/selectacudientes";
     }
 }
