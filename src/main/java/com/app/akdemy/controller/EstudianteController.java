@@ -1,9 +1,6 @@
 package com.app.akdemy.controller;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 import javax.validation.Valid;
 
@@ -123,7 +120,7 @@ public class EstudianteController {
         estudiante.setUsuario(usuario);
 
         // Se agrega un conjunto vacío de acudientes
-        Set<Acudiente> acudientes = new HashSet<>();
+        List<Acudiente> acudientes = new ArrayList<>();
         estudiante.setAcudientes(acudientes);
 
         // Se guarda el estudiante
@@ -190,11 +187,11 @@ public class EstudianteController {
         // Se guarda el user y se le asigna al estudiante
         estudiante.setUsuario(serUser.guardarUsuario(user));
 
-        Set<Acudiente> acudientes = estudiante.getAcudientes();
+        List<Acudiente> acudientes = estudiante.getAcudientes();
 
         if (acudientes == null) {
             // Se agrega un conjunto vacío de acudientes
-            acudientes = new HashSet<>();
+            acudientes = new ArrayList<>();
             estudiante.setAcudientes(acudientes);
         }
         // Se guarda el estudiante
@@ -243,8 +240,9 @@ public class EstudianteController {
     @GetMapping("/estudiante/curso")
     @PreAuthorize("hasAnyRole('ROLE_ESTUDIANTE', 'ROLE_ADMIN')")
     public String verCursoEstudiante(Model model) throws Exception {
+
         model.addAttribute("itemNavbar", "curso");
-        model.addAttribute("estudiantes", serEstudiante.listarEstudiantes());
+
         return "estudiante/curso/index";
     }
 
@@ -278,7 +276,7 @@ public class EstudianteController {
     @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_PROFESOR')")
     public String getEstudiantes(@PathVariable Long id, Model model) {
         model.addAttribute("estudiantes", serEstudiante.getEstudiantesCursoID(id));
-        return "profesor/observador/selectestudiantes.html";
+        return "profesor/observador/selectestudiantes";
     }
 
     private void generarUsuarios() {
@@ -304,13 +302,19 @@ public class EstudianteController {
 
     @GetMapping("/estudiante/calificaciones")
     @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_ESTUDIANTE')")
-    public String calificaciones(Model model) throws Exception{
+    public String calificaciones(Model model) throws Exception {
         model.addAttribute("itemNavbar", "calificaciones");
         Estudiante estudiante = serEstudiante.getByUser(serUser.getLoggedUser());
         CalificacionesEstDTO calificaciones = serEstudiante.getCalificaciones(estudiante);
-        model.addAttribute("calificaciones",calificaciones);
+        model.addAttribute("calificaciones", calificaciones);
         return "estudiante/calificaciones/index";
     }
 
-
+    @GetMapping("/profesor/comunicaciones/estudiantes/{id}")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_PROFESOR')")
+    public String getEstudiantesChat(@PathVariable Long id, Model model) {
+        model.addAttribute("estudiantes", serEstudiante.getEstudiantesCursoID(id));
+        return "profesor/comunicaciones/chats/selectestudiantes";
+    }
 }
+

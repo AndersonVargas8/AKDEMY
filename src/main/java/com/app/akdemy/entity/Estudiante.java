@@ -57,11 +57,8 @@ public class Estudiante {
     @JoinColumn(name = "est_usuario", nullable = false)
     private User usuario;
 
-    @ManyToMany
-    @JoinTable(name = "acudiente_estudiante"
-            , joinColumns = @JoinColumn(name = "id_estudiante")
-            , inverseJoinColumns = @JoinColumn(name = "id_acudiente"))
-    private Set<Acudiente> acudientes;
+    @ManyToMany(mappedBy = "estudiantes")
+    private List<Acudiente> acudientes;
 
     @ManyToMany(mappedBy = "estudiantes")
     private List<Curso> cursos;
@@ -71,7 +68,7 @@ public class Estudiante {
     public Estudiante() {
     }
 
-    public Estudiante(long id, String nombres, String apellidos, Date fechaNacimiento, TipoDocumento tipoDocumento, String documento, Eps eps, GrupoSanguineoRH grupoSanguineoRH, User usuario, Set<Acudiente> acudientes, List<Curso> cursos) {
+    public Estudiante(long id, String nombres, String apellidos, Date fechaNacimiento, TipoDocumento tipoDocumento, String documento, Eps eps, GrupoSanguineoRH grupoSanguineoRH, User usuario, List<Acudiente> acudientes, List<Curso> cursos) {
         this.id = id;
         this.nombres = nombres;
         this.apellidos = apellidos;
@@ -157,11 +154,11 @@ public class Estudiante {
         this.usuario = usuario;
     }
 
-    public Set<Acudiente> getAcudientes() {
+    public List<Acudiente> getAcudientes() {
         return this.acudientes;
     }
 
-    public void setAcudientes(Set<Acudiente> acudientes) {
+    public void setAcudientes(List<Acudiente> acudientes ) {
         this.acudientes = acudientes;
     }
 
@@ -181,7 +178,16 @@ public class Estudiante {
             return false;
         }
         Estudiante estudiante = (Estudiante) o;
-        return id == estudiante.id && Objects.equals(nombres, estudiante.nombres) && Objects.equals(apellidos, estudiante.apellidos) && Objects.equals(fechaNacimiento, estudiante.fechaNacimiento) && Objects.equals(tipoDocumento, estudiante.tipoDocumento) && Objects.equals(documento, estudiante.documento) && Objects.equals(eps, estudiante.eps) && Objects.equals(grupoSanguineoRH, estudiante.grupoSanguineoRH) && Objects.equals(usuario, estudiante.usuario) && Objects.equals(acudientes, estudiante.acudientes) && Objects.equals(cursos, estudiante.cursos);
+        return id == estudiante.id && Objects.equals(nombres, estudiante.nombres)
+                && Objects.equals(apellidos, estudiante.apellidos)
+                && Objects.equals(fechaNacimiento, estudiante.fechaNacimiento)
+                && Objects.equals(tipoDocumento, estudiante.tipoDocumento)
+                && Objects.equals(documento, estudiante.documento)
+                && Objects.equals(eps, estudiante.eps)
+                && Objects.equals(grupoSanguineoRH, estudiante.grupoSanguineoRH)
+                && Objects.equals(usuario, estudiante.usuario)
+                && Objects.equals(acudientes, estudiante.acudientes)
+                && Objects.equals(cursos, estudiante.cursos);
     }
 
     @Override

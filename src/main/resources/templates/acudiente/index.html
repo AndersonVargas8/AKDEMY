@@ -23,7 +23,7 @@
 <body>
 
 
-<div th:include="/acudiente/navbar.html" th:remove="tag"></div>
+<div th:include="acudiente/navbar.html" th:remove="tag"></div>
 
     <header class="jumbotron">
         <div class="container mt-5">
@@ -43,14 +43,14 @@
                     <div class="carousel-inner" role="listbox">
                         <div class="carousel-item active">
                             <div class="carousel-caption d-md-block">
-                                <img src="../../static/img/classroom.png" th:src="@{/img/classroom.png}"  width="15%" height="15%">
+                                <img src="../../static/img/estudiantes.png" th:src="@{/img/estudiantes.png}"  width="15%" height="15%">
                                 <h2>Estudiantes</h2>
                                 <p class="d-none d-sm-block">Visualización de los Estudiantes a los que esté asociado.</p>
                             </div>
                         </div>
                         <div class="carousel-item">
                             <div class="carousel-caption d-md-block">
-                                <img src="../../static/img/calendario.png" th:src="@{/img/calendario.png}"  width="15%" height="15%">
+                                <img src="../../static/img/observar.png" th:src="@{/img/observar.png}"  width="15%" height="15%">
                                 <h2>Observaciones</h2>
                                 <p class="d-none d-sm-block">Visualización de las observaciones que le hagan a sus estudiantes a lo largo del año escolar.</p>
                             </div>

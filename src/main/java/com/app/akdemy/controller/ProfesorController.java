@@ -2,7 +2,6 @@ package com.app.akdemy.controller;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Set;
 
 import javax.validation.Valid;
 
@@ -16,10 +15,10 @@ import com.app.akdemy.entity.MateriaGrado;
 import com.app.akdemy.entity.Observador;
 import com.app.akdemy.entity.Periodo;
 import com.app.akdemy.entity.Profesor;
-import com.app.akdemy.entity.Role;
 import com.app.akdemy.entity.User;
 import com.app.akdemy.interfacesServices.ICalificacionesService;
 import com.app.akdemy.interfacesServices.ICursoService;
+import com.app.akdemy.interfacesServices.IEstudianteService;
 import com.app.akdemy.interfacesServices.IHorarioService;
 import com.app.akdemy.interfacesServices.IMateriaGradoService;
 import com.app.akdemy.interfacesServices.IProfesorService;
@@ -55,6 +54,9 @@ public class ProfesorController {
     @Autowired
     private ICalificacionesService serCalificaciones;
 
+    @Autowired
+    private IEstudianteService serEstudiante;
+
     // controlador de profesor desde coordinador
     @GetMapping("/coordinador/profesores")
     @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_COORDINADOR')")
@@ -84,11 +86,14 @@ public class ProfesorController {
     @GetMapping("/coordinador/profesores/{id}")
     @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_COORDINADOR')")
     public String getEditarProfesor(@PathVariable long id, Model model) throws ProfesorNotFound {
+
         Profesor profesor = serProfesor.getById(id);
+
         model.addAttribute("editarProfesor", profesor);
         model.addAttribute("profesores", serProfesor.getAllProfesors());
         model.addAttribute("users", serUser.getAvailableUsersProfesores());
         model.addAttribute("itemNavbar", "profesores");
+
         return "coordinador/profesores/editarProfesor.html";
     }
 
@@ -210,6 +215,14 @@ public class ProfesorController {
     public String cerrarCalificaciones(@ModelAttribute CalificacionDTO calificaciones) throws ProfesorNotFound, Exception{
         serProfesor.guardarCalificaciones(calificaciones,true);
         return "redirect:/profesor/calificaciones";
+    }
+        
+    @GetMapping("/acudiente/comunicaciones/profesores/{id}")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_PROFESOR')")
+    public String getEstudiantesChat(@PathVariable Long id, Model model) {
+        Curso currentCurso = serEstudiante.buscarPorId(id).getCursoActual();
+        model.addAttribute("profesores", serProfesor.getProfesoresCurso(currentCurso));
+        return "acudiente/comunicaciones/chats/selectProfesores";
     }
 
 }

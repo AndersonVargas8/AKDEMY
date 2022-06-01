@@ -1,7 +1,9 @@
 package com.app.akdemy.service;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import com.app.akdemy.Exception.ProfesorNotFound;
 import com.app.akdemy.dto.CalificacionDTO;
@@ -93,4 +95,11 @@ public class ProfesorService implements IProfesorService {
     }
 
     
+    public Iterable<Profesor> getProfesoresCurso(Curso curso) {
+        HashSet<Profesor> profesores = new HashSet<Profesor>(repProfesor.getProfesorCurso(curso.getId()));
+        profesores.add(curso.getProfesor());
+
+        return (Iterable<Profesor>) profesores;
+    }
+
 }

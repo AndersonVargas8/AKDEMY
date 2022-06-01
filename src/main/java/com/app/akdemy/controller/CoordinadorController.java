@@ -15,11 +15,4 @@ public class CoordinadorController {
         return "coordinador/menu";
     }
 
-    @GetMapping("/acudiente")
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_ACUDIENTE')")
-    public String inicioAcudiente(Model model) {
-        model.addAttribute("itemNavbar", "inicio");
-        return "acudiente/index";
-    }
-
 }

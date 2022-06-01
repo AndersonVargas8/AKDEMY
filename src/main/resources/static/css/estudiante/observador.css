@@ -15,6 +15,13 @@ body{
     / 1fr;
   gap: 8px;
 }
+.layout.nopaddingright{
+  padding-right: 0px;
+}
+.layout.nopaddingleft{
+  padding-left: 0px;
+}
+
 
 .header { grid-area: header;}
 .main { grid-area: main; }

@@ -6,6 +6,7 @@ import com.app.akdemy.Exception.ProfesorNotFound;
 import com.app.akdemy.dto.CalificacionDTO;
 import com.app.akdemy.entity.Curso;
 import com.app.akdemy.entity.MateriaGrado;
+import com.app.akdemy.entity.Curso;
 import com.app.akdemy.entity.Profesor;
 import com.app.akdemy.entity.User;
 
@@ -16,4 +17,5 @@ public interface IProfesorService {
     public void deleteProfesor(Profesor profesor) throws Exception;
     public Profesor getByUser(User user)throws ProfesorNotFound;
     public void guardarCalificaciones(CalificacionDTO calificaciones, boolean cerrar)throws ProfesorNotFound,Exception;
+    public Iterable<Profesor> getProfesoresCurso(Curso curso);
 }

@@ -31,6 +31,13 @@
                         </a>
                     </li>
 
+                    <li th:class="${itemNavbar == 'calificaciones'} ? 'nav-item active' : 'nav-item'">
+                        <a class="nav-link" href="/profesor/calificaciones" >
+                            <span class="fa fa-star fa-lg"></span> 
+                            <span class="texto_navbarItem"> Calificaciones</span>
+                        </a>
+                    </li>
+
                     <li th:class="${itemNavbar == 'observador'} ? 'nav-item active' : 'nav-item'">
                         <a class="nav-link" href="/profesor/observador" >
                             <span class="fa fa-pen-to-square fa-lg"></span> 
@@ -38,10 +45,10 @@
                         </a>
                     </li>
 
-                    <li th:class="${itemNavbar == 'calificaciones'} ? 'nav-item active' : 'nav-item'">
-                        <a class="nav-link" href="/profesor/calificaciones" >
-                            <span class="fa fa-star fa-lg"></span> 
-                            <span class="texto_navbarItem"> Calificaciones</span>
+                    <li th:class="${itemNavbar == 'comunicaciones'} ? 'nav-item active' : 'nav-item'">
+                        <a class="nav-link" href="/profesor/comunicaciones" >
+                            <span class="fa fa-comments fa-lg"></span> 
+                            <span class="texto_navbarItem"> Comunicaciones</span>
                         </a>
                     </li>
                 </ul>
