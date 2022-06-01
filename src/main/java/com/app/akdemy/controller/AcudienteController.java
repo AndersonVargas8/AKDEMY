@@ -154,6 +154,7 @@ public class AcudienteController {
         model.addAttribute("estudiantes", estudiantes);
         model.addAttribute("acudiente", acudiente);
         model.addAttribute("hijos", serEstudiante.getEstudiantesAcudiente(acudiente));
+        model.addAttribute("itemNavbar", "acudientes");
         return "/coordinador/acudientes/acudientesEstudiantes";
     }
 
@@ -165,6 +166,8 @@ public class AcudienteController {
 
         model.addAttribute("estudiantes", estudianteList);
         model.addAttribute("acudiente",acudiente);
+        
+        model.addAttribute("itemNavbar", "acudientes");
         return "coordinador/acudientes/listadoEstudiantes";
     }
 

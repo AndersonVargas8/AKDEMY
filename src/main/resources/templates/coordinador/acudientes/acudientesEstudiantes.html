@@ -10,8 +10,8 @@
                 initial-scale=1.0">
     <title>Coordinador | Estudiantes</title>
 
-    <link rel="shortcut icon" type="image/x-icon" href="../static/img/avatar1.png" th:href="@{../img/avatar1.png}">
-    <!--JQUERY-->
+    <link rel="shortcut icon" type="image/x-icon" href="../static/img/avatar1.png" th:href="@{/img/avatar1.png}">
+   <!--JQUERY-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <!-- FRAMEWORK BOOTSTRAP para el estilo de la pagina-->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
@@ -55,7 +55,7 @@
                         <tr>
                             <th colspan="6" class="bg-dark border border-dark">
                                 <div class="d-flex justify-content-center">
-                                    <h3 class="mb-0 fw-bold" th:text=" 'Acudiente: ' + ${acudiente.nombres}"></h3>
+                                    <h3 class="mb-0 fw-bold" th:text=" 'Acudiente: ' + ${acudiente.nombres + ' ' + acudiente.apellidos}"></h3>
                                 </div>
                             </th>
                         </tr>
@@ -91,7 +91,7 @@
                             </tr>
                         </tbody>
                     </table>
-                    <input type="submit" class="btn btn-primary" value="Inscribir estudiantes" th:onclick="vertodosEstudiantes([[${acudiente.id}]])">
+                    <input type="submit" class="btn btn-primary" value="Asignar estudiantes" th:onclick="vertodosEstudiantes([[${acudiente.id}]])">
                 </div>
             </div>
         </section> 
