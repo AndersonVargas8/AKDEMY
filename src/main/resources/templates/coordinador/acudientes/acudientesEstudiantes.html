@@ -78,17 +78,17 @@
                         </thead>
                         <tbody>
 
-                        <input type="text" hidden th:field="${acudiente.id}">
+                        <!-- <input type="text" hidden th:field="${acudiente.id}">
                         <tr th:each="est:${hijos}">
                                 <td th:text="${est.nombres}"></td>
                                 <td th:text="${est.apellidos}"></td>
                                 <td th:text="${#dates.format(est.fechaNacimiento,'dd-MM-yyyy')}"> </td>
-<!--                                <td th:text="${est.tipoDocumento.descripcion}"></td>-->
+                                <td th:text="${est.tipoDocumento.descripcion}"></td>
                                 <td th:text="${est.documento}"></td>
                                 <td th:if="${est.cursoActual != null}" th:text="${est.cursoActual.nombre_Curso}"></td>
                                 <td th:unless="${est.cursoActual != null}"></td>
                                 <td th:text="${est.usuario.username}"></td>
-                            </tr>
+                            </tr> -->
                         </tbody>
                     </table>
                     <input type="submit" class="btn btn-primary" value="Asignar estudiantes" th:onclick="vertodosEstudiantes([[${acudiente.id}]])">
