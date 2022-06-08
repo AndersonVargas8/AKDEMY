@@ -135,6 +135,11 @@
                                 </option>
                             </select>
                         </div>
+                        <div>
+                            <label for="user"><b>Nombre de usuario</b></label>
+                            <input th:field="${profesor.usuario.username}" id="username" class="form-control"
+                            th:placeholder="Usuario" required>
+                        </div>
                         <br>
                         <button type="submit" class="w-100 btn guardar" width="100%">Guardar</button>
                     </form>

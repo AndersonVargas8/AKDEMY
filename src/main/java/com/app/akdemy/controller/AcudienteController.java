@@ -155,7 +155,7 @@ public class AcudienteController {
         model.addAttribute("acudiente", acudiente);
         model.addAttribute("hijos", serEstudiante.getEstudiantesAcudiente(acudiente));
         model.addAttribute("itemNavbar", "acudientes");
-        return "/coordinador/acudientes/acudientesEstudiantes";
+        return "coordinador/acudientes/acudientesEstudiantes";
     }
 
     @GetMapping("/coordinador/acudientes/estudiantes/listadoEstudiantes/{idAcudiente}")

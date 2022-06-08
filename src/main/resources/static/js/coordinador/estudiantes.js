@@ -1,6 +1,6 @@
-$(document).ready(function() {
+$(document).ready(function () {
     $('#tablaEstudiantes').DataTable(
-        {   
+        {
             "order": [[1, "asc"]],
             language: {
                 "url": "//cdn.datatables.net/plug-ins/1.10.16/i18n/Spanish.json"
@@ -8,9 +8,49 @@ $(document).ready(function() {
         }
     );
     $('.search_select_box select').selectpicker();
-} );
+});
 
-function editarEstudiante(id){
+function verificaUsername(valor) {
+    if (valor == null || valor == "") {
+        $("#verificandoLabel").prop("hidden", true);
+        return;
+    }
+    $.ajax({
+        type: 'post',
+        url: '/coordinador/estudiantes/verificarUsuario',
+        data: valor,
+        dataType: "text",
+        contentType: "text/plain",
+        success: function (r) {
+            $("#verificandoLabel").prop("hidden", true);
+            $("#disponibleLabel").prop("hidden", false);
+            $("#bsubmit").prop("disabled", false);
+        },
+        error: function (jqXHR) {
+            if (jqXHR.status && jqXHR.status == 406) {
+                $("#verificandoLabel").prop("hidden", true);
+                $("#noDisponibleLabel").prop("hidden", false);
+                $("#bsubmit").prop("disabled", true);
+            } else {
+                alert("Error :(");
+            }
+        }
+    })
+}
+
+let controladorTiempo = "";
+$("#username").on("keyup", function () {
+    $("#verificandoLabel").prop("hidden", false);
+    $("#disponibleLabel").prop("hidden", true);
+    $("#noDisponibleLabel").prop("hidden", true);
+    $("#errorUsername").prop("hidden", true);
+    clearTimeout(controladorTiempo);
+    controladorTiempo = setTimeout(function () {
+        verificaUsername($("#username").val());
+    }, 500);
+});
+
+function editarEstudiante(id) {
     // let mes = document.getElementById("selMesCalendar").value;
     // $('#modalLoading').modal({
     //     backdrop: "static", //remove ability to close modal with click
@@ -19,34 +59,34 @@ function editarEstudiante(id){
     //   });
 
     var url = "/coordinador/estudiantes/" + id;
-    $("#formEditarEstudiantes").load(url, function(){
+    $("#formEditarEstudiantes").load(url, function () {
         // $('#modalLoading').modal('hide');
         $("#modalFormEditarEstudiantes").modal();
     });
-    
-    
+
+
 }
 
-function activarModalNuevo(errorCrear,errorEditar){
-    if(errorCrear == true){
+function activarModalNuevo(errorCrear, errorEditar) {
+    if (errorCrear == true) {
         $("#modalFormEstudiantes").modal();
     }
-    if(errorEditar == true){
+    if (errorEditar == true) {
         $("#modalFormEditarEstudiantes").modal();
     }
 }
 
-function confirmDeleteEstudiante(id){
-	$('#deleteModalEstudiante').modal();
-	$("#estudianteIdHiddenInput").val(id);
+function confirmDeleteEstudiante(id) {
+    $('#deleteModalEstudiante').modal();
+    $("#estudianteIdHiddenInput").val(id);
 }
 
-function deleteEstudiante(){
+function deleteEstudiante() {
     let id = $("#estudianteIdHiddenInput").val();
     var url = "/coordinador/eliminarEstudiante/" + id;
     $("#listaEstudiantes").load(url);
-    
-	$('#deleteModalEstudiante').modal('hide');
-    
+
+    $('#deleteModalEstudiante').modal('hide');
+
     // window.location = "/coordinador/eliminarEstudiante/" + ;
 }
