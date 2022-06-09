@@ -46,10 +46,21 @@
                 </ul>
             </ul>
             <span class="navbar-text menu align-items-center">
-                <a th:href="@{/logout}" style="text-decoration:none">
-                    <span class="fa fa-sign-out fa-lg"></span>
-                    <span class="texto_cerrarSesion"> Cerrar Sesión</span>
-                </a>
+                <ul class=" mb-0">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle p-0 " href="#" data-toggle="dropdown">
+                            <span class="fa fa-user-circle fa-lg"></span>
+                            <span class="texto_cerrarSesion" th:text="${#authentication.getPrincipal().getUsername()}">
+                        </a>
+                        <div class="dropdown-menu pl-3" aria-labelledby="navbarDropdownMenuLink">
+                            <a th:href="@{/logout}" style="text-decoration:none">
+                                <span class="fa fa-sign-out fa-lg text-dark"></span>
+                                <span class="texto_cerrarSesion text-dark">
+                                    Cerrar Sesión</span>
+                            </a>
+                        </div>
+                    </li>
+                </ul>
             </span>
         </div>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#Navbar">
