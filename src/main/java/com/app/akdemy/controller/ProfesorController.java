@@ -278,7 +278,7 @@ public class ProfesorController {
     }
 
     @GetMapping("/acudiente/comunicaciones/profesores/{id}")
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_PROFESOR')")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_ACUDIENTE')")
     public String getEstudiantesChat(@PathVariable Long id, Model model) {
         Curso currentCurso = serEstudiante.buscarPorId(id).getCursoActual();
         model.addAttribute("profesores", serProfesor.getProfesoresCurso(currentCurso));

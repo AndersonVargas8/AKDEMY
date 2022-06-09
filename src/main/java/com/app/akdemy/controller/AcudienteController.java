@@ -120,7 +120,7 @@ public class AcudienteController {
         if (!serUser.userHasRole(acudiente.getUsuario(), "ACUDIENTE")) {
             serUser.setRoleProfesor(acudiente.getUsuario());
         }
-        
+
         return "redirect:/coordinador/acudientes";
     }
 
@@ -245,9 +245,13 @@ public class AcudienteController {
     public String verObservacionesAcudiente(Model model) throws Exception {
         User user = serUser.getLoggedUser();
         Acudiente acudiente = serAcudiente.getByUser(user);
+        List<Estudiante> estudiantes = (List<Estudiante>)serEstudiante.getEstudiantesAcudiente(acudiente);
 
+        if(estudiantes.size() == 1){
+            model.addAttribute("unicoEstudiante",estudiantes.get(0).getId());
+        }
         model.addAttribute("itemNavbar", "observaciones");
-        model.addAttribute("estudiantes", serEstudiante.getEstudiantesAcudiente(acudiente));
+        model.addAttribute("estudiantes", estudiantes);
         /*
          * model.addAttribute("observaciones",
          * serObservador.getObservadorEstudianteByAcudiente(acudiente));
@@ -269,9 +273,13 @@ public class AcudienteController {
     public String horariosAcudiente(Model model) throws Exception {
         User user = serUser.getLoggedUser();
         Acudiente acudiente = serAcudiente.getByUser(user);
+        List<Estudiante> estudiantes = (List<Estudiante>)serEstudiante.getEstudiantesAcudiente(acudiente);
 
+        if(estudiantes.size() == 1){
+            model.addAttribute("unicoEstudiante",estudiantes.get(0).getId());
+        }
         model.addAttribute("itemNavbar", "horarios");
-        model.addAttribute("estudiantes", serEstudiante.getEstudiantesAcudiente(acudiente));
+        model.addAttribute("estudiantes", estudiantes);
         return "acudiente/horarios/index";
     }
 
@@ -311,8 +319,13 @@ public class AcudienteController {
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_ACUDIENTE')")
     public String calificacionesAcudiente(Model model) throws Exception {
         Acudiente acudiente = serAcudiente.getByUser(serUser.getLoggedUser());
+        List<Estudiante> estudiantes = (List<Estudiante>)serEstudiante.getEstudiantesAcudiente(acudiente);
+
+        if(estudiantes.size() == 1){
+            model.addAttribute("unicoEstudiante",estudiantes.get(0).getId());
+        }
         model.addAttribute("itemNavbar", "calificaciones");
-        model.addAttribute("estudiantes", serEstudiante.getEstudiantesAcudiente(acudiente));
+        model.addAttribute("estudiantes", estudiantes);
         return "acudiente/calificaciones/index";
     }
 

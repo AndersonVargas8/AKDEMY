@@ -16,5 +16,7 @@ $(document).ready(function() {
         $('#observador').load(url, function(){
             
         });
-    })
+    });
+
+    
 } );
