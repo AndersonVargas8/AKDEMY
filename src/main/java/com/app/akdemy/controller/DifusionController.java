@@ -78,9 +78,12 @@ public class DifusionController {
     public String comunicacionesProfesor(Model model) throws ProfesorNotFound, Exception{
 
         Profesor currentProfesor = serProfesor.getByUser(serUser.getLoggedUser());
-
+        List<Curso> cursos = (List<Curso>)serCurso.getCoursesObservadorbyProfesor(currentProfesor);
+        if(cursos.size()==1){
+            model.addAttribute("unicoCurso",cursos.get(0).getId());
+        }
         model.addAttribute("profesor", currentProfesor);
-        model.addAttribute("courses", serCurso.getCoursesObservadorbyProfesor(currentProfesor));
+        model.addAttribute("courses", cursos);
         model.addAttribute("chats", serChat.getChats(currentProfesor));
         model.addAttribute("chat", new Chat());
         model.addAttribute("itemNavbar", "comunicaciones");

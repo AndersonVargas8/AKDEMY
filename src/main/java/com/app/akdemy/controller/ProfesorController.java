@@ -207,8 +207,12 @@ public class ProfesorController {
         observador.setEstudiante(new Estudiante());
         observador.setProfesor(currentProfesor);
 
+        List<Curso> cursos = (List<Curso>)serCurso.getCoursesObservadorbyProfesor(currentProfesor);
+        if(cursos.size()==1){
+            model.addAttribute("unicoCurso",cursos.get(0).getId());
+        }
         model.addAttribute("itemNavbar", "observador");
-        model.addAttribute("courses", serCurso.getCoursesObservadorbyProfesor(currentProfesor));
+        model.addAttribute("courses", cursos);
         // model.addAttribute("observacion", observador);
         return "profesor/observador/index";
     }

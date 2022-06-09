@@ -135,6 +135,10 @@
             var url = "comunicaciones/difusiones/" + unicoEstudiante;
             $('#difusiones').load(url);
 
+
+            url = "/acudiente/comunicaciones/profesores/" + unicoEstudiante;
+            $('#profesores').load(url);
+            
             table.rows().remove().draw();
         }
     </script>

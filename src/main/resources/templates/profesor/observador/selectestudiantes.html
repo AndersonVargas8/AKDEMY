@@ -6,3 +6,4 @@
     <option disabled th:selected="${true}" th:text="${'Selecciona un Estudiante'}" th:value="${0}"></option>
     <option th:each="estudiante:${estudiantes}" th:value="${estudiante.id}" th:text="${estudiante.nombres} + ' ' + ${estudiante.apellidos}"></option>
 </select>
+
