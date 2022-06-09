@@ -1,13 +1,28 @@
-
+<input type="text" th:if="${unicaMateria != null}" th:value="${unicaMateria}" id="unicaMateria" hidden>
 <div>
     <label class="col-lg-3"><b>Materia</b></label>
-    <select id="materiasSelect" class="w-60 border" data-live-search="true" 
-        data-none-results-text="No se encontró {0}">
+    <select id="materiasSelect" class="w-60 border" data-live-search="true" data-none-results-text="No se encontró {0}">
         <option th:selected="${true}" th:text="${'Selecciona una materia'}" th:value="${0}"></option>
         <option th:each="materia:${materias}" th:value="${materia.id}" th:text="${materia.materia.nombre}"></option>
     </select>
 </div>
 <script type="text/javascript">
+    $(document).ready(function () {
+
+        let unicaMateria = $("#unicaMateria").val();
+        if (unicaMateria > 0) {
+            $("#materiasSelect").prop("selectedIndex", 1);
+            $("#materiasSelect").selectpicker("refresh");
+
+            $("#periodos").prop("hidden", false);
+            $("#listaEstudiantes").prop('hidden', true);
+            $("#periodosSelect").prop("selectedIndex", 0);
+            $("#periodosSelect").selectpicker("refresh");
+        }
+
+
+    });
+
     $('select').selectpicker();
     $("#materiasSelect").change(function () {
         if ($(this).val() == 0) {
@@ -16,7 +31,11 @@
         }
         $("#periodos").prop("hidden", false);
         $("#listaEstudiantes").prop('hidden', true);
-        $("#periodosSelect").prop("selectedIndex",0);
+        $("#periodosSelect").prop("selectedIndex", 0);
         $("#periodosSelect").selectpicker("refresh");
     });
+
+    function seleccionarMateria() {
+
+    }
 </script>

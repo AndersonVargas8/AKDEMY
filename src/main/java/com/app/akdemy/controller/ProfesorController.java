@@ -232,6 +232,9 @@ public class ProfesorController {
         List<Curso> cursos = serCurso.getCursosProfesor(profesor);
         List<Periodo> periodos = serCalificaciones.getAllPeriodos();
 
+        if(cursos.size() == 1){
+            model.addAttribute("unicoCurso",cursos.get(0).getId());
+        }
         model.addAttribute("cursos", cursos);
         model.addAttribute("calificaciones", new CalificacionDTO());
         model.addAttribute("periodos", periodos);
@@ -253,6 +256,9 @@ public class ProfesorController {
     public String getMateriasCurso(Model model, @PathVariable int idCurso) throws ProfesorNotFound, Exception {
         List<MateriaGrado> materias = serMateriaGrado.getByCursoAndProfesor(idCurso,
                 serProfesor.getByUser(serUser.getLoggedUser()));
+        if(materias.size() == 1){
+            model.addAttribute("unicaMateria",materias.get(0).getId());
+        }
         model.addAttribute("materias", materias);
         return "profesor/calificaciones/selectMaterias";
     }

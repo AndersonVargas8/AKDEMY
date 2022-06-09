@@ -27,7 +27,8 @@ $(document).ready(function () {
             $("#listaEstudiantes").prop('hidden', true);
         });
 
-    });  
+    });
+
 });
 
 function evaluarNota(id) {
