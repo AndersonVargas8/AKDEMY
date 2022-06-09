@@ -1,23 +1,14 @@
 package com.app.akdemy.controller;
 
-import com.app.akdemy.Exception.AcudienteNotFound;
-import com.app.akdemy.Exception.CustomeFieldValidationException;
-import com.app.akdemy.Exception.UsernameOrIdNotFound;
-import com.app.akdemy.dto.CalificacionesEstDTO;
-import com.app.akdemy.dto.CalificacionDTO;
-import com.app.akdemy.entity.Acudiente;
-import com.app.akdemy.entity.Curso;
-import com.app.akdemy.entity.Estudiante;
-import com.app.akdemy.entity.HorarioCurso;
-import com.app.akdemy.entity.User;
-import com.app.akdemy.interfacesServices.IAcudienteService;
-import com.app.akdemy.service.CalificacionesService;
-import com.app.akdemy.service.EstudianteService;
-import com.app.akdemy.service.HorarioService;
-import com.app.akdemy.service.ObservadorService;
-import com.app.akdemy.service.UserService;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -28,18 +19,32 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import javax.validation.Valid;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import com.app.akdemy.Exception.AcudienteNotFound;
+import com.app.akdemy.Exception.CustomeFieldValidationException;
+import com.app.akdemy.Exception.UsernameOrIdNotFound;
+import com.app.akdemy.dto.CalificacionesEstDTO;
+import com.app.akdemy.entity.Acudiente;
+import com.app.akdemy.entity.Curso;
+import com.app.akdemy.entity.Estudiante;
+import com.app.akdemy.entity.HorarioCurso;
+import com.app.akdemy.entity.Role;
+import com.app.akdemy.entity.User;
+import com.app.akdemy.interfacesServices.IAcudienteService;
+import com.app.akdemy.interfacesServices.IRoleService;
+import com.app.akdemy.service.CalificacionesService;
+import com.app.akdemy.service.EstudianteService;
+import com.app.akdemy.service.HorarioService;
+import com.app.akdemy.service.ObservadorService;
+import com.app.akdemy.service.UserService;
 
 @Controller
 public class AcudienteController {
 
     @Autowired
     private UserService serUser;
+
+    @Autowired
+    private IRoleService serRole;
 
     @Autowired
     private IAcudienteService serAcudiente;
@@ -53,8 +58,6 @@ public class AcudienteController {
     @Autowired
     private HorarioService serHorario;
 
-    @Autowired
-    private CalificacionesService serCalificaciones;
 
     @Autowired
     BCryptPasswordEncoder bCryptPasswordEncoder;
@@ -66,19 +69,58 @@ public class AcudienteController {
 
         model.addAttribute("acudiente", new Acudiente());
         model.addAttribute("acudientes", serAcudiente.getAllAcudientes());
-        model.addAttribute("users", serUser.getAvailableUsersProfesores());
+        model.addAttribute("users", serUser.getAvailableUsersAcudientes());
         model.addAttribute("itemNavbar", "acudientes");
         return "coordinador/acudientes/index";
     }
 
     @PostMapping("/saveacudiente")
     @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_COORDINADOR')")
-    public String createAcudiente(@Valid @ModelAttribute("acudiente") Acudiente acudiente, Model model)
+    public String createAcudiente(@Valid @ModelAttribute("acudiente") Acudiente acudiente, Model model,
+            BindingResult result)
             throws UsernameOrIdNotFound {
 
-        acudiente.setUsuario(serUser.getUserById(acudiente.getUsuario().getId()));
+        if (acudiente.getUsuario().getId() > 0) {
+            acudiente.setUsuario(serUser.getUserById(acudiente.getUsuario().getId()));
+        } else {
+            // Se pone la contraseña de usuario igual al documento
+            String encodePassword = bCryptPasswordEncoder.encode(acudiente.getDocumento());
+            acudiente.getUsuario().setPassword(encodePassword);
+            acudiente.getUsuario().setConfirmPassword(encodePassword);
+            // Se le asigna el rol acudiente
+            Set<Role> roles = new HashSet<>();
+            roles.add(serRole.buscarPorNombre("ACUDIENTE"));
+            acudiente.getUsuario().setRoles(roles);
+
+            // Validar usuario
+            try {
+                serUser.validarUsuario(acudiente.getUsuario());
+            } catch (CustomeFieldValidationException e) {
+                result.rejectValue(e.getFieldName(), null, e.getMessage());
+            } catch (Exception e) {
+            }
+
+            // Retornar a la página mostrando los errores
+            if (result.getErrorCount() > 0) {
+                model.addAttribute("acudiente", new Acudiente());
+                model.addAttribute("acudientes", serAcudiente.getAllAcudientes());
+                model.addAttribute("users", serUser.getAvailableUsersAcudientes());
+                model.addAttribute("itemNavbar", "acudientes");
+
+                model.addAttribute("errorCrear", 1);
+                return "coordinador/acudientes/index";
+            }
+
+            // Se guarda el user y se le asigna al acudiente
+            User usuario = serUser.guardarUsuario(acudiente.getUsuario());
+            acudiente.setUsuario(usuario);
+        }
         serAcudiente.saveAcudiente(acudiente);
-        serUser.setRoleAcudiente(acudiente.getUsuario());
+
+        if (!serUser.userHasRole(acudiente.getUsuario(), "ACUDIENTE")) {
+            serUser.setRoleProfesor(acudiente.getUsuario());
+        }
+        
         return "redirect:/coordinador/acudientes";
     }
 
@@ -165,12 +207,11 @@ public class AcudienteController {
         Acudiente acudiente = serAcudiente.getById(idAcudiente);
 
         model.addAttribute("estudiantes", estudianteList);
-        model.addAttribute("acudiente",acudiente);
-        
+        model.addAttribute("acudiente", acudiente);
+
         model.addAttribute("itemNavbar", "acudientes");
         return "coordinador/acudientes/listadoEstudiantes";
     }
-
 
     @PostMapping("/coordinador/acudientes/estudiantes")
     public String guardarEstudiantes(@ModelAttribute("acudiente") Acudiente acudienteModel) throws AcudienteNotFound {

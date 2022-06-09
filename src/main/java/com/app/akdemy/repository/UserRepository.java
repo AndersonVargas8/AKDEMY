@@ -29,7 +29,7 @@ public interface UserRepository extends CrudRepository<User,Long>{
     void removeRoleProfesor(@Param("userID") Long userID);
 
 
-    @Query(value="select u.id, password, username from user u left join acudiente a on u.id = a.pro_usuario where a.pro_usuario is null", nativeQuery=true)
+    @Query(value="select u.id, password, username from user u left join acudiente a on u.id = a.acu_usuario where a.acu_usuario is null", nativeQuery=true)
     Iterable<User> usersAvaliablesAcudientes();
 
     @Transactional

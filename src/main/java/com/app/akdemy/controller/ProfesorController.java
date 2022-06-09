@@ -119,7 +119,7 @@ public class ProfesorController {
                 return "coordinador/profesores/index";
             }
 
-            // Se guarda el user y se le asigna al estudiante
+            // Se guarda el user y se le asigna al profesor
             User usuario = serUser.guardarUsuario(profesor.getUsuario());
             profesor.setUsuario(usuario);
         }
