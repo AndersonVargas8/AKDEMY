@@ -1,13 +1,18 @@
 package com.app.akdemy.controller;
 
-import com.app.akdemy.entity.User;
-import com.app.akdemy.interfacesServices.IRoleService;
-import com.app.akdemy.service.UserService;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+
+import com.app.akdemy.entity.User;
+import com.app.akdemy.interfacesServices.IRoleService;
+import com.app.akdemy.service.UserService;
 
 @Controller
 public class UserController {
@@ -64,5 +69,16 @@ public class UserController {
 
         return "seleccionarRol";
     }
+
+    @RequestMapping(value = "/user/verificarUsuario", method = RequestMethod.POST)
+    public ResponseEntity<?> verificarUsuario(@RequestBody String usuario){
+        try {
+            boolean validacion = serUser.validarUsuario(new User(usuario,""));
+        } catch (Exception e) {
+            return new ResponseEntity(HttpStatus.NOT_ACCEPTABLE);
+        }
+        return new ResponseEntity(HttpStatus.OK);
+    }
+
 
 }

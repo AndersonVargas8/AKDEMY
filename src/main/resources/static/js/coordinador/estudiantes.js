@@ -17,7 +17,7 @@ function verificaUsername(valor) {
     }
     $.ajax({
         type: 'post',
-        url: '/coordinador/estudiantes/verificarUsuario',
+        url: '/user/verificarUsuario',
         data: valor,
         dataType: "text",
         contentType: "text/plain",
