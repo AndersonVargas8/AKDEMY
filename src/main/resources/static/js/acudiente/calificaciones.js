@@ -7,5 +7,16 @@ $(document).ready(function() {
         $('#califEstu').load(url, function(){
             $('#califEstu').show();
         });
-    })
-} );
+    });
+
+    let unicoEstudiante = $("#unicoEstudiante").val();
+    if (unicoEstudiante > 0) {
+        $("#estudiantesSelect").prop("selectedIndex", 1);
+        $("#estudiantesSelect").selectpicker("refresh");
+
+        var url = "calificaciones/" + unicoEstudiante;
+        $('#califEstu').load(url, function(){
+            $('#califEstu').show();
+        });
+    }
+});

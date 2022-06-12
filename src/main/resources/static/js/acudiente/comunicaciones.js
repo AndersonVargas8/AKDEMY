@@ -36,6 +36,8 @@ $(document).ready(function() {
         table.rows().remove().draw();
         
     })
+    
+    
 
     $('#cursosChat').change(function() {
         var url = "comunicaciones/estudiantes/" + $(this).val();
@@ -48,15 +50,15 @@ $(document).ready(function() {
         // Set value on hidden input for form
        $('#estudianteid').val($(this).val());
 
-       var url = "comunicaciones/profesores/" + $(this).val();
+       var url = "/acudiente/comunicaciones/profesores/" + $(this).val();
        $('#profesores').load(url);
 
     
 
     })
 
+
     $('#profesoresSelect').change(function() {
-        alert()
         // Set value on hidden input for form
        $('#profesorid').val($(this).val());
     })

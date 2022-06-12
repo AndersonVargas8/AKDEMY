@@ -63,15 +63,28 @@
     <div class="form-group row">
         <label class="col-lg-3 col-lg form-label form-control-label"><b>Nombre de usuario</b></label>
         <div class="col-lg-7 search_select_box">
-            <input th:field="${nuevoEstudiante.usuario.username}" class="form-control" th:placeholder="Usuario" required>
+            <input th:field="${nuevoEstudiante.usuario.username}" id="username" class="form-control"
+                th:placeholder="Usuario" required>
+            <div id="verificandoLabel" hidden>
+                <i class="fa-solid fa-spinner fa-spin-pulse mt-2"></i>
+                <i class="mt-1 mr-2">Verificando</i>
+            </div>
+            <div id="disponibleLabel" hidden>
+                <i class="fas fa-check-circle mt-2" style="color:green"></i>
+                <i class="mt-1 mr-2">Usuario disponible</i>
+            </div>
+            <div id="noDisponibleLabel" hidden>
+                <i class="fa fa-x pt-2" style="color:red"></i>
+                <i class="mt-1 mr-2">Usuario no disponible</i>
+            </div>
             <div class="alert-danger p-2" th:if="${#fields.hasErrors('usuario.username')}"
-                th:errors="*{usuario.username}">Name Error
+                th:errors="*{usuario.username}" id="errorUsername">Name Error
             </div>
 
         </div>
     </div>
 
     <div class="form-group row d-flex justify-content-center">
-        <button type="submit" class="w-50 btn guardar" width="100%">Guardar</button>
+        <button type="submit" class="w-50 btn guardar" id="bsubmit" width="100%">Guardar</button>
     </div>
 </form>

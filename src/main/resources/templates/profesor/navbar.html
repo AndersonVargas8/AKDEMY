@@ -5,8 +5,8 @@
 
 <nav class="navbar navbar-dark navbar-expand-sm fixed-top">
     <div class="container">
-        <a class="navbar-brand mr-auto"><img src="../../static/img/avatar1.png"
-                th:src="@{/img/avatar1.png}" height="40" width="35" alt="AKDEMY"></a>
+        <a class="navbar-brand mr-auto"><img src="../../static/img/avatar1.png" th:src="@{/img/avatar1.png}" height="40"
+                width="35" alt="AKDEMY"></a>
         <div class="collapse navbar-collapse" id="Navbar">
             <ul class="navbar-nav mr-auto">
                 <ul class="menu align-items-center">
@@ -18,46 +18,57 @@
                     </li>
 
                     <li th:class="${itemNavbar == 'cursos'} ? 'nav-item active' : 'nav-item'">
-                        <a class="nav-link" href="/profesor/cursos" >
+                        <a class="nav-link" href="/profesor/cursos">
                             <span class="fa fa-info fa-lg"></span>
                             <span class="texto_navbarItem"> Cursos</span>
                         </a>
                     </li>
 
                     <li th:class="${itemNavbar == 'horario'} ? 'nav-item active' : 'nav-item'">
-                        <a class="nav-link" href="/profesor/horario" >
+                        <a class="nav-link" href="/profesor/horario">
                             <span class="fa fa-calendar-alt fa-lg"></span>
                             <span class="texto_navbarItem"> Horario</span>
                         </a>
                     </li>
 
                     <li th:class="${itemNavbar == 'calificaciones'} ? 'nav-item active' : 'nav-item'">
-                        <a class="nav-link" href="/profesor/calificaciones" >
-                            <span class="fa fa-star fa-lg"></span> 
+                        <a class="nav-link" href="/profesor/calificaciones">
+                            <span class="fa fa-star fa-lg"></span>
                             <span class="texto_navbarItem"> Calificaciones</span>
                         </a>
                     </li>
 
                     <li th:class="${itemNavbar == 'observador'} ? 'nav-item active' : 'nav-item'">
-                        <a class="nav-link" href="/profesor/observador" >
-                            <span class="fa fa-pen-to-square fa-lg"></span> 
+                        <a class="nav-link" href="/profesor/observador">
+                            <span class="fa fa-pen-to-square fa-lg"></span>
                             <span class="texto_navbarItem"> Observador</span>
                         </a>
                     </li>
 
                     <li th:class="${itemNavbar == 'comunicaciones'} ? 'nav-item active' : 'nav-item'">
-                        <a class="nav-link" href="/profesor/comunicaciones" >
-                            <span class="fa fa-comments fa-lg"></span> 
+                        <a class="nav-link" href="/profesor/comunicaciones">
+                            <span class="fa fa-comments fa-lg"></span>
                             <span class="texto_navbarItem"> Comunicaciones</span>
                         </a>
                     </li>
                 </ul>
             </ul>
             <span class="navbar-text menu align-items-center">
-                <a th:href="@{/logout}" style="text-decoration:none">
-                    <span class="fa fa-sign-out fa-lg"></span>
-                    <span class="texto_cerrarSesion"> Cerrar Sesión</span>
-                </a>
+                <ul class=" mb-0">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle p-0 " href="#" data-toggle="dropdown">
+                            <span class="fa fa-user-circle fa-lg"></span>
+                            <span class="texto_cerrarSesion" th:text="${#authentication.getPrincipal().getUsername()}">
+                        </a>
+                        <div class="dropdown-menu pl-3" aria-labelledby="navbarDropdownMenuLink">
+                            <a th:href="@{/logout}" style="text-decoration:none">
+                                <span class="fa fa-sign-out fa-lg text-dark"></span>
+                                <span class="texto_cerrarSesion text-dark">
+                                    Cerrar Sesión</span>
+                            </a>
+                        </div>
+                    </li>
+                </ul>
             </span>
         </div>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#Navbar">

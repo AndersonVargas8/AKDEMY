@@ -1,8 +1,18 @@
 package com.app.akdemy.controller;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.validation.Valid;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import com.app.akdemy.Exception.ProfesorNotFound;
 import com.app.akdemy.entity.Acudiente;
@@ -18,15 +28,6 @@ import com.app.akdemy.interfacesServices.IDifusionService;
 import com.app.akdemy.interfacesServices.IEstudianteService;
 import com.app.akdemy.interfacesServices.IProfesorService;
 import com.app.akdemy.service.UserService;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class DifusionController {
@@ -59,9 +60,13 @@ public class DifusionController {
     public String index(Model model) throws Exception {
 
         Acudiente currentAcudiente = serAcudiente.getByUser(serUser.getLoggedUser());
+        List<Estudiante> estudiantes = (List<Estudiante>)serEstudiante.getEstudiantesAcudiente(currentAcudiente);
 
+        if(estudiantes.size() == 1){
+            model.addAttribute("unicoEstudiante",estudiantes.get(0).getId());
+        }
         model.addAttribute("acudiente", currentAcudiente);
-        model.addAttribute("estudiantes", serEstudiante.getEstudiantesAcudiente(currentAcudiente));
+        model.addAttribute("estudiantes", estudiantes);
         model.addAttribute("chats", serChat.getChats(currentAcudiente));
         model.addAttribute("chat", new Chat());
         model.addAttribute("itemNavbar", "comunicaciones");
@@ -73,9 +78,12 @@ public class DifusionController {
     public String comunicacionesProfesor(Model model) throws ProfesorNotFound, Exception{
 
         Profesor currentProfesor = serProfesor.getByUser(serUser.getLoggedUser());
-
+        List<Curso> cursos = (List<Curso>)serCurso.getCoursesObservadorbyProfesor(currentProfesor);
+        if(cursos.size()==1){
+            model.addAttribute("unicoCurso",cursos.get(0).getId());
+        }
         model.addAttribute("profesor", currentProfesor);
-        model.addAttribute("courses", serCurso.getCoursesObservadorbyProfesor(currentProfesor));
+        model.addAttribute("courses", cursos);
         model.addAttribute("chats", serChat.getChats(currentProfesor));
         model.addAttribute("chat", new Chat());
         model.addAttribute("itemNavbar", "comunicaciones");
