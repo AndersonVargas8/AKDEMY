@@ -4,6 +4,17 @@ import java.sql.Time;
 import java.util.Arrays;
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+
+import org.springframework.web.bind.annotation.PostMapping;
+
 import com.app.akdemy.Exception.ProfesorNotFound;
 import com.app.akdemy.entity.Curso;
 import com.app.akdemy.entity.HorarioCurso;
@@ -13,12 +24,6 @@ import com.app.akdemy.service.CursoService;
 import com.app.akdemy.service.HorarioService;
 import com.app.akdemy.service.MateriaGradoService;
 import com.app.akdemy.service.ProfesorService;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 @Controller
@@ -50,10 +55,15 @@ public class HorarioController {
     }
 
     
-    @GetMapping("/coordinador/consultaHorario/{idCurso}")
+    @PostMapping("/coordinador/consultaHorario/{idCurso}")
     @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_COORDINADOR')")
-    public String consultaHorario(Model model, @PathVariable int idCurso) {
-        model = cargarTablaHorarios(model, idCurso);
+    public String consultaHorario(Model model, @PathVariable int idCurso, HttpServletResponse servletResponse) {
+        try{
+            model = cargarTablaHorarios(model, idCurso);
+            servletResponse.setStatus(HttpServletResponse.SC_OK);
+        }catch(Exception e){
+            servletResponse.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+        }
         return "coordinador/horarios/horario";
     }
 

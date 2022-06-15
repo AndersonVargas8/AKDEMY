@@ -1,8 +1,17 @@
 $(document).ready(function () {
     $("#selCurso").change(function () {
+        $("#tabla-horarios").addClass("loading");
         let idCurso = document.getElementById("selCurso").value;
         let url = "/coordinador/consultaHorario/" + idCurso;
-        $("#seccionHorario").load(url);
+        $("#seccionHorario").load(url,{limit:25},
+            function(responseText, textStatus, req){
+                if(textStatus == "error"){
+                    console.log("Error cargando el horario");
+                    toastr.error('Inténtalo nuevamente','Ocurrió un error');
+                }else{
+                    $("#tabla-horarios").removeClass("loading");
+                }
+        });
     });
     $("#agregarMatHoras").change(function () {
         let horas = $("#agregarMatHoras").val();
@@ -85,3 +94,4 @@ function guardarHorario(){
 
 
 }
+
