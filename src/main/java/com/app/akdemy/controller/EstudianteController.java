@@ -1,11 +1,13 @@
 package com.app.akdemy.controller;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +38,8 @@ import com.app.akdemy.repository.TipoDocumentoRepository;
 import com.app.akdemy.service.AcudienteService;
 import com.app.akdemy.service.RoleService;
 import com.app.akdemy.service.UserService;
+import com.app.akdemy.util.generatePDF;
+import com.lowagie.text.DocumentException;
 
 @Controller
 public class EstudianteController {
@@ -320,6 +324,24 @@ public class EstudianteController {
     public String getEstudiantesChat(@PathVariable Long id, Model model) {
         model.addAttribute("estudiantes", serEstudiante.getEstudiantesCursoID(id));
         return "profesor/comunicaciones/chats/selectestudiantes";
+    }
+
+    @GetMapping("/pdfprueba")
+    public void generateCertificate(HttpServletResponse response) throws DocumentException, IOException{
+
+        //Set response ContentType
+        response.setContentType("application/pdf");
+
+        //Headers
+        String headerkey = "Content-Disposition";
+        String headervalue = "attachment; filename=\"certificate.pdf\"";
+
+        response.setHeader(headerkey, headervalue);
+
+        //Generate Certificate
+        generatePDF generator = new generatePDF();
+        generator.generate(response);
+        
     }
 }
 
