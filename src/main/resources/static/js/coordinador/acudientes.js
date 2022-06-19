@@ -1,7 +1,7 @@
 $(document).ready(function() {
     datatable = createDatatable();
 
-    //Guardar profesor
+    //Guardar acudiente
     $("#acudientesForm").submit(function (e) {
         e.preventDefault();
         valid = verificateForm($("#selectuser"))
@@ -85,6 +85,7 @@ function cargarAcudientes() {
             }
         })
 }
+
 function resetForm() {
     document.getElementById("acudientesForm").reset();
     resetSelectPicker($("#selectuser"));

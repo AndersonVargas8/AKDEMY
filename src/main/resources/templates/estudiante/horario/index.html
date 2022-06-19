@@ -18,9 +18,9 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
    <!-- Local Files-->
     <link rel="stylesheet" type="text/css" th:href="@{/css/estudiante/horario.css}">
-    <link rel="stylesheet" type="text/css" th:href="@{/css/coordinador/horarios.css}">
     <link rel="stylesheet" type="text/css" href="../../static/css/normalize.css" th:href="@{/css/normalize.css}">
     <script type="text/javascript" th:src="@{/js/estudiante/horarios.js}"></script>
+    <link rel="stylesheet" type="text/css" th:href="@{/common/loading.css}">
 
 </head>
 
@@ -41,7 +41,7 @@
                 <div class="card-body ">
                     <!-- TABLA DE HORARIOS -->
                     <div class="table-responsive">
-                        <table class="table">
+                        <table class="table loading" id="tabla-horarios">
                             <thead class="thead-dark">
                                 <tr>
                                     <th colspan="6" class="bg-secondary border border-dark">

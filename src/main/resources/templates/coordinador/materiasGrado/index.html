@@ -103,15 +103,15 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body p-5 justify-content-center">
-                    <form th:action="@{/savemateriaGrado}" th:object="${materiaGrado}" method="POST"
+                <div class="modal-body p-4 justify-content-center">
+                    <form th:action="@{/savemateriaGrado}" class="form col-lg" th:object="${materiaGrado}" method="POST"
                         id="materiasGradoForm">
 
                         <div class="form-group row">
                             <label class="col-lg-3" for="materia"><b>Materia</b></label>
-                            <div class="col-lg-8 search_select_box p-0 ml-3">
+                            <div class="col-lg-8 search_select_box ">
                                 <select th:field="${materiaGrado.materia.id}" id="materia"
-                                    class="w-75 border selectpicker" data-live-search="true" data-none-results-text="No se encontró
+                                    class="w-100 border selectpicker" data-live-search="true" data-none-results-text="No se encontró
                                     {0}">
                                     <option value="0">Seleccione</option>
                                     <option th:each="materia:${materias}" th:value="${materia.id}"
@@ -122,20 +122,22 @@
 
                         <div class="form-group row">
                             <label class="col-lg-3" for="name"><b>Grado</b></label>
-                            <div class="col-lg-7">
+                            <div class="col-lg-8">
                                 <input th:field="*{grado}" type="number" min="0" max="3000" class="form-control"
                                     id="grado" placeholder="Grado" required>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-lg-3" for="year"><b>Descripción</b></label>
-                            <div class="col-lg-7">
-                                <input th:field="*{descripcion}" type="text" class="form-control"
-                                    id="descripcion" placeholder="Descripción" required>
+                            <div class="col-lg-8">
+                                <input th:field="*{descripcion}" type="text" class="form-control" id="descripcion"
+                                    placeholder="Descripción" required>
                             </div>
                         </div>
                         <br>
-                        <button type="submit" class="w-100 btn guardar" id="btnSubmit" width="100%">Guardar</button>
+                        <div class="form-group row d-flex justify-content-center">
+                            <button type="submit" class="w-75 btn guardar" id="btnSubmit" width="100%">Guardar</button>
+                        </div>
                     </form>
                 </div>
             </div>

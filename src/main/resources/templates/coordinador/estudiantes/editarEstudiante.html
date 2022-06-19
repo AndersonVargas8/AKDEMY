@@ -1,3 +1,4 @@
+
 <form id="editarEstudiantesForm" th:object="${editarEstudiante}" method="post" class="form col-lg" role="form"
     autocomplete="off" th:action="@{/coordinador/editarEstudiante}" th:if="${editarEstudiante != null}">
     <!--Es necesario para poder pasar la validacion del Model-->
@@ -5,52 +6,56 @@
 
     <div class="form-group row">
         <label class="col-lg-3 col-lg form-label form-control-label"><b>Nombres</b></label>
-        <div class="col-lg-7 search_select_box">
+        <div class="col-lg-8 search_select_box">
             <input th:field="${editarEstudiante.nombres}" class="form-control">
         </div>
     </div>
     <div class="form-group row">
         <label class="col-lg-3 col-lg form-label form-control-label"><b>Apellidos</b></label>
-        <div class="col-lg-7 search_select_box">
+        <div class="col-lg-8 search_select_box">
             <input th:field="${editarEstudiante.apellidos}" class="form-control">
         </div>
     </div>
 
     <div class="form-group row">
         <label class="col-lg-3 col-lg form-label form-control-label"><b>Fecha de Nacimiento</b></label>
-        <div class="col-lg-7">
+        <div class="col-lg-8">
             <input th:field="${editarEstudiante.fechaNacimiento}" type="date" class="form-control">
         </div>
     </div>
 
     <div class="form-group row">
         <label class="col-lg-3 form-label form-control-label"><b>Tipo de documento</b></label>
-        <select th:field="${editarEstudiante.tipoDocumento}" required
-            class="col-lg-6 m-2 ml-3 btn dropdown-toggle border">
-            <option th:each="tipoDoc:${tiposDoc}" th:value="${tipoDoc.id}" th:text="${tipoDoc.descripcion}"></option>
-        </select>
+        <div class="col-lg-8">
+            <select th:field="${editarEstudiante.tipoDocumento}" required
+                class="w-100 btn dropdown-toggle border">
+                <option th:each="tipoDoc:${tiposDoc}" th:value="${tipoDoc.id}" th:text="${tipoDoc.descripcion}"></option>
+            </select>
+        </div>
     </div>
 
     <div class="form-group row">
         <label class="col-lg-3 col-lg form-label form-control-label"><b>Documento</b></label>
-        <div class="col-lg-7 search_select_box">
+        <div class="col-lg-8 search_select_box">
             <input th:field="${editarEstudiante.documento}" type="number" class="form-control">
-            <div class="alert-danger p-2" th:if="${#fields.hasErrors('documento')}" th:errors="*{documento}">Name Error
+            <div class="alert-danger p-2" id="errorDoc2" hidden>Ya existe un estudiante con este documento
             </div>
         </div>
     </div>
 
     <div class="form-group row">
         <label class="col-lg-3 form-label form-control-label"><b>Grupo sanguíneo - RH</b></label>
-        <select th:field="${editarEstudiante.grupoSanguineoRH}" required
-            class="col-lg-6 m-2 ml-3 btn dropdown-toggle border">
-            <option th:each="grupoS:${gsrh}" th:value="${grupoS.id}" th:text="${grupoS.descripcion}"></option>
-        </select>
+        <div class="col-lg-8">
+            <select th:field="${editarEstudiante.grupoSanguineoRH}" required
+                class="w-100 btn dropdown-toggle border">
+                <option th:each="grupoS:${gsrh}" th:value="${grupoS.id}" th:text="${grupoS.descripcion}"></option>
+            </select>
+        </div>
     </div>
 
     <div class="form-group row">
         <label class="col-lg-3 form-label form-control-label"><b>EPS</b></label>
-        <div class="col-lg-7 search_select_box2">
+        <div class="col-lg-8 search_select_box2">
             <select th:field="${editarEstudiante.eps}" class="w-100 border" data-live-search="true"
                 data-none-results-text="No se encontró {0}">
                 <option th:each="EPS:${eps}" th:value="${EPS.id}" th:text="${EPS.nombre}"></option>
@@ -60,7 +65,7 @@
 
     <div class="form-group row">
         <label class="col-lg-3 col-lg form-label form-control-label"><b>Nombre de usuario</b></label>
-        <div class="col-lg-7">
+        <div class="col-lg-8">
             <input th:field="${editarEstudiante.usuario.username}" class="form-control">
             <div class="alert-danger p-2" th:if="${#fields.hasErrors('usuario.username')}" th:errors="*{usuario.username}">Name Error
             </div>
@@ -69,11 +74,42 @@
 
 
     <div class="form-group row d-flex justify-content-center">
-        <button type="submit" class="w-50 btn guardar">Guardar</button>
+        <button type="submit" class="w-75 btn guardar" id="btnSubmit2">Guardar</button>
     </div>
 </form>
 <script type="text/javascript">
     $(document).ready(function () {
         $('.search_select_box2 select').selectpicker();
     })
+
+    //editar estudiante
+    $("#editarEstudiantesForm").submit(function (e) {
+        e.preventDefault();
+        activateLoadingButton($("#btnSubmit2"), true);
+
+        $.ajax({
+            type: "post",
+            url: "/coordinador/editarEstudiante",
+            data: $(this).serialize(),
+            success: function () {
+                toastr.options.positionClass = 'toast-bottom-right';
+                toastr.success("Estudiante actualizado");
+                desactivateLoadingButton($("#btnSubmit2"), "Guardar", false);
+                closeModal($("#modalFormEditarEstudiantes"));
+                cargarEstudiantes();
+                resetForm();
+            },
+            error: function (jqXHR) {
+                if (jqXHR.status && jqXHR.status == 406) {
+                    desactivateLoadingButton($("#btnSubmit2"), "Guardar", false);
+                    defaultErrorNotify();
+                    $("#errorDoc2").prop("hidden",false);
+                }else if (jqXHR.status && jqXHR.status == 400) {
+                    defaultErrorNotify();
+                }else{
+                    defaultErrorNotify();
+                }
+            }
+        })
+    });
 </script>

@@ -55,7 +55,8 @@
                 </div>
                 <div th:replace="common/elements::label-loading(cursos)"></div>
                 <div class="card-body ">
-                    <table id="courses" th:fragment="listaCursos" class="table table-borderless table-hover" style="width:100%" hidden>
+                    <table id="courses" th:fragment="listaCursos" class="table table-borderless table-hover"
+                        style="width:100%" hidden>
                         <thead>
                             <tr>
                                 <th>Nombre del curso</th>
@@ -110,26 +111,26 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body p-5 justify-content-center">
-                    <form th:action="@{/savecurso}" th:object="${curso}" method="POST" id="cursosForm">
+                <div class="modal-body p-4 justify-content-center">
+                    <form th:action="@{/savecurso}" th:object="${curso}" method="POST" id="cursosForm" class="form col-lg">
                         <div class="form-group row">
                             <label class="col-lg-4" for="name"><b>Nombre del curso</b></label>
-                            <div class="col-lg-6">
+                            <div class="col-lg-7">
                                 <input th:field="*{nombre_Curso}" type="text" class="form-control" id="name"
                                     placeholder="Nombre" required>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-lg-4" for="year"><b>Año</b></label>
-                            <div class="col-lg-6">
+                            <div class="col-lg-7">
                                 <input th:field="*{anio_Curso}" type="number" min="1900" max="3000" class="form-control"
                                     id="year" placeholder="Año" required>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-lg-4" for="director"><b>Director de curso</b></label>
-                            <div class="col-lg-8 search_select_box ">
-                                <select th:field="${curso.profesor.id}" id="director" class="w-75 border selectpicker"
+                            <div class="col-lg-7 search_select_box ">
+                                <select th:field="${curso.profesor.id}" id="director" class="w-100 border selectpicker"
                                     data-live-search="true" data-none-results-text="No se encontró
                                     {0}">
                                     <option value="0">Seleccione</option>
@@ -139,7 +140,10 @@
                             </div>
                         </div>
                         <br>
-                        <button type="submit" class="w-100 btn guardar " id="btnSubmit" width="100%">Guardar</button>
+                        <div class="form-group row d-flex justify-content-center">
+                            <button type="submit" class="w-75 btn guardar " id="btnSubmit"
+                                width="100%">Guardar</button>
+                        </div>
                     </form>
                 </div>
             </div>

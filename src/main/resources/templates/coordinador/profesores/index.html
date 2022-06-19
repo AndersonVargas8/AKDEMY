@@ -64,7 +64,8 @@
                 </div>
                 <div th:replace="common/elements::label-loading(profesores)"></div>
                 <div class="card-body">
-                    <table th:fragment="listaProfesores" id="teachers" class=" table table-borderless table-hover" style="width:100%" hidden>
+                    <table th:fragment="listaProfesores" id="teachers" class=" table table-borderless table-hover"
+                        style="width:100%" hidden>
                         <thead>
                             <tr>
                                 <th>Nombres</th>
@@ -111,62 +112,75 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body p-5 justify-content-center">
-                    <form th:action="@{/saveprofesor}" th:object="${profesor}" method="POST" id="profesoresForm">
-                        <div class="form-group">
-                            <label for="names"><b>Nombres</b></label>
-                            <input required th:field="*{nombres}" type="text" class="form-control" id="names"
-                                placeholder="Nombre(s)">
+                <div class="modal-body p-4 justify-content-center">
+                    <form th:action="@{/saveprofesor}" th:object="${profesor}" method="POST" id="profesoresForm" class="form col-lg">
+                        <div class="form-group row">
+                            <label class="col-lg-3" for="names"><b>Nombres</b></label>
+                            <div class="col-lg-8">
+                                <input required th:field="*{nombres}" type="text" class="form-control" id="names"
+                                    placeholder="Nombre(s)">
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label for="lastnames"><b>Apellidos</b></label>
-                            <input required th:field="*{apellidos}" type="text" class="form-control" id="lastnames"
-                                placeholder="Apellido(s)">
+                        <div class="form-group row">
+                            <label class="col-lg-3" for="lastnames"><b>Apellidos</b></label>
+                            <div class="col-lg-8">
+                                <input required th:field="*{apellidos}" type="text" class="form-control" id="lastnames"
+                                    placeholder="Apellido(s)">
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label for="birthdate"><b>Fecha de Nacimiento</b></label>
-                            <input required th:field="*{fechaNacimiento}" type="date" class="form-control"
-                                id="birthdate" placeholder="Password">
+                        <div class="form-group row">
+                            <label class="col-lg-3" for="birthdate"><b>Fecha de Nacimiento</b></label>
+                            <div class="col-lg-8">
+                                <input required th:field="*{fechaNacimiento}" type="date" class="form-control"
+                                    id="birthdate" placeholder="Password">
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label for="document"><b>Documento</b></label>
-                            <input required th:field="*{documento}" type="number" class="form-control" id="document"
-                                placeholder="Documento">
+                        <div class="form-group row">
+                            <label class="col-lg-3" for="document"><b>Documento</b></label>
+                            <div class="col-lg-8">
+                                <input required th:field="*{documento}" type="number" class="form-control" id="document"
+                                    placeholder="Documento">
+                            </div>
                         </div>
-                        <div id="selectUser">
-                            <label for="user"><b>Usuario Asociado</b></label>
-                            <div class="search_select_box">
+                        <div id="selectUser" class="form-group row">
+                            <label class="col-lg-3" for="user"><b>Usuario Asociado</b></label>
+                            <div class="search_select_box col-lg-8">
                                 <select id="selectuser" class="form-control border" th:field="${profesor.usuario.id}"
                                     data-live-search="true" data-none-results-text="No se encontró {0}" required="true">
                                     <option value="0">Seleccione</option>
                                     <option th:each="user:${users}" th:value="${user.id}" th:text="${user.username}">
                                     </option>
                                 </select>
+                                <a href="#" class="mt-1 text-info" onclick="crearUsuario()">Crear nuevo usuario</a>
                             </div>
 
-                            <a href="#" class="mt-1 text-info" onclick="crearUsuario()">Crear nuevo usuario</a>
                         </div>
-                        <div id="createUser" hidden>
-                            <label for="user"><b>Nombre de usuario</b></label>
-                            <input th:field="${profesor.usuario.username}" id="username" class="form-control"
-                                th:placeholder="Usuario">
-                            <div id="verificandoLabel" hidden>
-                                <i class="fa-solid fa-spinner fa-spin-pulse mt-2"></i>
-                                <i class="mt-1 mr-2">Verificando</i>
+                        <div id="createUser" class="form-group row" hidden>
+                            <label class="col-lg-3" for="user"><b>Nombre de usuario</b></label>
+                            <div class="col-lg-8">
+
+                                <input th:field="${profesor.usuario.username}" id="username" class="form-control"
+                                    th:placeholder="Usuario">
+                                <div id="verificandoLabel" hidden>
+                                    <i class="fa-solid fa-spinner fa-spin-pulse mt-2"></i>
+                                    <i class="mt-1 mr-2">Verificando</i>
+                                </div>
+                                <div id="disponibleLabel" hidden>
+                                    <i class="fas fa-check-circle mt-2" style="color:green"></i>
+                                    <i class="mt-1 mr-2">Usuario disponible</i>
+                                </div>
+                                <div id="noDisponibleLabel" hidden>
+                                    <i class="fa fa-x pt-2" style="color:red"></i>
+                                    <i class="mt-1 mr-2">Usuario no disponible</i>
+                                </div>
+                                <a href="#" class="mt-1 text-info" onclick="seleccionarUsuario()">Seleccionar usuario
+                                    existente</a>
                             </div>
-                            <div id="disponibleLabel" hidden>
-                                <i class="fas fa-check-circle mt-2" style="color:green"></i>
-                                <i class="mt-1 mr-2">Usuario disponible</i>
-                            </div>
-                            <div id="noDisponibleLabel" hidden>
-                                <i class="fa fa-x pt-2" style="color:red"></i>
-                                <i class="mt-1 mr-2">Usuario no disponible</i>
-                            </div>
-                            <a href="#" class="mt-1 text-info" onclick="seleccionarUsuario()">Seleccionar usuario
-                                existente</a>
                         </div>
                         <br>
-                        <button type="submit" id="btnSubmit" class="w-100 btn guardar" width="100%">Guardar</button>
+                        <div class="form-group row d-flex justify-content-center">
+                            <button type="submit" id="btnSubmit" class="w-75 btn guardar" width="100%">Guardar</button>
+                        </div>
                     </form>
                 </div>
             </div>
@@ -184,10 +198,10 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body p-4 justify-content-center">
+                <div class="">
                     <div th:replace="common/elements::div-loading(información)"></div>
                     <div th:include="coordinador/profesores/editarProfesor.html"
-                        class="modal-body justify-content-center" id="formEditarProfesor">
+                        class="modal-body p-4 justify-content-center" id="formEditarProfesor">
                     </div>
                 </div>
             </div>
