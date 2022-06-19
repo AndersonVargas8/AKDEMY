@@ -52,6 +52,7 @@
                                 <th>Documento</th>
                                 <th>Curso</th>
                                 <th>Usuario</th>
+                                <th>Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -64,6 +65,12 @@
                                 <td th:if="${estu.cursoActual != null}" th:text="${estu.cursoActual.nombre_Curso}"></td>
                                 <td th:unless="${estu.cursoActual != null}"></td>
                                 <td th:text="${estu.usuario.username}"></td>
+                                <td>
+                                    <button th:if="${estu.cursoActual != null}" type='button' class='btn btn-warning btn-sm' title="Certificado"
+                                        th:onclick="generarCertificado([[${estu.id}]])">
+                                        <a><span class="fas fa-file-pdf"></span> Certificado Estudiantil</a>
+                                    </button>
+                                </td>
                             </tr>
                         </tbody>
                     </table>

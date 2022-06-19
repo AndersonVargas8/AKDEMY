@@ -338,6 +338,7 @@ public class AcudienteController {
         model.addAttribute("curso", calificaciones.getCurso());
         model.addAttribute("promedioGeneral", calificaciones.getPromedioGeneral());
         model.addAttribute("materias", calificaciones.getMaterias());
+        model.addAttribute("id", id);
         return "acudiente/calificaciones/datosEstudiante";
     }
 

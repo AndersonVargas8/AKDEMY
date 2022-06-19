@@ -8,3 +8,9 @@ $(document).ready(function() {
         }
     );
 } );
+
+function generarCertificado(id) {
+    var url = "/acudiente/estudiantes/certificado/" + id;
+    window.open(url, '_blank')
+}
+
