@@ -30,6 +30,7 @@ import com.app.akdemy.entity.HorarioCurso;
 import com.app.akdemy.entity.Role;
 import com.app.akdemy.entity.User;
 import com.app.akdemy.interfacesServices.ICursoService;
+import com.app.akdemy.interfacesServices.IDifusionService;
 import com.app.akdemy.interfacesServices.IEstudianteService;
 import com.app.akdemy.interfacesServices.IHorarioService;
 import com.app.akdemy.repository.EpsRepository;
@@ -70,6 +71,9 @@ public class EstudianteController {
 
     @Autowired
     ICursoService serCurso;
+
+    @Autowired
+    IDifusionService serDifusion;
 
     @Autowired
     BCryptPasswordEncoder bCryptPasswordEncoder;
@@ -336,11 +340,11 @@ public class EstudianteController {
         String headerkey = "Content-Disposition";
         String headervalue = "attachment; filename=\"certificate.pdf\"";
 
-        response.setHeader(headerkey, headervalue);
+        //response.setHeader(headerkey, headervalue);
 
         //Generate Certificate
         generatePDF generator = new generatePDF();
-        generator.generate(response);
+        generator.generateStudentCertificate(response, serEstudiante.buscarPorId(1), serDifusion.getSchoolData());
         
     }
 }

@@ -93,4 +93,17 @@ public class DifusionService implements IDifusionService{
 
     }
 
+    @Override
+    public Map<String, Object> getSchoolData(){
+     
+        try {
+            return firebase.getFirestore().collection("Data")
+            .document("schoolData").get().get().getData();
+            
+        } catch (Exception e) {
+            return null;
+        }
+        
+    }
+
 }
