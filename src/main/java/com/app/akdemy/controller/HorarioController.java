@@ -89,7 +89,7 @@ public class HorarioController {
         return model;
     }
 
-    @GetMapping("/coordinador/eliminarHorario/{idHorario}")
+    @PostMapping("/coordinador/eliminarHorario/{idHorario}")
     @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_COORDINADOR')")
     public String eliminarHorario(Model model, @PathVariable int idHorario) {
         HorarioCurso horario = serHorario.obtenerPorId(idHorario);
@@ -99,11 +99,11 @@ public class HorarioController {
         return "coordinador/horarios/horario";
     }
 
-    @GetMapping("/coordinador/agregarHorario/{idCurso}/{dia}/{horaInicio}/{horaFin}/{idMateria}/{idProfesor}")
+    @PostMapping("/coordinador/agregarHorario/{idCurso}/{dia}/{horaInicio}/{horaFin}/{idMateria}/{idProfesor}")
     @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_COORDINADOR')")
     public String agregarHorario(Model model, @PathVariable int idCurso, @PathVariable String dia,
             @PathVariable String horaInicio, @PathVariable String horaFin, @PathVariable int idMateria,
-            @PathVariable int idProfesor) {
+            @PathVariable int idProfesor, HttpServletResponse servletResponse) {
         HorarioCurso horario = new HorarioCurso();
         horario.setId(0);
         horario.setCurso(serCurso.buscarPorId(idCurso));
@@ -114,11 +114,17 @@ public class HorarioController {
         try {
             horario.setProfesor(serProfesor.getById(new Long(idProfesor)));
         } catch (ProfesorNotFound e) {
+            servletResponse.setStatus(HttpServletResponse.SC_CONFLICT);
         }
 
-        serHorario.guardarHorario(horario);
+        try{
+            serHorario.guardarHorario(horario);
+            model = cargarTablaHorarios(model, idCurso);
+            servletResponse.setStatus(HttpServletResponse.SC_CREATED);
+        }catch(Exception e){
+            servletResponse.setStatus(HttpServletResponse.SC_CONFLICT);
+        }
 
-        model = cargarTablaHorarios(model, idCurso);
         return "coordinador/horarios/horario";
     }
 

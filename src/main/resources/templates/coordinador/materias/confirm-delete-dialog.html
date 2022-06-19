@@ -13,8 +13,8 @@
           <input type="hidden" id="materiaIdHiddenInput" name="materiaIdHiddenInput"/>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn guardar" data-dismiss="modal">Cancelar</button>
-          <button type="button" class="btn btn-danger" th:onclick="deleteMateria()">Eliminar materia</button>
+          <button type="button" class="btn guardar" data-dismiss="modal" id="btnCancelar">Cancelar</button>
+          <button type="button" class="btn btn-danger" th:onclick="deleteMateria()" id="btnEliminar">Eliminar materia</button>
         </div>
       </div>
     </div>

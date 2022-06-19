@@ -12,8 +12,8 @@
           <input type="hidden" id="acudienteIdHiddenInput" name="acudienteIdHiddenInput"/>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn guardar" data-dismiss="modal">Cancelar</button>
-          <button type="button" class="btn btn-danger" th:onclick="deleteAcudiente()">Eliminar Acudiente</button>
+          <button type="button" class="btn guardar" data-dismiss="modal" id="btnCancelar">Cancelar</button>
+          <button type="button" class="btn btn-danger" th:onclick="deleteAcudiente()" id="btnEliminar">Eliminar Acudiente</button>
         </div>
       </div>
     </div>

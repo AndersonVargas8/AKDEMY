@@ -1,39 +1,110 @@
 $(document).ready(function () {
-    $('#teachers').DataTable(
-        {
-            language: {
-                "url": "//cdn.datatables.net/plug-ins/1.10.16/i18n/Spanish.json"
-            },
-        }
-    );
-
+    datatable = createDatatable();
     $('#selectuser').selectpicker();
 
-    let controladorTiempoa = "";
+    //Guardar profesor
+    $("#profesoresForm").submit(function (e) {
+        e.preventDefault();
+        valid = verificateForm($("#selectuser"))
+        if (!valid) {
+            return;
+        }
+        activateLoadingButton($("#btnSubmit"), true);
+
+        $.ajax({
+            type: "post",
+            url: "/saveprofesor",
+            data: $(this).serialize(),
+            success: function () {
+                toastr.options.positionClass = 'toast-bottom-right';
+                toastr.success("Profesor guardado");
+                desactivateLoadingButton($("#btnSubmit"), "Guardar", false);
+                closeModal($("#modalFormProfesor"));
+                cargarProfesores();
+                resetForm();
+            },
+            error: function () {
+                desactivateLoadingButton($("#btnSubmit"), "Guardar", false);
+                defaultErrorNotify();
+            }
+        })
+    });
+
+    let controladorTiempo = "";
     $("#username").on("keyup", function () {
         $("#verificandoLabel").prop("hidden", false);
         $("#disponibleLabel").prop("hidden", true);
         $("#noDisponibleLabel").prop("hidden", true);
         $("#errorUsername").prop("hidden", true);
-        clearTimeout(controladorTiempoa);
-        controladorTiempoa = setTimeout(function () {
+        clearTimeout(controladorTiempo);
+        controladorTiempo = setTimeout(function () {
             verificaUsername($("#username").val());
         }, 500);
     });
 
 });
 
+function createDatatable() {
+    datatable = $('#teachers').DataTable(
+        {
+            language: {
+                "url": "//cdn.datatables.net/plug-ins/1.10.16/i18n/Spanish.json"
+            },
+            drawCallback: function () {
+                $("#teachers").prop("hidden", false);
+            }
+        }
+    );
+    return datatable;
+}
+
+function verificateForm(select) {
+    if(select.prop("required") == false){
+        return true;
+    }
+    let profesorId = select.val();
+    if (profesorId == 0) {
+        select.selectpicker('toggle');
+        toastr.options.positionClass = 'toast-top-right';
+        toastr.warning("Seleccione el usuario", '', { timeOut: 2000 });
+        return false;
+    }
+
+    return true;
+}
+
+function cargarProfesores() {
+    activateLoadingTable($("#teachers"));
+    let url = "/cargarProfesores";
+    $("#teachers").load(url, { limit: 25 },
+        function (textStatus) {
+            if (textStatus == "error") {
+                defaultErrorNotify();
+            } else {
+                datatable.destroy();
+                datatable = createDatatable();
+                desactivateLoadingTable($("#teachers"));
+            }
+        })
+}
+
+function resetForm() {
+    document.getElementById("profesoresForm").reset();
+    resetSelectPicker($("#selectuser"));
+    $(".search_select_box").load(location.href + " .search_select_box");
+    setTimeout(function(){
+        $("#selectuser").selectpicker("refresh");
+    },500);
+}
+
 function editarProfesor(id) {
-    /*$('#modalLoading').modal({
-        backdrop: "static", //remove ability to close modal with click
-        keyboard: false, //remove option to close with keyboard
-        show: true //Display loader!
-      });*/
+    $("#div-loading").prop("hidden", false);
+    $("#editarProfesorForm").remove();
+    $("#modalFormEditarProfesor").modal();
 
     var url = "/coordinador/profesores/" + id;
     $("#formEditarProfesor").load(url, function () {
-        $('#modalLoading').modal('hide');
-        $("#modalFormEditarProfesor").modal();
+        $("#div-loading").prop("hidden", true);
     });
 
 };
@@ -41,11 +112,35 @@ function editarProfesor(id) {
 function confirmDeleteProfesor(id) {
     $('#deleteModalProfesor').modal('show');
     $("#profesorIdHiddenInput").val(id);
+    setTimeout(function () {
+        $("#btnEliminar").focus();
+    }, 500)
 };
 
+
 function deleteProfesor() {
-    window.location = "/coordinador/eliminarProfesor/" + $("#profesorIdHiddenInput").val();
-};
+    activateLoadingButton($("#btnEliminar"), true);
+    $("#btnCancelar").prop("hidden", true);
+
+    $.ajax({
+        type: 'post',
+        url: "/coordinador/eliminarProfesor/" + $("#profesorIdHiddenInput").val(),
+        success: function () {
+            $('#deleteModalProfesor').modal('hide');
+            desactivateLoadingButton($("#btnEliminar"), "Eliminar profesor", false);
+            $("#btnCancelar").prop("hidden", false);
+            toastr.options.positionClass = 'toast-bottom-right';
+            toastr.success("Profesor eliminado");
+            cargarProfesores();
+            resetForm();
+        },
+        error: function () {
+            defaultErrorNotify();
+            desactivateLoadingButton($("#btnEliminar"), "Eliminar profesor", false);
+            $("#btnCancelar").prop("hidden", false);
+        }
+    });
+}
 
 function crearUsuario() {
     $("#selectuser").val(0);
@@ -56,7 +151,7 @@ function crearUsuario() {
 };
 
 function seleccionarUsuario() {
-    $("#bsubmit").prop("disabled", false);
+    $("#btnSubmit").prop("disabled", false);
     $("#disponibleLabel").prop("hidden", true);
     $("#noDisponibleLabel").prop("hidden", true);
     $("#username").val(null);
@@ -82,15 +177,15 @@ function verificaUsername(valor) {
         success: function (r) {
             $("#verificandoLabel").prop("hidden", true);
             $("#disponibleLabel").prop("hidden", false);
-            $("#bsubmit").prop("disabled", false);
+            $("#btnSubmit").prop("disabled", false);
         },
         error: function (jqXHR) {
             if (jqXHR.status && jqXHR.status == 406) {
                 $("#verificandoLabel").prop("hidden", true);
                 $("#noDisponibleLabel").prop("hidden", false);
-                $("#bsubmit").prop("disabled", true);
+                $("#btnSubmit").prop("disabled", true);
             } else {
-                alert("Error :(");
+                defaultErrorNotify();
             }
         }
     })

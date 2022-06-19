@@ -1,6 +1,10 @@
 body{
   background-color: #F5F5F5;
 }
+.search_select_box button {
+  background-color: white !important;
+}
+
 .layout {
   padding: 20px;
 

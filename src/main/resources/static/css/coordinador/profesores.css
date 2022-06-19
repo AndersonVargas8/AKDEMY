@@ -1,6 +1,9 @@
 body{
   background-color: #F5F5F5;
 }
+.search_select_box button {
+  background-color: white !important;
+}
 .container-lg {
   margin-top: 60px;
 }

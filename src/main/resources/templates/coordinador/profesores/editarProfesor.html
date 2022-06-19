@@ -39,5 +39,32 @@
     </div>
     <br>
     <button type="submit" class="w-100 btn guardar"
-        width="100%">Guardar</button>
+        width="100%" id="btnSubmit2">Guardar</button>
 </form>
+
+<script type="text/javascript">
+    $(document).ready(function(){
+        $("#editarProfesorForm").submit(function (e) {
+            e.preventDefault();
+            activateLoadingButton($("#btnSubmit2"), true);
+    
+            $.ajax({
+                type: "post",
+                url: "/saveprofesor",
+                data: $(this).serialize(),
+                success: function () {
+                    toastr.options.positionClass = 'toast-bottom-right';
+                    toastr.success("Profesor actualizado");
+                    desactivateLoadingButton($("#btnSubmit2"), "Guardar", false);
+                    closeModal($("#modalFormEditarProfesor"));
+                    cargarProfesores();
+                    resetForm();
+                },
+                error: function () {
+                    desactivateLoadingButton($("#btnSubmit2"), "Guardar", false);
+                    defaultErrorNotify();
+                }
+            })
+        });
+    })
+</script>

@@ -1,3 +1,4 @@
+
 <form id="editarMateriasForm" th:object="${editarMateria}" method="post" class="form col-lg" role="form"
     autocomplete="off" th:action="@{/savemateria}" th:if="${editarMateria != null}">
     <!--Es necesario para poder pasar la validacion del Model-->
@@ -11,6 +12,32 @@
     </div>
 
     <div class="form-group row d-flex justify-content-center">
-        <input type="submit" value="Guardar" class="btn guardar w-100" />
+        <button type="submit" id="btnSubmit2" class="btn guardar w-100">Guardar
     </div>
 </form>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#editarMateriasForm").submit(function (e) {
+            activateLoadingButton($("#btnSubmit2"), true);
+            e.preventDefault();
+
+            $.ajax({
+                type: "post",
+                url: "/savemateria",
+                data: $(this).serialize(),
+                success: function () {
+                    toastr.options.positionClass = 'toast-bottom-right';
+                    toastr.success("Materia actualizada");
+                    desactivateLoadingButton($("#btnSubmit"), "Guardar", false);
+                    closeModal($("#modalFormEditarMaterias"));
+                    cargarMaterias();
+                },
+                error: function () {
+                    desactivateLoadingButton($("#btnSubmit2"), "Guardar", false);
+                    defaultErrorNotify();
+                }
+            })
+        });
+    })
+</script>

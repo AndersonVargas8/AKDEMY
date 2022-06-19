@@ -8,23 +8,28 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,
                 initial-scale=1.0">
-    <title>Coordinador | Cursos</title>
+    <title>Coordinador | Materias por grado</title>
 
     <link rel="shortcut icon" type="image/x-icon" href="../static/img/avatar1.png" th:href="@{../img/avatar1.png}">
     <!--JQUERY-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <!-- FRAMEWORK BOOTSTRAP para el estilo de la pagina-->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <!--TOASTR-->
+    <link rel="stylesheet" type="text/css" th:href="@{/common/toastr/toastr.css}">
+    <!--SELECTPICKER-->
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
     <!-- DataTables-->
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
-    <script type="text/javascript" charset="utf8"
-        src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
+
     <!-- Icons-->
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <!-- Local Files-->
-    <script type="text/javascript" th:src="@{/js/coordinador/materiasGrado.js}"></script>
     <link rel="stylesheet" type="text/css" th:href="@{/css/coordinador/materiasGrado.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/common/loading.css}">
+    <script type="text/javascript" th:src="@{/js/coordinador/materiasGrado.js}"></script>
+    <script type="text/javascript" th:src="@{/common/loading.js}"></script>
 
     <script src="https://cdn.datatables.net/plug-ins/1.11.5/i18n/es-ES.json"></script>
 </head>
@@ -36,19 +41,21 @@
             <div class="main card w-100">
                 <div class="card-title row titletable">
                     <div class="col text-left">
-                        <h2>Materias por Grado&nbsp;<span class="badge">Coordinador</span></h2>
-                        <p>Listado de Materias por Grado</p>
+                        <h2>Materias por grado&nbsp;<span class="badge">Coordinador</span></h2>
+                        <p>Listado de Materias por grado</p>
                     </div>
                     <div class="col text-right">
                         <button type="button" class="btn boton__materiasGrado mb-2 row w-50" data-toggle="modal"
                             data-target="#modalFormMateriaGrado">
-                            <span class="fa fa-user-plus fa-1x"></span>
-                            <span class="align-middle">Crear Materia Grado</span>
+                            <span class="fa fa-plus fa-1x align-middle"></span>
+                            <span class="align-middle">Crear materia grado</span>
                         </button>
                     </div>
                 </div>
+                <div th:replace="common/elements::label-loading(materias)"></div>
                 <div class="card-body ">
-                    <table id="materiasGrado" class="table table-borderless table-hover" style="width:100%">
+                    <table id="materiasGrado" th:fragment="listaMateriasGrado"
+                        class="table table-borderless table-hover" style="width:100%" hidden>
                         <thead>
                             <tr>
                                 <th>Materia</th>
@@ -63,59 +70,72 @@
                                 <td th:text="${materiaGrado.grado}"></td>
                                 <td th:text="${materiaGrado.descripcion}"></td>
                                 <td>
-                                    <button type='button' class='btn btn-info btn-sm' th:onclick="editarMateriaGrado([[${materiaGrado.id}]])">
-                                        <span class="fas fa-user-pen"></span>
+                                    <button type='button' class='btn btn-info btn-sm'
+                                        th:onclick="editarMateriaGrado([[${materiaGrado.id}]])" title="Editar materia">
+                                        <span class="fas fa-edit"></span>
                                         <span class='align-middle'></span>
                                     </button>
-                                    <button type='button' class='btn btn-danger btn-sm' th:onclick="confirmDelete([[${materiaGrado.id}]])">
-                                        <span class="fas fa-user-times"></span>
+                                    <button type='button' class='btn btn-danger btn-sm'
+                                        th:onclick="confirmDelete([[${materiaGrado.id}]])" title="Eliminar materia">
+                                        <span class="fas fa-trash"></span>
                                         <span class='align-middle'></span>
                                     </button>
                                 </td>
 
                             </tr>
                         </tbody>
-                        
+
                     </table>
                 </div>
             </div>
 
-        </section> 
+        </section>
     </div>
-    
+
 
     <!--Formulario crear MateriaGrado-->
     <div class="modal fade" tabindex="-1" role="dialog" id="modalFormMateriaGrado">
         <div class="modal-dialog modal-lg d-flex justify-content-center" role="document">
             <div class="modal-content" style="max-width:80%">
                 <div class="modal-header">
-                    <h5 class="modal-title">Nueva Materia Grado</h5>
+                    <h5 class="modal-title">Nueva materia grado</h5>
                     <button type="button" class="close icon-cerrar" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body p-5 justify-content-center">
-                    <form th:action="@{/savemateriaGrado}" th:object="${materiaGrado}" method="POST">
+                    <form th:action="@{/savemateriaGrado}" th:object="${materiaGrado}" method="POST"
+                        id="materiasGradoForm">
 
-                        <div>
-                            <label for="materia"><b>Materia</b></label>
-                            <select class="form-control" th:field="${materiaGrado.materia.id}" id="materia">
-                                <option th:each="materia:${materias}" th:value="${materia.id}" th:text="${materia.nombre}"></option>
-                            </select>
+                        <div class="form-group row">
+                            <label class="col-lg-3" for="materia"><b>Materia</b></label>
+                            <div class="col-lg-8 search_select_box p-0 ml-3">
+                                <select th:field="${materiaGrado.materia.id}" id="materia"
+                                    class="w-75 border selectpicker" data-live-search="true" data-none-results-text="No se encontró
+                                    {0}">
+                                    <option value="0">Seleccione</option>
+                                    <option th:each="materia:${materias}" th:value="${materia.id}"
+                                        th:text="${materia.nombre}"></option>
+                                </select>
+                            </div>
                         </div>
 
-                        <div class="form-group">
-                            <label for="name"><b>Grado</b></label>
-                            <input th:field="*{grado}" type="number"  min="0" max="3000"class="form-control" id="grado"
-                                placeholder="Grado" required>
+                        <div class="form-group row">
+                            <label class="col-lg-3" for="name"><b>Grado</b></label>
+                            <div class="col-lg-7">
+                                <input th:field="*{grado}" type="number" min="0" max="3000" class="form-control"
+                                    id="grado" placeholder="Grado" required>
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label for="year"><b>Descripción</b></label>
-                            <input th:field="*{descripcion}" type="text" class="form-control" id="descripcion"
-                                placeholder="Descripción" required>
+                        <div class="form-group row">
+                            <label class="col-lg-3" for="year"><b>Descripción</b></label>
+                            <div class="col-lg-7">
+                                <input th:field="*{descripcion}" type="text" class="form-control"
+                                    id="descripcion" placeholder="Descripción" required>
+                            </div>
                         </div>
                         <br>
-                        <button type="submit" class="w-100 btn guardar" width="100%">Guardar</button>
+                        <button type="submit" class="w-100 btn guardar" id="btnSubmit" width="100%">Guardar</button>
                     </form>
                 </div>
             </div>
@@ -132,6 +152,7 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
+                <div th:replace="common/elements::div-loading(información)"></div>
                 <div th:include="coordinador/materiasGrado/editarMateriasGrado"
                     class="modal-body p-4 d-flex justify-content-center" id="formEditarMateriasGrado">
 
@@ -146,8 +167,15 @@
         <span th:text="${deleteError}"></span>
     </div>
 
-    <div th:include="common/modalLoading.html" th:remove="tag"></div> 
-
+    <!--NOTIFICACIONES TOASTR-->
+    <script th:src="@{/common/toastr/toastr.js}"></script>
+    <!--SELECTPICKER-->
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.3/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
+    <!--Datatables-->
+    <script type="text/javascript" charset="utf8"
+        src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
 </body>
 
 </html>
