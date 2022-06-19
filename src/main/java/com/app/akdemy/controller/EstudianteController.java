@@ -332,39 +332,34 @@ public class EstudianteController {
 
     @GetMapping("/estudiante/certificado")
     @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_ESTUDIANTE')")
-    public void generateCertificate(HttpServletResponse response) throws DocumentException, IOException{
+    public void generateCertificate(HttpServletResponse response) throws Exception{
 
         //Set response ContentType
         response.setContentType("application/pdf");
 
-        //Headers
-        String headerkey = "Content-Disposition";
-        String headervalue = "attachment; filename=\"certificate.pdf\"";
-
-        //response.setHeader(headerkey, headervalue);
+        //Get data
+        Estudiante estudiante = serEstudiante.getByUser(serUser.getLoggedUser());
 
         //Generate Certificate
         generatePDF generator = new generatePDF();
-        generator.generateStudentCertificate(response, serEstudiante.buscarPorId(1), serDifusion.getSchoolData());
+        generator.generateStudentCertificate(response, estudiante, serDifusion.getSchoolData());
         
     }
 
-    @GetMapping("/pdfNotas")
+    @GetMapping("/estudiante/calificaciones/pdf")
     @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_ESTUDIANTE')")
-    public void generateGradesCertificate(HttpServletResponse response) throws DocumentException, IOException{
+    public void generateGradesCertificate(HttpServletResponse response) throws Exception{
 
         //Set response ContentType
         response.setContentType("application/pdf");
-
-        //Headers
-        String headerkey = "Content-Disposition";
-        String headervalue = "attachment; filename=\"certificate.pdf\"";
-
-        //response.setHeader(headerkey, headervalue);
+        
+        //Get data
+        Estudiante estudiante = serEstudiante.getByUser(serUser.getLoggedUser());
+        CalificacionesEstDTO calificaciones = serEstudiante.getCalificaciones(estudiante);
 
         //Generate Certificate
         generatePDF generator = new generatePDF();
-        generator.generateStudentGradesCertificate(response, serEstudiante.getCalificaciones(serEstudiante.buscarPorId(1)), serDifusion.getSchoolData());
+        generator.generateStudentGradesCertificate(response, calificaciones, serDifusion.getSchoolData());
         
     }
 }
