@@ -31,6 +31,10 @@
                     th:onclick="confirmDeleteEstudiante([[${estudiante.id}]])">
                     <span class="fas fa-user-times"></span>
                 </button>
+                <button th:if="${estudiante.cursoActual != null}" type='button' class='btn btn-warning btn-sm' title="Certificado"
+                    th:onclick="generarCertificado([[${estudiante.id}]])">
+                    <span class="fas fa-file-pdf"></span>
+                </button>
             </td>
         </tr>
     </tbody>

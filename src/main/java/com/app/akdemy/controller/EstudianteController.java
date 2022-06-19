@@ -362,5 +362,49 @@ public class EstudianteController {
         generator.generateStudentGradesCertificate(response, calificaciones, serDifusion.getSchoolData());
         
     }
+
+    @GetMapping("/coordinador/estudiantes/certificado/{id}")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_COORDINADOR')")
+    public void generateCertificateCoordinador(@PathVariable Long id, HttpServletResponse response) throws DocumentException, IOException {
+        //Set response ContentType
+        response.setContentType("application/pdf");
+
+        //Get data
+        Estudiante estudiante = serEstudiante.buscarPorId(id);
+
+        //Generate Certificate
+        generatePDF generator = new generatePDF();
+        generator.generateStudentCertificate(response, estudiante, serDifusion.getSchoolData());
+    }
+
+    @GetMapping("/acudiente/estudiantes/certificado/{id}")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_ACUDIENTE')")
+    public void generateCertificateAcudiente(@PathVariable Long id, HttpServletResponse response) throws DocumentException, IOException {
+        //Set response ContentType
+        response.setContentType("application/pdf");
+
+        //Get data
+        Estudiante estudiante = serEstudiante.buscarPorId(id);
+
+        //Generate Certificate
+        generatePDF generator = new generatePDF();
+        generator.generateStudentCertificate(response, estudiante, serDifusion.getSchoolData());
+    }
+
+    @GetMapping("/acudiente/calificaciones/certificado/{id}")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_ACUDIENTE')")
+    public void generateGradesCertificateAcudiente(@PathVariable Long id, HttpServletResponse response) throws DocumentException, IOException {
+        //Set response ContentType
+        response.setContentType("application/pdf");
+
+        //Get data
+        Estudiante estudiante = serEstudiante.buscarPorId(id);
+        CalificacionesEstDTO calificaciones = serEstudiante.getCalificaciones(estudiante);
+
+        //Generate Certificate
+        generatePDF generator = new generatePDF();
+        generator.generateStudentGradesCertificate(response, calificaciones, serDifusion.getSchoolData());
+    }
+
 }
 

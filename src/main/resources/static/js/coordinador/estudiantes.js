@@ -80,6 +80,10 @@ function confirmDeleteEstudiante(id) {
     $('#deleteModalEstudiante').modal();
     $("#estudianteIdHiddenInput").val(id);
 }
+function generarCertificado(id) {
+    var url = "/coordinador/estudiantes/certificado/" + id;
+    window.open(url, '_blank')
+}
 
 function deleteEstudiante() {
     let id = $("#estudianteIdHiddenInput").val();
