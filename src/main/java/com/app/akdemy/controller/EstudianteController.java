@@ -330,7 +330,8 @@ public class EstudianteController {
         return "profesor/comunicaciones/chats/selectestudiantes";
     }
 
-    @GetMapping("/pdfprueba")
+    @GetMapping("/estudiante/certificado")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_ESTUDIANTE')")
     public void generateCertificate(HttpServletResponse response) throws DocumentException, IOException{
 
         //Set response ContentType
@@ -345,6 +346,25 @@ public class EstudianteController {
         //Generate Certificate
         generatePDF generator = new generatePDF();
         generator.generateStudentCertificate(response, serEstudiante.buscarPorId(1), serDifusion.getSchoolData());
+        
+    }
+
+    @GetMapping("/pdfNotas")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_ESTUDIANTE')")
+    public void generateGradesCertificate(HttpServletResponse response) throws DocumentException, IOException{
+
+        //Set response ContentType
+        response.setContentType("application/pdf");
+
+        //Headers
+        String headerkey = "Content-Disposition";
+        String headervalue = "attachment; filename=\"certificate.pdf\"";
+
+        //response.setHeader(headerkey, headervalue);
+
+        //Generate Certificate
+        generatePDF generator = new generatePDF();
+        generator.generateStudentGradesCertificate(response, serEstudiante.getCalificaciones(serEstudiante.buscarPorId(1)), serDifusion.getSchoolData());
         
     }
 }
