@@ -104,18 +104,18 @@ table .dia {
   padding: 0;
 }
 
+table .dia{
+  height: 0;
+}
 table .dia div {
   background-color: white;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   font-weight: 500;
-  padding: 9%;
   border-left: none;
+  height: 100% !important;
 }
 
 table .dia div label {
-  overflow: hidden;
-  white-space: nowrap;
-  margin: 0;
   cursor: pointer;
 }
 

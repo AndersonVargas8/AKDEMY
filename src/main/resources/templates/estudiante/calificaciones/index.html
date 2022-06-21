@@ -47,16 +47,16 @@
                 <div class="card-body p-4">
                     <hr>
                     <div class="row pl-2">
-                        <h4 class="col-lg-2">Estudiante: </h4><label class="lead col-lg-8"
-                            th:text="${calificaciones.nombreEstudiante}"></label>
+                        <h4 class="col-lg-2">Estudiante: </h4><p class="lead col-lg-8"
+                            th:text="${calificaciones.nombreEstudiante}"></p>
                     </div>
                     <div class="row pl-2">
-                        <h4 class="col-lg-2">Curso: </h4><label class="lead col-lg-8"
-                            th:text="${calificaciones.curso}"></label>
+                        <h4 class="col-lg-2">Curso: </h4><p class="lead col-lg-8"
+                            th:text="${calificaciones.curso}"></p>
                     </div>
                     <div class="row pl-2">
-                        <h4 class="col-lg-2">Promedio: </h4><label class="lead font-weight-bold col-lg-8"
-                            th:text="${calificaciones.promedioGeneral}"></label>
+                        <h4 class="col-lg-2">Promedio: </h4><p class="lead font-weight-bold col-lg-8"
+                            th:text="${calificaciones.promedioGeneral}"></p>
                     </div>
 
                     <hr>
@@ -68,13 +68,13 @@
                                     th:data-bs-target="${'#collapse'+itemStat.index}" aria-expanded="true"
                                     th:aria-controls="${'#collapse'+itemStat.index}">
                                     <div class="row col-lg-12">
-                                        <label class="font-weight-bold col-lg-1 lbAcor h6 m-0 p-0"
-                                            th:text="${itemStat.index + 1}"></label>
-                                        <label class="col-lg-9 lbAcor nomMateria" th:text="${materia.nombre}"></label>
-                                        <div class="col-lg-2">
-                                            <b>Promedio:&nbsp; </b><label class="lbAcor"
+                                        <p class="font-weight-bold col-lg-1 lbAcor h6 m-0 p-0"
+                                            th:text="${itemStat.index + 1}"></p>
+                                        <p class="col-lg-9 lbAcor nomMateria" th:text="${materia.nombre}"></p>
+                                        <div class="col-lg-2 d-flex">
+                                            <b>Promedio:&nbsp; </b><p class="lbAcor"
                                                 th:text="${materia.promedio != null} ? ${materia.promedio} : '-'"
-                                                th:style="${materia.promedio != null} ? (${materia.promedio >= 3} ? 'color:limegreen;' : 'color:red;') : ''"></label>
+                                                th:style="${materia.promedio != null} ? (${materia.promedio >= 3} ? 'color:limegreen;' : 'color:red;') : ''"></p>
                                         </div>
                                     </div>
                                 </button>
@@ -83,9 +83,9 @@
                                 th:aria-labelledby="${'header'+itemStat.index}">
 
                                 <div class="d-flex justify-content-center mt-3 mb-3">
-                                    <div class="w-75">
-                                        <h5>Profesor: <label class="h4"><small
-                                                    th:text="${' ' + materia.nombreProfesor}"></small></label></h5>
+                                    <div class="w-75 table-responsive">
+                                        <h5>Profesor: <p class="h4"><small
+                                                    th:text="${' ' + materia.nombreProfesor}"></small></p></h5>
                                         <table class="table table-bordered table-striped text-center">
                                             <thead class="thead-dark">
                                                 <tr>

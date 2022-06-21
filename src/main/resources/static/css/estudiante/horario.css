@@ -83,6 +83,7 @@ margin-top: 60px;
 
 table .dia{
   padding: 0;
+  height: 0;
 }
 
 table .dia div{
@@ -90,6 +91,7 @@ table .dia div{
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   font-weight: 500;
   padding: 9%;
+  height: 100%;
 }
 
 table .dia div label{

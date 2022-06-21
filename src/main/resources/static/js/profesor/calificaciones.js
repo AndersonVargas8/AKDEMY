@@ -35,6 +35,7 @@ function evaluarNota(id) {
     $("#cerrarNotasBtn").prop("disabled",true);
     $("#guardarBtn").prop("disabled",false);
     $("#guardadoLabel").prop("hidden",true);
+    $("#cambiosLabel").prop("hidden",false);
 
     let valor = $("#nota" + id).val();
     if (valor < 0 || valor > 5 || valor == "") {
@@ -55,6 +56,7 @@ function evaluarNota(id) {
 
 $("#calificacionesForm").submit(function(e){
     $("#guardadoLabel").prop("hidden",true);
+    $("#cambiosLabel").prop("hidden",true);
     $("#guardandoLabel").prop("hidden",false);
     e.preventDefault();
     $.ajax({
@@ -81,6 +83,7 @@ function confirmCerrarNotas(){
 
 function cerrarNotas(){
     $("#guardadoLabel").prop("hidden",true);
+    $("#cambiosLabel").prop("hidden",true);
     $("#guardandoLabel").prop("hidden",false);
     $("#cerrarCalModal").modal('hide');
     $.ajax({
