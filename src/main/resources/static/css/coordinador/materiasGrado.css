@@ -1,9 +1,15 @@
-body{
-    background-color: #F5F5F5;
-  }
-.container-lg {
-    margin-top: 60px;
+body {
+  background-color: #F5F5F5;
 }
+
+.search_select_box button {
+  background-color: white !important;
+}
+
+.container-lg {
+  margin-top: 60px;
+}
+
 .layout {
   padding: 20px;
 
@@ -12,57 +18,71 @@ body{
 
   display: grid;
   grid:
-    "header" auto
-    "main" 1fr
-    "footer" auto
-    / 1fr;
+    "header" auto "main" 1fr "footer" auto / 1fr;
   gap: 8px;
 }
 
-.header { grid-area: header;}
-.main { grid-area: main; }
-.footer { grid-area: footer; }
-
-.titletable{
-    padding-top: 40px;
-    padding-left: 30px;
-    padding-right: 35px;
+.header {
+  grid-area: header;
 }
+
+.main {
+  grid-area: main;
+}
+
+.footer {
+  grid-area: footer;
+}
+
+.titletable {
+  padding-top: 40px;
+  padding-left: 30px;
+  padding-right: 35px;
+}
+
 .badge {
-  background-color: rgb(55,80,130);
+  background-color: rgb(55, 80, 130);
   color: floralwhite;
 }
-.boton__materiasGrado, .boton__materiasGrado:hover {
-    background-color: #28a745;
-    color: floralwhite;
-    width: 70%;
+
+.boton__materiasGrado,
+.boton__materiasGrado:hover {
+  background-color: #28a745;
+  color: floralwhite;
+  width: 70%;
 }
-.table thead{
+
+.table thead {
   background-color: rgb(52, 58, 64);
   color: floralwhite;
 }
-.table td{
+
+.table td {
   color: black;
 }
-.table-hover{
+
+.table-hover {
   background-color: rgb(205, 218, 243);
   color: floralwhite;
 }
+
 .modal-header {
-  background-color: rgb(55,80,130);
+  background-color: rgb(55, 80, 130);
   color: floralwhite;
   border-radius: 0px
 }
-.icon-cerrar, .icon-cerrar:hover {
+
+.icon-cerrar,
+.icon-cerrar:hover {
   color: white;
 }
-.guardar{
-  background-color: rgb(55,80,130);
+
+.guardar {
+  background-color: rgb(55, 80, 130);
   color: floralwhite;
 }
 
-.guardar:hover{
+.guardar:hover {
   background-color: rgb(50, 81, 141);
   color: floralwhite;
 }
-

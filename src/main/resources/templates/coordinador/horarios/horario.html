@@ -1,12 +1,11 @@
 <tr class="horarios" th:each="hora:${horas}">
     <th class="table-active" th:text="${hora + ':00'}"></th>
     <!-- LUNES -->
-    <td class="dia" 
-        th:onclick="nuevoHorario(
+    <td class="dia" th:onclick="nuevoHorario(
             [[${nombreCurso}]],
             [[${'Lunes'}]],
             [[${hora}]]
-        )" title="Agregar materia">
+        )" title="Agregar materia" name="my_col">
         <div th:each="horario:${horarios}" title="Ver información"
             th:if="${hora >= #dates.format(horario.horaInicio,'HH') AND hora < #dates.format(horario.horaFin,'HH') AND horario.dia == 'Lunes'}"
             th:onclick="infoMateria(
@@ -20,12 +19,11 @@
                 [[${horario.materia.descripcion}]]
             )">
             <input type="hidden" th:id="${'Lunes' + hora}" th:value="${1}">
-            <label th:text="${horario.materia.materia.nombre}"></label>
+            <label th:text="${horario.materia.materia.nombre}" name="labelMateria"></label>
         </div>
     </td>
     <!-- MARTES -->
-    <td class="dia" 
-    th:onclick="nuevoHorario(
+    <td class="dia" th:onclick="nuevoHorario(
             [[${nombreCurso}]],
             [[${'Martes'}]],
             [[${hora}]]
@@ -43,12 +41,11 @@
                 [[${horario.materia.descripcion}]]
             )">
             <input type="hidden" th:id="${'Martes' + hora}" th:value="${1}">
-            <label th:text="${horario.materia.materia.nombre}" ></label>
+            <label th:text="${horario.materia.materia.nombre}" name="labelMateria"></label>
         </div>
     </td>
     <!-- MIÉRCOLES -->
-    <td class="dia" 
-    th:onclick="nuevoHorario(
+    <td class="dia" th:onclick="nuevoHorario(
             [[${nombreCurso}]],
             [[${'Miércoles'}]],
             [[${hora}]]
@@ -66,12 +63,11 @@
                 [[${horario.materia.descripcion}]]
             )">
             <input type="hidden" th:id="${'Miércoles' + hora}" th:value="${1}">
-            <label th:text="${horario.materia.materia.nombre}" ></label>
+            <label th:text="${horario.materia.materia.nombre}" name="labelMateria"></label>
         </div>
     </td>
     <!-- JUEVES -->
-    <td class="dia" 
-    th:onclick="nuevoHorario(
+    <td class="dia" th:onclick="nuevoHorario(
             [[${nombreCurso}]],
             [[${'Jueves'}]],
             [[${hora}]]
@@ -89,12 +85,11 @@
                 [[${horario.materia.descripcion}]]
             )">
             <input type="hidden" th:id="${'Jueves' + hora}" th:value="${1}">
-            <label th:text="${horario.materia.materia.nombre}" ></label>
+            <label th:text="${horario.materia.materia.nombre}" name="labelMateria"></label>
         </div>
     </td>
     <!-- VIERNES -->
-    <td class="dia" 
-    th:onclick="nuevoHorario(
+    <td class="dia" th:onclick="nuevoHorario(
             [[${nombreCurso}]],
             [[${'Viernes'}]],
             [[${hora}]]
@@ -112,7 +107,10 @@
                 [[${horario.materia.descripcion}]]
             )">
             <input type="hidden" th:id="${'Viernes' + hora}" th:value="${1}">
-            <label th:text="${horario.materia.materia.nombre}" ></label>
+            <label th:text="${horario.materia.materia.nombre}" name="labelMateria"></label>
         </div>
     </td>
 </tr>
+
+
+<script type="text/javascript" th:src="@{/common/coloresHorarios.js}"></script>

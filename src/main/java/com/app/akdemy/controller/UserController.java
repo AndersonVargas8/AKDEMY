@@ -23,7 +23,22 @@ public class UserController {
     @Autowired
     IRoleService serRole;
 
-    @GetMapping({ "/", "/login" })
+    @GetMapping("/")
+    public String inicio() {
+        User user;
+        try {
+            user = serUser.getLoggedUser();
+        } catch (Exception e) {
+            return "redirect:/login";
+        }
+        if (user != null) {
+            return "redirect:/conmutador";
+        }
+
+        return "redirect:/login";
+    }
+
+    @GetMapping("/login")
     public String index() {
         return "login";
     }
@@ -71,14 +86,13 @@ public class UserController {
     }
 
     @RequestMapping(value = "/user/verificarUsuario", method = RequestMethod.POST)
-    public ResponseEntity<?> verificarUsuario(@RequestBody String usuario){
+    public ResponseEntity<?> verificarUsuario(@RequestBody String usuario) {
         try {
-            boolean validacion = serUser.validarUsuario(new User(usuario,""));
+            boolean validacion = serUser.validarUsuario(new User(usuario, ""));
         } catch (Exception e) {
             return new ResponseEntity(HttpStatus.NOT_ACCEPTABLE);
         }
         return new ResponseEntity(HttpStatus.OK);
     }
-
 
 }

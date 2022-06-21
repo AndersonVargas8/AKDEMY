@@ -4,57 +4,61 @@
     <input class="form-control" hidden th:field="*{id}">
 
     <div class="form-group row">
-        <label class="col-lg-3 col-lg form-label form-control-label"><b>Nombres</b></label>
-        <div class="col-lg-7">
+        <label class="col-lg-3 form-label form-control-label"><b>Nombres</b></label>
+        <div class="col-lg-8">
             <input th:field="${nuevoEstudiante.nombres}" class="form-control" th:placeholder="Nombres" required>
         </div>
     </div>
     <div class="form-group row">
         <label class="col-lg-3 col-lg form-label form-control-label"><b>Apellidos</b></label>
-        <div class="col-lg-7">
+        <div class="col-lg-8">
             <input th:field="${nuevoEstudiante.apellidos}" class="form-control" th:placeholder="Apellidos" required>
         </div>
     </div>
 
     <div class="form-group row">
         <label class="col-lg-3 col-lg form-label form-control-label"><b>Fecha de Nacimiento</b></label>
-        <div class="col-lg-7">
+        <div class="col-lg-8">
             <input th:field="${nuevoEstudiante.fechaNacimiento}" type="date" class="form-control" required>
         </div>
     </div>
 
     <div class="form-group row">
         <label class="col-lg-3 form-label form-control-label"><b>Tipo de documento</b></label>
-        <select th:field="${nuevoEstudiante.tipoDocumento}" required
-            class="col-lg-6 m-2 ml-3 btn dropdown-toggle border">
-            <option th:each="tipoDoc:${tiposDoc}" th:value="${tipoDoc.id}" th:text="${tipoDoc.descripcion}"></option>
-        </select>
+        <div class="col-lg-8">
+            <select th:field="${nuevoEstudiante.tipoDocumento}" required class="w-100 btn dropdown-toggle border" id="selectTipoDoc">
+                <option th:each="tipoDoc:${tiposDoc}" th:value="${tipoDoc.id}" th:text="${tipoDoc.descripcion}">
+                </option>
+            </select>
+        </div>
 
     </div>
 
     <div class="form-group row">
         <label class="col-lg-3 col-lg form-label form-control-label"><b>Documento</b></label>
-        <div class="col-lg-7 search_select_box">
+        <div class="col-lg-8 search_select_box">
             <input th:field="${nuevoEstudiante.documento}" type="number" class="form-control" th:placeholder="Documento"
                 required>
-            <div class="alert-danger p-2" th:if="${#fields.hasErrors('documento')}" th:errors="*{documento}">Name Error
+            <div class="alert-danger p-2" id="errorDoc" hidden>Ya existe un estudiante con este documento
             </div>
         </div>
     </div>
 
     <div class="form-group row">
         <label class="col-lg-3 form-label form-control-label"><b>Grupo sanguíneo - RH</b></label>
-        <select th:field="${nuevoEstudiante.grupoSanguineoRH}" required
-            class="col-lg-6 m-2 ml-3 btn dropdown-toggle border">
-            <option th:each="grupoS:${gsrh}" th:value="${grupoS.id}" th:text="${grupoS.descripcion}"></option>
-        </select>
+        <div class="col-lg-8">
+            <select th:field="${nuevoEstudiante.grupoSanguineoRH}" required
+                class="w-100 btn dropdown-toggle border" id="selectRH">
+                <option th:each="grupoS:${gsrh}" th:value="${grupoS.id}" th:text="${grupoS.descripcion}"></option>
+            </select>
+        </div>
     </div>
 
     <div class="form-group row">
         <label class="col-lg-3 form-label form-control-label"><b>EPS</b></label>
-        <div class="col-lg-7 search_select_box">
+        <div class="col-lg-8 search_select_box">
             <select th:field="${nuevoEstudiante.eps}" class="w-100 border" data-live-search="true"
-                data-none-results-text="No se encontró {0}">
+                data-none-results-text="No se encontró {0}" id="selectEPS">
                 <option th:each="EPS:${eps}" th:value="${EPS.id}" th:text="${EPS.nombre}"></option>
             </select>
         </div>
@@ -62,7 +66,7 @@
 
     <div class="form-group row">
         <label class="col-lg-3 col-lg form-label form-control-label"><b>Nombre de usuario</b></label>
-        <div class="col-lg-7 search_select_box">
+        <div class="col-lg-8 search_select_box">
             <input th:field="${nuevoEstudiante.usuario.username}" id="username" class="form-control"
                 th:placeholder="Usuario" required>
             <div id="verificandoLabel" hidden>
@@ -85,6 +89,6 @@
     </div>
 
     <div class="form-group row d-flex justify-content-center">
-        <button type="submit" class="w-50 btn guardar" id="bsubmit" width="100%">Guardar</button>
+        <button type="submit" class="w-75 btn guardar" id="btnSubmit" width="100%">Guardar</button>
     </div>
 </form>

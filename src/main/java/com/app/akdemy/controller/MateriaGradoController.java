@@ -49,6 +49,12 @@ public class MateriaGradoController {
         return "redirect:/coordinador/materiasGrado";
     }
 
+    @PostMapping("/cargarMateriasGrado")
+    public String cargarMaterias(Model model){
+        model.addAttribute("materiasGrado", serMateriaGrado.getAllMateriasGrado());
+        return "coordinador/materiasGrado/index::listaMateriasGrado";
+    }
+
     @GetMapping("/coordinador/materiasGrado/{id}")
     @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_COORDINADOR')")
     public String editarMateriaGrado(@PathVariable int id, Model model) {
@@ -62,7 +68,7 @@ public class MateriaGradoController {
         return "coordinador/materiasGrado/editarMateriasGrado.html";
     }
 
-    @GetMapping("/coordinador/eliminarMateriasGrado/{id}")
+    @PostMapping("/coordinador/eliminarMateriasGrado/{id}")
     @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_COORDINADOR')")
 	public String deleteMateriaGrado(Model model, @PathVariable Long id) {
 		try {

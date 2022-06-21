@@ -1,36 +1,76 @@
 <form id="editarAcudientesForm" th:object="${editarAcudiente}" method="post" class="form col-lg" role="form"
-      autocomplete="off" th:action="@{/coordinador/editarAcudiente}" th:if="${editarAcudiente != null}">
+    autocomplete="off" th:action="@{/coordinador/editarAcudiente}" th:if="${editarAcudiente != null}">
     <!--Es necesario para poder pasar la validacion del Model-->
     <input class="form-control" hidden th:field="*{id}">
 
-    <div class="form-group">
-        <label for="names"><b>Nombres</b></label>
-        <input required th:field="*{nombres}" type="text" class="form-control" id="names" placeholder="Nombre(s)">
+    <div class="form-group row">
+        <label class="col-lg-3" for="names"><b>Nombres</b></label>
+        <div class="col-lg-8">
+            <input required th:field="*{nombres}" type="text" class="form-control" id="names" placeholder="Nombre(s)">
+        </div>
     </div>
-    <div class="form-group">
-        <label for="lastnames"><b>Apellidos</b></label>
-        <input required th:field="*{apellidos}" type="text" class="form-control" id="lastnames" placeholder="Apellido(s)">
+    <div class="form-group row">
+        <label class="col-lg-3" for="lastnames"><b>Apellidos</b></label>
+        <div class="col-lg-8">
+            <input required th:field="*{apellidos}" type="text" class="form-control" id="lastnames"
+                placeholder="Apellido(s)">
+        </div>
     </div>
-    <div class="form-group">
-        <label for="birthdate"><b>Correo</b></label>
-        <input required th:field="*{correo}" type="text" class="form-control" id="correo" placeholder="Password">
+    <div class="form-group row">
+        <label class="col-lg-3" for="birthdate"><b>Correo</b></label>
+        <div class="col-lg-8">
+            <input required th:field="*{correo}" type="text" class="form-control" id="correo" placeholder="Password">
+        </div>
     </div>
-    <div class="form-group">
-        <label for="document"><b>Documento</b></label>
-        <input required th:field="*{documento}" type="number" class="form-control" id="document" placeholder="Documento">
+    <div class="form-group row">
+        <label class="col-lg-3" for="document"><b>Documento</b></label>
+        <div class="col-lg-8">
+            <input required th:field="*{documento}" type="number" class="form-control" id="document"
+                placeholder="Documento">
+        </div>
     </div>
-    <div class="form-group">
-        <label for="phone"><b>Teléfono</b></label>
-        <input required th:field="*{telefono}" type="number" class="form-control" id="phone"
-               placeholder="Telefono">
+    <div class="form-group row">
+        <label class="col-lg-3" for="phone"><b>Teléfono</b></label>
+        <div class="col-lg-8">
+            <input required th:field="*{telefono}" type="number" class="form-control" id="phone" placeholder="Telefono">
+        </div>
     </div>
-    <div>
-        <label for="user"><b>Usuario Asociado</b></label>
-        <select readonly required class="form-control"
-            th:field="*{usuario.id}" id="user">
-            <option readonly selected th:value="*{usuario.id}" th:text="*{usuario.username}"></option>
-        </select>
+    <div class="form-group row">
+        <label class="col-lg-3" for="user"><b>Usuario Asociado</b></label>
+        <div class="col-lg-8">
+            <select readonly required class="form-control" th:field="*{usuario.id}" id="user">
+                <option readonly selected th:value="*{usuario.id}" th:text="*{usuario.username}"></option>
+            </select>
+        </div>
     </div>
     <br>
-    <button type="submit" class="w-100 btn guardar" width="100%">Guardar</button>
+    <div class="form-group row d-flex justify-content-center">
+        <button type="submit" class="w-75 btn guardar" width="100%" id="btnSubmit2">Guardar</button>
+    </div>
 </form>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#editarAcudientesForm").submit(function (e) {
+            e.preventDefault();
+            activateLoadingButton($("#btnSubmit2"), true);
+
+            $.ajax({
+                type: "post",
+                url: "/coordinador/editarAcudiente",
+                data: $(this).serialize(),
+                success: function () {
+                    toastr.options.positionClass = 'toast-bottom-right';
+                    toastr.success("Acudiente actualizado");
+                    desactivateLoadingButton($("#btnSubmit2"), "Guardar", false);
+                    closeModal($("#modalFormEditarAcudientes"));
+                    cargarAcudientes();
+                    resetForm();
+                },
+                error: function () {
+                    desactivateLoadingButton($("#btnSubmit2"), "Guardar", false);
+                    defaultErrorNotify();
+                }
+            })
+        });
+    })
+</script>

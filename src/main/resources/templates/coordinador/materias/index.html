@@ -16,6 +16,8 @@
     <!-- FRAMEWORK BOOTSTRAP para el estilo de la pagina-->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <!--TOASTR-->
+    <link rel="stylesheet" type="text/css" th:href="@{/common/toastr/toastr.css}">
     <!-- DataTables-->
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
     <script type="text/javascript" charset="utf8"
@@ -24,8 +26,10 @@
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <!-- Local Files-->
     <script type="text/javascript" th:src="@{/js/coordinador/materias.js}"></script>
+    <script type="text/javascript" th:src="@{/common/loading.js}"></script>
     <link rel="stylesheet" type="text/css" th:href="@{/css/coordinador/materias.css}">
     <link rel="stylesheet" type="text/css" th:href="@{/css/normalize.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/common/loading.css}">
 
     <script src="https://cdn.datatables.net/plug-ins/1.11.5/i18n/es-ES.json"></script>
 </head>
@@ -42,14 +46,16 @@
                     </div>
                     <div class="col text-right">
                         <button type="button" class="btn boton__materias mb-2 row w-50" data-toggle="modal"
-                            data-target="#modalFormMateria">
-                            <span class="fa fa-user-plus fa-1x"></span>
+                            data-target="#modalFormMateria" onclick="crearMateria()">
+                            <span class="fa fa-plus fa-1x align-middle"></span>
                             <span class="align-middle">Crear Materia</span>
                         </button>
                     </div>
                 </div>
-                <div class="card-body ">
-                    <table id="materias" class="table table-borderless table-hover" style="width:100%">
+
+                <div th:replace="common/elements::label-loading(materias)"></div>
+                <div class="card-body">
+                    <table id="materias" th:fragment="listaMaterias" class="table table-borderless table-hover" hidden style="width:100%">
                         <thead>
                             <tr>
                                 <th>Nombre de la materia</th>
@@ -60,26 +66,28 @@
                             <tr th:each="materia:${materias}">
                                 <td th:text="${materia.nombre}"></td>
                                 <td>
-                                    <button type='button' class='btn btn-info btn-sm' th:onclick="editarMateria([[${materia.id}]])">
-                                        <span class="fas fa-user-pen"></span>
+                                    <button type='button' class='btn btn-info btn-sm'
+                                        th:onclick="editarMateria([[${materia.id}]])" title="Editar materia">
+                                        <span class="fas fa-edit"></span>
                                         <span class='align-middle'></span>
                                     </button>
-                                    <button type='button' class='btn btn-danger btn-sm' th:onclick="confirmDelete([[${materia.id}]])">
-                                        <span class="fas fa-user-times"></span>
+                                    <button type='button' class='btn btn-danger btn-sm'
+                                        th:onclick="confirmDelete([[${materia.id}]])" title="Eliminar materia">
+                                        <span class="fas fa-trash"></span>
                                         <span class='align-middle'></span>
                                     </button>
                                 </td>
 
                             </tr>
                         </tbody>
-                        
+
                     </table>
                 </div>
             </div>
 
-        </section> 
+        </section>
     </div>
-    
+
 
     <!--Formulario crear materia-->
     <div class="modal fade" tabindex="-1" role="dialog" id="modalFormMateria">
@@ -92,14 +100,14 @@
                     </button>
                 </div>
                 <div class="modal-body p-5 justify-content-center">
-                    <form th:action="@{/savemateria}" th:object="${materia}" method="POST">
+                    <form th:action="@{/savemateria}" th:object="${materia}" method="POST" id="materiasForm">
                         <div class="form-group">
                             <label for="name"><b>Nombre de la materia</b></label>
-                            <input th:field="*{nombre}" type="text" class="form-control" id="name"
-                                placeholder="Nombre" required>
+                            <input th:field="*{nombre}" type="text" class="form-control" id="name" placeholder="Nombre"
+                                required>
                         </div>
                         <br>
-                        <button type="submit" class="w-100 btn guardar" width="100%">Guardar</button>
+                        <button type="submit" class="w-100 btn guardar" width="100%" id="btnSubmit">Guardar</button>
                     </form>
                 </div>
             </div>
@@ -116,6 +124,7 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
+                <div th:replace="common/elements::div-loading(información)"></div>
                 <div th:include="coordinador/materias/editarMaterias"
                     class="modal-body p-4 d-flex justify-content-center" id="formEditarMaterias">
 
@@ -130,8 +139,9 @@
         <span th:text="${deleteError}"></span>
     </div>
 
-    <div th:include="common/modalLoading.html" th:remove="tag"></div> 
-
+    <div th:include="common/modalLoading.html" th:remove="tag"></div>
+    <!--NOTIFICACIONES TOASTR-->
+    <script th:src="@{/common/toastr/toastr.js}"></script>
 </body>
 
 </html>

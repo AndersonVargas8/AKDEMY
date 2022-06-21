@@ -118,10 +118,17 @@ public class AcudienteController {
         serAcudiente.saveAcudiente(acudiente);
 
         if (!serUser.userHasRole(acudiente.getUsuario(), "ACUDIENTE")) {
-            serUser.setRoleProfesor(acudiente.getUsuario());
+            serUser.setRoleAcudiente(acudiente.getUsuario());
         }
 
         return "redirect:/coordinador/acudientes";
+    }
+
+    @PostMapping("/cargarAcudientes")
+    public String cargarMaterias(Model model){
+        model.addAttribute("acudientes", serAcudiente.getAllAcudientes());
+        model.addAttribute("users", serUser.getAvailableUsersAcudientes());     
+        return "coordinador/acudientes/index::listaAcudientes";
     }
 
     @GetMapping("/coordinador/acudientes/{id}")
@@ -170,7 +177,7 @@ public class AcudienteController {
         return "redirect:/coordinador/acudientes";
     }
 
-    @GetMapping("/coordinador/eliminarAcudiente/{id}")
+    @PostMapping("/coordinador/eliminarAcudiente/{id}")
     @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_COORDINADOR')")
     public String deleteAcudiente(@PathVariable long id, Model model) throws AcudienteNotFound {
         try {

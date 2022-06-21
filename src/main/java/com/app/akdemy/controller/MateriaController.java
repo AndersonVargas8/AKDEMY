@@ -41,6 +41,12 @@ public class MateriaController {
 
     }
 
+    @PostMapping("/cargarMaterias")
+    public String cargarMaterias(Model model){
+        model.addAttribute("materias", serMateria.getAllMaterias());
+        return "coordinador/materias/index::listaMaterias";
+    }
+
     @GetMapping("/coordinador/materias/{id}")
     @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_COORDINADOR')")
     public String editarMateria(@PathVariable int id, Model model) {
@@ -53,7 +59,7 @@ public class MateriaController {
         return "coordinador/materias/editarMaterias.html";
     }
 
-    @GetMapping("/coordinador/eliminarMaterias/{id}")
+    @PostMapping("/coordinador/eliminarMaterias/{id}")
     @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_COORDINADOR')")
 	public String deleteMateria(Model model, @PathVariable Long id) {
 		try {

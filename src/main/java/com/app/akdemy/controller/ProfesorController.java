@@ -132,6 +132,13 @@ public class ProfesorController {
         return "redirect:/coordinador/profesores";
     }
 
+    @PostMapping("/cargarProfesores")
+    public String cargarMaterias(Model model){
+        model.addAttribute("profesores", serProfesor.getAllProfesors());
+        model.addAttribute("users", serUser.getAvailableUsersProfesores());
+        return "coordinador/profesores/index::listaProfesores";
+    }
+
     @GetMapping("/coordinador/profesores/{id}")
     @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_COORDINADOR')")
     public String getEditarProfesor(@PathVariable long id, Model model) throws ProfesorNotFound {
@@ -146,7 +153,7 @@ public class ProfesorController {
         return "coordinador/profesores/editarProfesor.html";
     }
 
-    @GetMapping("/coordinador/eliminarProfesor/{id}")
+    @PostMapping("/coordinador/eliminarProfesor/{id}")
     @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_COORDINADOR')")
     public String deleteProfesor(@PathVariable long id, Model model) throws ProfesorNotFound {
         try {

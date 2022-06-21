@@ -56,6 +56,12 @@ public class CursoController {
         return "redirect:/coordinador/cursos";
     }
 
+    @PostMapping("/cargarCursos")
+    public String cargarMaterias(Model model){
+        model.addAttribute("cursos", serCurso.getAllCourses());
+        return "coordinador/cursos/index::listaCursos";
+    }
+
     @GetMapping("/coordinador/cursos/{id}")
     @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_COORDINADOR')")
     public String editarCurso(@PathVariable int id, Model model) {
@@ -69,7 +75,7 @@ public class CursoController {
         return "coordinador/cursos/editarCursos.html";
     }
 
-    @GetMapping("/coordinador/eliminarCursos/{id}")
+    @PostMapping("/coordinador/eliminarCursos/{id}")
     @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_COORDINADOR')")
     public String deleteCurso(Model model, @PathVariable Long id) {
         try {

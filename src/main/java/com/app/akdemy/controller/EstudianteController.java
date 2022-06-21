@@ -92,7 +92,7 @@ public class EstudianteController {
     @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_COORDINADOR')")
     public String guardarEstudiante(@Valid @ModelAttribute("nuevoEstudiante") Estudiante estudiante,
             BindingResult result,
-            Model model) {
+            Model model, HttpServletResponse servletResponse) {
 
         // Se pone la contraseña de usuario igual al documento
         String encodePassword = bCryptPasswordEncoder.encode(estudiante.getDocumento());
@@ -107,6 +107,7 @@ public class EstudianteController {
         try {
             serEstudiante.validarEstudiante(estudiante);
         } catch (CustomeFieldValidationException e) {
+            servletResponse.setStatus(HttpServletResponse.SC_NOT_ACCEPTABLE);
             result.rejectValue(e.getFieldName(), null, e.getMessage());
         } catch (Exception e) {
         }
@@ -115,6 +116,7 @@ public class EstudianteController {
         try {
             serUser.validarUsuario(estudiante.getUsuario());
         } catch (CustomeFieldValidationException e) {
+            servletResponse.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             result.rejectValue(e.getFieldName(), null, e.getMessage());
         } catch (Exception e) {
         }
@@ -142,6 +144,12 @@ public class EstudianteController {
         return "redirect:/coordinador/estudiantes";
     }
 
+    @PostMapping("/cargarEstudiantes")
+    public String cargarMaterias(Model model){
+        model.addAttribute("estudiantes", serEstudiante.listarEstudiantes());     
+        return "coordinador/estudiantes/listaEstudiantes";
+    }
+
     @GetMapping("/coordinador/estudiantes/{id}")
     @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_COORDINADOR')")
     public String getEditarEstudiante(@PathVariable int id, Model model) {
@@ -155,7 +163,7 @@ public class EstudianteController {
     @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_COORDINADOR')")
     public String editarEstudiante(@Valid @ModelAttribute("editarEstudiante") Estudiante estudiante,
             BindingResult result,
-            Model model) throws Exception {
+            Model model, HttpServletResponse servletResponse) throws Exception {
         Estudiante estudianteFound = serEstudiante.buscarPorId(estudiante.getId());
         User user = estudianteFound.getUsuario();
 
@@ -164,6 +172,7 @@ public class EstudianteController {
             try {
                 serEstudiante.validarEstudiante(estudiante);
             } catch (CustomeFieldValidationException e) {
+                servletResponse.setStatus(HttpServletResponse.SC_NOT_ACCEPTABLE);
                 result.rejectValue(e.getFieldName(), null, e.getMessage());
             } catch (Exception e) {
             }
@@ -174,6 +183,7 @@ public class EstudianteController {
             try {
                 serUser.validarUsuario(estudiante.getUsuario());
             } catch (CustomeFieldValidationException e) {
+                servletResponse.setStatus(HttpServletResponse.SC_BAD_REQUEST);
                 result.rejectValue(e.getFieldName(), null, e.getMessage());
             } catch (Exception e) {
             }
@@ -223,7 +233,7 @@ public class EstudianteController {
         return model;
     }
 
-    @GetMapping("/coordinador/eliminarEstudiante/{id}")
+    @PostMapping("/coordinador/eliminarEstudiante/{id}")
     @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_COORDINADOR')")
     public String eliminarEstudiante(@PathVariable int id, Model model) {
         Estudiante estudiante = serEstudiante.buscarPorId(id);
