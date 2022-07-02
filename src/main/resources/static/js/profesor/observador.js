@@ -10,6 +10,7 @@ $(document).ready(function() {
         }
     );
     $('select').selectpicker();
+    
     $('#cursos').change(function() {
         var url = "observador/estudiantes/" + $(this).val();
         $('#estudiantes').load(url);
