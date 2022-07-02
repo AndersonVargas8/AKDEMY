@@ -19,7 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class DifusionService implements IDifusionService{
+public class DifusionService implements IDifusionService {
 
     @Autowired
     private FirebaseInitialize firebase;
@@ -27,9 +27,9 @@ public class DifusionService implements IDifusionService{
     @Autowired
     private IProfesorService serProfesor;
 
-    private CollectionReference getCollection(Long id){
+    private CollectionReference getCollection(Long id) {
         return firebase.getFirestore().collection("Broadcast")
-        .document(Long.toString(id)).collection("messages");
+                .document(Long.toString(id)).collection("messages");
     }
 
     @Override
@@ -49,19 +49,17 @@ public class DifusionService implements IDifusionService{
         // Save document
         Broadcast.document().create(docData);
 
-
-
     }
 
     @Override
     public void deleteDifusion(Difusion difusion) {
-       getCollection(difusion.getCurso().getId()).document(difusion.getId()).delete();
-        
+        getCollection(difusion.getCurso().getId()).document(difusion.getId()).delete();
+
     }
 
     @Override
     public Iterable<Difusion> getDifusionesCurso(Curso curso) {
-        
+
         // Return Iterable
         List<Difusion> difusiones = new ArrayList<Difusion>();
 
@@ -70,40 +68,42 @@ public class DifusionService implements IDifusionService{
 
         try {
             // Iterate results and crete objects list
-            for(DocumentSnapshot docSnapshot : querySnapshot.get().getDocuments()){
+            for (DocumentSnapshot docSnapshot : querySnapshot.get().getDocuments()) {
                 Map<String, Object> data = docSnapshot.getData();
                 difusiones.add(new Difusion(
-                    docSnapshot.getId(), 
-                    curso, 
-                    serProfesor.getById((Long) data.get("profesor")), 
-                    ((Long) data.get("date")), 
-                    ((String) data.get("subject")), 
-                    ((String) data.get("message"))
-                    ));
+                        docSnapshot.getId(),
+                        curso,
+                        serProfesor.getById((Long) data.get("profesor")),
+                        ((Long) data.get("date")),
+                        ((String) data.get("subject")),
+                        ((String) data.get("message"))));
             }
 
             // Cast and return collection
             return (Iterable<Difusion>) difusiones;
-            
-        } catch (Exception e) {
 
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+            return null;
+        } catch (Exception e) {
             return null;
         }
-
 
     }
 
     @Override
-    public Map<String, Object> getSchoolData(){
-     
+    public Map<String, Object> getSchoolData() {
+
         try {
             return firebase.getFirestore().collection("Data")
-            .document("schoolData").get().get().getData();
-            
+                    .document("schoolData").get().get().getData();
+
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+            return null;
         } catch (Exception e) {
             return null;
         }
-        
     }
 
 }

@@ -1,6 +1,6 @@
-colores = ["#ff6961", "#77dd77", "#fdfd96", "#84b6f4", "#fdcae1", "#fcb7af", "#b0f2c2", "#d8af97", "#ff9688", "#ffda9e","#c5c6c8","#b2e2f2","#a0d995","#c8ca66","#dcd9f8","#d8f79a","#95fab9","#ba9df4"];
+var colores = ["#ff6961", "#77dd77", "#fdfd96", "#84b6f4", "#fdcae1", "#fcb7af", "#b0f2c2", "#d8af97", "#ff9688", "#ffda9e","#c5c6c8","#b2e2f2","#a0d995","#c8ca66","#dcd9f8","#d8f79a","#95fab9","#ba9df4"];
     if(typeof(materias) === 'undefined')
-        materias = new Map();
+        var materias = new Map();
 
 
     $(document).ready(function () {

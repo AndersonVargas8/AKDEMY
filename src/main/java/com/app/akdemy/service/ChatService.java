@@ -28,7 +28,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class ChatService implements IChatService{
+public class ChatService implements IChatService {
 
     @Autowired
     private FirebaseInitialize firebase;
@@ -42,13 +42,13 @@ public class ChatService implements IChatService{
     @Autowired
     private IEstudianteService serEstudiante;
 
-    private CollectionReference getCollection(){
+    private CollectionReference getCollection() {
         return firebase.getFirestore().collection("PrivateMessages");
     }
 
-    private CollectionReference getCollection(Chat chat){
+    private CollectionReference getCollection(Chat chat) {
         return firebase.getFirestore().collection("PrivateMessages")
-        .document(chat.getId()).collection("messages");
+                .document(chat.getId()).collection("messages");
     }
 
     @Override
@@ -66,9 +66,11 @@ public class ChatService implements IChatService{
         CollectionReference PrivateMessages = getCollection();
 
         // Save document
-        PrivateMessages.document("chat-" + chat.getEstudiante().getId() + "-" + chat.getAcudiente().getId() + "-" + chat.getProfesor().getId())
-        .create(docData);
-        
+        PrivateMessages
+                .document("chat-" + chat.getEstudiante().getId() + "-" + chat.getAcudiente().getId() + "-"
+                        + chat.getProfesor().getId())
+                .create(docData);
+
     }
 
     @Override
@@ -81,15 +83,13 @@ public class ChatService implements IChatService{
         docData.put("content", message.getContent());
         docData.put("isProfesor", message.isProfesor());
 
-
-
         // Set reference to save document
         CollectionReference ChatMessages = getCollection(chat);
 
         // Save document
         ChatMessages.document().create(docData);
 
-        //Update lastUpdate date
+        // Update lastUpdate date
         getCollection().document(chat.getId()).update("lastUpdate", message.getDate().getTime());
 
     }
@@ -101,12 +101,14 @@ public class ChatService implements IChatService{
             DocumentSnapshot document = chat.get();
             Map<String, Object> data = document.getData();
             return new Chat(
-                id,
-                serAcudiente.getById((Long) data.get("acudiente")),
-                serProfesor.getById((Long) data.get("profesor")),
-                serEstudiante.buscarPorId((Long) data.get("estudiante")),
-                ((Long) data.get("lastUpdate"))
-            );
+                    id,
+                    serAcudiente.getById((Long) data.get("acudiente")),
+                    serProfesor.getById((Long) data.get("profesor")),
+                    serEstudiante.buscarPorId((Long) data.get("estudiante")),
+                    ((Long) data.get("lastUpdate")));
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+            return null;
         } catch (Exception e) {
             return null;
         }
@@ -115,140 +117,142 @@ public class ChatService implements IChatService{
     @Override
     public Iterable<Chat> getChats(Profesor profesor) {
 
-         // Return Iterable
-         List<Chat> chats = new ArrayList<Chat>();
+        // Return Iterable
+        List<Chat> chats = new ArrayList<Chat>();
 
-         // Create a query against the collection.
-         Query query = getCollection().whereEqualTo("profesor", profesor.getId());
+        // Create a query against the collection.
+        Query query = getCollection().whereEqualTo("profesor", profesor.getId());
 
-         // retrieve  query results asynchronously using query.get()
-         ApiFuture<QuerySnapshot> querySnapshot = query.get();
- 
-         try {
-             // Iterate results and crete objects list
-             for(DocumentSnapshot docSnapshot : querySnapshot.get().getDocuments()){
-                 Map<String, Object> data = docSnapshot.getData();
-                 chats.add(new Chat(
-                    docSnapshot.getId(),
-                    serAcudiente.getById((Long) data.get("acudiente")),
-                    serProfesor.getById((Long) data.get("profesor")),
-                    serEstudiante.buscarPorId((Long) data.get("estudiante")),
-                    ((Long) data.get("lastUpdate"))
-                 ));
-             }
+        // retrieve query results asynchronously using query.get()
+        ApiFuture<QuerySnapshot> querySnapshot = query.get();
 
- 
-             // Cast and return collection
-             return (Iterable<Chat>) chats;
-             
-         } catch (Exception e) {
- 
-             return null;
-         }
-  
+        try {
+            // Iterate results and crete objects list
+            for (DocumentSnapshot docSnapshot : querySnapshot.get().getDocuments()) {
+                Map<String, Object> data = docSnapshot.getData();
+                chats.add(new Chat(
+                        docSnapshot.getId(),
+                        serAcudiente.getById((Long) data.get("acudiente")),
+                        serProfesor.getById((Long) data.get("profesor")),
+                        serEstudiante.buscarPorId((Long) data.get("estudiante")),
+                        ((Long) data.get("lastUpdate"))));
+            }
+
+            // Cast and return collection
+            return (Iterable<Chat>) chats;
+
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+            return null;
+        } catch (Exception e) {
+            return null;
+        }
+
     }
 
     @Override
     public Iterable<Chat> getChats(Acudiente acudiente, Estudiante estudiante) {
-         // Return Iterable
-         List<Chat> chats = new ArrayList<Chat>();
+        // Return Iterable
+        List<Chat> chats = new ArrayList<Chat>();
 
-         // Create a query against the collection.
-         Query query = getCollection().whereEqualTo("acudiente", acudiente.getId()).whereEqualTo("estudiante", estudiante.getId());
+        // Create a query against the collection.
+        Query query = getCollection().whereEqualTo("acudiente", acudiente.getId()).whereEqualTo("estudiante",
+                estudiante.getId());
 
-         // retrieve  query results asynchronously using query.get()
-         ApiFuture<QuerySnapshot> querySnapshot = query.get();
- 
-         try {
-             // Iterate results and crete objects list
-             for(DocumentSnapshot docSnapshot : querySnapshot.get().getDocuments()){
-                 Map<String, Object> data = docSnapshot.getData();
-                 chats.add(new Chat(
-                    docSnapshot.getId(),
-                    serAcudiente.getById((Long) data.get("acudiente")),
-                    serProfesor.getById((Long) data.get("profesor")),
-                    serEstudiante.buscarPorId((Long) data.get("estudiante")),
-                    ((Long) data.get("lastUpdate"))
-                 ));
-             }
- 
-             // Cast and return collection
-             return (Iterable<Chat>) chats;
-             
-         } catch (Exception e) {
- 
-             return null;
-         }
+        // retrieve query results asynchronously using query.get()
+        ApiFuture<QuerySnapshot> querySnapshot = query.get();
+
+        try {
+            // Iterate results and crete objects list
+            for (DocumentSnapshot docSnapshot : querySnapshot.get().getDocuments()) {
+                Map<String, Object> data = docSnapshot.getData();
+                chats.add(new Chat(
+                        docSnapshot.getId(),
+                        serAcudiente.getById((Long) data.get("acudiente")),
+                        serProfesor.getById((Long) data.get("profesor")),
+                        serEstudiante.buscarPorId((Long) data.get("estudiante")),
+                        ((Long) data.get("lastUpdate"))));
+            }
+
+            // Cast and return collection
+            return (Iterable<Chat>) chats;
+
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+            return null;
+        } catch (Exception e) {
+            return null;
+        }
     }
 
     @Override
     public Iterable<Chat> getChats(Acudiente acudiente) {
-         // Return Iterable
-         List<Chat> chats = new ArrayList<Chat>();
+        // Return Iterable
+        List<Chat> chats = new ArrayList<Chat>();
 
-         // Create a query against the collection.
-         Query query = getCollection().whereEqualTo("acudiente", acudiente.getId());
+        // Create a query against the collection.
+        Query query = getCollection().whereEqualTo("acudiente", acudiente.getId());
 
-         // retrieve  query results asynchronously using query.get()
-         ApiFuture<QuerySnapshot> querySnapshot = query.get();
- 
-         try {
-             // Iterate results and crete objects list
-             for(DocumentSnapshot docSnapshot : querySnapshot.get().getDocuments()){
-                 Map<String, Object> data = docSnapshot.getData();
-                 chats.add(new Chat(
-                    docSnapshot.getId(),
-                    serAcudiente.getById((Long) data.get("acudiente")),
-                    serProfesor.getById((Long) data.get("profesor")),
-                    serEstudiante.buscarPorId((Long) data.get("estudiante")),
-                    ((Long) data.get("lastUpdate"))
-                 ));
-             }
- 
-             // Cast and return collection
-             return (Iterable<Chat>) chats;
-             
-         } catch (Exception e) {
- 
-             return null;
-         }
+        // retrieve query results asynchronously using query.get()
+        ApiFuture<QuerySnapshot> querySnapshot = query.get();
+
+        try {
+            // Iterate results and crete objects list
+            for (DocumentSnapshot docSnapshot : querySnapshot.get().getDocuments()) {
+                Map<String, Object> data = docSnapshot.getData();
+                chats.add(new Chat(
+                        docSnapshot.getId(),
+                        serAcudiente.getById((Long) data.get("acudiente")),
+                        serProfesor.getById((Long) data.get("profesor")),
+                        serEstudiante.buscarPorId((Long) data.get("estudiante")),
+                        ((Long) data.get("lastUpdate"))));
+            }
+
+            // Cast and return collection
+            return (Iterable<Chat>) chats;
+
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+            return null;
+        } catch (Exception e) {
+            return null;
+        }
+
     }
 
     @Override
     public Iterable<Message> getMessages(Chat chat) {
-         // Return Iterable
-         List<Message> messages = new ArrayList<Message>();
+        // Return Iterable
+        List<Message> messages = new ArrayList<Message>();
 
-         // retrieve  query results asynchronously using query.get()
-         ApiFuture<QuerySnapshot> querySnapshot = getCollection(chat).get();
- 
-         try {
-             // Iterate results and crete objects list
-             for(DocumentSnapshot docSnapshot : querySnapshot.get().getDocuments()){
-                 Map<String, Object> data = docSnapshot.getData();
-                 messages.add(new Message(
-                    ((Long) data.get("date")),
-                    ((String) data.get("content")),
-                    ((Boolean) data.get("isProfesor"))
-                 ));
-             }
+        // retrieve query results asynchronously using query.get()
+        ApiFuture<QuerySnapshot> querySnapshot = getCollection(chat).get();
 
-             Collections.sort(messages, new Comparator<Message>() {
+        try {
+            // Iterate results and crete objects list
+            for (DocumentSnapshot docSnapshot : querySnapshot.get().getDocuments()) {
+                Map<String, Object> data = docSnapshot.getData();
+                messages.add(new Message(
+                        ((Long) data.get("date")),
+                        ((String) data.get("content")),
+                        ((Boolean) data.get("isProfesor"))));
+            }
+
+            Collections.sort(messages, new Comparator<Message>() {
                 @Override
                 public int compare(Message m1, Message m2) {
-                  return m1.getDate().compareTo(m2.getDate());
+                    return m1.getDate().compareTo(m2.getDate());
                 }
-              });
- 
-             // Cast and return collection
-             return (Iterable<Message>) messages;
-             
-         } catch (Exception e) {
- 
-             return null;
-         }
+            });
+
+            // Cast and return collection
+            return (Iterable<Message>) messages;
+
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+            return null;
+        } catch (Exception e) {
+            return null;
+        }
     }
-
-
-
 }

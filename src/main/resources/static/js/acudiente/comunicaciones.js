@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    table = $('#difusionesTable').DataTable(
+    let table = $('#difusionesTable').DataTable(
         {
             language: {
                 "url": "//cdn.datatables.net/plug-ins/1.10.16/i18n/Spanish.json"
@@ -10,7 +10,7 @@ $(document).ready(function() {
         }
     );
 
-    tableChat = $('#chatsTable').DataTable(
+    let tableChat = $('#chatsTable').DataTable(
         {
             language: {
                 "url": "//cdn.datatables.net/plug-ins/1.10.16/i18n/Spanish.json"

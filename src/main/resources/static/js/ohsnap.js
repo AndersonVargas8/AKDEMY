@@ -11,7 +11,7 @@ $('#red').on('click', function () {
           dataType: "text",
           contentType: "text/plain",
           success:function(response){
-               data = JSON.parse(response);
+               let data = JSON.parse(response);
                consulta(response);
                toastr.success('Dato guardado');
                $("#red").html(data.nombres);

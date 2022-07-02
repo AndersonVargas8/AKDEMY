@@ -5,7 +5,7 @@ $(document).ready(function () {
     //Guardar profesor
     $("#profesoresForm").submit(function (e) {
         e.preventDefault();
-        valid = verificateForm($("#selectuser"))
+        let valid = verificateForm($("#selectuser"))
         if (!valid) {
             return;
         }
