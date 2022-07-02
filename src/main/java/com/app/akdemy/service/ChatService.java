@@ -142,9 +142,13 @@ public class ChatService implements IChatService {
             return (Iterable<Chat>) chats;
 
         } catch (InterruptedException e) {
+            // Thread interrupt for get chats 
             Thread.currentThread().interrupt();
+
+            // return null for exception
             return null;
         } catch (Exception e) {
+            //get chats return null
             return null;
         }
 
@@ -178,9 +182,14 @@ public class ChatService implements IChatService {
             return (Iterable<Chat>) chats;
 
         } catch (InterruptedException e) {
+            // Interrupr Thread get chats acudiente estudiante
             Thread.currentThread().interrupt();
+
+            //null 
             return null;
         } catch (Exception e) {
+
+            // return null for petition
             return null;
         }
     }
@@ -212,9 +221,13 @@ public class ChatService implements IChatService {
             return (Iterable<Chat>) chats;
 
         } catch (InterruptedException e) {
+
+            //Catch for interrupted
             Thread.currentThread().interrupt();
+            // null returned
             return null;
         } catch (Exception e) {
+            //null returned generical exception
             return null;
         }
 
@@ -249,9 +262,12 @@ public class ChatService implements IChatService {
             return (Iterable<Message>) messages;
 
         } catch (InterruptedException e) {
+            // InterrupCtach 
             Thread.currentThread().interrupt();
+            // NUlled returned
             return null;
         } catch (Exception e) {
+            // NUlled returned
             return null;
         }
     }
